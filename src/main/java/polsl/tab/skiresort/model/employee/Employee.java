@@ -1,22 +1,30 @@
-package polsl.tab.skiresort.model.customer;
+package polsl.tab.skiresort.model.employee;
 
-import polsl.tab.skiresort.model.employee.Employee;
-import polsl.tab.skiresort.model.invoice.Invoice;
+import polsl.tab.skiresort.model.customer.Customer;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "customers")
-public class Customer {
+@Table(name = "employees")
+public class Employee {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     @Column(nullable = false)
-    private Integer idCustomer;
+    private Integer idEmployee;
 
     private String firstName;
 
     private String lastName;
+
+    private String title;
+
+    private LocalDateTime birthDate;
+
+    private LocalDateTime hireDate;
 
     private String address;
 
@@ -33,20 +41,23 @@ public class Customer {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "id_employee")
-    private Employee supportEmployee;
+    private Employee reportsTo;
 
-    @OneToMany(targetEntity = Invoice.class)
-    private List<Invoice> invoiceList;
+    @OneToMany(mappedBy = "reportsTo")
+    private Collection<Employee> children;
 
-    public Customer(){};
+    @OneToMany(targetEntity = Customer.class)
+    private List<Customer> customerList;
 
-    public Integer getIdCustomer() {
-        return idCustomer;
+
+    public Employee() {}
+
+    public Integer getIdEmployee() {
+        return idEmployee;
     }
 
-    public void setIdCustomer(Integer idCustomer) {
-        this.idCustomer = idCustomer;
+    public void setIdEmployee(Integer idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
     public String getFirstName() {
@@ -63,6 +74,30 @@ public class Customer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDateTime getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDateTime birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public LocalDateTime getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(LocalDateTime hireDate) {
+        this.hireDate = hireDate;
     }
 
     public String getAddress() {
@@ -121,11 +156,27 @@ public class Customer {
         this.email = email;
     }
 
-    public Employee getEmployee() {
-        return supportEmployee;
+    public Employee getReportsTo() {
+        return reportsTo;
     }
 
-    public void setEmployee(Employee supportEmployee) {
-        this.supportEmployee = supportEmployee;
+    public void setReportsTo(Employee reportsTo) {
+        this.reportsTo = reportsTo;
+    }
+
+    public Collection<Employee> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Collection<Employee> children) {
+        this.children = children;
+    }
+
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
     }
 }
