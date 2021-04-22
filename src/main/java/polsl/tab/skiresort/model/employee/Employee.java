@@ -3,8 +3,8 @@ package polsl.tab.skiresort.model.employee;
 import polsl.tab.skiresort.model.customer.Customer;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -40,6 +40,9 @@ public class Employee {
     private String phone;
 
     private String email;
+
+    @NotBlank(message = "Your password should not be empty!")
+    private String password;
 
     @ManyToOne
     @JoinColumn(name = "reports_to")
