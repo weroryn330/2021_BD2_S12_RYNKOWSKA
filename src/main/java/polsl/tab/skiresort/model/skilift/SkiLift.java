@@ -10,13 +10,13 @@ import java.util.List;
 @Table(name = "ski_lift")
 public class SkiLift {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer idSkiLift;
 
     private String name;
 
-    @OneToMany(targetEntity = Pass.class)
+    @OneToMany(mappedBy = "idSkiLift")
     private List<Pass> passList;
 
     public Integer getIdSkiLift() {

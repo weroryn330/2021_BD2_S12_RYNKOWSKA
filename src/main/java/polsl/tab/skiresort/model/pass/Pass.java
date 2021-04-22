@@ -12,7 +12,7 @@ import java.util.List;
 public class Pass {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer idPass;
 
@@ -26,7 +26,7 @@ public class Pass {
     @JoinColumn(name = "id_spa")
     private Spa idSpa;
 
-    @OneToMany(targetEntity = InvoiceItem.class)
+    @OneToMany(mappedBy = "idPass")
     private List<InvoiceItem> invoiceItemsList;
 
     public Integer getIdPass() {

@@ -33,10 +33,10 @@ public class Customer {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name = "id_employee")
+    @JoinColumn(name = "support_employee")
     private Employee supportEmployee;
 
-    @OneToMany(targetEntity = Invoice.class)
+    @OneToMany(mappedBy = "idCustomer")
     private List<Invoice> invoiceList;
 
     public Customer(){};
@@ -121,11 +121,11 @@ public class Customer {
         this.email = email;
     }
 
-    public Employee getEmployee() {
-        return supportEmployee;
-    }
-
-    public void setEmployee(Employee supportEmployee) {
-        this.supportEmployee = supportEmployee;
-    }
+//    public Employee getEmployee() {
+//        return supportEmployee;
+//    }
+//
+//    public void setEmployee(Employee supportEmployee) {
+//        this.supportEmployee = supportEmployee;
+//    }
 }
