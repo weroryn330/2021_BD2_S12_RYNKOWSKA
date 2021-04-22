@@ -3,6 +3,7 @@ package polsl.tab.skiresort.model.employee;
 import polsl.tab.skiresort.model.customer.Customer;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 public class Employee {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer idEmployee;
 
@@ -22,9 +23,9 @@ public class Employee {
 
     private String title;
 
-    private LocalDateTime birthDate;
+    private Date birthDate;
 
-    private LocalDateTime hireDate;
+    private Date hireDate;
 
     private String address;
 
@@ -41,12 +42,13 @@ public class Employee {
     private String email;
 
     @ManyToOne
+    @JoinColumn(name = "reports_to")
     private Employee reportsTo;
 
     @OneToMany(mappedBy = "reportsTo")
     private Collection<Employee> children;
 
-    @OneToMany(targetEntity = Customer.class)
+    @OneToMany(mappedBy = "supportEmployee")
     private List<Customer> customerList;
 
 
@@ -84,19 +86,19 @@ public class Employee {
         this.title = title;
     }
 
-    public LocalDateTime getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(LocalDateTime birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
-    public LocalDateTime getHireDate() {
+    public Date getHireDate() {
         return hireDate;
     }
 
-    public void setHireDate(LocalDateTime hireDate) {
+    public void setHireDate(Date hireDate) {
         this.hireDate = hireDate;
     }
 

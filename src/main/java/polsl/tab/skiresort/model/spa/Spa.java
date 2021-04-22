@@ -10,13 +10,13 @@ import java.util.List;
 public class Spa {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer idSpa;
 
     private String name;
 
-    @OneToMany(targetEntity = Pass.class)
+    @OneToMany(mappedBy = "idSpa")
     private List<Pass> passList;
 
     public Integer getIdSpa() {

@@ -4,6 +4,7 @@ import polsl.tab.skiresort.model.customer.Customer;
 import polsl.tab.skiresort.model.invoiceitem.InvoiceItem;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,11 +13,11 @@ import java.util.List;
 public class Invoice {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Integer idInvoice;
 
-    private LocalDateTime invoiceDate;
+    private Date invoiceDate;
 
     private String billingAddress;
 
@@ -34,7 +35,7 @@ public class Invoice {
     @JoinColumn(name = "id_customer")
     private Customer idCustomer;
 
-    @OneToMany(targetEntity = InvoiceItem.class)
+    @OneToMany(mappedBy = "idInvoice")
     private List<InvoiceItem> invoiceItemsList;
 
     public Integer getIdInvoice() {
@@ -45,11 +46,11 @@ public class Invoice {
         this.idInvoice = idInvoice;
     }
 
-    public LocalDateTime getInvoiceDate() {
+    public Date getInvoiceDate() {
         return invoiceDate;
     }
 
-    public void setInvoiceDate(LocalDateTime invoiceDate) {
+    public void setInvoiceDate(Date invoiceDate) {
         this.invoiceDate = invoiceDate;
     }
 
