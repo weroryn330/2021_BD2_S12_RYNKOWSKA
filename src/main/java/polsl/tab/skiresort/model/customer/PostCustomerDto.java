@@ -70,6 +70,54 @@ public class PostCustomerDto {
         this.invoiceList = invoiceList;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getVoivodeship() {
+        return voivodeship;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Employee getSupportEmployee() {
+        return supportEmployee;
+    }
+
+    public List<Invoice> getInvoiceList() {
+        return invoiceList;
+    }
+
     public Customer toEntity() {
         return Customer
                 .builder()
