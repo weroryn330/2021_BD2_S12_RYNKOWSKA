@@ -2,3 +2,4 @@
 Do you need a fully funcional ski resort service? Feel free to use this app!
 # Team
 * Marcin Rogoż
+* Szymon Sochaj
