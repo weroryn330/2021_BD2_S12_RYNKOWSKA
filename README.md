@@ -4,6 +4,7 @@ Do you need a fully funcional ski resort service? Feel free to use this app!
 * Marcin Rogoż
 * Szymon Sochaj
 * Adam Berezka
+* Tomasz Stach
 
 ## Ski Resort
 
