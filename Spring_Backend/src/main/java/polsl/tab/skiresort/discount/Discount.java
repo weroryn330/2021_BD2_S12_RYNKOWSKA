@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 public class Discount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Integer idDiscount;
 
     @NotBlank(message = "Your discount percentage should not be empty!")

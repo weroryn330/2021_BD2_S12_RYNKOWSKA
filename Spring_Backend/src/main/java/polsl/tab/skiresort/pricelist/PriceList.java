@@ -4,6 +4,7 @@ import polsl.tab.skiresort.pass.Pass;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
@@ -24,8 +25,8 @@ public class PriceList {
 
     @OneToOne()
     @JoinColumn(name = "pass_id_invoice_item")
-    @Column(nullable = false)
-    private Pass pasIdInvoiceItem;
+    @NotNull
+    private Pass passIdInvoiceItem;
 
     public Integer getIdPriceList() {
         return idPriceList;
@@ -60,11 +61,11 @@ public class PriceList {
     }
 
     public Pass getPasIdInvoiceItem() {
-        return pasIdInvoiceItem;
+        return passIdInvoiceItem;
     }
 
-    public void setPasIdInvoiceItem(Pass pasIdInvoiceItem) {
-        this.pasIdInvoiceItem = pasIdInvoiceItem;
+    public void setPasIdInvoiceItem(Pass passIdInvoiceItem) {
+        this.passIdInvoiceItem = passIdInvoiceItem;
     }
 }
 

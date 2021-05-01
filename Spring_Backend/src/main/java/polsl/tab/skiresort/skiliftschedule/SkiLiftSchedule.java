@@ -4,6 +4,7 @@ import polsl.tab.skiresort.skilift.SkiLift;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 @Entity
@@ -28,6 +29,54 @@ public class SkiLiftSchedule {
 
     @ManyToOne()
     @JoinColumn(name = "ski_lift_id_ski_lift")
-    @Column(nullable = false)
+    @NotNull
     private SkiLift skiLiftIdSkiLift;
+
+    public Integer getIdSkiLiftSchedule() {
+        return idSkiLiftSchedule;
+    }
+
+    public void setIdSkiLiftSchedule(Integer idSkiLiftSchedule) {
+        this.idSkiLiftSchedule = idSkiLiftSchedule;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public Date getOpensTime() {
+        return opensTime;
+    }
+
+    public void setOpensTime(Date opensTime) {
+        this.opensTime = opensTime;
+    }
+
+    public Date getClosesTime() {
+        return closesTime;
+    }
+
+    public void setClosesTime(Date closesTime) {
+        this.closesTime = closesTime;
+    }
+
+    public SkiLift getSkiLiftIdSkiLift() {
+        return skiLiftIdSkiLift;
+    }
+
+    public void setSkiLiftIdSkiLift(SkiLift skiLiftIdSkiLift) {
+        this.skiLiftIdSkiLift = skiLiftIdSkiLift;
+    }
 }

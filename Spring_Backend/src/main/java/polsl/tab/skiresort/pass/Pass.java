@@ -3,10 +3,11 @@ package polsl.tab.skiresort.pass;
 import polsl.tab.skiresort.discount.Discount;
 import polsl.tab.skiresort.invoice.Invoice;
 import polsl.tab.skiresort.pricelist.PriceList;
-import polsl.tab.skiresort.skiliftpass.SkiLiftPass;
+import polsl.tab.skiresort.skilift.SkiLift;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class Pass {
 
     @ManyToOne()
     @JoinColumn(name = "invoices_id_invoice")
-    @Column(nullable = false)
+    @NotNull
     private Invoice invoicesIdInvoice;
 
     @NotBlank(message = "Your pass start date should not be empty!")
@@ -34,7 +35,7 @@ public class Pass {
 
     @OneToOne()
     @JoinColumn(name = "discounts_id_discount")
-    @Column(nullable = false)
+    @NotNull
     private Discount discountIdDiscount;
 
     @NotBlank(message = "Your pass first name should not be empty!")
@@ -55,8 +56,12 @@ public class Pass {
     @OneToOne(mappedBy = "passIdInvoiceItem")
     private PriceList priceList;
 
-    @OneToMany(mappedBy = "pass")
-    private List<SkiLiftPass> skiLiftPassList;
+    @ManyToMany()
+    @JoinTable(
+            name = "ski_lift_pass",
+            joinColumns = {@JoinColumn(name = "pass_id_invoice_item")},
+            inverseJoinColumns = {@JoinColumn(name = "ski_lift_id_ski_lift")})
+    private List<SkiLift> skiLiftList;
 
     public Integer getIdInvoiceItem() {
         return idInvoiceItem;
@@ -154,11 +159,11 @@ public class Pass {
         this.priceList = priceList;
     }
 
-    public List<SkiLiftPass> getSkiLiftPassList() {
-        return skiLiftPassList;
+    public List<SkiLift> getSkiLiftList() {
+        return skiLiftList;
     }
 
-    public void setSkiLiftPassList(List<SkiLiftPass> skiLiftPassList) {
-        this.skiLiftPassList = skiLiftPassList;
+    public void setSkiLiftList(List<SkiLift> skiLiftList) {
+        this.skiLiftList = skiLiftList;
     }
 }

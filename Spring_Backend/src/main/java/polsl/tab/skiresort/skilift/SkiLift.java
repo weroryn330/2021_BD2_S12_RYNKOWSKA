@@ -1,6 +1,6 @@
 package polsl.tab.skiresort.skilift;
 
-import polsl.tab.skiresort.skiliftpass.SkiLiftPass;
+import polsl.tab.skiresort.pass.Pass;
 import polsl.tab.skiresort.skiliftschedule.SkiLiftSchedule;
 
 import javax.persistence.*;
@@ -22,13 +22,14 @@ public class SkiLift {
     private Integer height;
 
     @NotBlank(message = "Your ski lift is open flag should not be empty!")
-    private boolean isOpened;
+    private Character isOpened;
 
-    @OneToMany(mappedBy = "skiLift")
-    private List<SkiLiftPass> skiLiftPassList;
 
     @OneToMany(mappedBy = "skiLiftIdSkiLift")
     private List<SkiLiftSchedule> skiLiftScheduleList;
+
+    @ManyToMany(mappedBy = "skiLiftList")
+    private List<Pass> passList;
 
     public Integer getIdSkiLift() {
         return idSkiLift;
@@ -54,20 +55,12 @@ public class SkiLift {
         this.height = height;
     }
 
-    public boolean isOpened() {
+    public Character getIsOpened() {
         return isOpened;
     }
 
-    public void setOpened(boolean opened) {
-        isOpened = opened;
-    }
-
-    public List<SkiLiftPass> getSkiLiftPassList() {
-        return skiLiftPassList;
-    }
-
-    public void setSkiLiftPassList(List<SkiLiftPass> skiLiftPassList) {
-        this.skiLiftPassList = skiLiftPassList;
+    public void setIsOpened(Character isOpened) {
+        this.isOpened = isOpened;
     }
 
     public List<SkiLiftSchedule> getSkiLiftScheduleList() {
@@ -76,5 +69,13 @@ public class SkiLift {
 
     public void setSkiLiftScheduleList(List<SkiLiftSchedule> skiLiftScheduleList) {
         this.skiLiftScheduleList = skiLiftScheduleList;
+    }
+
+    public List<Pass> getPassList() {
+        return passList;
+    }
+
+    public void setPassList(List<Pass> passList) {
+        this.passList = passList;
     }
 }

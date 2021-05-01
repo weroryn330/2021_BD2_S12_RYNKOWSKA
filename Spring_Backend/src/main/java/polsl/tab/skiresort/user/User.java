@@ -6,6 +6,7 @@ import polsl.tab.skiresort.role.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -45,7 +46,7 @@ public class User {
 
     @OneToOne()
     @JoinColumn(name = "roles_id_role")
-    @Column(nullable = false)
+    @NotNull
     private Role rolesIdRole;
 
     @NotBlank(message = "Your user password should not be empty!")

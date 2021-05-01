@@ -5,6 +5,7 @@ import polsl.tab.skiresort.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class Invoice {
 
     @ManyToOne
     @JoinColumn(name = "users_id_customer")
-    @Column(nullable = false)
+    @NotNull
     private User usersIdCustomer;
 
     @OneToMany(mappedBy = "invoicesIdInvoice")
