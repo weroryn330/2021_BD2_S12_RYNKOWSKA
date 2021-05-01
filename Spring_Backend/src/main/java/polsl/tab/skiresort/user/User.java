@@ -22,27 +22,33 @@ public class User {
     @NotBlank(message = "Your last name should not be empty!")
     private String lastName;
 
+    @NotBlank(message = "Your user address should not be empty!")
     private String address;
 
+    @NotBlank(message = "Your user city should not be empty!")
     private String city;
 
+    @NotBlank(message = "Your user voivodeship should not be empty!")
     private String voivodeship;
 
+    @NotBlank(message = "Your user country should not be empty!")
     private String country;
 
+    @NotBlank(message = "Your user postal code should not be empty!")
     private String postalCode;
 
-    @NotBlank(message = "Your phone information should not be empty!")
+    @NotBlank(message = "Your user phone information should not be empty!")
     private String phone;
 
-    @NotBlank(message = "Your email should not be empty!")
+    @NotBlank(message = "Your user email should not be empty!")
     private String email;
 
     @OneToOne()
     @JoinColumn(name = "roles_id_role")
+    @Column(nullable = false)
     private Role rolesIdRole;
 
-    @NotBlank(message = "Your password should not be empty!")
+    @NotBlank(message = "Your user password should not be empty!")
     private String password;
 
     @OneToMany(mappedBy = "usersIdCustomer")

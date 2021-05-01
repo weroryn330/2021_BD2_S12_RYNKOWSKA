@@ -1,6 +1,6 @@
 package polsl.tab.skiresort.role;
 
-import org.hibernate.annotations.GeneratorType;
+
 import polsl.tab.skiresort.user.User;
 
 import javax.persistence.*;

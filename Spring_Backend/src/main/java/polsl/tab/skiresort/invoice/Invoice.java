@@ -16,24 +16,30 @@ public class Invoice {
     @Column(nullable = false)
     private Integer idInvoice;
 
-    @NotBlank(message = "Your date should not be empty!")
+    @NotBlank(message = "Your invoice date should not be empty!")
     private Date invoiceDate;
 
+    @NotBlank(message = "Your invoice billing address should not be empty!")
     private String billingAddress;
 
+    @NotBlank(message = "Your invoice billing city should not be empty!")
     private String billingCity;
 
+    @NotBlank(message = "Your invoice billing state should not be empty!")
     private String billingState;
 
+    @NotBlank(message = "Your invoice billing country should not be empty!")
     private String billingCountry;
 
+    @NotBlank(message = "Your invoice billing postal code should not be empty!")
     private String billingPostalCode;
 
-    @NotBlank(message = "Your total should not be empty!")
+    @NotBlank(message = "Your invoice total should not be empty!")
     private Float total;
 
     @ManyToOne
     @JoinColumn(name = "users_id_customer")
+    @Column(nullable = false)
     private User usersIdCustomer;
 
     @OneToMany(mappedBy = "invoicesIdInvoice")

@@ -13,17 +13,18 @@ public class PriceList {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPriceList;
 
-    @NotBlank(message = "Your start date should not be empty!")
+    @NotBlank(message = "Your price list start date should not be empty!")
     private Date startDate;
 
-    @NotBlank(message = "Your end date should not be empty!")
+    @NotBlank(message = "Your price list end date should not be empty!")
     private Date endDate;
 
-    @NotBlank(message = "Your percentage should not be empty!")
+    @NotBlank(message = "Your price list percentage should not be empty!")
     private Integer percentage;
 
     @OneToOne()
     @JoinColumn(name = "pass_id_invoice_item")
+    @Column(nullable = false)
     private Pass pasIdInvoiceItem;
 
     public Integer getIdPriceList() {

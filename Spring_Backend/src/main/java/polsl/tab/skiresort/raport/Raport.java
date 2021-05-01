@@ -3,6 +3,7 @@ package polsl.tab.skiresort.raport;
 import polsl.tab.skiresort.user.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
 
@@ -14,10 +15,13 @@ public class Raport {
     @Column(nullable = false)
     private Integer idRaport;
 
+    @NotBlank(message = "Your raport name should not be empty!")
     private String name;
 
+    @NotBlank(message = "Your raport date should not be empty!")
     private Date raportDate;
 
+    @NotBlank(message = "Your raport path should not be empty!")
     private String path;
 
     @ManyToOne()
