@@ -16,4 +16,4 @@ Do you need a fully funcional ski resort service? Feel free to use this app!
 ### Use Case Diagram
 ![UseCaseDiagram](https://user-images.githubusercontent.com/43822509/116464413-3db2e280-a86c-11eb-80a5-349497d461a7.png)
 ### Database Diagram
-![DBScheme1 2](https://user-images.githubusercontent.com/43854203/116541460-ca50b580-a8eb-11eb-9309-c6299f4124c1.png)
+![DBDIagramv1 3](https://user-images.githubusercontent.com/43854203/117532304-146e2100-afe7-11eb-8d0a-11098bfa45cd.png)
