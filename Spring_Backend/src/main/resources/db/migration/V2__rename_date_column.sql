@@ -1,1 +1,0 @@
-ALTER TABLE raports RENAME COLUMN "date" TO raport_date
