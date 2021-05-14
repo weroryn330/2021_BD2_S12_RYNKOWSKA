@@ -1,0 +1,94 @@
+package polsl.tab.skiresort.pricelist;
+
+import polsl.tab.skiresort.agediscount.AgeDiscount;
+import polsl.tab.skiresort.pass.Pass;
+import polsl.tab.skiresort.quantitypass.QuantityPass;
+import polsl.tab.skiresort.timepass.TimePass;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.sql.Date;
+import java.util.List;
+
+@Entity
+@Table(name = "price_lists")
+public class PriceList {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private Integer idPriceList;
+
+    @NotBlank(message = "Your price list start date should not be empty!")
+    private Date startDate;
+
+    @NotBlank(message = "Your price list end date should not be empty!")
+    private Date endDate;
+
+    @OneToMany(mappedBy = "priceList")
+    private List<Pass> passList;
+
+    @OneToMany(mappedBy = "priceListIdPriceList")
+    private List<AgeDiscount> ageDiscountList;
+
+    @OneToMany(mappedBy = "priceListIdPriceList")
+    private List<TimePass> timePassList;
+
+    @OneToMany(mappedBy = "priceListIdPriceList")
+    private List<QuantityPass> quantityPassList;
+
+    public Integer getIdPriceList() {
+        return idPriceList;
+    }
+
+    public void setIdPriceList(Integer idPriceList) {
+        this.idPriceList = idPriceList;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public List<Pass> getPassList() {
+        return passList;
+    }
+
+    public void setPassList(List<Pass> passList) {
+        this.passList = passList;
+    }
+
+    public List<AgeDiscount> getAgeDiscountList() {
+        return ageDiscountList;
+    }
+
+    public void setAgeDiscountList(List<AgeDiscount> ageDiscountList) {
+        this.ageDiscountList = ageDiscountList;
+    }
+
+    public List<TimePass> getTimePassList() {
+        return timePassList;
+    }
+
+    public void setTimePassList(List<TimePass> timePassList) {
+        this.timePassList = timePassList;
+    }
+
+    public List<QuantityPass> getQuantityPassList() {
+        return quantityPassList;
+    }
+
+    public void setQuantityPassList(List<QuantityPass> quantityPassList) {
+        this.quantityPassList = quantityPassList;
+    }
+}
