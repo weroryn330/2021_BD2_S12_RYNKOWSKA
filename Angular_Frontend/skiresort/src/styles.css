@@ -1,0 +1,136 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', serif;
+  color: #fff;
+}
+
+#homeHeader {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("assets/ski.jpeg");
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+}
+
+#loginHeader {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("assets/login.jpg") no-repeat;
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+}
+
+#aboutHeader {
+  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("assets/about.jpg") no-repeat;
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+}
+.wrapper {
+  width: 90vw;
+  height: 15vh;
+  margin: auto;
+  position: relative;
+}
+
+.wrapperL {
+  width: 90vw;
+  margin: auto;
+  position: relative;
+}
+
+.logo img {
+  width: 5vw;
+  float: left;
+  margin-top: 15px;
+}
+
+.navBar {
+  float: right;
+  list-style: none;
+  margin-top: 30px;
+}
+
+/* Elementy listy wyswietlane w liniowym bloku */
+.navBar li {
+  display: inline-block;
+}
+
+/* Linki do podstron */
+.navBar li a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 5px 15px;
+  font-size: 1vw;
+}
+
+/* Efekt podkreslenia */
+.navBar li a::after {
+  content:'';
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width .5s;
+  position: relative;
+  left: 15px;
+}
+
+/* Efekt podkreslenia */
+.navBar li a:hover::after {
+  width: calc(100% - 15px);
+}
+
+.welcomeText {
+  position: absolute;
+  width: 40vw;
+  margin: 25vh 30vw;
+  text-align: center;
+  top: 40px;
+}
+
+.welcomeText h1 {
+  text-align: center;
+  color: #ffffff;
+  font-size: 3vw;
+}
+
+.welcomeText a {
+  border: 1px solid white;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 10px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-top: 20px;
+  font-size: 2vh;
+  display: inline-block;
+  color: rgba(255, 255, 255, 1);
+  position: relative;
+  letter-spacing: 2px;
+  transition: 0.5s;
+}
+
+.welcomeText a:hover {
+  color: rgba(255, 255, 255, 1);
+  animation: pulse 0.8s linear infinite alternate;
+}
+
+@keyframes pulse{
+  0% {
+    background: transparent;
+  }
+  100% {
+    background: rgba(255, 255, 255, 0.4);
+  }
+}
+
+#container {
+  height: 100vh;
+  color: #ffffff;
+}
