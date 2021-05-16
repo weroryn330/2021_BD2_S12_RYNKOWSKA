@@ -4,6 +4,7 @@ import polsl.tab.skiresort.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Table(name = "roles")
@@ -16,8 +17,8 @@ public class Role {
     @NotBlank(message = "Your role name should not be empty!")
     private String roleName;
 
-    @OneToOne(mappedBy = "rolesIdRole")
-    private User user;
+    @ManyToMany(mappedBy = "roleList")
+    private List<User> userList;
 
     public Integer getIdRole() {
         return idRole;
@@ -33,13 +34,5 @@ public class Role {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

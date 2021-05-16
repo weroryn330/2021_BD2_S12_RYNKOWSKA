@@ -43,16 +43,19 @@ public class User {
     @NotBlank(message = "Your user email should not be empty!")
     private String email;
 
-    @OneToOne
-    @JoinColumn(name = "roles_id_role")
-    @NotNull
-    private Role rolesIdRole;
-
     @NotBlank(message = "Your user password should not be empty!")
     private String password;
 
     @OneToMany(mappedBy = "userIdUser")
     private List<Invoice> invoiceList;
+
+    @ManyToMany
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = {@JoinColumn(name = "users_id_user")},
+            inverseJoinColumns = {@JoinColumn(name = "roles_id_role")}
+    )
+    private List<Role> roleList;
 
     public Integer getIdUser() {
         return idUser;
@@ -134,14 +137,6 @@ public class User {
         this.email = email;
     }
 
-    public Role getRolesIdRole() {
-        return rolesIdRole;
-    }
-
-    public void setRolesIdRole(Role rolesIdRole) {
-        this.rolesIdRole = rolesIdRole;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -156,5 +151,13 @@ public class User {
 
     public void setInvoiceList(List<Invoice> invoiceList) {
         this.invoiceList = invoiceList;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 }
