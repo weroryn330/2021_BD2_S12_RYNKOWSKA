@@ -56,6 +56,19 @@ public class User {
     )
     private List<Role> roleList;
 
+    public User(String firstName, String lastName, String address, String city, String voivodeship, String country, String postalCode, String phone, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.voivodeship = voivodeship;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+    }
+
     public Integer getIdUser() {
         return idUser;
     }
