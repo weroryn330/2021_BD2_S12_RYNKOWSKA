@@ -1,6 +1,4 @@
-package polsl.tab.skiresort.role;
-
-import polsl.tab.skiresort.user.User;
+package polsl.tab.skiresort.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -24,7 +22,7 @@ public class Role {
         return idRole;
     }
 
-    public void setIdRole(Integer idRole) {
+    void setIdRole(Integer idRole) {
         this.idRole = idRole;
     }
 

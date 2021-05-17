@@ -1,6 +1,6 @@
-package polsl.tab.skiresort.quantitypass;
+package polsl.tab.skiresort.model;
 
-import polsl.tab.skiresort.pricelist.PriceList;
+import polsl.tab.skiresort.model.PriceList;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -29,7 +29,7 @@ public class QuantityPass {
         return idQuantityPass;
     }
 
-    public void setIdQuantityPass(Integer idQuantityPass) {
+    void setIdQuantityPass(Integer idQuantityPass) {
         this.idQuantityPass = idQuantityPass;
     }
 

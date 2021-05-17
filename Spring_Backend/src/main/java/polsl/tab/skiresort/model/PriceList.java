@@ -1,9 +1,4 @@
-package polsl.tab.skiresort.pricelist;
-
-import polsl.tab.skiresort.agediscount.AgeDiscount;
-import polsl.tab.skiresort.pass.Pass;
-import polsl.tab.skiresort.quantitypass.QuantityPass;
-import polsl.tab.skiresort.timepass.TimePass;
+package polsl.tab.skiresort.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -40,7 +35,7 @@ public class PriceList {
         return idPriceList;
     }
 
-    public void setIdPriceList(Integer idPriceList) {
+    void setIdPriceList(Integer idPriceList) {
         this.idPriceList = idPriceList;
     }
 

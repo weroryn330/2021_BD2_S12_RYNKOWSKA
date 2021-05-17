@@ -1,7 +1,4 @@
-package polsl.tab.skiresort.invoice;
-
-import polsl.tab.skiresort.pass.Pass;
-import polsl.tab.skiresort.user.User;
+package polsl.tab.skiresort.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -50,7 +47,7 @@ public class Invoice {
         return idInvoice;
     }
 
-    public void setIdInvoice(Integer idInvoice) {
+    void setIdInvoice(Integer idInvoice) {
         this.idInvoice = idInvoice;
     }
 

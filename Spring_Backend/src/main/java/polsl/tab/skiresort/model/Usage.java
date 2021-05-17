@@ -1,8 +1,7 @@
-package polsl.tab.skiresort.usage;
+package polsl.tab.skiresort.model;
 
-import polsl.tab.skiresort.pass.Pass;
-import polsl.tab.skiresort.pricelist.PriceList;
-import polsl.tab.skiresort.skilift.SkiLift;
+import polsl.tab.skiresort.model.Pass;
+import polsl.tab.skiresort.model.SkiLift;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -37,7 +36,7 @@ public class Usage {
         return idUsage;
     }
 
-    public void setIdUsage(Integer idUsage) {
+    void setIdUsage(Integer idUsage) {
         this.idUsage = idUsage;
     }
 

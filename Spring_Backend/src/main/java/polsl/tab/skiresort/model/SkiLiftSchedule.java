@@ -1,6 +1,6 @@
-package polsl.tab.skiresort.skiliftschedules;
+package polsl.tab.skiresort.model;
 
-import polsl.tab.skiresort.skilift.SkiLift;
+import polsl.tab.skiresort.model.SkiLift;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -36,7 +36,7 @@ public class SkiLiftSchedule {
         return idSkiLiftSchedule;
     }
 
-    public void setIdSkiLiftSchedule(Integer idSkiLiftSchedule) {
+    void setIdSkiLiftSchedule(Integer idSkiLiftSchedule) {
         this.idSkiLiftSchedule = idSkiLiftSchedule;
     }
 

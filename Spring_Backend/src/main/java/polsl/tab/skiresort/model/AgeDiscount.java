@@ -1,6 +1,4 @@
-package polsl.tab.skiresort.agediscount;
-
-import polsl.tab.skiresort.pricelist.PriceList;
+package polsl.tab.skiresort.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -30,7 +28,7 @@ public class AgeDiscount {
         return idAgeDiscount;
     }
 
-    public void setIdAgeDiscounts(Integer idAgeDiscount) {
+    void setIdAgeDiscounts(Integer idAgeDiscount) {
         this.idAgeDiscount = idAgeDiscount;
     }
 

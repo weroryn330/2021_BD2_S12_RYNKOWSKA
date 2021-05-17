@@ -1,11 +1,10 @@
-package polsl.tab.skiresort.user;
+package polsl.tab.skiresort.model;
 
-import polsl.tab.skiresort.invoice.Invoice;
-import polsl.tab.skiresort.role.Role;
+import polsl.tab.skiresort.model.Invoice;
+import polsl.tab.skiresort.model.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -61,7 +60,7 @@ public class User {
         return idUser;
     }
 
-    public void setIdUser(Integer idUser) {
+    void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 

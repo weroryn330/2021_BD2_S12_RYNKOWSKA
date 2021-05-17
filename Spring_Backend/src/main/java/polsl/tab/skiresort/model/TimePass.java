@@ -1,6 +1,6 @@
-package polsl.tab.skiresort.timepass;
+package polsl.tab.skiresort.model;
 
-import polsl.tab.skiresort.pricelist.PriceList;
+import polsl.tab.skiresort.model.PriceList;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -29,7 +29,7 @@ public class TimePass {
         return idTimePass;
     }
 
-    public void setIdTimePass(Integer idTimePass) {
+    void setIdTimePass(Integer idTimePass) {
         this.idTimePass = idTimePass;
     }
 
