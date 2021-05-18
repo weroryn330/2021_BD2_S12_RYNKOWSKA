@@ -21,9 +21,9 @@ public class UserResponse {
 
     private String email;
 
-    private String accessToken;
+    private String token;
 
-    public UserResponse(User user, String accessToken) {
+    public UserResponse(User user) {
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.address = user.getAddress();
@@ -33,7 +33,19 @@ public class UserResponse {
         this.postalCode = user.getPostalCode();
         this.phone = user.getPhone();
         this.email = user.getEmail();
-        this.accessToken = accessToken;
+    }
+
+    public UserResponse(User user, String token) {
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.address = user.getAddress();
+        this.city = user.getCity();
+        this.voivodeship = user.getVoivodeship();
+        this.country = user.getCountry();
+        this.postalCode = user.getPostalCode();
+        this.phone = user.getPhone();
+        this.email = user.getEmail();
+        this.token = token;
     }
 
 }

@@ -11,8 +11,7 @@ import java.util.List;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idUser;
 
     @NotBlank(message = "Your user first name should not be empty!")
@@ -67,6 +66,25 @@ public class User {
         this.phone = phone;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String firstName, String lastName, String address, String city, String voivodeship, String country, String postalCode, String phone, String email, String password, List<Role> roleList) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.voivodeship = voivodeship;
+        this.country = country;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.roleList = roleList;
+    }
+
+
+    public User() {
+
     }
 
     public Integer getIdUser() {

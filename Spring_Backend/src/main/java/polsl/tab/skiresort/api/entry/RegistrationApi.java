@@ -25,7 +25,7 @@ public class RegistrationApi {
             @RequestBody UserRequest body
     ) {
         return new ResponseEntity<>(
-                registerService.registerUserAndCreateToken(body),
+                registerService.registerUser(body),
                 HttpStatus.OK
         );
     }
