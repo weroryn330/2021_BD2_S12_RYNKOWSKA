@@ -6,6 +6,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 import polsl.tab.skiresort.api.entry.jwt.JwtTokenUtility;
 import polsl.tab.skiresort.api.entry.request.UserLoginRequest;
+import polsl.tab.skiresort.api.entry.response.UserResponse;
 import polsl.tab.skiresort.api.entry.service.LoginService;
 import polsl.tab.skiresort.api.entry.service.UserDetailsServiceImpl;
 
@@ -44,12 +45,12 @@ public class LoginApi {
     }
 
     @PostMapping
-    ResponseEntity<String> login(@RequestBody UserLoginRequest body) {
+    ResponseEntity<UserResponse> login(@RequestBody UserLoginRequest body) {
         authenticate(body.getUsername(), body.getPassword());
         var userDetails = userDetailsService.loadUserByUsername(body.getUsername());
         var token = jwtTokenUtility.generateToken(body);
         return ResponseEntity.ok(
-                token
+                loginService.mapResponse(body.getUsername(), token)
         );
     }
 }
