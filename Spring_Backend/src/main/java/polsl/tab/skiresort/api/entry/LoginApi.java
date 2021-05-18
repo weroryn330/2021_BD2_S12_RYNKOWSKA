@@ -39,11 +39,6 @@ public class LoginApi {
         this.loginService = loginService;
     }
 
-    @GetMapping("/owner")
-    String ownerEndpoint() {
-        return "Owner";
-    }
-
     @PostMapping
     ResponseEntity<UserResponse> login(@RequestBody UserLoginRequest body) {
         authenticate(body.getUsername(), body.getPassword());

@@ -1,7 +1,8 @@
 package polsl.tab.skiresort.api.entry.service;
 
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import polsl.tab.skiresort.api.entry.response.UserResponse;
 import polsl.tab.skiresort.repository.UserRepository;
 
@@ -22,6 +23,6 @@ public class LoginService {
                     token
             );
         }
-        throw new UsernameNotFoundException("User not found");
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User not found");
     }
 }

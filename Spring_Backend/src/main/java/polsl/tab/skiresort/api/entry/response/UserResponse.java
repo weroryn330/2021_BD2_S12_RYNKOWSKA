@@ -3,23 +3,23 @@ package polsl.tab.skiresort.api.entry.response;
 import polsl.tab.skiresort.model.User;
 
 public class UserResponse {
-    private String firstName;
+    private final String firstName;
 
-    private String lastName;
+    private final String lastName;
 
-    private String address;
+    private final String address;
 
-    private String city;
+    private final String city;
 
-    private String voivodeship;
+    private final String voivodeship;
 
-    private String country;
+    private final String country;
 
-    private String postalCode;
+    private final String postalCode;
 
-    private String phone;
+    private final String phone;
 
-    private String email;
+    private final String email;
 
     private String token;
 
@@ -33,6 +33,7 @@ public class UserResponse {
         this.postalCode = user.getPostalCode();
         this.phone = user.getPhone();
         this.email = user.getEmail();
+        this.token = "Log in to acquire token!";
     }
 
     public UserResponse(User user, String token) {
