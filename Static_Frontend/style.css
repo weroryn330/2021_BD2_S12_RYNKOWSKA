@@ -1,0 +1,157 @@
+/* Default style */
+* {
+  margin: 0;
+  padding: 0;
+
+  font-family: "Montserrat", serif;
+  color: #fff;
+
+  box-sizing: border-box;
+}
+
+/* Navigation bar container */
+.navContainer {
+  width: 90vw;
+  height: 15vh;
+  margin: auto;
+
+  position: relative;
+}
+
+/* Navbar style */
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Displaying navbar items */
+nav .mainNav {
+  display: flex;
+  list-style: none;
+}
+
+/* Logo style */
+nav .logo {
+  margin: 6px;
+
+  font-size: 40px;
+  font-family: 'Gloria Hallelujah', cursive;
+  text-shadow: 0 0 20px white;
+}
+
+/* Sitelinks style */
+nav .mainNav li a {
+  display: inline-block;
+
+  padding: 15px;
+
+  text-decoration: none;
+  font-size: 1.3rem;
+}
+
+/* Underline effect */
+nav .mainNav li a::after {
+  content: "";
+  display: block;
+  position: relative;
+
+  width: 0;
+  height: 2px;
+
+  background: #fff;
+  transition: width 0.5s;
+  box-shadow: 0 0 10px white;
+}
+
+/* Underline effect */
+nav .mainNav li a:hover::after {
+  width: 100%;
+}
+
+/* Open menu 'button' style */
+nav .menuOpen {
+  margin: 20px;
+  display: none;
+
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+/* Close menu 'button' style */
+nav .mainNav .menuClose {
+  cursor: pointer;
+  display: none;
+
+  font-size: 2rem;
+}
+
+/* Footer style */
+footer {
+  position: fixed;
+
+  text-align: center;
+  line-height: 20px;
+
+  width: 100%;
+  padding: 0 2px;
+  bottom: 0px;
+
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(5px);
+}
+
+/* Empty div */
+.empty {
+  height: 40px;
+}
+
+/* Hamburger button menu */
+@media(max-width: 900px){
+  /* Menu */
+  nav .mainNav {
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+    height: 100vh;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    flex-direction: column;
+    
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+
+    transition: top 1.5s ease;
+  }
+
+  /* Close button */
+  nav .mainNav .menuClose {
+    display: block;
+    position: absolute;
+
+    top: 20px;
+    right: 55px;
+  }
+
+  /* Open button */
+  nav .menuOpen {
+    display: block;
+    position: relative;
+    width: 40px;
+    height: 30px;
+    padding: 11px;
+  }
+
+  /* Icon button */
+  nav .menuOpen i {
+    display: block;
+  }
+
+  /* Hover effects*/
+  nav .mainNav li a:hover {
+    background: none;
+  }
+}

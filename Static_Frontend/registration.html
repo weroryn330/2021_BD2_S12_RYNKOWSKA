@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charste="utf-8" />
+    <title>Narcikowo Rejestracja</title>
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="registrationStyle.css" type="text/css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+    <link href='https://css.gg/menu.css' rel='stylesheet'>
+    <link href='https://css.gg/close.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div id="registrationContainer">
+        <div class="navContainer">
+            <nav>
+                <div class="logo">
+                    narcikowo.pl
+                </div>
+                <div class="menuOpen"><i class="gg-menu"></i></div>
+                <ul class="mainNav">
+                    <li><a href="#">O nas</a></li>
+                    <li><a href="#">Karnety i ceny</a></li>
+                    <li><a href="#">Wyciągi i trasy</a></li>
+                    <li><a href="#">Dojazd i kontakt</a></li>
+                    <li><a href="#">Logowanie</a></li>
+                    <div class="menuClose"><i class="gg-close"></i></div>
+                </ul>
+            </nav>
+        </div>
+        <div class="mainContainer">
+            <div class="title">Registration</div>
+            <div class="content">
+                <form action="#">
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="details">Imię</span>
+                            <input type="text" placeholder="Podaj imię" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Nazwisko</span>
+                            <input type="text" placeholder="Podaj nazwisko" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Email</span>
+                            <input type="text" placeholder="Podaj e-mail" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Numer telefonu</span>
+                            <input type="text" placeholder="Podaj numer telefonu" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Hasło</span>
+                            <input type="text" placeholder="Podaj hasło" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Powtórz hasło</span>
+                            <input type="text" placeholder="Ponownie podaj hasło" required>
+                        </div>
+                    </div>
+                    <div class="discount-details">
+                        <input type="radio" name="discount" id="dot-1">
+                        <input type="radio" name="discount" id="dot-2">
+                        <span class="discount-title">Zniżka/bez</span>
+                        <div class="category">
+                            <label for="dot-1">
+                                <span class="dot one"></span>
+                                <span class="discount">Ze zniżką</span>
+                            </label>
+                            <label for="dot-3">
+                                <span class="dot three"></span>
+                                <span class="discount">Bez zniżki</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="Zarejestruj">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="./menu.js"></script>
+</body>
+
+</html>
