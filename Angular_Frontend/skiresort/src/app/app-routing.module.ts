@@ -5,6 +5,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {LiftsComponent} from "./components/lifts/lifts.component";
 import {AboutUsComponent} from "./components/about-us/about-us.component";
 import {ContactComponent} from "./components/contact/contact.component";
+import {RegisterComponent} from "./components/register/register.component";
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'about', component: AboutUsComponent},
   {path: 'lifts', component: LiftsComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
   {path: 'welcome', component: WelcomePageComponent},
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
   {path: '**', redirectTo: '/welcome', pathMatch: 'full'}

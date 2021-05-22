@@ -1,136 +1,212 @@
+/* Default style */
+
+#container {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  url("assets/ski.jpeg");
+  background-size: cover;
+  background-position: center center;
+
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#loginContainer {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  url("assets/login.jpg");
+  background-size: cover;
+  background-position: center center;
+
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#aboutContainer {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  url("assets/about.jpg");
+  background-size: cover;
+  background-position: center center;
+
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#registrationContainer {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  url("assets/registration.jpg");
+  background-size: cover;
+  background-position: center center;
+
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+
+}
+
+
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Montserrat', serif;
+
+  font-family: "Montserrat", serif;
   color: #fff;
+
+  box-sizing: border-box;
 }
 
-#homeHeader {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("assets/ski.jpeg");
-  height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center center;
-  position: relative;
-}
-
-#loginHeader {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("assets/login.jpg") no-repeat;
-  height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center center;
-  position: relative;
-}
-
-#aboutHeader {
-  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("assets/about.jpg") no-repeat;
-  height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center center;
-  position: relative;
-}
-.wrapper {
+/* Navigation bar container */
+.navContainer {
   width: 90vw;
   height: 15vh;
   margin: auto;
+
   position: relative;
 }
 
-.wrapperL {
-  width: 90vw;
-  margin: auto;
-  position: relative;
+/* Navbar style */
+nav {
+  display: flex;
+  justify-content: space-between;
 }
 
-.logo img {
-  width: 5vw;
-  float: left;
-  margin-top: 15px;
-}
-
-.navBar {
-  float: right;
+/* Displaying navbar items */
+nav .mainNav {
+  display: flex;
   list-style: none;
-  margin-top: 30px;
 }
 
-/* Elementy listy wyswietlane w liniowym bloku */
-.navBar li {
+/* Logo style */
+nav .logo {
+  margin: 6px;
+
+  font-size: 40px;
+  font-family: 'Gloria Hallelujah', cursive;
+  text-shadow: 0 0 20px white;
+}
+
+/* Sitelinks style */
+nav .mainNav li a {
   display: inline-block;
-}
 
-/* Linki do podstron */
-.navBar li a {
-  color: #ffffff;
+  padding: 15px;
+
   text-decoration: none;
-  padding: 5px 15px;
-  font-size: 1vw;
+  font-size: 1.3rem;
 }
 
-/* Efekt podkreslenia */
-.navBar li a::after {
-  content:'';
+/* Underline effect */
+nav .mainNav li a::after {
+  content: "";
   display: block;
+  position: relative;
+
   width: 0;
   height: 2px;
+
   background: #fff;
-  transition: width .5s;
-  position: relative;
-  left: 15px;
+  transition: width 0.5s;
+  box-shadow: 0 0 10px white;
 }
 
-/* Efekt podkreslenia */
-.navBar li a:hover::after {
-  width: calc(100% - 15px);
+/* Underline effect */
+nav .mainNav li a:hover::after {
+  width: 100%;
 }
 
-.welcomeText {
-  position: absolute;
-  width: 40vw;
-  margin: 25vh 30vw;
+/* Open menu 'button' style */
+nav .menuOpen {
+  margin: 20px;
+  display: none;
+
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+/* Close menu 'button' style */
+nav .mainNav .menuClose {
+  cursor: pointer;
+  display: none;
+
+  font-size: 2rem;
+}
+
+/* Footer style */
+footer {
+  position: fixed;
+
   text-align: center;
-  top: 40px;
+  line-height: 20px;
+
+  width: 100%;
+  padding: 0 2px;
+  bottom: 0px;
+
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(5px);
 }
 
-.welcomeText h1 {
-  text-align: center;
-  color: #ffffff;
-  font-size: 3vw;
+/* Empty div */
+.empty {
+  height: 40px;
 }
 
-.welcomeText a {
-  border: 1px solid white;
-  font-weight: 500;
-  background: rgba(255, 255, 255, 0.4);
-  padding: 10px 20px;
-  text-decoration: none;
-  text-transform: uppercase;
-  margin-top: 20px;
-  font-size: 2vh;
-  display: inline-block;
-  color: rgba(255, 255, 255, 1);
-  position: relative;
-  letter-spacing: 2px;
-  transition: 0.5s;
-}
+/* Hamburger button menu */
+@media(max-width: 900px){
+  /* Menu */
+  nav .mainNav {
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    display: none;
 
-.welcomeText a:hover {
-  color: rgba(255, 255, 255, 1);
-  animation: pulse 0.8s linear infinite alternate;
-}
+    height: 100vh;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    flex-direction: column;
 
-@keyframes pulse{
-  0% {
-    background: transparent;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+
+    transition: top 1.5s ease;
   }
-  100% {
-    background: rgba(255, 255, 255, 0.4);
-  }
-}
 
-#container {
-  height: 100vh;
-  color: #ffffff;
+  /* Close button */
+  nav .mainNav .menuClose {
+    display: block;
+    position: absolute;
+
+    top: 20px;
+    right: 55px;
+  }
+
+  /* Open button */
+  nav .menuOpen {
+    display: block;
+    position: relative;
+    width: 40px;
+    height: 30px;
+    padding: 11px;
+  }
+
+  /* Icon button */
+  nav .menuOpen i {
+    display: block;
+  }
+
+  /* Hover effects*/
+  nav .mainNav li a:hover {
+    background: none;
+  }
 }

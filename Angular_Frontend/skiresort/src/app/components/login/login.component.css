@@ -1,88 +1,52 @@
-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-
-.box {
+/* Input style */
+.info .inputBox {
   position: relative;
-  padding: 50px;
-  width: 360px;
-  height: 480px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.07);
-  border-radius: 10px;
-  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.3);
-}
 
-.box::after {
-  content:'';
-  position:absolute;
-  top: 4px;
-  left: 4px;
-  right: 4px;
-  bottom: 4px;
-  border-radius: 8px;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%,
-  rgba(255, 255, 255, 0.05) 15%, transparent 50%, transparent 85%,
-  rgba(255, 255, 255, 0.3) 100%);
-}
-
-.box .form {
-  position: relative;
-  width: 100%;
-}
-
-.box .form h2 {
-  font-weight: 800;
-  font-size: 30px;
-  letter-spacing: 3px;
-  margin-bottom: 30px;
-}
-
-.box .form .inputBx {
-  position: relative;
   width: 100%;
   margin-bottom: 20px;
 }
 
-.box .form .inputBx input[type=submit] {
+/* Submit style */
+.info .form .inputBox input[type="submit"] {
   width: 40%;
+  padding: 8px 10px;
+
   font-size: 17px;
   font-weight: 500;
-  outline: none;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.3);
-  padding: 8px 10px;
-  border-radius: 6px;
 }
 
-.box .form .inputBx input {
+/* E-mail/password input style */
+.info .inputBox input {
+  outline: none;
+
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+
   width: 90%;
+  padding: 8px 10px;
+
   font-size: 17px;
   font-weight: 500;
-  outline: none;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.3);
-  padding: 8px 10px;
-  border-radius: 6px;
 }
 
-.remember {
+/* Label for 'remember me' */
+label {
   position: relative;
   display: inline-block;
-  font-weight: 300;
   cursor: pointer;
-  margin-bottom: 10px;
+
+  font-weight: 300;
+
+  margin-bottom: 30px;
 }
 
+/* Placeholder style */
+::placeholder{
+  color: rgba(255, 255, 255, 0.6)
+}
+
+/* Paragraph style */
 p {
-  margin-top: 20px;
+  margin: 20px 0;
 }
