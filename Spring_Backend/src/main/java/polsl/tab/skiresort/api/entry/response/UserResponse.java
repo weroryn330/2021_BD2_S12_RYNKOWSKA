@@ -21,7 +21,7 @@ public class UserResponse {
 
     private final String email;
 
-    private String token;
+    private final String token;
 
     public UserResponse(User user) {
         this.firstName = user.getFirstName();

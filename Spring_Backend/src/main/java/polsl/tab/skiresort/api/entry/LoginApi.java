@@ -32,7 +32,10 @@ public class LoginApi {
         );
     }
 
-    public LoginApi(AuthenticationManager authenticationManager, JwtTokenUtility jwtTokenUtility, UserDetailsServiceImpl userDetailsService, LoginService loginService) {
+    public LoginApi(AuthenticationManager authenticationManager,
+                    JwtTokenUtility jwtTokenUtility,
+                    UserDetailsServiceImpl userDetailsService,
+                    LoginService loginService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtility = jwtTokenUtility;
         this.userDetailsService = userDetailsService;
