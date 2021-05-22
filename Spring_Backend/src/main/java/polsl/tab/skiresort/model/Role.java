@@ -8,8 +8,7 @@ import java.util.List;
 @Table(name = "roles")
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idRole;
 
     @NotBlank(message = "Your role name should not be empty!")
@@ -17,6 +16,12 @@ public class Role {
 
     @ManyToMany(mappedBy = "roleList")
     private List<User> userList;
+
+    public Role() {}
+
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
 
     public Integer getIdRole() {
         return idRole;
