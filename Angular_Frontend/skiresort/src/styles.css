@@ -94,6 +94,14 @@ nav .logo {
   text-shadow: 0 0 20px white;
 }
 
+nav .logo:hover {
+  margin: 6px;
+  font-size: 40px;
+  font-family: 'Gloria Hallelujah', cursive;
+  text-shadow: 0 0 20px crimson;
+  cursor: pointer;
+}
+
 /* Sitelinks style */
 nav .mainNav li a {
   display: inline-block;
@@ -138,21 +146,6 @@ nav .mainNav .menuClose {
   display: none;
 
   font-size: 2rem;
-}
-
-/* Footer style */
-footer {
-  position: fixed;
-
-  text-align: center;
-  line-height: 20px;
-
-  width: 100%;
-  padding: 0 2px;
-  bottom: 0px;
-
-  background: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(5px);
 }
 
 /* Empty div */
