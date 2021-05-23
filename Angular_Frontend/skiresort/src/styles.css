@@ -13,19 +13,6 @@
   min-height: 100vh;
 }
 
-#loginContainer {
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-  url("assets/login.jpg");
-  background-size: cover;
-  background-position: center center;
-
-  position: relative;
-
-  height: 100%;
-  width: 100%;
-  min-height: 100vh;
-}
-
 #aboutContainer {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
   url("assets/about.jpg");
@@ -39,6 +26,7 @@
   min-height: 100vh;
 }
 
+/* Main div container - background style */
 #registrationContainer {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
   url("assets/registration.jpg");
@@ -50,10 +38,24 @@
   height: 100%;
   width: 100%;
   min-height: 100vh;
+}
 
+/* Main div container - background style */
+#loginContainer {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+  url("assets/login.jpg");
+  background-size: cover;
+  background-position: center center;
+
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
 }
 
 
+/* Default style */
 * {
   margin: 0;
   padding: 0;
@@ -91,14 +93,13 @@ nav .logo {
 
   font-size: 40px;
   font-family: 'Gloria Hallelujah', cursive;
-  text-shadow: 0 0 20px white;
+  text-shadow: 0 0 20px #ffffff;
 }
 
 nav .logo:hover {
   margin: 6px;
   font-size: 40px;
-  font-family: 'Gloria Hallelujah', cursive;
-  text-shadow: 0 0 20px crimson;
+  text-shadow: 0 0 20px #000000;
   cursor: pointer;
 }
 
@@ -146,6 +147,21 @@ nav .mainNav .menuClose {
   display: none;
 
   font-size: 2rem;
+}
+
+/* Footer style */
+footer {
+  position: fixed;
+
+  text-align: center;
+  line-height: 20px;
+
+  width: 100%;
+  padding: 0 2px;
+  bottom: 0px;
+
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(5px);
 }
 
 /* Empty div */
@@ -202,4 +218,31 @@ nav .mainNav .menuClose {
   nav .mainNav li a:hover {
     background: none;
   }
+  .container {
+    max-width: 100%;
+  }
+
+  form .user-details .inputBox {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  form .category {
+    width: 100%;
+  }
+
+  .content form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .user-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+
+/* Info header style */
+.info h2 {
+  text-shadow: 2px 2px 4px black;
+  margin-bottom: 40px;
 }
