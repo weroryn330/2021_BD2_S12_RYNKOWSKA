@@ -1,29 +1,27 @@
-<section>
-  <div class="box">
-    <div class="form">
-      <h2>Login</h2>
-      <form>
+<div class="mainContainer">
+  <h2>Logowanie</h2>
+  <div class="content">
+    <form action="#">
+      <div class="user-details">
         <div class="inputBx">
-          <input type="email" placeholder="E-mail">
+          <span class="details">Email</span>
+          <input type="email" placeholder="Podaj e-mail" required>
         </div>
         <div class="inputBx">
-          <input type="password" placeholder="Password">
+          <span class="details">Hasło</span>
+          <input type="password" placeholder="Podaj hasło" required>
         </div>
-        <label class="remember">
-          <input type="checkbox">
-          Zapamiętaj mnie
-        </label>
         <div class="inputBx">
-          <input type="submit" value="LOGIN">
+          <span> Nie masz jeszcze konta? </span>
+          <a (click)="goToRegistration()">Zarejestruj się tutaj!</a>
         </div>
-      </form>
-      <p>
-        <a href="#">Nie pamiętasz hasła? </a>
-      </p>
-      <h3> Nie masz jeszcze konta? </h3>
-      <p>
-        <a href="#">Zarejestruj się tutaj!</a>
-      </p>
-    </div>
+        <div class="inputBx">
+          <a href="#">Nie pamiętasz hasła? </a>
+        </div>
+      </div>
+      <div class="button">
+        <input type="submit" value="Zaloguj">
+      </div>
+    </form>
   </div>
-</section>
+</div>

@@ -1,19 +1,23 @@
 <!--Header with title of the page-->
-<header id="{{currentHeader}}">
-  <div class="{{currentWrapper}}">
-    <!--Logo - main page-->
-    <div class="logo">
-      <!--Paste ready logo here-->
-    </div>
-    <ul class="navBar">
-      <li id="activeLi"><a routerLink="/about">O nas</a></li>
-      <li><a href="#">Karnety i ceny</a></li>
-      <li><a routerLink="/lifts">Wyciągi i trasy</a></li>
-      <li><a routerLink="/contact">Dojazd i kontakt</a></li>
-      <li><a routerLink="/login">Logowanie</a></li>
-    </ul>
+<div id="{{currentContainer}}">
+  <div class="navContainer">
+    <nav>
+      <div class="logo" routerLink="/welcome">
+        narcikowo.pl
+      </div>
+      <div class="menuOpen" (click)="openMenu()"><i class="gg-menu"></i></div>
+      <ul class="mainNav">
+        <li id="activeLi"><a routerLink="/welcome">O nas</a></li>
+        <li><a href="#">Karnety i ceny</a></li>
+        <li><a routerLink="/lifts">Wyciągi i trasy</a></li>
+        <li><a routerLink="/contact">Dojazd i kontakt</a></li>
+        <li><a routerLink="/login">Logowanie</a></li>
+        <div class="menuClose" (click)="closeMenu()"><i class="gg-close"></i></div>
+      </ul>
+    </nav>
   </div>
   <div>
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
-</header>
+</div>
+
