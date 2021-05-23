@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
         this.token.saveToken(data.token);
         this.token.saveUser(data);
         alert("Zalogowano pomyślnie!" + data.token);
+        this.router.navigateByUrl('/welcome');
       },
       error => {
 

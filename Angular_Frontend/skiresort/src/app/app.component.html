@@ -11,7 +11,8 @@
         <li><a href="#">Karnety i ceny</a></li>
         <li><a routerLink="/lifts">Wyciągi i trasy</a></li>
         <li><a routerLink="/contact">Dojazd i kontakt</a></li>
-        <li><a routerLink="/login">Logowanie</a></li>
+        <li><a *ngIf="!loggedIn" routerLink="/login">Logowanie</a></li>
+        <li><a *ngIf="loggedIn" (click)="logout()">Wyloguj</a></li>
         <div class="menuClose" (click)="closeMenu()"><i class="gg-close"></i></div>
       </ul>
     </nav>

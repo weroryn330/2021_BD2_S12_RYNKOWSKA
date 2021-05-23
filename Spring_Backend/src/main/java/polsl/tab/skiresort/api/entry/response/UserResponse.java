@@ -1,6 +1,9 @@
 package polsl.tab.skiresort.api.entry.response;
 
+import polsl.tab.skiresort.model.Role;
 import polsl.tab.skiresort.model.User;
+
+import java.util.List;
 
 public class UserResponse {
     private final String firstName;
@@ -21,6 +24,8 @@ public class UserResponse {
 
     private final String email;
 
+    private final List<Role> roleList;
+
     private final String token;
 
     public UserResponse(User user) {
@@ -33,6 +38,7 @@ public class UserResponse {
         this.postalCode = user.getPostalCode();
         this.phone = user.getPhone();
         this.email = user.getEmail();
+        this.roleList = user.getRoleList();
         this.token = "Log in to acquire token!";
     }
 
@@ -46,6 +52,7 @@ public class UserResponse {
         this.postalCode = user.getPostalCode();
         this.phone = user.getPhone();
         this.email = user.getEmail();
+        this.roleList = user.getRoleList();
         this.token = token;
     }
 
@@ -83,6 +90,10 @@ public class UserResponse {
 
     public String getEmail() {
         return email;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
     public String getToken() {

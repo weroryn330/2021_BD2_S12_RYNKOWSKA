@@ -68,6 +68,7 @@ export class RegistrationComponent implements OnInit {
         this.isRegistrationSuccessful = true;
         this.isFormSend = true;
         alert("Rejestracja przebiegła pomyślnie!");
+        this.router.navigateByUrl('/login');
 
     },
       error => {
