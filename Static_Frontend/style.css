@@ -36,7 +36,14 @@ nav .logo {
 
   font-size: 40px;
   font-family: 'Gloria Hallelujah', cursive;
-  text-shadow: 0 0 20px white;
+  text-shadow: 0 0 20px #ffffff;
+}
+
+nav .logo:hover {
+  margin: 6px;
+  font-size: 40px;
+  text-shadow: 0 0 20px #000000;
+  cursor: pointer;
 }
 
 /* Sitelinks style */
@@ -154,4 +161,31 @@ footer {
   nav .mainNav li a:hover {
     background: none;
   }
+  .container {
+    max-width: 100%;
+  }
+
+  form .user-details .inputBox {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  form .category {
+    width: 100%;
+  }
+
+  .content form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .user-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+
+/* Info header style */
+.info h2 {
+  text-shadow: 2px 2px 4px black;
+  margin-bottom: 40px;
 }

@@ -4,9 +4,9 @@
 <head>
     <meta charste="utf-8" />
     <title>Narcikowo Logowanie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css" type="text/css" />
-    <link rel="stylesheet" href="loginStyle.css" type="text/css" />
-    <link rel="stylesheet" href="aboutStyle.css" type="text/css" />
+    <link rel="stylesheet" href="registrationStyle.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
     <link href='https://css.gg/menu.css' rel='stylesheet'>
@@ -31,34 +31,31 @@
                 </ul>
             </nav>
         </div>
-        <div class="infoContainer">
-            <div class="empty"></div>
-            <div class="info">
-                <div class="form">
-                    <h2>Login</h2>
-                    <form>
-                        <div class="inputBox">
-                            <input type="email" placeholder="E-mail">
+        <div class="mainContainer">
+            <h2>Logowanie</h2>
+            <div class="content">
+                <form action="#">
+                    <div class="user-details">
+                        <div class="inputBx">
+                            <span class="details">Email</span>
+                            <input type="email" placeholder="Podaj e-mail" required>
                         </div>
-                        <div class="inputBox">
-                            <input type="password" placeholder="Password">
+                        <div class="inputBx">
+                            <span class="details">Hasło</span>
+                            <input type="password" placeholder="Podaj hasło" required>
                         </div>
-                        <label class="remember">
-                            <input type="checkbox">
-                            Zapamiętaj mnie
-                        </label>
-                        <div class="inputBox">
-                            <input type="submit" value="LOGIN">
+                        <div class="inputBx">
+                            <span> Nie masz jeszcze konta? </span>
+                            <a href="#">Zarejestruj się tutaj!</a>
                         </div>
-                    </form>
-                    <p>
-                        <a href="#">Nie pamiętasz hasła? </a>
-                    </p>
-                    <p>
-                    <h3> Nie masz jeszcze konta? </h3>
-                    <a href="#">Zarejestruj się tutaj!</a>
-                    </p>
-                </div>
+                        <div class="inputBx">
+                            <a href="#">Nie pamiętasz hasła? </a>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <input type="submit" value="Zaloguj">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

@@ -49,17 +49,11 @@
 
 /* Image info block div */
 .info img {
-  max-width: 35vw;
+  max-width: 30vw;
 }
 
 /* Icon style */
 i {
   margin-bottom: 40px;
   --ggs: 2;
-}
-
-/* Info header style */
-.info h2 {
-  text-shadow: 2px 2px 4px black;
-  margin-bottom: 40px;
 }
