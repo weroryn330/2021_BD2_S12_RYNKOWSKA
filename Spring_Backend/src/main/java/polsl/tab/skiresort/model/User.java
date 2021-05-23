@@ -5,6 +5,7 @@ import polsl.tab.skiresort.model.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -189,5 +190,21 @@ public class User {
 
     public void setRoleList(List<Role> roleList) {
         this.roleList = roleList;
+    }
+
+    public void addRole(Role role) {
+        if (this.roleList == null) {
+            this.roleList = new ArrayList<>();
+        }
+        this.roleList.add(role);
+        role.getUserList().add(this);
+    }
+
+    public void removeRole(Role role) {
+        if (this.roleList == null) {
+            this.roleList = new ArrayList<>();
+        }
+        this.roleList.remove(role);
+        role.getUserList().remove(this);
     }
 }
