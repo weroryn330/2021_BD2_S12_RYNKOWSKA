@@ -1,0 +1,62 @@
+<div class="mainContainer" >
+  <h2>Rejestracja</h2>
+  <div class="content">
+    <form (ngSubmit)="onSubmit()" #f="ngForm" name="form">
+      <div class="user-details">
+        <div class="inputBox">
+          <span class="details">Imię</span>
+          <input type="text" placeholder="Podaj imię" [(ngModel)]="form.firstName" #firstName="ngModel" name="firstName" required>
+        </div>
+        <div class="inputBox">
+          <span class="details">Nazwisko</span>
+          <input type="text" placeholder="Podaj nazwisko" [(ngModel)]="form.lastName" #lastName="ngModel" name="lastName" required>
+        </div>
+        <div class="inputBox">
+          <span class="details">Kraj</span>
+          <input type="text" placeholder="Podaj kraj" [(ngModel)]="form.country" #country="ngModel" name="country" required>
+        </div>
+        <div class="inputBox">
+          <span class="details">Email</span>
+          <input type="email" id="email" placeholder="Podaj e-mail" style="background-color: #c4e2ff;" [(ngModel)]="form.email" #email="ngModel" name="email" required>
+        </div>
+        <div class="inputBox">
+          <span class="details">Powtórz email</span>
+          <input type="email" id="email2" placeholder="Podaj e-mail" style="background-color: #c4e2ff;" [(ngModel)]="form.emailRepetition" #emailRepetition="ngModel" name="emailRepetition" required>
+        </div>
+        <div class="inputBox">
+          <span class="details">Numer telefonu</span>
+          <input type="text" placeholder="Podaj numer telefonu" (blur)="validatePhone()" [(ngModel)]="form.phone" #phone="ngModel" name="phone" required>
+        </div>
+        <div class="inputBox">
+          <span class="details">Województwo</span>
+          <input type="text" placeholder="Podaj województwo" [(ngModel)]="form.voivodeship" #voivodeship="ngModel" name="voivodeship" required>
+        </div>
+        <div class="inputBox">
+          <span class="details">Kod pocztowy</span>
+          <input type="" required class="postalCode" placeholder="Kod pocztowy:"
+                 (keyup)="insertDash()"  (blur)="validatePostalCode()" [(ngModel)]="form.postalCode" #postalCode="ngModel" name="postalCode">
+        </div>
+        <div class="inputBox">
+          <span class="details">Miasto</span>
+          <input type="text" placeholder="Miasto zamieszkania" [(ngModel)]="form.city" #city="ngModel"  name="city" required>
+        </div>
+        <div class="inputBox">
+          <span class="details">Adres</span>
+          <input type="text" placeholder="Ulica i numer domu" [(ngModel)]="form.address" #address="ngModel" name="address" required>
+        </div>
+        <div class="inputBox">
+          <span class="details">Hasło</span>
+          <input type="password" placeholder="Podaj hasło" style="background-color: #c4e2ff" [(ngModel)]="form.password" #password="ngModel" name="password" required>
+        </div>
+        <div class="inputBox">
+          <span class="details">Powtórz hasło</span>
+          <input type="password" placeholder="Powtórz hasło" style="background-color: #c4e2ff"  [(ngModel)]="form.passwordRepetition" #passwordRepetition="ngModel"
+                 name="passwordRepetition" required>
+        </div>
+      </div>
+      <div class="button">
+        <input [disabled]="!f.form.valid" type="submit" value="Zarejestruj mnie">
+      </div>
+    </form>
+  </div>
+</div>
