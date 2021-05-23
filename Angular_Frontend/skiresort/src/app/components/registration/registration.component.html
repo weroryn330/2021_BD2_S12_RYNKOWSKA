@@ -1,7 +1,7 @@
 <div class="mainContainer" >
   <h2>Rejestracja</h2>
   <div class="content">
-    <form (ngSubmit)="onSubmit()" #f="ngForm" name="form">
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" name="form">
       <div class="user-details">
         <div class="inputBox">
           <span class="details">Imię</span>
@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="button">
-        <input [disabled]="!f.form.valid" type="submit" value="Zarejestruj mnie">
+        <input  type="submit" value="Zarejestruj mnie">
       </div>
     </form>
   </div>

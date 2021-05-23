@@ -33,10 +33,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   validatePostalCode(): void {
-    if (this.form.postalCode.length != 6 || this.form.postalCode.charAt(2) != '-') {
+    if (this.form.postalCode == null || this.form.postalCode.length != 6 || this.form.postalCode.charAt(2) != '-') {
       alert("Niepoprawny format kodu pocztowego!\nWpisz kod w postaci: [][]-[][][], np: 44-100")
     }
-    if (isNaN(this.form.postalCode.charAt(0)) || isNaN(this.form.postalCode.charAt(1)) ||
+    if (this.form.postalCode == null || isNaN(this.form.postalCode.charAt(0)) || isNaN(this.form.postalCode.charAt(1)) ||
       isNaN(this.form.postalCode.charAt(3)) || isNaN(this.form.postalCode.charAt(4)) || isNaN(this.form.postalCode.charAt(5))) {
       alert("Niepoprawny format kodu pocztowego!\nPrawidłowy format musi składać się z cyfr, np: 44-100")
     }
@@ -49,8 +49,9 @@ export class RegistrationComponent implements OnInit {
   }
 
   validatePhone(): void {
-    if (this.form.phone.length != 9) {
+    if (this.form.phone == null || this.form.phone.length != 9) {
       alert("Niepoprawny format numeru telefonu!\nPrawidłowy format musi składać się z 9 cyfr, np: 600700800")
+      return;
     }
     for(let i=0; i<this.form.phone.length; i++) {
       if (isNaN(this.form.phone.charAt(i))){
