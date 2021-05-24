@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RegistrationService} from "../../services/registration.service";
 import {Router} from "@angular/router";
+import {RegistrationRequest} from "../../classes/registration-request";
 
 @Component({
   selector: 'app-register',
@@ -53,24 +54,23 @@ export class RegistrationComponent implements OnInit {
       alert("Niepoprawny format numeru telefonu!\nPrawidłowy format musi składać się z 9 cyfr, np: 600700800")
       return;
     }
-    for(let i=0; i<this.form.phone.length; i++) {
-      if (isNaN(this.form.phone.charAt(i))){
+    for (let i = 0; i < this.form.phone.length; i++) {
+      if (isNaN(this.form.phone.charAt(i))) {
         alert("Niepoprawny format numeru telefonu!\nPrawidłowy format musi składać się z cyfr, np: 600700800")
       }
     }
   }
 
   onSubmit(): void {
-    const { firstName, lastName, country, email, phone, voivodeship, postalCode, city, address, password } = this.form;
-    this.registationService.register(firstName, lastName, country, email,
-      phone, voivodeship, postalCode, city, address, password).subscribe( data => {
-        console.log(data);
+    const {firstName, lastName, country, email, emailRepetition, phone, voivodeship, postalCode, city, address, password, passwordRepetition} = this.form;
+    const registrationRequest = new RegistrationRequest(firstName, lastName, country, email, phone, voivodeship, postalCode, city, address, password);
+    this.registationService.register(registrationRequest).subscribe(data => {
         this.isRegistrationSuccessful = true;
         this.isFormSend = true;
         alert("Rejestracja przebiegła pomyślnie!");
         this.router.navigateByUrl('/login');
 
-    },
+      },
       error => {
         this.isRegistrationSuccessful = false;
         this.isFormSend = true;

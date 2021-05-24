@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {RegistrationRequest} from "../classes/registration-request";
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +15,8 @@ endPoint = 'http://localhost:8080/api/'
   constructor(private http: HttpClient) {
   }
 
-  register(firstName: string, lastName: string, country: string, email: string, phone: string,
-           voivodeship: string, postalCode: string, city: string, address: string, password: string): Observable<any> {
-    return this.http.post(this.endPoint + 'register', {
-      firstName,
-      lastName,
-      address,
-      city,
-      voivodeship,
-      country,
-      postalCode,
-      phone,
-      email,
-      password
-    },this.httpOptions)
+  register(registrationRequest: RegistrationRequest): Observable<any> {
+    return this.http.post<RegistrationRequest>(this.endPoint + 'register',
+      registrationRequest ,this.httpOptions)
   }
 }
