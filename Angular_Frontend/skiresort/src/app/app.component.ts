@@ -10,6 +10,7 @@ import {TokenService} from "./services/token.service";
 export class AppComponent implements OnInit {
   currentContainer = "container";
   loggedIn = false;
+  roles: string[] = [];
 
   constructor(private router: Router, private token: TokenService) {
     this.router.events.subscribe(event => {
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     if (this.token.getToken() != null) {
       this.loggedIn = true;
+      this.roles = this.token.getUser().roleList;
     }
   }
 

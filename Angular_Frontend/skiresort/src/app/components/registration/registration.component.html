@@ -1,61 +1,81 @@
-<div class="mainContainer" >
+<div class="mainContainer">
   <h2>Rejestracja</h2>
   <div class="content">
-    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" name="form">
+    <form (ngSubmit)="f.form.valid && isFormValid && onSubmit()" #f="ngForm" name="form">
       <div class="user-details">
         <div class="inputBox">
           <span class="details">Imię</span>
-          <input type="text" placeholder="Podaj imię" [(ngModel)]="form.firstName" #firstName="ngModel" name="firstName" required>
+          <input type="text" id="firstName" placeholder="Imię" (input)="validateSimpleInput('firstName')"
+                 [(ngModel)]="form.firstName" #firstName="ngModel" name="firstName" required>
         </div>
         <div class="inputBox">
           <span class="details">Nazwisko</span>
-          <input type="text" placeholder="Podaj nazwisko" [(ngModel)]="form.lastName" #lastName="ngModel" name="lastName" required>
+          <input type="text" id="lastName" placeholder="Nazwisko" (input)="validateSimpleInput('lastName')"
+                 [(ngModel)]="form.lastName" #lastName="ngModel" name="lastName" required>
         </div>
         <div class="inputBox">
           <span class="details">Kraj</span>
-          <input type="text" placeholder="Podaj kraj" [(ngModel)]="form.country" #country="ngModel" name="country" required>
+          <input type="text" id="country" placeholder="Kraj" (input)="validateSimpleInput('country')"
+                 [(ngModel)]="form.country" #country="ngModel" name="country" required>
         </div>
         <div class="inputBox">
           <span class="details">Email</span>
-          <input type="email" id="email" placeholder="Podaj e-mail" style="background-color: #c4e2ff;" [(ngModel)]="form.email" #email="ngModel" name="email" required>
+          <input type="email" id="email" placeholder="adres@email.com" (input)="validateEmail('email')"
+                 (input)="validateEmailRepetition('emailRepetition')"
+                 style="background-color: #c4e2ff;" [(ngModel)]="form.email" #email="ngModel" name="email" required>
         </div>
         <div class="inputBox">
           <span class="details">Powtórz email</span>
-          <input type="email" id="email2" placeholder="Podaj e-mail" style="background-color: #c4e2ff;" [(ngModel)]="form.emailRepetition" #emailRepetition="ngModel" name="emailRepetition" required>
+          <input type="email" id="emailRepetition" placeholder="adres@email.com"
+                 (input)="validateEmailRepetition('emailRepetition')" style="background-color: #c4e2ff;"
+                 [(ngModel)]="form.emailRepetition" #emailRepetition="ngModel" name="emailRepetition" required>
         </div>
         <div class="inputBox">
           <span class="details">Numer telefonu</span>
-          <input type="text" placeholder="Podaj numer telefonu" (blur)="validatePhone()" [(ngModel)]="form.phone" #phone="ngModel" name="phone" required>
+          <input type="text" id="phone" placeholder="123456789" (input)="validatePhone('phone')"
+                 [(ngModel)]="form.phone" #phone="ngModel" name="phone" required>
         </div>
         <div class="inputBox">
           <span class="details">Województwo</span>
-          <input type="text" placeholder="Podaj województwo" [(ngModel)]="form.voivodeship" #voivodeship="ngModel" name="voivodeship" required>
+          <input type="text" id="voivodeship" placeholder="Wojewódźtwo" (input)="validateSimpleInput('voivodeship')"
+                 [(ngModel)]="form.voivodeship" #voivodeship="ngModel" name="voivodeship" required>
         </div>
         <div class="inputBox">
           <span class="details">Kod pocztowy</span>
-          <input type="" required class="postalCode" placeholder="Kod pocztowy:"
-                 (keyup)="insertDash()"  (blur)="validatePostalCode()" [(ngModel)]="form.postalCode" #postalCode="ngModel" name="postalCode">
+          <input type="" id="postalCode" required class="postalCode" placeholder="12-345"
+                 (keyup)="insertDash()" (input)="validatePostalCode('postalCode')" [(ngModel)]="form.postalCode"
+                 #postalCode="ngModel" name="postalCode">
         </div>
         <div class="inputBox">
           <span class="details">Miasto</span>
-          <input type="text" placeholder="Miasto zamieszkania" [(ngModel)]="form.city" #city="ngModel"  name="city" required>
+          <input type="text" id="city" placeholder="Miasto" (input)="validateSimpleInput('city')"
+                 [(ngModel)]="form.city" #city="ngModel" name="city" required>
         </div>
         <div class="inputBox">
-          <span class="details">Adres</span>
-          <input type="text" placeholder="Ulica i numer domu" [(ngModel)]="form.address" #address="ngModel" name="address" required>
+          <span class="details">Ulica</span>
+          <input type="text" id="address" placeholder="Ulica 123" (input)="validateSimpleInput('address')"
+                 [(ngModel)]="form.address" #address="ngModel" name="address" required>
         </div>
         <div class="inputBox">
           <span class="details">Hasło</span>
-          <input type="password" placeholder="Podaj hasło" style="background-color: #c4e2ff" [(ngModel)]="form.password" #password="ngModel" name="password" required>
+          <input type="password" id="password" placeholder="Hasło" (input)="validatePassword('password')"
+                 (input)="validatePasswordRepetition('passwordRepetition')"
+                 style="background-color: #c4e2ff" [(ngModel)]="form.password" #password="ngModel" name="password"
+                 required>
         </div>
         <div class="inputBox">
           <span class="details">Powtórz hasło</span>
-          <input type="password" placeholder="Powtórz hasło" style="background-color: #c4e2ff"  [(ngModel)]="form.passwordRepetition" #passwordRepetition="ngModel"
+          <input type="password" id="passwordRepetition" placeholder="Hasło"
+                 (input)="validatePasswordRepetition('passwordRepetition')" style="background-color: #c4e2ff"
+                 [(ngModel)]="form.passwordRepetition" #passwordRepetition="ngModel"
                  name="passwordRepetition" required>
         </div>
       </div>
+      <div>
+
+      </div>
       <div class="button">
-        <input  type="submit" value="Zarejestruj mnie">
+        <input type="submit" value="Zarejestruj mnie">
       </div>
     </form>
   </div>

@@ -197,6 +197,9 @@ public class User {
             this.roleList = new ArrayList<>();
         }
         this.roleList.add(role);
+        if (role.getUserList() == null) {
+            role.setUserList(new ArrayList<User>());
+        }
         role.getUserList().add(this);
     }
 
@@ -205,6 +208,8 @@ public class User {
             this.roleList = new ArrayList<>();
         }
         this.roleList.remove(role);
-        role.getUserList().remove(this);
+        if (role.getUserList() != null) {
+            role.getUserList().remove(this);
+        }
     }
 }

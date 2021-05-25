@@ -7,10 +7,19 @@
       </div>
       <div class="menuOpen" (click)="openMenu()"><i class="gg-menu"></i></div>
       <ul class="mainNav">
-        <li id="activeLi"><a routerLink="/welcome">O nas</a></li>
+        <li id="activeLi"><a *ngIf="!roles.includes('ROLE_EMPLOYEE')" routerLink="/welcome">O nas</a></li>
+        <li><a *ngIf="roles.includes('ROLE_OWNER')" href="#">Dodaj pracownika</a></li>
+        <li><a *ngIf="roles.includes('ROLE_OWNER')" href="#">Moi pracownicy</a></li>
+        <li><a *ngIf="roles.includes('ROLE_OWNER')" href="#">Moi klienci</a></li>
+        <li><a *ngIf="roles.includes('ROLE_OWNER')" href="#">Faktury</a></li>
+        <li><a *ngIf="roles.includes('ROLE_OWNER')" href="#">Raporty biznesowe</a></li>
+        <li><a *ngIf="roles.includes('ROLE_EMPLOYEE')" href="#">Aktywne karnety</a></li>
+        <li><a *ngIf="roles.includes('ROLE_EMPLOYEE')" href="#">Modyfikacja rozkładu wyciągów</a></li>
+        <li><a *ngIf="roles.includes('ROLE_EMPLOYEE')" href="#">Modyfikacja cennika</a></li>
         <li><a href="#">Karnety i ceny</a></li>
         <li><a routerLink="/lifts">Wyciągi i trasy</a></li>
         <li><a routerLink="/contact">Dojazd i kontakt</a></li>
+        <li><a *ngIf="roles.includes('ROLE_USER')" href="#">Moje konto</a></li>
         <li><a *ngIf="!loggedIn" routerLink="/login">Logowanie</a></li>
         <li><a *ngIf="loggedIn" (click)="logout()">Wyloguj</a></li>
         <div class="menuClose" (click)="closeMenu()"><i class="gg-close"></i></div>

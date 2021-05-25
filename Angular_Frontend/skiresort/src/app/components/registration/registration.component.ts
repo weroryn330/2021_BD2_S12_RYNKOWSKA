@@ -24,6 +24,7 @@ export class RegistrationComponent implements OnInit {
     passwordRepetition: null
   }
   isRegistrationSuccessful = false;
+  isFormValid = false;
   isFormSend = false;
 
   constructor(private registationService: RegistrationService, private router: Router) {
@@ -33,36 +34,120 @@ export class RegistrationComponent implements OnInit {
     this.isFormSend = false;
   }
 
-  validatePostalCode(): void {
-    if (this.form.postalCode == null || this.form.postalCode.length != 6 || this.form.postalCode.charAt(2) != '-') {
-      alert("Niepoprawny format kodu pocztowego!\nWpisz kod w postaci: [][]-[][][], np: 44-100")
-    }
-    if (this.form.postalCode == null || isNaN(this.form.postalCode.charAt(0)) || isNaN(this.form.postalCode.charAt(1)) ||
-      isNaN(this.form.postalCode.charAt(3)) || isNaN(this.form.postalCode.charAt(4)) || isNaN(this.form.postalCode.charAt(5))) {
-      alert("Niepoprawny format kodu pocztowego!\nPrawidłowy format musi składać się z cyfr, np: 44-100")
-    }
-  }
-
   insertDash(): void {
     if (this.form.postalCode.length == 2) {
       this.form.postalCode = this.form.postalCode + '-'
     }
   }
 
-  validatePhone(): void {
-    if (this.form.phone == null || this.form.phone.length != 9) {
-      alert("Niepoprawny format numeru telefonu!\nPrawidłowy format musi składać się z 9 cyfr, np: 600700800")
-      return;
+  checkIfNotEmpty(element: HTMLInputElement): boolean {
+    if (element.value == null || (element.value != null && element.value.trim().length === 0)) {
+      return false;
     }
-    for (let i = 0; i < this.form.phone.length; i++) {
-      if (isNaN(this.form.phone.charAt(i))) {
-        alert("Niepoprawny format numeru telefonu!\nPrawidłowy format musi składać się z cyfr, np: 600700800")
-      }
-    }
+    return true;
   }
 
+  changeElementColors(element: HTMLInputElement, backgroundColor: string, color: string) {
+    element!!.style.backgroundColor = backgroundColor;
+    element!!.style.color = color;
+  }
+
+  validatePostalCode(id: string): void {
+    const element = <HTMLInputElement>window.document.getElementById(id);
+    if (!element.value.match('^[0-9]{2}-[0-9]{3}$')) {
+      this.changeElementColors(element, 'rgba(250,0,0,0.3)', 'white');
+      this.isFormValid = false;
+      return;
+    }
+    this.changeElementColors(element, 'white', 'black');
+    this.isFormValid = true;
+  }
+
+
+  validatePhone(id: string): void {
+    const element = <HTMLInputElement>window.document.getElementById(id);
+    if (!element.value.match('^[0-9]{9}$')) {
+      this.changeElementColors(element, 'rgba(250,0,0,0.3)', 'white');
+      this.isFormValid = false;
+      return;
+    }
+    this.changeElementColors(element, 'white', 'black');
+    this.isFormValid = true;
+  }
+
+
+  validateSimpleInput(id: string) {
+    const element = <HTMLInputElement>window.document.getElementById(id);
+    if (!this.checkIfNotEmpty(element) || element.value.length < 3 || element.value.length > 25) {
+      this.changeElementColors(element, 'rgba(250,0,0,0.3)', 'white');
+      this.isFormValid = false;
+      return;
+    }
+    this.changeElementColors(element, 'white', 'black');
+    this.isFormValid = true;
+  }
+
+  validateEmail(id: string) {
+    const element = <HTMLInputElement>window.document.getElementById(id);
+    if (!element.value.match(
+      '^([\\w-]+(?:\\.[\\w-]+)*)@((?:[\\w-]+\\.)*\\w[\\w-]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$')) {
+      this.changeElementColors(element, 'rgba(250,0,0,0.3)', 'white');
+      this.isFormValid = false;
+      return;
+    }
+    this.changeElementColors(element, 'white', 'black');
+    this.isFormValid = true;
+  }
+
+  validateEmailRepetition(id: string) {
+    const element = <HTMLInputElement>window.document.getElementById(id);
+    if (this.form.email !== this.form.emailRepetition) {
+      this.changeElementColors(element, 'rgba(250,0,0,0.3)', 'white');
+      this.isFormValid = false;
+      return;
+    }
+    this.changeElementColors(element, 'white', 'black');
+    this.isFormValid = true;
+  }
+
+  validatePassword(id: string) {
+    const element = <HTMLInputElement>window.document.getElementById(id);
+    if (!element.value.match('^[a-zA-Z0-9_-]{5,25}$')) {
+      this.changeElementColors(element, 'rgba(250,0,0,0.3)', 'white');
+      this.isFormValid = false;
+      return;
+    }
+    this.changeElementColors(element, 'white', 'black');
+    this.isFormValid = true;
+  }
+
+  validatePasswordRepetition(id: string) {
+    const element = <HTMLInputElement>window.document.getElementById(id);
+    if (this.form.password !== this.form.passwordRepetition) {
+      this.changeElementColors(element, 'rgba(250,0,0,0.3)', 'white');
+      this.isFormValid = false;
+      return;
+    }
+    this.changeElementColors(element, 'white', 'black');
+    this.isFormValid = true;
+  }
+
+
   onSubmit(): void {
-    const {firstName, lastName, country, email, emailRepetition, phone, voivodeship, postalCode, city, address, password, passwordRepetition} = this.form;
+    const {
+      firstName,
+      lastName,
+      country,
+      email,
+      emailRepetition,
+      phone,
+      voivodeship,
+      postalCode,
+      city,
+      address,
+      password,
+      passwordRepetition
+    } = this.form;
     const registrationRequest = new RegistrationRequest(firstName, lastName, country, email, phone, voivodeship, postalCode, city, address, password);
     this.registationService.register(registrationRequest).subscribe(data => {
         this.isRegistrationSuccessful = true;
