@@ -25,6 +25,13 @@ public class TimePass {
     @NotNull
     private PriceList priceListIdPriceList;
 
+    public TimePass(){};
+
+    public TimePass(Integer hours,Float price)
+    {
+        this.hours = hours;
+        this.price = price;
+    }
     public Integer getIdTimePass() {
         return idTimePass;
     }

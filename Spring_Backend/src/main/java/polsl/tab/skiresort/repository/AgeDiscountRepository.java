@@ -5,22 +5,20 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import polsl.tab.skiresort.model.PriceList;
+import polsl.tab.skiresort.model.AgeDiscount;
 
 import javax.transaction.Transactional;
-import java.sql.Date;
 import java.util.Optional;
 
 @Repository
-public interface PriceListRepository extends JpaRepository<PriceList, Integer> {
-
-    Optional<PriceList> findByStartDate(Date startDate);
+public interface AgeDiscountRepository extends JpaRepository<AgeDiscount, Integer> {
+    Optional<AgeDiscount> findByAgeMax(Integer ageMax);
 
     @Query(
             nativeQuery = true,
-            value = "DELETE FROM PRICE_LISTS WHERE start_date = :start_date"
+            value = "DELETE FROM AGE_DISCOUNTS WHERE age_max = :age_max"
     )
     @Modifying
     @Transactional
-    void deleteByStartDate(@Param("2021-05-26") Date start_date);
+    void deleteByAgeMax(@Param("99") Integer age_max);
 }
