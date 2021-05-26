@@ -103,17 +103,17 @@ public class UserService {
 
             if(user.isPresent()){
                 if (userRepository.findByEmail(body.getEmail()).isEmpty()) {
-                    User gotUser = user.get();
 
-                    gotUser.setFirstName(body.getFirstName());
-                    gotUser.setLastName(body.getLastName());
-                    gotUser.setAddress(body.getAddress());
-                    gotUser.setCity(body.getCity());
-                    gotUser.setVoivodeship(body.getVoivodeship());
-                    gotUser.setCountry(body.getCountry());
-                    gotUser.setPostalCode(body.getPostalCode());
-                    gotUser.setPhone(body.getPhone());
-                    gotUser.setEmail(body.getEmail());
+
+                    user.get().setFirstName(body.getFirstName());
+                    user.get().setLastName(body.getLastName());
+                    user.get().setAddress(body.getAddress());
+                    user.get().setCity(body.getCity());
+                    user.get().setVoivodeship(body.getVoivodeship());
+                    user.get().setCountry(body.getCountry());
+                    user.get().setPostalCode(body.getPostalCode());
+                    user.get().setPhone(body.getPhone());
+                    user.get().setEmail(body.getEmail());
 
                     try {
                         user.get().setPassword(passwordEncoder.encode(body.getPassword()));
