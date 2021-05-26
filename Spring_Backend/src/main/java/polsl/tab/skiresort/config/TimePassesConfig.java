@@ -11,9 +11,9 @@ import polsl.tab.skiresort.repository.TimePassRepository;
 @Configuration
 public class TimePassesConfig {
 
-    private static final Integer[] hours = {1,3,6,9,12,24,36,48};
+    private static final Integer[] hours = {3,6,24,48,72,168,288};
 
-    private static final Float[] price = {20.0f,55.0f,105.0f,165.0f,200.0f,445.0f,680.0f,900.0f};
+    private static final Float[] price = {10.0f,18.0f,60.0f,114.0f,162.0f,357.0f,576.0f};
 
     private static final Logger logger = LoggerFactory.getLogger(TimePassesConfig.class);
 

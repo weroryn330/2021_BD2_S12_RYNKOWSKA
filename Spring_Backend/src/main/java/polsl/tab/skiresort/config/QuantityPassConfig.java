@@ -12,7 +12,7 @@ public class QuantityPassConfig {
 
     private static final Integer[] quantity = {10,20,30,60,90};
 
-    private static final Float[] price = {20.0f,35.0f,52.0f,110.0f,165.0f};
+    private static final Float[] price = {20.0f,38.0f,54.0f,102.0f,144.0f};
 
     private static final Logger logger = LoggerFactory.getLogger(QuantityPassConfig.class);
 
