@@ -2,30 +2,28 @@ package polsl.tab.skiresort.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "passes")
 public class Pass {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idPass;
 
-    @NotBlank(message = "Your pass unit price should not be empty!")
+    @NotNull(message = "Your pass unit price should not be empty!")
     private Float unitPrice;
 
     @ManyToOne()
     @JoinColumn(name = "invoices_id_invoice")
-    @NotNull
     private Invoice invoicesIdInvoice;
 
-    @NotBlank(message = "Your pass start date should not be empty!")
     private Date startDate;
 
-    @NotBlank(message = "Your pass end date should not be empty!")
     private Date endDate;
 
     @NotBlank(message = "Your pass first name should not be empty!")
@@ -34,22 +32,50 @@ public class Pass {
     @NotBlank(message = "Your pass last name should not be empty!")
     private String lastName;
 
-    @NotBlank(message = "Your pass birth date should not be empty!")
+    @NotNull(message = "Your pass birth date should not be empty!")
     private Date birthDate;
 
-    @NotBlank(message = "Your pass uses total should not be empty!")
     private Integer usesTotal;
 
-    @NotBlank(message = "Your pass uses left should not be empty!")
     private Integer usesLeft;
 
     @ManyToOne
     @JoinColumn(name = "price_list_id_price_list")
-    @NotNull
     private PriceList priceList;
 
     @OneToMany(mappedBy = "passesIdInvoiceItem")
     private List<Usage> usageList;
+
+    public Pass() {
+    }
+
+    public Pass(Float unitPrice,
+                Date startDate,
+                Date endDate,
+                String firstName,
+                String lastName,
+                Date birthDate) {
+        this.unitPrice = unitPrice;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+    }
+
+    public Pass(Float unitPrice,
+                String firstName,
+                String lastName,
+                Date birthDate,
+                Integer usesTotal,
+                Integer usesLeft) {
+        this.unitPrice = unitPrice;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.usesTotal = usesTotal;
+        this.usesLeft = usesLeft;
+    }
 
     public Integer getIdPass() {
         return idPass;
@@ -140,6 +166,9 @@ public class Pass {
     }
 
     public List<Usage> getUsageList() {
+        if (this.usageList == null){
+            this.usageList = new ArrayList<>();
+        }
         return usageList;
     }
 

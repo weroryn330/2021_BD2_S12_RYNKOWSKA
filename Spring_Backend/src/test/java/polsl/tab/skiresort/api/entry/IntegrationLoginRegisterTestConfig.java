@@ -11,7 +11,7 @@ import javax.transaction.Transactional;
 
 @SpringBootTest
 @Transactional
-public abstract class IntegrationTestConfig {
+public abstract class IntegrationLoginRegisterTestConfig {
 
     @Autowired
     private UserRepository userRepository;

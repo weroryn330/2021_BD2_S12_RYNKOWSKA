@@ -4,17 +4,17 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "invoices")
 public class Invoice {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idInvoice;
 
-    @NotBlank(message = "Your invoice date should not be empty!")
+    @NotNull(message = "Your invoice date should not be empty!")
     private Date invoiceDate;
 
     @NotBlank(message = "Your invoice billing address should not be empty!")
@@ -32,7 +32,7 @@ public class Invoice {
     @NotBlank(message = "Your invoice billing postal code should not be empty!")
     private String billingPostalCode;
 
-    @NotBlank(message = "Your invoice total should not be empty!")
+    @NotNull(message = "Your invoice total should not be empty!")
     private Float total;
 
     @ManyToOne
@@ -42,6 +42,24 @@ public class Invoice {
 
     @OneToMany(mappedBy = "invoicesIdInvoice")
     private List<Pass> passList;
+
+    public Invoice() {}
+
+    public Invoice(Date invoiceDate,
+                   String billingAddress,
+                   String billingCity,
+                   String billingState,
+                   String billingCountry,
+                   String billingPostalCode,
+                   Float total) {
+        this.invoiceDate = invoiceDate;
+        this.billingAddress = billingAddress;
+        this.billingCity = billingCity;
+        this.billingState = billingState;
+        this.billingCountry = billingCountry;
+        this.billingPostalCode = billingPostalCode;
+        this.total = total;
+    }
 
     public Integer getIdInvoice() {
         return idInvoice;
@@ -116,6 +134,9 @@ public class Invoice {
     }
 
     public List<Pass> getPassList() {
+        if (this.passList == null) {
+            this.passList = new ArrayList<>();
+        }
         return passList;
     }
 

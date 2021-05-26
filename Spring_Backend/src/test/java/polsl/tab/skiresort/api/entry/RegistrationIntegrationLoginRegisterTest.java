@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("integration")
-public class RegistrationIntegrationTest extends IntegrationTestConfig {
+public class RegistrationIntegrationLoginRegisterTest extends IntegrationLoginRegisterTestConfig {
 
     @Autowired
     private MockMvc mockMvc;

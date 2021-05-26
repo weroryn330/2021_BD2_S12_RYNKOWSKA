@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import polsl.tab.skiresort.model.PriceList;
 
 @Repository
-interface PriceListRepository extends JpaRepository<PriceList, Integer> {
+public interface PriceListRepository extends JpaRepository<PriceList, Integer> {
 }

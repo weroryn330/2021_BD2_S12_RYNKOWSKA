@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import polsl.tab.skiresort.model.Invoice;
 
 @Repository
-interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
+public interface InvoiceRepository extends JpaRepository<Invoice, Integer> {
 }

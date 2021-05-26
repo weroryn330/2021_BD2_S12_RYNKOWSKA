@@ -2,6 +2,8 @@ package polsl.tab.skiresort.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.List;
 
@@ -9,14 +11,13 @@ import java.util.List;
 @Table(name = "price_lists")
 public class PriceList {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idPriceList;
 
-    @NotBlank(message = "Your price list start date should not be empty!")
+    @NotNull(message = "Your price list start date should not be empty!")
     private Date startDate;
 
-    @NotBlank(message = "Your price list end date should not be empty!")
+    @NotNull(message = "Your price list end date should not be empty!")
     private Date endDate;
 
     @OneToMany(mappedBy = "priceList")
@@ -30,6 +31,15 @@ public class PriceList {
 
     @OneToMany(mappedBy = "priceListIdPriceList")
     private List<QuantityPass> quantityPassList;
+
+    public PriceList() {
+
+    }
+
+    public PriceList(Date startDate, Date endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
     public Integer getIdPriceList() {
         return idPriceList;
