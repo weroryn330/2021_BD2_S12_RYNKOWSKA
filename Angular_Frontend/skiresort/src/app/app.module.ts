@@ -7,6 +7,9 @@ import {authInterceptorProviders} from "./interceptors/authorization.interceptor
 
 
 import { AppComponent } from './app.component';
+import { ProfileComponent} from "./components/profile/profile.component";
+import { PurchaseComponent} from "./components/purchase/purchase.component";
+import { PricelistComponent} from "./components/pricelist/pricelist.component";
 import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { ContactComponent } from './components/contact/contact.component';
@@ -15,6 +18,9 @@ import { RegistrationComponent } from './components/registration/registration.co
 @NgModule({
   declarations: [
     AppComponent,
+    ProfileComponent,
+    PurchaseComponent,
+    PricelistComponent,
     WelcomePageComponent,
     LoginComponent,
     ContactComponent,
