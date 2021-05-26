@@ -27,6 +27,9 @@ export class AppComponent implements OnInit {
           case "/contact":
             this.currentContainer = "aboutContainer";
             break;
+          case "/pricelist":
+            this.currentContainer = "pricelistContainer";
+            break;
           default:
             this.currentContainer = "container";
         }

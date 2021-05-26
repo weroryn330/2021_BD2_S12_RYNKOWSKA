@@ -1,0 +1,101 @@
+.infoContainer {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+
+  max-height: fit-content;
+  padding: 30px;
+}
+
+/* Info block div */
+.infoTime, .infoQua {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+
+  border-radius: 10px;
+
+  margin: auto;
+  margin-bottom: 40px;
+
+  max-height: fit-content;
+  min-width: 300px;
+
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.infoTime:hover, .infoQua:hover {
+  box-shadow: 1px 3px 2px #c4e2ff;
+  cursor: pointer;
+}
+
+.price {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.infoTime .header {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  font-size: 30px;
+  text-transform: uppercase;
+  padding: 15px;
+}
+
+.infoQua .header {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  font-size: 30px;
+  text-transform: uppercase;
+  padding: 15px;
+}
+
+.infoTime .detail {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
+
+  font-size: 20px;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.infoQua .detail {
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+
+  font-size: 20px;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.price li {
+  padding: 20px;
+}
+
+.price .inf {
+  font-size: 10px;
+}
+
+p {
+  font-size: 23px;
+  text-align: center;
+}

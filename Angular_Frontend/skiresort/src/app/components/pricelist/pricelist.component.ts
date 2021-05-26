@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {PricelistResponse} from "../../classes/pricelist-response";
+import {PricelistService} from "../../services/pricelist.service";
+import {Router} from "@angular/router";
+import {PricelistPass} from "../../classes/pricelist-pass";
+import {AgeDiscountResponse} from "../../classes/age-discount-response";
+import {TokenService} from "../../services/token.service";
+import {TimePassResponse} from "../../classes/time-pass-response";
+import {QuantityPassResponse} from "../../classes/quantity-pass-response";
 
 @Component({
   selector: 'app-pricelist',
@@ -6,10 +14,48 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pricelist.component.css']
 })
 export class PricelistComponent implements OnInit {
+  pricelist: PricelistResponse = {} as PricelistResponse;
+  /*  STATIC TEST
+    pricelist: PricelistResponse = {
+    ageDiscountsList: [new AgeDiscountResponse(5, 10, 33)],
+    timePassesList: [ new TimePassResponse(30,150)],
+    quantityPassesList: [ new QuantityPassResponse(10,30)]
+  };*/
+    isUser = false;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private pricelistService: PricelistService, private router: Router, private token: TokenService) {
   }
 
+  ngOnInit(): void {
+    this.getPricelist();
+    if(!this.token.getUser()){
+      this.isUser = false;
+    }
+    else{
+      this.isUser = this.token.getUser().roleList.includes("ROLE_USER");
+    }
+  }
+
+  goToPurchase(pricelistPass: PricelistPass, discount: AgeDiscountResponse) {
+    this.router.navigateByUrl('/profile/purchase', {state: {pass: pricelistPass, discount: discount}});
+  }
+
+  goToLogin() {
+    this.router.navigateByUrl('/login');
+  }
+
+  private getPricelist(): void {
+    this.pricelistService.getPricelist().subscribe(data => {
+        console.log(data);
+        this.pricelist = data;
+      },
+      error => {
+        console.log(error);
+      })
+  }
+
+  calculateDiscountPrice(price: number): number {
+    const discount = this.pricelist.ageDiscountsList[0].percentage;
+    return price*((100-discount)/100);
+  }
 }

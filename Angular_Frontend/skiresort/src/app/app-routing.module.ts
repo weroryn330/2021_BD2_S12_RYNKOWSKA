@@ -14,10 +14,13 @@ import {PurchaseComponent} from "./components/purchase/purchase.component";
 const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'pricelist', component: PricelistComponent},
-  {path: 'profile', component: ProfileComponent,
-  children: [
-    {path: 'purchase', component: PurchaseComponent}
-  ]},
+  {
+    path: 'profile', component: ProfileComponent, canActivate: [RouteGuard],
+    data: {expectedRole: 'ROLE_USER'},
+    children: [
+      {path: 'purchase', component: PurchaseComponent}
+    ]
+  },
   {path: 'lifts', component: LiftsComponent},
   {
     path: 'login', component: LoginComponent, canActivate: [RouteGuard],
