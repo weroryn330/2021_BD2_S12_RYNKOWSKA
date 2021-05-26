@@ -20,7 +20,7 @@ public class EmployeeApi {
     }
 
     @GetMapping("/activePasses")
-    ResponseEntity<List<PassesResponse>> getAllActivePassesIncludeInvoiceOwnerEmailInThem() {
+    ResponseEntity<List<PassesResponse>> getAllActivePasses() {
         return ResponseEntity.ok(employeePassesService.getActivePasses());
     }
 
@@ -28,5 +28,6 @@ public class EmployeeApi {
     ResponseEntity<List<PassesResponse>> getAllPasses() {
         return ResponseEntity.ok(employeePassesService.getAllPasses());
     }
+
 
 }
