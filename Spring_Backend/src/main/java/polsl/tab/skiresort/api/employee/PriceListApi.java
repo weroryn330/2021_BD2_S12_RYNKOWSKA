@@ -23,21 +23,21 @@ public class PriceListApi {
         return ResponseEntity.ok(priceListService.getActivePriceList());
     }
 
-    @PutMapping("/ageDiscounts")
+    @PutMapping("/edit/ageDiscounts")
     ResponseEntity<PriceListResponse> modifyActivePriceListAgeDiscounts(
             @RequestBody AgeDiscountsRequest request
     ) {
         return ResponseEntity.ok(priceListService.modifyAgeDiscountsForActivePriceList(request));
     }
 
-    @PutMapping("/quantityPasses")
+    @PutMapping("/edit/quantityPasses")
     ResponseEntity<PriceListResponse> modifyActivePriceListQuantityPasses(
             @RequestBody QuantityPassRequest request
     ) {
         return ResponseEntity.ok(priceListService.modifyQuantityPassForActivePriceList(request));
     }
 
-    @PutMapping("/timePasses")
+    @PutMapping("/edit/timePasses")
     ResponseEntity<PriceListResponse> modifyActivePriceListTimePasses(
             @RequestBody TimePassRequest request
     ) {
