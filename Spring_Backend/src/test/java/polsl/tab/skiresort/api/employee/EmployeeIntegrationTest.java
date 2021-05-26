@@ -34,6 +34,10 @@ public class EmployeeIntegrationTest extends IntegrationEmployeeTestConfig{
                 .getContentAsString()
         );
         Assertions.assertEquals(
+                2,
+                jsonArray.length()
+        );
+        Assertions.assertEquals(
                 "test@test.pl",
                 jsonArray.getJSONObject(0).get("invoiceOwnerEmail").toString()
         );
