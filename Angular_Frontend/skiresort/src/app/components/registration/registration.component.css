@@ -37,6 +37,7 @@ form .user-details .inputBox {
   margin-bottom: 10px;
   width: calc(100% / 3 - 20px);
 }
+
 form .user-details .inputBx {
   margin-bottom: 10px;
   width: 100%;
@@ -60,6 +61,11 @@ form .inputBox span.details, form .inputBx span.details {
   border-bottom-width: 2px;
   transition: all 0.3s ease;
   color: black;
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.5);
+  color: white;
 }
 
 .user-details .inputBox input:focus,
@@ -126,3 +132,5 @@ form .button input:hover {
     flex-direction: column;
   }
 }
+
+

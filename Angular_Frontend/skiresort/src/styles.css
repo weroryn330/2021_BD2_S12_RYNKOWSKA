@@ -106,11 +106,28 @@ nav .logo:hover {
 /* Sitelinks style */
 nav .mainNav li a {
   display: inline-block;
-
   padding: 15px;
 
   text-decoration: none;
   font-size: 1.3rem;
+}
+
+/* For owners and employees there is a dropdown navbar */
+nav .mainNav li .dropdown {
+  display: none;
+  position: absolute;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 1;
+}
+
+/* Content of a dropdown list */
+nav .mainNav li .dropdown a{
+  display: block;
+}
+
+/* Show items after link hover */
+nav .mainNav li:hover .dropdown {
+  display: block;
 }
 
 /* Underline effect */
@@ -214,6 +231,12 @@ footer {
     display: block;
   }
 
+  /* Dropdown list for smaller screen */
+  nav .mainNav li .dropdown {
+    display: none;
+    position: relative;
+    background-color: rgba(0,0,0,0.4);
+  }
   /* Hover effects*/
   nav .mainNav li a:hover {
     background: none;

@@ -1,26 +1,33 @@
 <div class="mainContainer">
   <h2>Logowanie</h2>
   <div class="content">
-    <form action="#">
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()">
       <div class="user-details">
         <div class="inputBx">
           <span class="details">Email</span>
-          <input type="email" placeholder="Podaj e-mail" required>
+          <input type="email" [ngClass]=" {error: email.errors && email.touched}"
+                 placeholder="Podaj e-mail" [(ngModel)]="form.email" #email="ngModel" name="email"
+                 required>
         </div>
         <div class="inputBx">
           <span class="details">Hasło</span>
-          <input type="password" placeholder="Podaj hasło" required>
+          <input type="password"
+                 [ngClass]="{error :  password.touched && password.errors}"
+                 placeholder="Podaj hasło" [(ngModel)]="form.password" #password="ngModel"
+                 name="password" required>
         </div>
         <div class="inputBx">
           <span> Nie masz jeszcze konta? </span>
-          <a (click)="goToRegistration()">Zarejestruj się tutaj!</a>
+          <a (click)="goToRegistration()" style="cursor: pointer; text-decoration: underline;">Zarejestruj się
+            tutaj!</a>
         </div>
         <div class="inputBx">
           <a href="#">Nie pamiętasz hasła? </a>
         </div>
       </div>
       <div class="button">
-        <input type="submit" value="Zaloguj">
+        <input id="button" (click)="f.form.markAllAsTouched()" type="submit"
+               value="Zaloguj">
       </div>
     </form>
   </div>
