@@ -29,7 +29,7 @@ export class PurchaseComponent implements OnInit {
     postalCode: null,
     city: null,
     address: null,
-    total: null,
+    total: 0,
     useUserData: null
   }
 
@@ -62,7 +62,7 @@ export class PurchaseComponent implements OnInit {
 
   addPassRequest(request: PassRequest) {
     this.passRequestsList.push(request);
-    this.form.total += request.unitPrice;
+    this.form.total = parseInt(this.form.total) + request.unitPrice;
   }
 
   addPassForm() {

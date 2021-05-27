@@ -30,6 +30,7 @@ export class PassFormComponent implements OnInit {
   unitPrice: any;
   passTypes = ['Karnet czasowy', 'Karnet zjazdowy'];
   isSubmitted = false;
+
   constructor() {
   }
 
@@ -45,7 +46,7 @@ export class PassFormComponent implements OnInit {
         this.calculatePrice(this.form.usesTotal);
       }
     } else {
-
+      this.discount = this.pricelist.ageDiscountsList[0];
     }
   }
 
@@ -68,10 +69,9 @@ export class PassFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.passType == 'Karnet czasowy'){
+    if (this.form.passType == 'Karnet czasowy') {
       this.form.usesTotal = null;
-    }
-    else {
+    } else {
       this.form.passTime = null;
       this.form.startDate = null;
     }
@@ -86,9 +86,15 @@ export class PassFormComponent implements OnInit {
     let standardPrice: number;
     if (this.form.passType == 'Karnet czasowy') {
       let pass = this.pricelist.timePassesList.find((i: any) => i.hours == value);
+      if (!pass) {
+        return;
+      }
       standardPrice = pass.price;
     } else {
       let pass = this.pricelist.quantityPassesList.find((i: any) => i.quantity == value);
+      if (!pass) {
+        return;
+      }
       standardPrice = pass.price;
     }
     if (this.isDiscountActive) {
