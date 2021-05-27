@@ -11,7 +11,6 @@ import java.util.Optional;
 @Repository
 public interface PriceListRepository extends JpaRepository<PriceList, Integer> {
 
-    // TODO what if there are 2 price lists with the same time range
     @Query(
             nativeQuery = true,
             value = "SELECT * FROM price_lists WHERE start_date < NOW() AND end_date > NOW()"

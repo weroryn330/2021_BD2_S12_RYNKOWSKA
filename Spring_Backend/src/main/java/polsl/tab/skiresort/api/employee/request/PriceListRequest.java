@@ -1,6 +1,10 @@
 package polsl.tab.skiresort.api.employee.request;
 
-import java.util.Date;
+
+import polsl.tab.skiresort.model.PriceList;
+
+import java.sql.Date;
+import java.util.List;
 
 public class PriceListRequest {
 
@@ -8,11 +12,11 @@ public class PriceListRequest {
 
     private Date endDate;
 
-    private AgeDiscountsRequest ageDiscountsResponse;
+    private List<AgeDiscountsRequest> ageDiscountsResponse;
 
-    private QuantityPassRequest quantityPassResponse;
+    private List<QuantityPassRequest> quantityPassResponse;
 
-    private TimePassRequest timePassResponse;
+    private List<TimePassRequest> timePassResponse;
 
     public Date getStartDate() {
         return startDate;
@@ -22,15 +26,15 @@ public class PriceListRequest {
         return endDate;
     }
 
-    public AgeDiscountsRequest getAgeDiscountsRequest() {
+    public List<AgeDiscountsRequest> getAgeDiscountsRequest() {
         return ageDiscountsResponse;
     }
 
-    public QuantityPassRequest getQuantityPassRequest() {
+    public List<QuantityPassRequest> getQuantityPassRequest() {
         return quantityPassResponse;
     }
 
-    public TimePassRequest getTimePassRequest() {
+    public List<TimePassRequest> getTimePassRequest() {
         return timePassResponse;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import polsl.tab.skiresort.api.employee.request.AgeDiscountsRequest;
+import polsl.tab.skiresort.api.employee.request.PriceListRequest;
 import polsl.tab.skiresort.api.employee.request.QuantityPassRequest;
 import polsl.tab.skiresort.api.employee.request.TimePassRequest;
 import polsl.tab.skiresort.api.employee.response.AgeDiscountsResponse;
@@ -17,6 +18,7 @@ import polsl.tab.skiresort.model.TimePass;
 import polsl.tab.skiresort.repository.AgeDiscountRepository;
 import polsl.tab.skiresort.repository.PriceListRepository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,6 +87,36 @@ public class PriceListService {
         return null;
     }
 
+    public PriceListResponse addNewPriceList(PriceListRequest priceListRequest) {
+        // todo
+        /*
+        var priceList = priceListRepository.findCurrentPriceList();
+        priceList.ifPresent(date -> {
+                    date.setStartDate(priceListRequest.getStartDate());
+                    date.setEndDate(priceListRequest.getEndDate());
+                    date.setAgeDiscountList(priceListRequest.getAgeDiscountsRequest()
+                            .stream()
+                            .map(age)
+                    );
+                }
+        );
+        */
+        return null;
+    }
+
+    public PriceListResponse modifyActivePriceListStartDateEndDate(Date startDate, Date endDate) {
+        var priceList = priceListRepository.findCurrentPriceList();
+        priceList.ifPresent(date -> {
+                    date.setStartDate(startDate);
+                    date.setEndDate(endDate);
+                }
+        );
+        if (priceList.isPresent()) {
+            return mapPriceListResponse(priceListRepository.save(priceList.get()));
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Price list not found!");
+    }
+
     private PriceListResponse mapPriceListResponse(PriceList priceList) {
         return new PriceListResponse(
                 priceList.getIdPriceList(),
@@ -100,5 +132,12 @@ public class PriceListService {
             return list.get();
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Price list not found!");
+    }
+
+    public List<PriceListResponse> getAll() {
+        return priceListRepository.findAll()
+                .stream()
+                .map(this::mapPriceListResponse)
+                .collect(Collectors.toList());
     }
 }
