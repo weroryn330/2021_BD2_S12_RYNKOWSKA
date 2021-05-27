@@ -15,6 +15,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { LiftsComponent } from './components/lifts/lifts.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { PassFormComponent } from './components/pass-form/pass-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     LoginComponent,
     ContactComponent,
     LiftsComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    PassFormComponent
   ],
   imports: [
     BrowserModule,

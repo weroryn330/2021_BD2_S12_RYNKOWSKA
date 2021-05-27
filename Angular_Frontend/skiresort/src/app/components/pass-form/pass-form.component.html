@@ -1,0 +1,79 @@
+<form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"
+      style="border-bottom:5px solid rgba(0,0,0,0.5); margin-bottom:5%;" name="form">
+  <div class="user-details">
+    <div class="inputBox">
+      <span class="details">Imię</span>
+      <input type="text" placeholder="Imię"
+             name="firstName" required
+             pattern="^[A-ZĄĆĘŁŃÓŚŻŹ]{1}[a-ząćęłńóśżź]{2,19}$"
+             [(ngModel)]="form.firstName" #firstName="ngModel"
+             [ngClass]="{error :  firstName.touched && firstName.errors}">
+    </div>
+    <div class="inputBox">
+      <span class="details">Nazwisko</span>
+      <input type="text" placeholder="Nazwisko" name="lastName"
+             required pattern="^[A-ZĄĆĘŁŃÓŚŻŹ]{1}[a-ząćęłńóśżź]{2,19}$"
+             [(ngModel)]="form.lastName" #lastName="ngModel"
+             [ngClass]="{error :  lastName.touched && lastName.errors}">
+    </div>
+    <div class="inputBox">
+      <span class="details">Data Urodzenia</span>
+      <input type="date" name="birthDate" required
+             (change)="checkIfDiscountApply(birthDate.value, discount.ageMin, discount.ageMax)"
+             [(ngModel)]="form.birthDate" #birthDate="ngModel"
+             [ngClass]="{error :  birthDate.touched && birthDate.errors}">
+    </div>
+    <div class="inputBox">
+      <span class="details">Typ karnetu</span>
+      <select class="input" name="passType" [(ngModel)]="form.passType" #passType="ngModel"
+              [ngClass]="{error :  passType.touched && passType.errors}" required>
+        <option class="input">Karnet czasowy</option>
+        <option class="input">Karnet zjazdowy</option>
+      </select>
+    </div>
+    <ng-container *ngIf="passType.value === passTypes[0]">
+      <div class="inputBox">
+        <span class="details">Czas trwania</span>
+        <select class="input" name="passTime" [(ngModel)]="form.passTime" #passTime="ngModel" (change)="calculatePrice(passTime.value)"
+                [ngClass]="{error :  passTime.touched && passTime.errors}" required>
+          <option *ngFor="let pricetype of pricelist.timePassesList" value="{{pricetype.hours}}">{{convertToDays(pricetype.hours)}}</option>
+        </select>
+      </div>
+      <div class="inputBox">
+        <span class="details">Data Rozpoczęcia</span>
+        <input type="datetime-local" name="startDate" required [(ngModel)]="form.startDate" #startDate="ngModel"
+               [ngClass]="{error :  startDate.touched && startDate.errors}">
+      </div>
+    </ng-container>
+    <ng-container *ngIf="passType.value === passTypes[1]">
+      <div class="inputBox">
+        <span class="details">Ilość zjazdów</span>
+        <select class="input" name="usesTotal" [(ngModel)]="form.usesTotal" #usesTotal="ngModel" (change)="calculatePrice(usesTotal.value)"
+                [ngClass]="{error :  usesTotal.touched && usesTotal.errors}" required>
+          <option *ngFor="let pricetype of pricelist.quantityPassesList" value="{{pricetype.quantity}}">{{pricetype.quantity}} ZJAZDÓW</option>
+        </select>
+      </div>
+    </ng-container>
+   <!-- <div class="inputBoxBill">
+      <span class="details">Cena karnetu</span>
+      <div class="input">{{unitPrice | number: '1.0-0'}}</div>
+    </div> -->
+    <div class="inputBoxBill">
+      <span class="details">Cena karnetu</span>
+      <input type="number" disabled
+             name="unitPrice" [(ngModel)]="form.unitPrice" #unitPrice="ngModel"
+             required>
+    </div>
+  </div>
+  <ng-container *ngIf="isSubmitted">
+    <div class="buttonSubmitted">
+      <input  type="submit" id="button1" disabled (click)="f.form.markAllAsTouched()"value="Zatwierdź karnet">
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!isSubmitted">
+  <div class="button">
+    <input type="submit" id="button" (click)="f.form.markAllAsTouched()"value="Zatwierdź karnet">
+  </div>
+  </ng-container>
+
+</form>

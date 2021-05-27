@@ -18,7 +18,8 @@
         <li>ulgowy: {{calculateDiscountPrice(pass.price) | number: '1.0-0'}} zł</li>
       </ul>
     </div>
-    <div class="infoQua" *ngFor="let pass of pricelist.quantityPassesList">
+    <div class="infoQua" *ngFor="let pass of pricelist.quantityPassesList"
+         (click)="goToPurchase(pass,pricelist.ageDiscountsList[0])">
       <ul class="price">
         <li class="header">KARNET ZJAZDOWY</li>
         <li class="detail">{{pass.quantity}} ZJAZDÓW</li>
