@@ -1,6 +1,5 @@
 package polsl.tab.skiresort.config;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -38,11 +37,11 @@ class OwnerCredentialsConfig {
     ) {
         this.userRepository = userRepository;
 
-        if (recreate) {
+        if (Boolean.TRUE.equals(recreate)) {
             deleteOwnerAccount(email);
         }
 
-        Logger logger = LoggerFactory.getLogger(OwnerCredentialsConfig.class);
+        var logger = LoggerFactory.getLogger(OwnerCredentialsConfig.class);
         if (userRepository.findByEmail(email).isPresent()) {
             logger.info("Owner exists in database");
         } else {

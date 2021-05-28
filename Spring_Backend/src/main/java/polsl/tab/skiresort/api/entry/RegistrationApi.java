@@ -21,7 +21,7 @@ public class RegistrationApi {
     }
 
     @PostMapping
-    ResponseEntity<UserResponse> registerUserAndCreateToken(
+    public ResponseEntity<UserResponse> registerUserAndCreateToken(
             @RequestBody UserRequest body
     ) {
         return new ResponseEntity<>(

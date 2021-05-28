@@ -5,7 +5,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import polsl.tab.skiresort.api.entry.request.UserLoginRequest;
-import polsl.tab.skiresort.api.entry.response.UserResponse;
 import polsl.tab.skiresort.repository.UserRepository;
 
 @Service

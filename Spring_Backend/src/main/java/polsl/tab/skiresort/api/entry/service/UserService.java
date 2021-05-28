@@ -22,6 +22,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private static final String TOKEN_START = "Bearer ";
 
     public UserService(UserRepository userRepository, JwtTokenUtility jwtTokenUtility, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -34,7 +35,7 @@ public class UserService {
         String jwtToken;
         String username;
 
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+        if (requestTokenHeader != null && requestTokenHeader.startsWith(TOKEN_START)) {
             jwtToken = requestTokenHeader.substring(7);
             try {
                 username = jwtTokenUtility.getUsernameFromToken(jwtToken);
@@ -48,10 +49,8 @@ public class UserService {
                 }
 
             } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "JWT Token has expired");
             }
         }
@@ -80,32 +79,21 @@ public class UserService {
     }
 
     public UserResponse updateUser(UserRequest body, String requestTokenHeader) {
-
         String jwtToken;
         String username;
-
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-
+        if (requestTokenHeader != null && requestTokenHeader.startsWith(TOKEN_START)) {
             jwtToken = requestTokenHeader.substring(7);
-
             try {
                 username = jwtTokenUtility.getUsernameFromToken(jwtToken);
-
             } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "JWT Token has expired");
             }
-
-            Optional<User> user = userRepository.findByEmail(username);;
-
+            Optional<User> user = userRepository.findByEmail(username);
             if(user.isPresent()){
                 if (userRepository.findByEmail(body.getEmail()).isEmpty()) {
-
-                    User gotUser = user.get();
-
+                    var gotUser = user.get();
                     gotUser.setFirstName(body.getFirstName());
                     gotUser.setLastName(body.getLastName());
                     gotUser.setAddress(body.getAddress());
@@ -115,13 +103,11 @@ public class UserService {
                     gotUser.setPostalCode(body.getPostalCode());
                     gotUser.setPhone(body.getPhone());
                     gotUser.setEmail(body.getEmail());
-
                     try {
                         user.get().setPassword(passwordEncoder.encode(body.getPassword()));
                     }catch(IllegalArgumentException e){
                         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Password cannot be empty" );
                     }
-
                     return new UserResponse(userRepository.save(user.get()));
                 }else{
                     throw new ResponseStatusException(HttpStatus.CONFLICT, "User with provided email already exists" );
@@ -134,22 +120,16 @@ public class UserService {
     }
 
     public void deleteUser(String requestTokenHeader){
-
         String jwtToken;
         String username;
-
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+        if (requestTokenHeader != null && requestTokenHeader.startsWith(TOKEN_START)) {
             jwtToken = requestTokenHeader.substring(7);
             try {
                 username = jwtTokenUtility.getUsernameFromToken(jwtToken);
-
                 userRepository.deleteByEmail(username);
-
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
             } catch (ExpiredJwtException e) {
-                System.out.println("JWT Token has expired");
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "JWT Token has expired");
             }
         }

@@ -1,8 +1,5 @@
 package polsl.tab.skiresort.model;
 
-import polsl.tab.skiresort.model.Pass;
-import polsl.tab.skiresort.model.SkiLift;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

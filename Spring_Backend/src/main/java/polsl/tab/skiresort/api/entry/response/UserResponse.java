@@ -39,7 +39,7 @@ public class UserResponse {
         this.postalCode = user.getPostalCode();
         this.phone = user.getPhone();
         this.email = user.getEmail();
-        this.roleList = user.getRoleList().stream().map(role-> role.getRoleName()).collect(Collectors.toList());
+        this.roleList = user.getRoleList().stream().map(Role::getRoleName).collect(Collectors.toList());
         this.token = "Log in to acquire token!";
     }
 
@@ -53,7 +53,7 @@ public class UserResponse {
         this.postalCode = user.getPostalCode();
         this.phone = user.getPhone();
         this.email = user.getEmail();
-        this.roleList = user.getRoleList().stream().map(role-> role.getRoleName()).collect(Collectors.toList());
+        this.roleList = user.getRoleList().stream().map(Role::getRoleName).collect(Collectors.toList());
         this.token = token;
     }
 
