@@ -25,6 +25,14 @@ public class QuantityPass {
     @NotNull
     private PriceList priceListIdPriceList;
 
+    public QuantityPass(){};
+
+    public QuantityPass(Integer quantity, Float price)
+    {
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public Integer getIdQuantityPass() {
         return idQuantityPass;
     }

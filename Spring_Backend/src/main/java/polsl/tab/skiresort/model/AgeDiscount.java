@@ -24,6 +24,22 @@ public class AgeDiscount {
     @JoinColumn(name = "price_list_id_price_list")
     private PriceList priceListIdPriceList;
 
+    public AgeDiscount(){};
+
+    public AgeDiscount(Integer ageMin,Integer ageMax, Integer percentage)
+    {
+        this.ageMin = ageMin;
+        this.ageMax = ageMax;
+        this.percentage = percentage;
+    }
+    public AgeDiscount(Integer ageMin,Integer ageMax, Integer percentage,PriceList priceListIdPriceList)
+    {
+        this.ageMin = ageMin;
+        this.ageMax = ageMax;
+        this.percentage = percentage;
+        this.priceListIdPriceList = priceListIdPriceList;
+    }
+
     public Integer getIdAgeDiscounts() {
         return idAgeDiscount;
     }

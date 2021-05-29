@@ -41,6 +41,15 @@ public class PriceList {
         this.endDate = endDate;
     }
 
+    public PriceList(Date startDate, Date endDate, List<AgeDiscount> ageDiscountList, List<TimePass> timePassList, List<QuantityPass> quantityPassList)
+    {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.ageDiscountList = ageDiscountList;
+        this.timePassList = timePassList;
+        this.quantityPassList = quantityPassList;
+    }
+
     public Integer getIdPriceList() {
         return idPriceList;
     }
