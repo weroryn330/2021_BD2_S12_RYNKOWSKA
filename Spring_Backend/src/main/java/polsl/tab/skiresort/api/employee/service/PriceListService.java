@@ -53,7 +53,7 @@ public class PriceListService {
         var listOfQuantityPass = currentList.getQuantityPassList();
         for (QuantityPass quantityPass: listOfQuantityPass) {
             if (quantityPass.getQuantity().equals(request.getQuantity())) {
-                quantityPass.setQuantity(request.getQuantity());
+                quantityPass.setPrice(request.getPrice());
             }
         }
         currentList.setQuantityPassList(listOfQuantityPass);
@@ -72,19 +72,50 @@ public class PriceListService {
         return mapPriceListResponse(currentList);
     }
 
+    //Change all discount percentage based on ages
     public PriceListResponse modifyAllAgeDiscountsForActivePriceList(List<AgeDiscountsRequest> requestList) {
-        //todo
-        return null;
+        var currentList = this.getCurrentPriceList();
+        var listOfAgeDiscounts = currentList.getAgeDiscountList();
+        for (AgeDiscount discount: listOfAgeDiscounts) {
+            for(AgeDiscountsRequest requestDiscount : requestList) {
+                if (discount.getAgeMin().equals(requestDiscount.getAgeMin()) &&
+                        discount.getAgeMax().equals(requestDiscount.getAgeMax())) {
+                    discount.setPercentage(requestDiscount.getPercentage());
+                }
+            }
+        }
+        currentList.setAgeDiscountList(listOfAgeDiscounts);
+        return mapPriceListResponse(priceListRepository.save(currentList));
     }
 
+    //Change all quantity passes prices based on quantity
     public PriceListResponse modifyAllQuantityPassForActivePriceList(List<QuantityPassRequest> requestList) {
-        //todo
-        return null;
+        var currentList = this.getCurrentPriceList();
+        var listOfQuantityPass = currentList.getQuantityPassList();
+        for (QuantityPass quantityPass: listOfQuantityPass) {
+            for(QuantityPassRequest requestQuantity : requestList) {
+                if (quantityPass.getQuantity().equals(requestQuantity.getQuantity())) {
+                    quantityPass.setPrice(requestQuantity.getPrice());
+                }
+            }
+        }
+        currentList.setQuantityPassList(listOfQuantityPass);
+        return mapPriceListResponse(priceListRepository.save(currentList));
     }
 
+    //Change all time passes prices based on time
     public PriceListResponse modifyAllTimePassForActivePriceList(List<TimePassRequest> requestList) {
-        //todo
-        return null;
+        var currentList = this.getCurrentPriceList();
+        var listOfTimePass = currentList.getTimePassList();
+        for (TimePass timePass: listOfTimePass) {
+            for(TimePassRequest requestTime : requestList) {
+                if (timePass.getHours().equals(requestTime.getHours())) {
+                    timePass.setPrice(requestTime.getPrice());
+                }
+            }
+        }
+        currentList.setTimePassList(listOfTimePass);
+        return mapPriceListResponse(currentList);
     }
 
     public PriceListResponse addNewPriceList(PriceListRequest priceListRequest) {

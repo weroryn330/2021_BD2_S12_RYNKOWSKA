@@ -23,5 +23,5 @@ public interface AgeDiscountRepository extends JpaRepository<AgeDiscount, Intege
     )
     @Modifying
     @Transactional
-    void deleteByAgeMax(@Param("99") Integer age_max);
+    void deleteByAgeMax(@Param("age_max") Integer age_max);
 }
