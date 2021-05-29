@@ -1,0 +1,130 @@
+/* Main div container - background style */
+#profileContainer {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("profile.jpg");
+  background-size: cover;
+  background-position: center center;
+
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.mainContainer {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+
+  max-height: fit-content;
+  padding: 30px;
+}
+
+main {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+
+  border-radius: 10px;
+
+  margin: 5px;
+  padding: 30px;
+  min-width: 50%;
+
+  min-height: 60vh;
+
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.userData {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+
+  border-radius: 10px;
+
+  margin: 15px;
+  padding: 30px;
+
+  min-height: 60vh;
+  min-width: 250px;
+
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.userData img {
+  width: 80px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50px;
+}
+
+.userData .data {
+  margin-top: 30px;
+}
+
+.userData .data h5 {
+  color:rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+}
+
+.actions {
+  margin: 15px;
+
+  min-height: 60vh;
+
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.actions .button {
+  height: 45px;
+  margin: 15px 0;
+  background: transparent;
+}
+
+.actions .button:hover {
+  border-radius: 5px;
+  box-shadow: 0 0 25px #fff;
+}
+
+.actions button  {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  border-right: 1px solid rgba(0, 0, 0, 1);
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
