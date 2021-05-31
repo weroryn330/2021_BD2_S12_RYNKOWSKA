@@ -23,23 +23,50 @@ class EmployeeIntegrationTest extends IntegrationEmployeeTestConfig{
 
     @Test
     @WithMockUser(username = "test", password = "test", roles = "EMPLOYEE")
-    void getAllActivePassesContainingUserEmailShouldReturnTrue() throws Exception {
-        var jsonArray = new JSONArray(mockMvc
-                .perform(
-                        MockMvcRequestBuilders.get("/api/employee/passes")
-                )
-                .andExpect(status().is2xxSuccessful())
-                .andReturn()
-                .getResponse()
-                .getContentAsString()
-        );
-        Assertions.assertEquals(
-                2,
-                jsonArray.length()
-        );
-        Assertions.assertEquals(
-                "test@test.pl",
-                jsonArray.getJSONObject(0).get("invoiceOwnerEmail").toString()
-        );
+    void getAllActivePassesContainingUserEmailShouldReturnTrue() {
+        try {
+            JSONArray jsonArray = new JSONArray(mockMvc
+                    .perform(
+                            MockMvcRequestBuilders.get("/api/employee/activePasses")
+                    )
+                    .andExpect(status().is2xxSuccessful())
+                    .andReturn()
+                    .getResponse()
+                    .getContentAsString()
+            );
+            Assertions.assertEquals(
+                    2,
+                    jsonArray.length()
+            );
+            Assertions.assertEquals(
+                    "test@test.pl",
+                    jsonArray.getJSONObject(0).get("invoiceOwnerEmail").toString()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    @WithMockUser(username = "test", password = "test", roles = "EMPLOYEE")
+    void getAllPassesContainingUserEmailShouldReturnTrue() {
+        try {
+            JSONArray jsonArray = new JSONArray(mockMvc
+                    .perform(
+                            MockMvcRequestBuilders.get("/api/employee/allPasses")
+                    )
+                    .andExpect(status().is2xxSuccessful())
+                    .andReturn()
+                    .getResponse()
+                    .getContentAsString()
+            );
+            Assertions.assertEquals(
+                    4,
+                    jsonArray.length()
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

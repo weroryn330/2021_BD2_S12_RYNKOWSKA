@@ -8,20 +8,34 @@ import javax.validation.constraints.NotNull;
 @Table(name = "quantity_passes")
 public class QuantityPass {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private Integer idQuantityPass;
 
-    @NotBlank(message = "Your quantity pass quantity should not be empty!")
+    @NotNull(message = "Your quantity pass quantity should not be empty!")
     private Integer quantity;
 
-    @NotBlank(message = "Your quantity pass price should not be empty!")
+    @NotNull(message = "Your quantity pass price should not be empty!")
     private Float price;
 
     @ManyToOne
     @JoinColumn(name = "price_list_id_price_list")
-    @NotNull
     private PriceList priceListIdPriceList;
+
+    public QuantityPass(){};
+
+    public QuantityPass(Integer quantity, Float price)
+    {
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public QuantityPass(Integer quantity, Float price, PriceList priceList)
+    {
+        this.quantity = quantity;
+        this.price = price;
+        this.priceListIdPriceList = priceList;
+    }
 
     public Integer getIdQuantityPass() {
         return idQuantityPass;

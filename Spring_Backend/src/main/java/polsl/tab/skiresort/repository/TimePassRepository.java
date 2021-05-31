@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import polsl.tab.skiresort.model.TimePass;
 
 @Repository
-interface TimePassRepository extends JpaRepository<TimePass, Integer> {
+public interface TimePassRepository extends JpaRepository<TimePass, Integer> {
 }

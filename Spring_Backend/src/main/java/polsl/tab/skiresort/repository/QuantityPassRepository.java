@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 import polsl.tab.skiresort.model.QuantityPass;
 
 @Repository
-interface QuantityPassRepository extends JpaRepository<QuantityPass, Integer> {
+public interface QuantityPassRepository extends JpaRepository<QuantityPass, Integer> {
+
 }

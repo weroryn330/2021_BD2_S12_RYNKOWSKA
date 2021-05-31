@@ -30,13 +30,20 @@ public class PriceList {
     @OneToMany(mappedBy = "priceListIdPriceList")
     private List<QuantityPass> quantityPassList;
 
-    public PriceList() {
-
-    }
+    public PriceList() {}
 
     public PriceList(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public PriceList(Date startDate, Date endDate, List<AgeDiscount> ageDiscountList, List<TimePass> timePassList, List<QuantityPass> quantityPassList)
+    {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.ageDiscountList = ageDiscountList;
+        this.timePassList = timePassList;
+        this.quantityPassList = quantityPassList;
     }
 
     public Integer getIdPriceList() {
