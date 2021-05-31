@@ -14,20 +14,20 @@ import {QuantityPassResponse} from "../../classes/quantity-pass-response";
   styleUrls: ['./pricelist.component.css']
 })
 export class PricelistComponent implements OnInit {
-  //pricelist: PricelistResponse = {} as PricelistResponse;
+  pricelist: PricelistResponse = {} as PricelistResponse;
   //  STATIC TEST
-    pricelist: PricelistResponse = {
+   /* pricelist: PricelistResponse = {
     ageDiscountsList: [new AgeDiscountResponse(5, 10, 33)],
     timePassesList: [ new TimePassResponse(3,20),new TimePassResponse(24,50),new TimePassResponse(48,75)],
     quantityPassesList: [ new QuantityPassResponse(5,20),new QuantityPassResponse(10,60),new QuantityPassResponse(20,100)]
-  };
+  };*/
     isUser = false;
 
   constructor(private pricelistService: PricelistService, private router: Router, private token: TokenService) {
   }
 
   ngOnInit(): void {
-    //this.getPricelist();
+    this.getPricelist();
     if(!this.token.getToken()){
       this.isUser = false;
     }
