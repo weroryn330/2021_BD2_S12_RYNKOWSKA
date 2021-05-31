@@ -120,18 +120,18 @@ public class PriceListService {
 
     public PriceListResponse addNewPriceList(PriceListRequest priceListRequest) {
         // todo
-        /*
-        var priceList = priceListRepository.findCurrentPriceList();
-        priceList.ifPresent(date -> {
-                    date.setStartDate(priceListRequest.getStartDate());
-                    date.setEndDate(priceListRequest.getEndDate());
-                    date.setAgeDiscountList(priceListRequest.getAgeDiscountsRequest()
-                            .stream()
-                            .map(age)
-                    );
-                }
-        );
-        */
+
+//        var priceList = priceListRepository.findCurrentPriceList();
+//        priceList.ifPresent(date -> {
+//                    date.setStartDate(priceListRequest.getStartDate());
+//                    date.setEndDate(priceListRequest.getEndDate());
+//                    date.setAgeDiscountList(priceListRequest.getAgeDiscountsRequest()
+//                            .stream()
+//                            .map(age)
+//                    );
+//                }
+//        );
+
         return null;
     }
 

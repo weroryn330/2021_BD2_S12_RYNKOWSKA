@@ -5,7 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import polsl.tab.skiresort.model.TimePass;
+import polsl.tab.skiresort.repository.PriceListRepository;
 import polsl.tab.skiresort.repository.TimePassRepository;
+
+import java.sql.Date;
 
 
 @Configuration
@@ -50,6 +53,7 @@ public class TimePassesConfig {
     private void deleteTimePasses(){timePassRepository.deleteAll();}
 
     TimePassesConfig(TimePassRepository timePassRepository,
+                     final PriceListRepository priceListRepository,
                      @Value("false") Boolean recreate
     ) {
         this.timePassRepository = timePassRepository;
@@ -62,7 +66,7 @@ public class TimePassesConfig {
 
             for(TIME_PASS_ENUM t : TIME_PASS_ENUM.values())
             {
-                TimePass timePass = new TimePass(t.getHours(),t.getPrice());
+                var timePass = new TimePass(t.getHours(),t.getPrice(),priceListRepository.findByStartDate(Date.valueOf("2021-05-26")).get());
                 timePassRepository.save(timePass);
             }
             logger.info("Time passes added to database");

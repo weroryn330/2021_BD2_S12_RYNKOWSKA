@@ -22,7 +22,7 @@ public interface PriceListRepository extends JpaRepository<PriceList, Integer> {
     )
     @Modifying
     @Transactional
-    void deleteByStartDate(@Param("2021-05-26") Date start_date);
+    void deleteByStartDate(@Param("start_date") Date start_date);
 
     @Query(
             nativeQuery = true,

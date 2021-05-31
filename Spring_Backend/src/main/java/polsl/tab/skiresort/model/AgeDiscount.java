@@ -1,23 +1,22 @@
 package polsl.tab.skiresort.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "age_discounts")
 public class AgeDiscount {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idAgeDiscount;
 
-    @NotBlank(message = "Your age discount age min should not be empty!")
+    @NotNull(message = "Your age discount age min should not be empty!")
     private Integer ageMin;
 
-    @NotBlank(message = "Your age discount age max should not be empty!")
+    @NotNull(message = "Your age discount age max should not be empty!")
     private Integer ageMax;
 
-    @NotBlank(message = "Your age percentage should not be empty!")
+    @NotNull(message = "Your age percentage should not be empty!")
     private Integer percentage;
 
     @ManyToOne

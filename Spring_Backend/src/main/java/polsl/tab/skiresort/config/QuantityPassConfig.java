@@ -5,7 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import polsl.tab.skiresort.model.QuantityPass;
+import polsl.tab.skiresort.repository.PriceListRepository;
 import polsl.tab.skiresort.repository.QuantityPassRepository;
+
+import java.sql.Date;
 
 @Configuration
 public class QuantityPassConfig {
@@ -36,10 +39,6 @@ public class QuantityPassConfig {
         }
     }
 
-//    private static final Integer[] quantity = {10,20,30,60,90};
-//
-//    private static final Float[] price = {20.0f,38.0f,54.0f,102.0f,144.0f};
-
     private static final Logger logger = LoggerFactory.getLogger(QuantityPassConfig.class);
 
     private final QuantityPassRepository quantityPassRepository;
@@ -47,6 +46,7 @@ public class QuantityPassConfig {
     private void deleteQuantityPasses(){quantityPassRepository.deleteAll();}
 
     QuantityPassConfig(QuantityPassRepository quantityPassRepository,
+                       final PriceListRepository priceListRepository,
                        @Value("false") Boolean recreate
     ) {
         this.quantityPassRepository = quantityPassRepository;
@@ -58,7 +58,7 @@ public class QuantityPassConfig {
         if(quantityPassRepository.findAll().isEmpty()){
             for(QUANTITY_PASS_ENUM q : QUANTITY_PASS_ENUM.values())
             {
-                QuantityPass quantityPass = new QuantityPass(q.getQuantity(),q.getPrice());
+                var quantityPass = new QuantityPass(q.getQuantity(),q.getPrice(),priceListRepository.findByStartDate(Date.valueOf("2021-05-26")).get());
                 quantityPassRepository.save(quantityPass);
             }
             logger.info("Quantity passes added to database");

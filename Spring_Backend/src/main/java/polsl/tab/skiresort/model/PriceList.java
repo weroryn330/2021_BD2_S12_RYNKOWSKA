@@ -32,9 +32,7 @@ public class PriceList {
     @OneToMany(mappedBy = "priceListIdPriceList")
     private List<QuantityPass> quantityPassList;
 
-    public PriceList() {
-
-    }
+    public PriceList() {}
 
     public PriceList(Date startDate, Date endDate) {
         this.startDate = startDate;

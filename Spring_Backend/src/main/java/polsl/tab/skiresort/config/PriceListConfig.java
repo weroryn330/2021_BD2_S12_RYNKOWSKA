@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import polsl.tab.skiresort.model.PriceList;
 import polsl.tab.skiresort.repository.AgeDiscountRepository;
 import polsl.tab.skiresort.repository.PriceListRepository;
@@ -14,6 +16,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 @Configuration
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class PriceListConfig {
 
     private static final Date startDate = Date.valueOf("2021-05-26");
@@ -27,9 +30,6 @@ public class PriceListConfig {
     }
 
     PriceListConfig(final PriceListRepository priceListRepository,
-                    final AgeDiscountRepository ageDiscountRepository,
-                    final TimePassRepository timePassRepository,
-                    final QuantityPassRepository quantityPassRepository,
                     @Value("false") Boolean recreate
     ) {
         this.priceListRepository = priceListRepository;
@@ -44,10 +44,8 @@ public class PriceListConfig {
             priceListRepository.save(
                     new PriceList(
                             startDate,
-                            endDate,
-                            new ArrayList<>(ageDiscountRepository.findAll()),
-                            new ArrayList<>(timePassRepository.findAll()),
-                            new ArrayList<>(quantityPassRepository.findAll()))
+                            endDate
+                            )
             );
             logger.info("Price List added to database with credentials from properties.");
         }

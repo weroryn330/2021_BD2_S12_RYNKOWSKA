@@ -4,10 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import polsl.tab.skiresort.model.AgeDiscount;
 import polsl.tab.skiresort.repository.AgeDiscountRepository;
+import polsl.tab.skiresort.repository.PriceListRepository;
+
+import java.sql.Date;
 
 @Configuration
+@Order
 public class AgeDiscountsConfig {
 
     public enum DISCOUNTS
@@ -40,12 +45,6 @@ public class AgeDiscountsConfig {
             return percentage;
         }
     }
-    //Table include respectively child, school student and college student
-//    private static final Integer[] ageMin = {0,4,19};
-//
-//    private static final Integer[] ageMax = {3,18,26};
-//
-//    private static final Integer[] percentage = {100,30,51};
 
     private static final Logger logger = LoggerFactory.getLogger(AgeDiscountsConfig.class);
 
@@ -53,10 +52,11 @@ public class AgeDiscountsConfig {
 
     private void deleteAgeDiscounts(){ageDiscountRepository.deleteAll();}
 
-    AgeDiscountsConfig(final AgeDiscountRepository ageDiscountRepository,
-                       @Value("false") Boolean recreate
+    AgeDiscountsConfig(final AgeDiscountRepository repository,
+                       final PriceListRepository priceListRepository,
+                       @Value("${resort.agediscount.recreate}") Boolean recreate
     ) {
-        this.ageDiscountRepository = ageDiscountRepository;
+        this.ageDiscountRepository = repository;
 
         if(recreate)
         {
@@ -66,7 +66,8 @@ public class AgeDiscountsConfig {
         if(ageDiscountRepository.findAll().isEmpty()) {
             for(DISCOUNTS d : DISCOUNTS.values())
             {
-                AgeDiscount ageDiscount = new AgeDiscount(d.getAgeMin(),d.getAgeMax(),d.getPercentage());
+                //priceListRepository.findByStartDate(Date.valueOf("2021-05-26")).get()
+                var ageDiscount = new AgeDiscount(d.getAgeMin(),d.getAgeMax(),d.getPercentage(),priceListRepository.findByStartDate(Date.valueOf("2021-05-26")).get());
                 ageDiscountRepository.save(ageDiscount);
             }
 
