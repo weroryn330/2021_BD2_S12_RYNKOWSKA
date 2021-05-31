@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import polsl.tab.skiresort.api.entry.request.UserRequest;
 import polsl.tab.skiresort.api.entry.response.UserResponse;
-import polsl.tab.skiresort.model.Role;
 import polsl.tab.skiresort.model.User;
 import polsl.tab.skiresort.repository.RoleRepository;
 import polsl.tab.skiresort.repository.UserRepository;
@@ -30,7 +29,7 @@ public class RegisterService {
 
     public UserResponse registerUser(UserRequest userRequest) {
         if (userRepository.findByEmail(userRequest.getEmail()).isEmpty()) {
-            User user = new User(
+            var user = new User(
                     userRequest.getFirstName(),
                     userRequest.getLastName(),
                     userRequest.getAddress(),
@@ -42,9 +41,11 @@ public class RegisterService {
                     userRequest.getEmail(),
                     passwordEncoder.encode(userRequest.getPassword())
             );
-            Role role = this.roleRepository.findByRoleName("ROLE_USER").get();
-            user.addRole(role);
-            return new UserResponse(userRepository.save(user));
+            var role = this.roleRepository.findByRoleName("ROLE_USER");
+            if (role.isPresent()) {
+                user.addRole(role.get());
+                return new UserResponse(userRepository.save(user));
+            }
         }
         throw new ResponseStatusException(HttpStatus.CONFLICT, "User with email " + userRequest.getEmail() + " exists!");
     }

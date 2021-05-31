@@ -1,11 +1,10 @@
 package polsl.tab.skiresort.model;
 
-import polsl.tab.skiresort.model.SkiLift;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.sql.Time;
 
 @Entity
 @Table(name = "ski_lift_schedules")
@@ -22,10 +21,10 @@ public class SkiLiftSchedule {
     private Date endDate;
 
     @NotBlank(message = "Your ski lift schedule opens time should not be empty!")
-    private Date opensTime;
+    private Time opensTime;
 
     @NotBlank(message = "Your ski lift schedule closes time should not be empty!")
-    private Date closesTime;
+    private Time closesTime;
 
     @ManyToOne
     @JoinColumn(name = "ski_lift_id_ski_lift")
@@ -56,19 +55,19 @@ public class SkiLiftSchedule {
         this.endDate = endDate;
     }
 
-    public Date getOpensTime() {
+    public Time getOpensTime() {
         return opensTime;
     }
 
-    public void setOpensTime(Date opensTime) {
+    public void setOpensTime(Time opensTime) {
         this.opensTime = opensTime;
     }
 
-    public Date getClosesTime() {
+    public Time getClosesTime() {
         return closesTime;
     }
 
-    public void setClosesTime(Date closesTime) {
+    public void setClosesTime(Time closesTime) {
         this.closesTime = closesTime;
     }
 

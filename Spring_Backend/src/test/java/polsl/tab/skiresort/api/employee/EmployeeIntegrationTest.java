@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("employee_integration")
-public class EmployeeIntegrationTest extends IntegrationEmployeeTestConfig{
+class EmployeeIntegrationTest extends IntegrationEmployeeTestConfig{
 
     @Autowired
     private MockMvc mockMvc;
@@ -32,6 +32,10 @@ public class EmployeeIntegrationTest extends IntegrationEmployeeTestConfig{
                 .andReturn()
                 .getResponse()
                 .getContentAsString()
+        );
+        Assertions.assertEquals(
+                2,
+                jsonArray.length()
         );
         Assertions.assertEquals(
                 "test@test.pl",

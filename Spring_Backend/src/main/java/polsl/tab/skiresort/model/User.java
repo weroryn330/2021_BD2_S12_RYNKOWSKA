@@ -1,8 +1,5 @@
 package polsl.tab.skiresort.model;
 
-import polsl.tab.skiresort.model.Invoice;
-import polsl.tab.skiresort.model.Role;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -201,7 +198,7 @@ public class User {
         }
         this.roleList.add(role);
         if (role.getUserList() == null) {
-            role.setUserList(new ArrayList<User>());
+            role.setUserList(new ArrayList<>());
         }
         role.getUserList().add(this);
     }

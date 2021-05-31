@@ -10,20 +10,16 @@ import polsl.tab.skiresort.repository.RoleRepository;
 @Configuration
 class RolesConfig {
 
-    // Id = 1
-    private static final String userRole = "ROLE_USER";
+    private static final String ROLE_USER = "ROLE_USER";
 
-    // Id = 2
-    private static final String employeeRole = "ROLE_EMPLOYEE";
+    private static final String ROLE_EMPLOYEE = "ROLE_EMPLOYEE";
 
-    // Id = 3
-    private static final String ownerRole = "ROLE_OWNER";
+    private static final String ROLE_OWNER = "ROLE_OWNER";
 
     private static final Logger logger = LoggerFactory.getLogger(RolesConfig.class);
 
     private final RoleRepository roleRepository;
 
-    // Before adding roles delete them in database
     private void deleteRoles() {
         roleRepository.deleteAll();
     }
@@ -33,15 +29,13 @@ class RolesConfig {
 
     ) {
         this.roleRepository = repository;
-
-        if (recreate) {
+        if (Boolean.TRUE.equals(recreate)) {
             deleteRoles();
         }
-
         if (repository.findAll().isEmpty()) {
-            Role roleUser = new Role(userRole);
-            Role roleEmployee = new Role(employeeRole);
-            Role roleOwner = new Role(ownerRole);
+            var roleUser = new Role(ROLE_USER);
+            var roleEmployee = new Role(ROLE_EMPLOYEE);
+            var roleOwner = new Role(ROLE_OWNER);
 
             roleRepository.save(roleUser);
             roleRepository.save(roleEmployee);
