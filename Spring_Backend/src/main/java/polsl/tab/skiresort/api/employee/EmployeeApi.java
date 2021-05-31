@@ -20,12 +20,12 @@ public class EmployeeApi {
     }
 
     @GetMapping("/activePasses")
-    ResponseEntity<List<PassesResponse>> getAllActivePasses() {
+    public ResponseEntity<List<PassesResponse>> getAllActivePasses() {
         return ResponseEntity.ok(employeePassesService.getActivePasses());
     }
 
     @GetMapping("/allPasses")
-    ResponseEntity<List<PassesResponse>> getAllPasses() {
+    public ResponseEntity<List<PassesResponse>> getAllPasses() {
         return ResponseEntity.ok(employeePassesService.getAllPasses());
     }
 

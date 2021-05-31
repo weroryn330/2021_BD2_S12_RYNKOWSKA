@@ -21,7 +21,7 @@ public class PriceListValidation {
     }
 
     @Pointcut("execution(* polsl.tab.skiresort.api.employee.PriceListApi.editStartDateAndEndDateOfActivePriceList(..))")
-    static void validateStartDateEndDateOfPriceLists() {}
+    static void validateStartDateEndDateOfPriceLists() { /* Used for pointcut header */ }
 
     @Around("validateStartDateEndDateOfPriceLists()")
     Object validateStartDateAndEndDateThrowExceptionIfError(ProceedingJoinPoint joinPoint) throws Throwable {

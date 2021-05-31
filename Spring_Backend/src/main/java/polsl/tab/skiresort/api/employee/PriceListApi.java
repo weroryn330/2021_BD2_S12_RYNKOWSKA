@@ -23,17 +23,17 @@ public class PriceListApi {
     }
 
     @GetMapping("/current")
-    ResponseEntity<PriceListResponse> getActivePriceList() {
+    public ResponseEntity<PriceListResponse> getActivePriceList() {
         return ResponseEntity.ok(priceListService.getActivePriceList());
     }
 
     @GetMapping("/edit/all")
-    ResponseEntity<List<PriceListResponse>> getAllPriceLists() {
+    public ResponseEntity<List<PriceListResponse>> getAllPriceLists() {
         return ResponseEntity.ok(priceListService.getAll());
     }
 
     @PutMapping("/edit/current")
-    ResponseEntity<PriceListResponse> editStartDateAndEndDateOfActivePriceList(
+    public ResponseEntity<PriceListResponse> editStartDateAndEndDateOfActivePriceList(
             @RequestBody Date startDate,
             @RequestBody Date endDate
     ) {
@@ -41,26 +41,26 @@ public class PriceListApi {
     }
 
     @PostMapping
-    ResponseEntity<PriceListResponse> addNewPriceList(@RequestBody PriceListRequest priceListRequest) {
-        return ResponseEntity.ok(priceListService.addNewPriceList(priceListRequest));
+    public ResponseEntity<PriceListResponse> addNewPriceList(@RequestBody PriceListRequest priceListRequest) {
+        return ResponseEntity.ok(priceListService.addNewCurrentPriceList(priceListRequest));
     }
 
     @PutMapping("/edit/ageDiscounts")
-    ResponseEntity<PriceListResponse> modifyActivePriceListAgeDiscounts(
+    public ResponseEntity<PriceListResponse> modifyActivePriceListAgeDiscounts(
             @RequestBody AgeDiscountsRequest request
     ) {
         return ResponseEntity.ok(priceListService.modifyAgeDiscountsForActivePriceList(request));
     }
 
     @PutMapping("/edit/quantityPasses")
-    ResponseEntity<PriceListResponse> modifyActivePriceListQuantityPasses(
+    public ResponseEntity<PriceListResponse> modifyActivePriceListQuantityPasses(
             @RequestBody QuantityPassRequest request
     ) {
         return ResponseEntity.ok(priceListService.modifyQuantityPassForActivePriceList(request));
     }
 
     @PutMapping("/edit/timePasses")
-    ResponseEntity<PriceListResponse> modifyActivePriceListTimePasses(
+    public ResponseEntity<PriceListResponse> modifyActivePriceListTimePasses(
             @RequestBody TimePassRequest request
     ) {
         return ResponseEntity.ok(priceListService.modifyTimePassForActivePriceList(request));

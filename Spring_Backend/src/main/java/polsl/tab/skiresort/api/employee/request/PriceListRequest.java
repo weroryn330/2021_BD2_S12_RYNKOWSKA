@@ -1,8 +1,5 @@
 package polsl.tab.skiresort.api.employee.request;
 
-
-import polsl.tab.skiresort.model.PriceList;
-
 import java.sql.Date;
 import java.util.List;
 

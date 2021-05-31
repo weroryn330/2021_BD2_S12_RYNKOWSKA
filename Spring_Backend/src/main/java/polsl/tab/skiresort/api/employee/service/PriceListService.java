@@ -15,7 +15,6 @@ import polsl.tab.skiresort.model.AgeDiscount;
 import polsl.tab.skiresort.model.PriceList;
 import polsl.tab.skiresort.model.QuantityPass;
 import polsl.tab.skiresort.model.TimePass;
-import polsl.tab.skiresort.repository.AgeDiscountRepository;
 import polsl.tab.skiresort.repository.PriceListRepository;
 
 import java.sql.Date;
@@ -27,7 +26,7 @@ public class PriceListService {
 
     private final PriceListRepository priceListRepository;
 
-    public PriceListService(PriceListRepository priceListRepository, AgeDiscountRepository ageDiscountRepository) {
+    public PriceListService(PriceListRepository priceListRepository) {
         this.priceListRepository = priceListRepository;
     }
 
@@ -118,21 +117,34 @@ public class PriceListService {
         return mapPriceListResponse(currentList);
     }
 
-    public PriceListResponse addNewPriceList(PriceListRequest priceListRequest) {
-        // todo
-
-//        var priceList = priceListRepository.findCurrentPriceList();
-//        priceList.ifPresent(date -> {
-//                    date.setStartDate(priceListRequest.getStartDate());
-//                    date.setEndDate(priceListRequest.getEndDate());
-//                    date.setAgeDiscountList(priceListRequest.getAgeDiscountsRequest()
-//                            .stream()
-//                            .map(age)
-//                    );
-//                }
-//        );
-
-        return null;
+    public PriceListResponse addNewCurrentPriceList(PriceListRequest priceListRequest) {
+        var priceList = priceListRepository.findCurrentPriceList();
+        priceList.ifPresent(priceListRepository::delete);
+        return mapPriceListResponse(priceListRepository.save(
+                new PriceList(
+                        priceListRequest.getStartDate(),
+                        priceListRequest.getEndDate(),
+                        priceListRequest.getAgeDiscountsRequest().stream().map(
+                                age -> new AgeDiscount(
+                                        age.getAgeMin(),
+                                        age.getAgeMax(),
+                                        age.getPercentage()
+                                )
+                        ).collect(Collectors.toList()),
+                        priceListRequest.getTimePassRequest().stream().map(
+                                time -> new TimePass(
+                                        time.getHours(),
+                                        time.getPrice()
+                                )
+                        ).collect(Collectors.toList()),
+                        priceListRequest.getQuantityPassRequest().stream().map(
+                                quantity -> new QuantityPass(
+                                        quantity.getQuantity(),
+                                        quantity.getPrice()
+                                )
+                        ).collect(Collectors.toList())
+                    )
+            ));
     }
 
     public PriceListResponse modifyActivePriceListStartDateEndDate(Date startDate, Date endDate) {

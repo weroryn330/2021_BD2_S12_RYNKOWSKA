@@ -25,7 +25,7 @@ class UserValidation {
     }
 
     @Pointcut("execution(* polsl.tab.skiresort.api.entry.LoginApi.login(..))")
-    static void validateUserLogin() {}
+    static void validateUserLogin() { /* Used for pointcut header */ }
 
     @Around("validateUserLogin()")
     Object validate(ProceedingJoinPoint joinPoint) throws Throwable {
