@@ -5,8 +5,8 @@
     <meta charste="utf-8" />
     <title>Narcikowo Rejestracja</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css" type="text/css" />
-    <link rel="stylesheet" href="registrationStyle.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/style.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/registrationStyle.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
     <link href='https://css.gg/menu.css' rel='stylesheet'>
@@ -35,8 +35,8 @@
             if (phone.length != 9) {
                 alert("Niepoprawny format numeru telefonu!\nPrawidłowy format musi składać się z 9 cyfr, np: 600700800")
             }
-            for(i=0; i<phone.length; i++) {
-                if (isNaN(phone.charAt(i))){
+            for (i = 0; i < phone.length; i++) {
+                if (isNaN(phone.charAt(i))) {
                     alert("Niepoprawny format numeru telefonu!\nPrawidłowy format musi składać się z cyfr, np: 600700800")
                 }
             }
@@ -81,11 +81,13 @@
                         </div>
                         <div class="inputBox">
                             <span class="details">Email</span>
-                            <input type="email" id="email" placeholder="Podaj e-mail" style="background-color: #c4e2ff;" required>
+                            <input type="email" id="email" placeholder="Podaj e-mail" style="background-color: #c4e2ff;"
+                                required>
                         </div>
                         <div class="inputBox">
                             <span class="details">Powtórz email</span>
-                            <input type="email" id="email2" placeholder="Podaj e-mail" style="background-color: #c4e2ff;" required>
+                            <input type="email" id="email2" placeholder="Podaj e-mail"
+                                style="background-color: #c4e2ff;" required>
                         </div>
                         <div class="inputBox">
                             <span class="details">Numer telefonu</span>
@@ -126,7 +128,7 @@
             </div>
         </div>
     </div>
-    <script src="./menu.js"></script>
+    <script src="/scripts/menu.js"></script>
 </body>
 
 </html>

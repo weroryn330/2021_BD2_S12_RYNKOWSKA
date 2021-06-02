@@ -1,6 +1,6 @@
 #passContainer {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("passes.jpg") no-repeat;
+    url("/styles/images/passes.jpg") no-repeat;
   min-height: 100vh;
   background-size: cover;
   background-position: center center;
@@ -27,7 +27,8 @@
 }
 
 /* Info block div */
-.infoTime, .infoQua {
+.infoTime,
+.infoQua {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(5px);
@@ -50,9 +51,10 @@
   flex-direction: column;
 }
 
-.infoTime:hover, .infoQua:hover {
-    box-shadow: 1px 3px 2px #c4e2ff;
-    cursor: pointer;
+.infoTime:hover,
+.infoQua:hover {
+  box-shadow: 1px 3px 2px #c4e2ff;
+  cursor: pointer;
 }
 
 .price {
@@ -64,54 +66,54 @@
 }
 
 .infoTime .header {
-    background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(5px);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 
-    font-size: 30px;
-    text-transform: uppercase;
-    padding: 15px;
+  font-size: 30px;
+  text-transform: uppercase;
+  padding: 15px;
 }
 
 .infoQua .header {
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 
-    font-size: 30px;
-    text-transform: uppercase;
-    padding: 15px;
+  font-size: 30px;
+  text-transform: uppercase;
+  padding: 15px;
 }
 
 .infoTime .detail {
-    background-color: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(5px);
 
-    font-size: 20px;
-    text-transform: uppercase;
-    padding: 10px;
+  font-size: 20px;
+  text-transform: uppercase;
+  padding: 10px;
 }
 
 .infoQua .detail {
-    background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
 
-    font-size: 20px;
-    text-transform: uppercase;
-    padding: 10px;
+  font-size: 20px;
+  text-transform: uppercase;
+  padding: 10px;
 }
 
 .price li {
-    padding: 20px;
+  padding: 20px;
 }
 
 .price .inf {
-    font-size: 10px;
+  font-size: 10px;
 }
 
 p {
-    font-size: 23px;
-    text-align: center;
+  font-size: 23px;
+  text-align: center;
 }

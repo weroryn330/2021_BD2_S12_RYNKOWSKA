@@ -35,7 +35,7 @@ nav .logo {
   margin: 6px;
 
   font-size: 40px;
-  font-family: 'Gloria Hallelujah', cursive;
+  font-family: "Gloria Hallelujah", cursive;
   text-shadow: 0 0 20px #ffffff;
 }
 
@@ -113,7 +113,7 @@ footer {
 }
 
 /* Hamburger button menu */
-@media(max-width: 900px){
+@media (max-width: 900px) {
   /* Menu */
   nav .mainNav {
     position: fixed;
@@ -127,7 +127,7 @@ footer {
     left: 0;
     z-index: 10;
     flex-direction: column;
-    
+
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
 
