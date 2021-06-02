@@ -72,7 +72,9 @@
   </ng-container>
   <ng-container *ngIf="!isSubmitted">
   <div class="button">
-    <input type="submit" id="button" (click)="f.form.markAllAsTouched()"value="Zatwierdź karnet">
+    <input type="submit" id="button" (click)="f.form.markAllAsTouched()"
+           (click)="passFormValidation(false)"
+           value="Zatwierdź karnet">
   </div>
   </ng-container>
 

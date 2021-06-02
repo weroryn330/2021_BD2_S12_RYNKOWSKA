@@ -1,28 +1,43 @@
 package polsl.tab.skiresort.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "age_discounts")
 public class AgeDiscount {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idAgeDiscount;
 
-    @NotBlank(message = "Your age discount age min should not be empty!")
+    @NotNull(message = "Your age discount age min should not be empty!")
     private Integer ageMin;
 
-    @NotBlank(message = "Your age discount age max should not be empty!")
+    @NotNull(message = "Your age discount age max should not be empty!")
     private Integer ageMax;
 
-    @NotBlank(message = "Your age percentage should not be empty!")
+    @NotNull(message = "Your age percentage should not be empty!")
     private Integer percentage;
 
     @ManyToOne
     @JoinColumn(name = "price_list_id_price_list")
     private PriceList priceListIdPriceList;
+
+    public AgeDiscount(){};
+
+    public AgeDiscount(Integer ageMin,Integer ageMax, Integer percentage)
+    {
+        this.ageMin = ageMin;
+        this.ageMax = ageMax;
+        this.percentage = percentage;
+    }
+    public AgeDiscount(Integer ageMin,Integer ageMax, Integer percentage,PriceList priceListIdPriceList)
+    {
+        this.ageMin = ageMin;
+        this.ageMax = ageMax;
+        this.percentage = percentage;
+        this.priceListIdPriceList = priceListIdPriceList;
+    }
 
     public Integer getIdAgeDiscounts() {
         return idAgeDiscount;

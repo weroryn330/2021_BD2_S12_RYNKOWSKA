@@ -6,8 +6,8 @@ import {TokenService} from "../../services/token.service";
 import {AgeDiscountResponse} from "../../classes/age-discount-response";
 import {TimePassResponse} from "../../classes/time-pass-response";
 import {QuantityPassResponse} from "../../classes/quantity-pass-response";
-import {PassService} from "../../services/pass.service";
 import {InvoiceService} from "../../services/invoice.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-purchase',
@@ -35,8 +35,9 @@ export class PurchaseComponent implements OnInit {
   userData: any;
   pricelist: PricelistResponse = {} as PricelistResponse;
   passRequestsList: PassRequest[] = [];
+  isPassFormValid = false;
 
-  constructor(private pricelistService: PricelistService, private passService: PassService,
+  constructor(private pricelistService: PricelistService, private router: Router,
               private invoiceService: InvoiceService, private token: TokenService) {
   }
 
@@ -44,7 +45,7 @@ export class PurchaseComponent implements OnInit {
     this.userData = this.token.getUser();
     this.routeData = history.state;
     if (this.routeData.pass == null || this.routeData.discount == null || this.routeData.pricelist == null) {
-     // this.getPricelist();
+      //this.getPricelist();
       //  STATIC TEST
       this.pricelist = {
         ageDiscountsList: [new AgeDiscountResponse(5, 10, 33)],
@@ -62,6 +63,10 @@ export class PurchaseComponent implements OnInit {
   addPassRequest(request: PassRequest) {
     this.passRequestsList.push(request);
     this.form.total = parseInt(this.form.total) + request.unitPrice;
+  }
+
+  checkPassFormValidation(validate: boolean) {
+    this.isPassFormValid = validate;
   }
 
   addPassForm() {
@@ -104,6 +109,7 @@ export class PurchaseComponent implements OnInit {
   }
 
   onSubmit() {
-    return false;
+    // TODO
+    this.router.navigateByUrl('/profile');
   }
 }
