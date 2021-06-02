@@ -1,7 +1,7 @@
 /* Main div container - background style */
 #container {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("ski.jpeg");
+    url("/styles/images/ski.jpeg");
   background-size: cover;
   background-position: center center;
 

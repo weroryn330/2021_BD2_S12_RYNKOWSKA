@@ -1,7 +1,7 @@
 /* Main div container - background style */
 #aboutContainer {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("about.jpg");
+    url("/styles/images/about.jpg");
   background-size: cover;
   background-position: center center;
 
@@ -23,7 +23,7 @@
 
   max-height: fit-content;
   padding: 30px;
-  position:relative;
+  position: relative;
 }
 
 /* Info block div */
@@ -36,7 +36,7 @@
 
   border-radius: 10px;
 
-  margin: auto;
+  margin: 5px;
   padding: 30px;
 
   max-height: fit-content;

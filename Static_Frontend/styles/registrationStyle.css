@@ -1,7 +1,7 @@
 /* Main div container - background style */
 #registrationContainer {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("registration.jpg");
+    url("/styles/images/registration.jpg");
   background-size: cover;
   background-position: center center;
 
@@ -15,7 +15,7 @@
 /* Main div container - background style */
 #loginContainer {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("login.jpg");
+    url("/styles/images/login.jpg");
   background-size: cover;
   background-position: center center;
 
@@ -32,7 +32,7 @@
   width: 100%;
   background-color: transparent;
   padding: 25px 30px;
-  
+
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
@@ -71,13 +71,15 @@ form .user-details .inputBx {
 }
 
 /* input labels */
-form .inputBox span.details, form .inputBx span.details {
+form .inputBox span.details,
+form .inputBx span.details {
   display: block;
   font-weight: 500;
   margin-bottom: 5px;
 }
 
-.user-details .inputBox input, .user-details .inputBx input {
+.user-details .inputBox input,
+.user-details .inputBx input {
   height: 40px;
   width: 100%;
   outline: none;
@@ -91,7 +93,7 @@ form .inputBox span.details, form .inputBx span.details {
 }
 
 .user-details .inputBox input:focus,
-.user-details .inputBox input:valid, 
+.user-details .inputBox input:valid,
 .user-details .inputBx input:focus,
 .user-details .inputBx input:valid {
   border: 4px solid #7dbeff;
