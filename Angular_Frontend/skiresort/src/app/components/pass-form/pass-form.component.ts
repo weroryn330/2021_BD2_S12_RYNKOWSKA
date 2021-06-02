@@ -15,6 +15,7 @@ export class PassFormComponent implements OnInit {
   @Input() pass: any;
   @Input() discount: any;
   @Output() newRequestEvent = new EventEmitter<PassRequest>();
+  @Output() newValidateEvent = new EventEmitter<boolean>();
 
   form: any = {
     firstName: null,
@@ -68,6 +69,10 @@ export class PassFormComponent implements OnInit {
     this.newRequestEvent.emit(request);
   }
 
+  passFormValidation(validate: boolean) {
+    this.newValidateEvent.emit(validate);
+  }
+
   onSubmit() {
     if (this.form.passType == 'Karnet czasowy') {
       this.form.usesTotal = null;
@@ -79,6 +84,7 @@ export class PassFormComponent implements OnInit {
     passRequest.setAtributes(this.form.firstName, this.form.lastName, this.form.birthDate, this.form.usesTotal, this.form.startDate, this.form.passTime, this.form.unitPrice);
     this.isSubmitted = true;
     this.addNewRequest(passRequest);
+    this.passFormValidation(true);
   }
 
 
