@@ -71,13 +71,46 @@ public abstract class IntegrationEmployeeTestConfig {
                 "Test Pass Last Name",
                 Date.valueOf(LocalDate.of(2002, 3, 12))
         );
+        var expiredPass = new Pass(
+                100.00f,
+                Date.valueOf(LocalDate.of(1900, 1, 1)),
+                Date.valueOf(LocalDate.of(1999, 1, 12)),
+                "Expired Pass",
+                "Expired Pass",
+                Date.valueOf(LocalDate.of(1800, 1, 1))
+        );
+        var quantityPass = new Pass(
+                123.00f,
+                "Quantity Pass",
+                "Quantity Pass",
+                Date.valueOf(LocalDate.of(2021, 1, 1)),
+                0,
+                20
+        );
+        var noUsesLeft = new Pass (
+                123.00f,
+                "No uses left",
+                "No uses left",
+                Date.valueOf(LocalDate.of(2021, 1, 1)),
+                20,
+                0
+        );
         userRepository.save(user);
         invoice.setUserIdUser(user);
         invoiceRepository.save(invoice);
         pass.setInvoicesIdInvoice(invoice);
+        expiredPass.setInvoicesIdInvoice(invoice);
+        quantityPass.setInvoicesIdInvoice(invoice);
+        noUsesLeft.setInvoicesIdInvoice(invoice);
         priceListRepository.save(priceList);
         pass.setPriceList(priceList);
+        expiredPass.setPriceList(priceList);
+        quantityPass.setPriceList(priceList);
+        noUsesLeft.setPriceList(priceList);
         passRepository.save(pass);
+        passRepository.save(expiredPass);
+        passRepository.save(quantityPass);
+        passRepository.save(noUsesLeft);
     }
 
 }

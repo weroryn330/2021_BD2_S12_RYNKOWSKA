@@ -2,7 +2,6 @@ package polsl.tab.skiresort.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -54,7 +53,8 @@ public class Pass {
                 Date endDate,
                 String firstName,
                 String lastName,
-                Date birthDate) {
+                Date birthDate
+    ) {
         this.unitPrice = unitPrice;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -68,7 +68,8 @@ public class Pass {
                 String lastName,
                 Date birthDate,
                 Integer usesTotal,
-                Integer usesLeft) {
+                Integer usesLeft
+    ) {
         this.unitPrice = unitPrice;
         this.firstName = firstName;
         this.lastName = lastName;

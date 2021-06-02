@@ -49,7 +49,7 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
@@ -58,9 +58,11 @@ class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/api/login", "/api/register")
+                .antMatchers("/api/login", "/api/register", "/api/priceList/current")
                 .permitAll()
-                .antMatchers("/api/employee")
+                .antMatchers("/api/invoices", "/api/passes")
+                .hasAnyAuthority("ROLE_USER")
+                .antMatchers("/api/employee/**", "/api/priceList/edit/**")
                 .hasAnyAuthority("ROLE_EMPLOYEE", "ROLE_OWNER")
                 .anyRequest()
                 .authenticated()

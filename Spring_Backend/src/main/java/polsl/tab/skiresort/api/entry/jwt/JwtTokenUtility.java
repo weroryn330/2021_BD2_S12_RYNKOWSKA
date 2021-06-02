@@ -14,7 +14,7 @@ import java.util.function.Function;
 
 @Component
 public class JwtTokenUtility {
-    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
+    public static final long JWT_TOKEN_VALIDITY = 5L * 60L * 60L;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -28,7 +28,7 @@ public class JwtTokenUtility {
     }
 
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = getAllClaimsFromToken(token);
+        final var claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
 
@@ -37,7 +37,7 @@ public class JwtTokenUtility {
     }
 
     private Boolean isTokenExpired(String token) {
-        final Date expiration = getExpirationDateFromToken(token);
+        final var expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 

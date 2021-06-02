@@ -1,7 +1,5 @@
 package polsl.tab.skiresort.model;
 
-import polsl.tab.skiresort.model.PriceList;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,20 +8,33 @@ import javax.validation.constraints.NotNull;
 @Table(name = "time_passes")
 public class TimePass {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idTimePass;
 
-    @NotBlank(message = "Your time pass hours should not be empty!")
+    @NotNull(message = "Your time pass hours should not be empty!")
     private Integer hours;
 
-    @NotBlank(message = "Your time pass price should not be empty!")
+    @NotNull(message = "Your time pass price should not be empty!")
     private Float price;
 
     @ManyToOne
     @JoinColumn(name = "price_list_id_price_list")
-    @NotNull
     private PriceList priceListIdPriceList;
+
+    public TimePass(){};
+
+    public TimePass(Integer hours,Float price)
+    {
+        this.hours = hours;
+        this.price = price;
+    }
+
+    public TimePass(Integer hours,Float price, PriceList priceList)
+    {
+        this.hours = hours;
+        this.price = price;
+        this.priceListIdPriceList = priceList;
+    }
 
     public Integer getIdTimePass() {
         return idTimePass;
