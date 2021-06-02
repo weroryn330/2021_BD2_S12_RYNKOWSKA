@@ -9,6 +9,11 @@ import {RouteGuard} from "./services/route.guard";
 import {PricelistComponent} from "./components/pricelist/pricelist.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {PurchaseComponent} from "./components/purchase/purchase.component";
+import {UserPassesComponent} from "./components/user-passes/user-passes.component";
+import {UserReportComponent} from "./components/user-report/user-report.component";
+import {UserInfoComponent} from "./components/user-info/user-info.component";
+import {UserEditInfoComponent} from "./components/user-edit-info/user-edit-info.component";
+import {UserEditCredentialsComponent} from "./components/user-edit-credentials/user-edit-credentials.component";
 
 
 const routes: Routes = [
@@ -18,7 +23,13 @@ const routes: Routes = [
     path: 'profile', component: ProfileComponent, canActivate: [RouteGuard],
     data: {expectedRole: 'ROLE_USER'},
     children: [
-      {path: 'purchase', component: PurchaseComponent}
+      {path: 'purchase', component: PurchaseComponent},
+      {path: 'passes', component: UserPassesComponent},
+      {path: 'report', component: UserReportComponent},
+      {path: 'info', component: UserInfoComponent},
+      {path: 'edit-info', component: UserEditInfoComponent},
+      {path: 'edit-credentials', component: UserEditCredentialsComponent},
+      {path: '', redirectTo: 'purchase', pathMatch: 'full'}
     ]
   },
   {path: 'lifts', component: LiftsComponent},

@@ -12,8 +12,7 @@ import {InvoiceService} from "../../services/invoice.service";
 @Component({
   selector: 'app-purchase',
   templateUrl: './purchase.component.html',
-  styleUrls: ['./purchase.component.css',
-    '../registration/registration.component.css']
+  styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
   passForms: number[] = [];
@@ -45,15 +44,15 @@ export class PurchaseComponent implements OnInit {
     this.userData = this.token.getUser();
     this.routeData = history.state;
     if (this.routeData.pass == null || this.routeData.discount == null || this.routeData.pricelist == null) {
-      this.getPricelist();
-     /* //  STATIC TEST
+     // this.getPricelist();
+      //  STATIC TEST
       this.pricelist = {
         ageDiscountsList: [new AgeDiscountResponse(5, 10, 33)],
         timePassesList: [new TimePassResponse(3, 20),
           new TimePassResponse(24, 50), new TimePassResponse(48, 75)],
         quantityPassesList: [new QuantityPassResponse(5, 20),
           new QuantityPassResponse(10, 60), new QuantityPassResponse(20, 100)]
-      };*/
+      };
     } else {
       this.pricelist = this.routeData.pricelist;
       this.passForms.push(1);
