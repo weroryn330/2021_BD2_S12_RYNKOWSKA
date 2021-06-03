@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
     <link href='https://css.gg/menu.css' rel='stylesheet'>
     <link href='https://css.gg/close.css' rel='stylesheet'>
+    <link href='https://css.gg/danger.css' rel='stylesheet'>
 
     <script type="text/javascript">
         function insertDash(inputcode) {
@@ -70,55 +71,117 @@
                         <div class="inputBox">
                             <span class="details">Imię</span>
                             <input type="text" placeholder="Podaj imię" required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Imiona rozpoczynamy wielką literą.</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
                             <span class="details">Nazwisko</span>
                             <input type="text" placeholder="Podaj nazwisko" required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Nazwiska rozpoczynamy wielką literą.</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
                             <span class="details">Kraj</span>
                             <input type="text" placeholder="Podaj kraj" required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Nazwy krajów rozpoczynamy wielką literą.</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
                             <span class="details">Email</span>
                             <input type="email" id="email" placeholder="Podaj e-mail" style="background-color: #c4e2ff;"
                                 required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Wpisz email w postaci: zzzzz@zzzz.zzz, np:
+                                        narcikowo@gmail.com</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
                             <span class="details">Powtórz email</span>
-                            <input type="email" id="email2" placeholder="Podaj e-mail"
+                            <input type="email" id="email2" placeholder="Powtórz e-mail"
                                 style="background-color: #c4e2ff;" required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Adresy email muszą być identyczne!</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
                             <span class="details">Numer telefonu</span>
-                            <input type="text" placeholder="Podaj numer telefonu" onblur="validatePhone(this);"
-                                required>
+                            <input type="text" placeholder="Podaj nr tel" onblur="validatePhone(this);" required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Prawidłowy numer telefonu składa się z 9 cyfr, np:
+                                        600700800"</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
                             <span class="details">Województwo</span>
                             <input type="text" placeholder="Podaj województwo" required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Wpisz województwo</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
                             <span class="details">Kod pocztowy</span>
                             <input type="" required class="postalCode" placeholder="Kod pocztowy:"
                                 onkeyup="insertDash(this);" onblur="validatePostalCode(this);">
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Wpisz kod w postaci: [][]-[][][], np: 44-100</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
                             <span class="details">Miasto</span>
-                            <input type="text" placeholder="Miasto zamieszkania" required>
+                            <input type="text" placeholder="Podaj miasto" required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Nazwy miast rozpoczynamy wielką literą.</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
-                            <span class="details">Adres</span>
-                            <input type="text" placeholder="Ulica i numer domu" required>
+                            <span class="details">Ulica</span>
+                            <input type="text" placeholder="Podaj ulicę i nr" required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Wpisz adres, np: Katowicka 5</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
                             <span class="details">Hasło</span>
                             <input type="password" placeholder="Podaj hasło" style="background-color: #c4e2ff" required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Prawidłowe hasło zawiera litery, liczby i ma długość od 5 do
+                                        25 znaków.</div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="inputBox">
                             <span class="details">Powtórz hasło</span>
                             <input type="password" placeholder="Powtórz hasło" style="background-color: #c4e2ff"
                                 required>
+                            <ul>
+                                <li>i
+                                    <div class="dangerInfo">Hasła muszą być identyczne!</div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <div class="button">
