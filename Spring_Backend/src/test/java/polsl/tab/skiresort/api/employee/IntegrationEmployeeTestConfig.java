@@ -19,22 +19,22 @@ import java.time.LocalDate;
 
 @SpringBootTest
 @Transactional
-public abstract class IntegrationEmployeeTestConfig {
+abstract class IntegrationEmployeeTestConfig {
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    public PasswordEncoder passwordEncoder;
 
     @Autowired
-    private InvoiceRepository invoiceRepository;
+    public InvoiceRepository invoiceRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public UserRepository userRepository;
 
     @Autowired
-    private PassRepository passRepository;
+    public PassRepository passRepository;
 
     @Autowired
-    private PriceListRepository priceListRepository;
+    public PriceListRepository priceListRepository;
 
     @BeforeEach
     void setup() {
@@ -69,7 +69,8 @@ public abstract class IntegrationEmployeeTestConfig {
                 Date.valueOf(LocalDate.of(2021, 12, 12)),
                 "Test Pass First Name",
                 "Test Pass Last Name",
-                Date.valueOf(LocalDate.of(2002, 3, 12))
+                Date.valueOf(LocalDate.of(2002, 3, 12)),
+                priceList
         );
         var expiredPass = new Pass(
                 100.00f,
@@ -77,7 +78,8 @@ public abstract class IntegrationEmployeeTestConfig {
                 Date.valueOf(LocalDate.of(1999, 1, 12)),
                 "Expired Pass",
                 "Expired Pass",
-                Date.valueOf(LocalDate.of(1800, 1, 1))
+                Date.valueOf(LocalDate.of(1800, 1, 1)),
+                priceList
         );
         var quantityPass = new Pass(
                 123.00f,
@@ -85,7 +87,8 @@ public abstract class IntegrationEmployeeTestConfig {
                 "Quantity Pass",
                 Date.valueOf(LocalDate.of(2021, 1, 1)),
                 0,
-                20
+                20,
+                priceList
         );
         var noUsesLeft = new Pass (
                 123.00f,
@@ -93,7 +96,8 @@ public abstract class IntegrationEmployeeTestConfig {
                 "No uses left",
                 Date.valueOf(LocalDate.of(2021, 1, 1)),
                 20,
-                0
+                0,
+                priceList
         );
         userRepository.save(user);
         invoice.setUserIdUser(user);
