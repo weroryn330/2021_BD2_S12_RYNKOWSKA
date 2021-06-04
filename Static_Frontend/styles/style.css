@@ -10,7 +10,7 @@
 }
 
 /* Navigation bar container */
-.navContainer {
+.navContainer, .navContainerW {
   width: 90vw;
   height: 15vh;
   margin: auto;
@@ -25,7 +25,7 @@ nav {
 }
 
 /* Displaying navbar items */
-nav .mainNav {
+nav .mainNav, nav .mainNavW {
   display: flex;
   list-style: none;
 }
@@ -39,7 +39,7 @@ nav .logo {
   text-shadow: 0 0 20px #ffffff;
 }
 
-nav .logo:hover {
+nav .logo:hover, nav .logoW:hover {
   margin: 6px;
   font-size: 40px;
   text-shadow: 0 0 20px #000000;
@@ -47,7 +47,7 @@ nav .logo:hover {
 }
 
 /* Sitelinks style */
-nav .mainNav li a {
+nav .mainNav li a, nav .mainNavW li a {
   display: inline-block;
 
   padding: 15px;
@@ -85,7 +85,7 @@ nav .menuOpen {
 }
 
 /* Close menu 'button' style */
-nav .mainNav .menuClose {
+nav .mainNav .menuClose, nav .mainNavW .menuClose {
   cursor: pointer;
   display: none;
 
@@ -115,7 +115,7 @@ footer {
 /* Hamburger button menu */
 @media (max-width: 900px) {
   /* Menu */
-  nav .mainNav {
+  nav .mainNav, nav .mainNavW {
     position: fixed;
     justify-content: center;
     align-items: center;
@@ -135,7 +135,7 @@ footer {
   }
 
   /* Close button */
-  nav .mainNav .menuClose {
+  nav .mainNav .menuClose, nav .mainNavW .menuClose {
     display: block;
     position: absolute;
 
@@ -158,9 +158,10 @@ footer {
   }
 
   /* Hover effects*/
-  nav .mainNav li a:hover {
+  nav .mainNav li a:hover, nav .mainNavW li a:hover {
     background: none;
   }
+
   .container {
     max-width: 100%;
   }
