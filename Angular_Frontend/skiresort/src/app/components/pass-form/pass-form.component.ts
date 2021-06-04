@@ -80,9 +80,12 @@ export class PassFormComponent implements OnInit {
       this.form.passTime = null;
       this.form.startDate = null;
     }
-    const passRequest = new PassRequest();
-    passRequest.setAtributes(this.form.firstName, this.form.lastName, this.form.birthDate, this.form.usesTotal, this.form.startDate, this.form.passTime, this.form.unitPrice);
-    this.isSubmitted = true;
+    const endDate = new Date();
+    endDate.setTime(new Date(this.form.startDate).getTime() + this.form.passTime*60*60*1000);
+    console.log(endDate);
+    const passRequest = new PassRequest(this.form.unitPrice,this.form.firstName, this.form.lastName,
+      this.form.startDate, endDate, this.form.birthDate, this.form.usesTotal);
+     this.isSubmitted = true;
     this.addNewRequest(passRequest);
     this.passFormValidation(true);
   }
