@@ -27,7 +27,7 @@
           <li><a *ngIf="roles.includes('ROLE_EMPLOYEE')">Panel Klienta</a>
             <div class="dropdown">
               <a routerLink="/welcome">O nas</a>
-              <a href="#">Karnety i ceny</a>
+              <a routerLink="/pricelist">Karnety i ceny</a>
               <a routerLink="/lifts">Wyciągi i trasy</a>
               <a routerLink="/contact">Dojazd i kontakt</a>
               <a (click)="logout()">Wyloguj</a>
@@ -40,10 +40,10 @@
         <div class="menuOpen" (click)="openMenu()"><i class="gg-menu"></i></div>
         <ul class="mainNav">
           <li><a *ngIf="!roles.includes('ROLE_EMPLOYEE')" routerLink="/welcome">O nas</a></li>
-          <li><a href="#">Karnety i ceny</a></li>
+          <li><a routerLink="/pricelist">Karnety i ceny</a></li>
           <li><a routerLink="/lifts">Wyciągi i trasy</a></li>
           <li><a routerLink="/contact">Dojazd i kontakt</a></li>
-          <li><a *ngIf="roles.includes('ROLE_USER')" href="#">Moje konto</a></li>
+          <li><a *ngIf="roles.includes('ROLE_USER')" routerLink="/profile">Moje konto</a></li>
           <li><a *ngIf="!loggedIn" routerLink="/login">Logowanie</a></li>
           <li><a *ngIf="loggedIn" (click)="logout()">Wyloguj</a></li>
           <div class="menuClose" (click)="closeMenu()"><i class="gg-close"></i></div>

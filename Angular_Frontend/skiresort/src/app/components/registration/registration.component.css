@@ -24,8 +24,19 @@
   text-align: center;
 }
 
-/* Layout inside of the box */
+/* Layout inside of the box
 .content form .user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}*/
+
+select option {
+  color: black;
+}
+
+form .user-details {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -38,19 +49,37 @@ form .user-details .inputBox {
   width: calc(100% / 3 - 20px);
 }
 
+form .user-details .inputBoxBill {
+  margin-bottom: 10px;
+  width: calc(100% / 2 - 20px);
+}
+
 form .user-details .inputBx {
   margin-bottom: 10px;
   width: 100%;
 }
 
 /* input labels */
-form .inputBox span.details, form .inputBx span.details {
+form .inputBox span.details, form .inputBx span.details, form .inputBoxBill span.details {
   display: block;
   font-weight: 500;
   margin-bottom: 5px;
 }
 
-.user-details .inputBox input, .user-details .inputBx input {
+.input {
+  height: 40px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  color: black;
+}
+
+.user-details .inputBox input, .user-details .inputBx input, .user-details .inputBoxBill input {
   height: 40px;
   width: 100%;
   outline: none;
@@ -70,17 +99,35 @@ form .inputBox span.details, form .inputBx span.details {
 
 .user-details .inputBox input:focus,
 .user-details .inputBox input:valid,
+.user-details .inputBoxBill input:focus,
+.user-details .inputBoxBill input:valid,
 .user-details .inputBx input:focus,
-.user-details .inputBx input:valid {
+.user-details .inputBx input:valid,
+.input:focus, .input:valid {
   border: 4px solid #7dbeff;
 }
 
-form .button {
+.buttonInput {
+  margin-bottom: 5%;
+  height: 45px;
+  width: 50%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+form .button, form .buttonSubmitted {
   height: 45px;
   margin: 35px 0;
 }
 
-form .button:hover {
+form .button:hover, .buttonInput:hover {
   border-radius: 5px;
   box-shadow: 0 0 25px #fff;
 }
@@ -97,6 +144,18 @@ form .button input {
   cursor: pointer;
   transition: all 0.3s ease;
   background: rgba(0, 0, 0, 0.3);
+}
+form .buttonSubmitted  input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  background-color: rgba(0, 255, 0, 0.5);
+  color: white;
 }
 
 form .button input:hover {

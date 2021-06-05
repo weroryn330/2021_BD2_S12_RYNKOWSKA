@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {LoginService} from "../../services/login.service";
-import {HttpClient} from "@angular/common/http";
 import {TokenService} from "../../services/token.service";
 
 @Component({
@@ -30,7 +29,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const {email, password} = this.form;
     this.loginService.login(email, password).subscribe(data => {
-        console.log(data);
         this.token.saveToken(data.token);
         this.token.saveUser(data);
         alert("Zalogowano pomyślnie!" + data.token);

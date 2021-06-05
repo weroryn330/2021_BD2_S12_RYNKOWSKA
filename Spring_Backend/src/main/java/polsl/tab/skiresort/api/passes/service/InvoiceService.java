@@ -10,6 +10,7 @@ import polsl.tab.skiresort.api.passes.response.PassResponse;
 import polsl.tab.skiresort.model.Invoice;
 import polsl.tab.skiresort.model.Pass;
 import polsl.tab.skiresort.repository.InvoiceRepository;
+import polsl.tab.skiresort.repository.PassRepository;
 import polsl.tab.skiresort.repository.PriceListRepository;
 import polsl.tab.skiresort.repository.UserRepository;
 
@@ -25,15 +26,18 @@ public class InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
 
+    private final PassRepository passRepository;
+
     private final PriceListRepository priceListRepository;
 
     public InvoiceService(JwtTokenUtility jwtTokenUtility,
                           UserRepository userRepository,
                           InvoiceRepository invoiceRepository,
-                          PriceListRepository priceListRepository) {
+                          PassRepository passRepository, PriceListRepository priceListRepository) {
         this.jwtTokenUtility = jwtTokenUtility;
         this.userRepository = userRepository;
         this.invoiceRepository = invoiceRepository;
+        this.passRepository = passRepository;
         this.priceListRepository = priceListRepository;
     }
 
@@ -73,7 +77,8 @@ public class InvoiceService {
                                     passRequest.getBirthDate(),
                                     passRequest.getUsesTotal(),
                                     passRequest.getUsesTotal(),
-                                    currentPriceList.get()
+                                    currentPriceList.get(),
+                                    invoice
                             );
                         } else {
                             // Time Pass
@@ -84,13 +89,16 @@ public class InvoiceService {
                                     passRequest.getFirstName(),
                                     passRequest.getLastName(),
                                     passRequest.getBirthDate(),
-                                    currentPriceList.get()
+                                    currentPriceList.get(),
+                                    invoice
                             );
                         }
                     }).collect(Collectors.toList())
             );
             invoice.setUserIdUser(user.get());
-            return new InvoiceResponse(invoiceRepository.save(invoice));
+            InvoiceResponse invoiceResponse = new InvoiceResponse(invoiceRepository.save(invoice));
+            invoice.getPassList().forEach(pass -> passRepository.save(pass));
+            return invoiceResponse;
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Check existence of user and price list");
     }

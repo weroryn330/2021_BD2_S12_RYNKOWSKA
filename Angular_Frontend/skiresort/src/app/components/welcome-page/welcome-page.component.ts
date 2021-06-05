@@ -24,4 +24,7 @@ export class WelcomePageComponent implements OnInit {
       }
   }
 
+  goToPricelist() {
+    this.router.navigateByUrl("/pricelist");
+  }
 }

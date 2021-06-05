@@ -1,14 +1,14 @@
 <div class="mainContainer">
   <div *ngIf="!loggedIn" class="welcomeText">
     <h1> Witaj na narcikowo.pl</h1>
-    <a href="#">
+    <a routerLink="/pricelist">
       Kup karnet!
     </a>
   </div>
   <div *ngIf="loggedIn" class="welcomeText">
     <h1> {{username}} </h1>
     <h1>Witaj na narcikowo.pl</h1>
-    <a href="#">
+    <a routerLink="/pricelist">
       Kup karnet!
     </a>
   </div>
