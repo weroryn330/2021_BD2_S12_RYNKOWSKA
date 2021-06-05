@@ -1,0 +1,38 @@
+package polsl.tab.skiresort.model;
+
+import org.hibernate.annotations.Immutable;
+
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.math.BigInteger;
+
+@Entity
+@Immutable
+@Table(name="ski_report_view")
+public class SkiReport {
+
+    @EmbeddedId
+    public SkiReportId skiReportId;
+
+    public Long count;
+
+    public SkiReport() {
+    }
+
+    public SkiReportId getSkiReportId() {
+        return skiReportId;
+    }
+
+    public void setSkiReportId(SkiReportId skiReportId) {
+        this.skiReportId = skiReportId;
+    }
+
+    public Long getCount() {
+        return count;
+    }
+
+    public void setCount(Long count) {
+        this.count = count;
+    }
+}
