@@ -15,12 +15,6 @@ import {QuantityPassResponse} from "../../classes/quantity-pass-response";
 })
 export class PricelistComponent implements OnInit {
   pricelist: PricelistResponse = {} as PricelistResponse;
-  //  STATIC TEST
-   /* pricelist: PricelistResponse = {
-    ageDiscountsList: [new AgeDiscountResponse(5, 10, 33)],
-    timePassesList: [ new TimePassResponse(3,20),new TimePassResponse(24,50),new TimePassResponse(48,75)],
-    quantityPassesList: [ new QuantityPassResponse(5,20),new QuantityPassResponse(10,60),new QuantityPassResponse(20,100)]
-  };*/
     isUser = false;
 
   constructor(private pricelistService: PricelistService, private router: Router, private token: TokenService) {
@@ -36,8 +30,8 @@ export class PricelistComponent implements OnInit {
     }
   }
 
-  goToPurchase(pricelistPass: PricelistPass, discount: AgeDiscountResponse) {
-    this.router.navigateByUrl('/profile/purchase', {state: {pass: pricelistPass, discount: discount, pricelist: this.pricelist}});
+  goToPurchase(pricelistPass: PricelistPass) {
+    this.router.navigateByUrl('/profile/purchase', {state: {pass: pricelistPass, pricelist: this.pricelist}});
   }
 
   goToLogin() {
@@ -47,15 +41,18 @@ export class PricelistComponent implements OnInit {
   private getPricelist(): void {
     this.pricelistService.getPricelist().subscribe(data => {
         console.log(data);
-        this.pricelist = data;
+        this.pricelist.ageDiscountsList = data.ageDiscountsResponse;
+        this.pricelist.quantityPassesList = data.quantityPassResponse;
+        this.pricelist.timePassesList = data.timePassResponse;
+        console.log(this.pricelist);
       },
       error => {
         console.log(error);
       })
   }
 
-  calculateDiscountPrice(price: number): number {
-    const discount = this.pricelist.ageDiscountsList[0].percentage;
+  calculateDiscountPrice(price: number, discountNumber: number): number {
+    const discount = this.pricelist.ageDiscountsList[discountNumber].percentage;
     return price*((100-discount)/100);
   }
 }

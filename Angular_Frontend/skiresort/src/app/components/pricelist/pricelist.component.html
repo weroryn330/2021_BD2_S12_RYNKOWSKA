@@ -2,7 +2,7 @@
   <p>Kliknij w karnet żeby kupić.</p>
   <div class="infoContainer">
     <div class="infoTime" *ngFor="let pass of pricelist.timePassesList"
-         (click)="goToPurchase(pass,pricelist.ageDiscountsList[0])">
+         (click)="goToPurchase(pass)">
       <ul class="price">
         <li class="header">KARNET CZASOWY</li>
         <ng-container *ngIf="pass.hours<24">
@@ -15,16 +15,20 @@
           <li class="detail">{{pass.hours / 24| number: '1.0-0'}} DNI</li>
         </ng-container>
         <li>normalny: {{pass.price}} zł</li>
-        <li>ulgowy: {{calculateDiscountPrice(pass.price) | number: '1.0-0'}} zł</li>
+        <li>ulgowy dziecięcy: {{calculateDiscountPrice(pass.price,0) | number: '1.0-0'}} zł</li>
+        <li>ulgowy szkolny: {{calculateDiscountPrice(pass.price,1) | number: '1.0-0'}} zł</li>
+        <li>ulgowy studencki: {{calculateDiscountPrice(pass.price,2) | number: '1.0-0'}} zł</li>
       </ul>
     </div>
     <div class="infoQua" *ngFor="let pass of pricelist.quantityPassesList"
-         (click)="goToPurchase(pass,pricelist.ageDiscountsList[0])">
+         (click)="goToPurchase(pass)">
       <ul class="price">
         <li class="header">KARNET ZJAZDOWY</li>
         <li class="detail">{{pass.quantity}} ZJAZDÓW</li>
         <li>normalny: {{pass.price}} zł</li>
-        <li>ulgowy: {{calculateDiscountPrice(pass.price) | number: '1.0-0'}} zł</li>
+        <li>ulgowy dziecięcy: {{calculateDiscountPrice(pass.price,0) | number: '1.0-0'}} zł</li>
+        <li>ulgowy szkolny: {{calculateDiscountPrice(pass.price,1) | number: '1.0-0'}} zł</li>
+        <li>ulgowy studencki: {{calculateDiscountPrice(pass.price,2) | number: '1.0-0'}} zł</li>
       </ul>
     </div>
   </div>
@@ -45,7 +49,9 @@
           <li class="detail">{{pass.hours / 24| number: '1.0-0'}} DNI</li>
         </ng-container>
         <li>normalny: {{pass.price}} zł</li>
-        <li>ulgowy: {{calculateDiscountPrice(pass.price) | number: '1.0-0'}} zł</li>
+        <li>ulgowy dziecięcy: {{calculateDiscountPrice(pass.price,0) | number: '1.0-0'}} zł</li>
+        <li>ulgowy szkolny: {{calculateDiscountPrice(pass.price,1) | number: '1.0-0'}} zł</li>
+        <li>ulgowy studencki: {{calculateDiscountPrice(pass.price,2) | number: '1.0-0'}} zł</li>
       </ul>
     </div>
     <div class="infoQua" *ngFor="let pass of pricelist.quantityPassesList">
@@ -53,7 +59,9 @@
         <li class="header">KARNET ZJAZDOWY</li>
         <li class="detail">{{pass.quantity}} ZJAZDÓW</li>
         <li>normalny: {{pass.price}} zł</li>
-        <li>ulgowy: {{calculateDiscountPrice(pass.price) | number: '1.0-0'}} zł</li>
+        <li>ulgowy dziecięcy: {{calculateDiscountPrice(pass.price,0) | number: '1.0-0'}} zł</li>
+        <li>ulgowy szkolny: {{calculateDiscountPrice(pass.price,1) | number: '1.0-0'}} zł</li>
+        <li>ulgowy studencki: {{calculateDiscountPrice(pass.price,2) | number: '1.0-0'}} zł</li>
       </ul>
     </div>
   </div>

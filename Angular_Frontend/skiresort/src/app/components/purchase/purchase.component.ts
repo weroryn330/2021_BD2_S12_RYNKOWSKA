@@ -21,7 +21,6 @@ export class PurchaseComponent implements OnInit {
   passForms: number[] = [];
   routeData: any = {
     pass: null,
-    discount: null,
     pricelist: null
   }
 
@@ -47,16 +46,8 @@ export class PurchaseComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this.token.getUser();
     this.routeData = history.state;
-    if (this.routeData.pass == null || this.routeData.discount == null || this.routeData.pricelist == null) {
-      //this.getPricelist();
-      //  STATIC TEST
-      this.pricelist = {
-        ageDiscountsList: [new AgeDiscountResponse(5, 10, 33)],
-        timePassesList: [new TimePassResponse(3, 20),
-          new TimePassResponse(24, 50), new TimePassResponse(48, 75)],
-        quantityPassesList: [new QuantityPassResponse(5, 20),
-          new QuantityPassResponse(10, 60), new QuantityPassResponse(20, 100)]
-      };
+    if (this.routeData.pass == null || this.routeData.pricelist == null) {
+      this.getPricelist();
     } else {
       this.pricelist = this.routeData.pricelist;
       this.passForms.push(1);
@@ -83,7 +74,9 @@ export class PurchaseComponent implements OnInit {
   private getPricelist(): void {
     this.pricelistService.getPricelist().subscribe(data => {
         console.log(data);
-        this.pricelist = data;
+        this.pricelist.ageDiscountsList = data.ageDiscountsResponse;
+        this.pricelist.quantityPassesList = data.quantityPassResponse;
+        this.pricelist.timePassesList = data.timePassResponse;
       },
       error => {
         console.log(error);

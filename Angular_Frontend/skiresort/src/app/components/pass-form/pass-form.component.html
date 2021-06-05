@@ -19,7 +19,7 @@
     <div class="inputBox">
       <span class="details">Data Urodzenia</span>
       <input type="date" name="birthDate" required
-             (change)="checkIfDiscountApply(birthDate.value, discount.ageMin, discount.ageMax)"
+             (change)="checkIfDiscountApply(birthDate.value)"
              [(ngModel)]="form.birthDate" #birthDate="ngModel"
              [ngClass]="{error :  birthDate.touched && birthDate.errors}">
     </div>
