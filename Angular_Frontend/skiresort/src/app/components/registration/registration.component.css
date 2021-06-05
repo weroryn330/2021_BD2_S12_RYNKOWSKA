@@ -131,7 +131,42 @@ form .button:hover, .buttonInput:hover {
   border-radius: 5px;
   box-shadow: 0 0 25px #fff;
 }
+.user-details .inputBox input:invalid li {
+  visibility: visible;
+}
 
+.user-details .inputBox input:invalid i {
+  visibility: visible;
+}
+form li {
+  position: relative;
+  list-style: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid black;
+  color: black;
+  font-size: 15px;
+  border-radius: 20px;
+  bottom: 30px;
+  left: 85%;
+  cursor: pointer;
+}
+
+form li:hover .dangerInfo {
+  visibility: visible;
+}
+
+form li .dangerInfo {
+  position: absolute;
+  bottom: -300%;
+  left: -930%;
+  width: 200px;
+  background-color: rgba(0, 0, 0, 1);
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  visibility: hidden;
+}
 form .button input {
   height: 100%;
   width: 100%;
@@ -174,6 +209,10 @@ form .button input:hover {
 
   form .category {
     width: 100%;
+  }
+
+  form li .dangerInfo {
+    right: 300px;
   }
 
   .content form .user-details {
