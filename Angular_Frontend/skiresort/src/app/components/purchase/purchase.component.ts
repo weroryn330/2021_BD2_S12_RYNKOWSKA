@@ -65,7 +65,11 @@ export class PurchaseComponent implements OnInit {
 
   addPassRequest(request: PassRequest) {
     this.passRequestsList.push(request);
-    this.form.total = parseInt(this.form.total) + request.unitPrice;
+    if (parseInt(this.form.total) == 0) {
+      this.form.total = request.unitPrice;
+    } else {
+      this.form.total = (parseInt(this.form.total) + request.unitPrice) as number;
+    }
   }
 
   checkPassFormValidation(validate: boolean) {
@@ -113,11 +117,11 @@ export class PurchaseComponent implements OnInit {
 
   onSubmit() {
     // TODO
-    console.log(formatDate(new Date(),'yyyy-MM-dd\'T\'HH:mm:ss.SSS', 'en-US'));
+    console.log(formatDate(new Date(), 'yyyy-MM-dd\'T\'HH:mm:ss.SSS', 'en-US'));
     this.invoiceService.addInvoice(new InvoiceRequest(formatDate(new Date(),
       'yyyy-MM-dd\'T\'HH:mm:ss.SSS', 'en-US'), this.form.address,
       this.form.city, this.form.voivodeship, this.form.country, this.form.postalCode,
-      this.form.total, this.passRequestsList )).subscribe(data => {
+      this.form.total, this.passRequestsList)).subscribe(data => {
         alert("Dokonano pomyślnego zakupu!");
         this.router.navigateByUrl('/profile/passes');
       },

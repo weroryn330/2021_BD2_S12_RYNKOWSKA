@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     const {email, password} = this.form;
     this.loginService.login(email, password).subscribe(data => {
-        console.log(data);
         this.token.saveToken(data.token);
         this.token.saveUser(data);
         alert("Zalogowano pomyślnie!" + data.token);

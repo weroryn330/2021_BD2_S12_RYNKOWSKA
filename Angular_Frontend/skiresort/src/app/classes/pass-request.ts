@@ -4,8 +4,8 @@ export class PassRequest {
   unitPrice: number;
   firstName: string;
   lastName: string ;
-  startDate: string;
-  endDate: string;
+  startDate: any;
+  endDate: any;
   birthDate: string;
   usesTotal: number;
 
@@ -14,8 +14,14 @@ export class PassRequest {
     this.unitPrice = unitPrice;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.startDate = formatDate(startDate,'yyyy-MM-dd\'T\'HH:mm:ss.SSS', 'en-US');
-    this.endDate = formatDate(endDate,'yyyy-MM-dd\'T\'HH:mm:ss.SSS', 'en-US');
+    if(startDate != null && endDate != null){
+      this.startDate = formatDate(startDate,'yyyy-MM-dd\'T\'HH:mm:ss.SSS', 'en-US');
+      this.endDate = formatDate(endDate,'yyyy-MM-dd\'T\'HH:mm:ss.SSS', 'en-US');
+    }
+    else{
+        this.startDate = null;
+        this.endDate = null;
+    }
     this.birthDate = formatDate(birthDate,'yyyy-MM-dd', 'en-US');
     this.usesTotal = usesTotal;
   }
