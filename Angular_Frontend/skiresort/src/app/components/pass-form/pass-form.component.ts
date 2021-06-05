@@ -13,7 +13,6 @@ import {PricelistPass} from "../../classes/pricelist-pass";
 export class PassFormComponent implements OnInit {
   @Input() pricelist: any;
   @Input() pass: any;
-  @Input() discount: any;
   @Output() newRequestEvent = new EventEmitter<PassRequest>();
   @Output() newValidateEvent = new EventEmitter<boolean>();
 
@@ -27,7 +26,7 @@ export class PassFormComponent implements OnInit {
     passTime: null,
     unitTotal: null
   }
-  isDiscountActive = false;
+  activeDiscountPercentage: number = 0;
   unitPrice: any;
   passTypes = ['Karnet czasowy', 'Karnet zjazdowy'];
   isSubmitted = false;
@@ -36,7 +35,7 @@ export class PassFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.pass && this.discount) {
+    if (this.pass) {
       if (this.pass.hours) {
         this.form.passType = this.passTypes[0];
         this.form.passTime = this.pass.hours;
@@ -46,17 +45,17 @@ export class PassFormComponent implements OnInit {
         this.form.usesTotal = this.pass.quantity;
         this.calculatePrice(this.form.usesTotal);
       }
-    } else {
-      this.discount = this.pricelist.ageDiscountsList[0];
     }
   }
 
-  checkIfDiscountApply(birthDate: Date, ageMin: number, ageMax: number) {
+  checkIfDiscountApply(birthDate: Date) {
+    this.activeDiscountPercentage = 0;
     const age = (Date.now() - new Date(birthDate).getTime()) / 31536000000;
-    if (age > ageMin && age < ageMax) {
-      this.isDiscountActive = true;
-    } else {
-      this.isDiscountActive = false;
+    for(const discount of this.pricelist.ageDiscountsList) {
+      if (age > discount.ageMin && age < discount.ageMax) {
+        this.activeDiscountPercentage = discount.percentage;
+        break;
+      }
     }
     if (this.form.passType === this.passTypes[0]) {
       this.calculatePrice(this.form.passTime);
@@ -105,11 +104,7 @@ export class PassFormComponent implements OnInit {
       }
       standardPrice = pass.price;
     }
-    if (this.isDiscountActive) {
-      this.form.unitPrice = parseInt((standardPrice * (100 - this.discount.percentage) / 100).toPrecision(2));
-    } else {
-      this.form.unitPrice = standardPrice;
-    }
+      this.form.unitPrice = parseInt((standardPrice * (100 - this.activeDiscountPercentage) / 100).toPrecision(3));
   }
 
   convertToDays(hours: number): string {
@@ -118,7 +113,7 @@ export class PassFormComponent implements OnInit {
     } else if (hours == 24) {
       return 1 + ' DZIEŃ';
     } else {
-      return (hours / 24).toPrecision(1) + ' DNI';
+      return parseInt((hours / 24).toPrecision(2)) + ' DNI';
     }
   }
 

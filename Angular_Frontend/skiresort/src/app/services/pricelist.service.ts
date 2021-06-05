@@ -8,7 +8,7 @@ import {PricelistResponse} from "../classes/pricelist-response";
 })
 export class PricelistService {
 
-  endPoint = 'http://localhost:8080/api/pricelist'
+  endPoint = 'http://localhost:8080/api/priceList/current'
 
   constructor(private http: HttpClient) {}
 

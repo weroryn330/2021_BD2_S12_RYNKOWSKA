@@ -1,5 +1,5 @@
 package polsl.tab.skiresort.api.employee;
-/*
+
 import org.json.JSONArray;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,12 +10,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import polsl.tab.skiresort.model.Invoice;
-import polsl.tab.skiresort.model.Pass;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -75,4 +69,3 @@ class EmployeeIntegrationTest extends IntegrationEmployeeTestConfig{
 
     }
 }
-*/

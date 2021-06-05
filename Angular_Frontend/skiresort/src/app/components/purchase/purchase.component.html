@@ -3,7 +3,7 @@
   <h2 *ngIf="passForms[0]">Dane karnetów</h2>
   <div class="content">
     <app-pass-form *ngFor="let passRequest of passForms" [pricelist]="pricelist" [pass]="routeData.pass"
-                   [discount]="routeData.discount" (newRequestEvent)="addPassRequest($event)"
+                   (newRequestEvent)="addPassRequest($event)"
                    (newValidateEvent)="checkPassFormValidation($event)"
     ></app-pass-form>
     <h2>Dane płatnicze</h2>

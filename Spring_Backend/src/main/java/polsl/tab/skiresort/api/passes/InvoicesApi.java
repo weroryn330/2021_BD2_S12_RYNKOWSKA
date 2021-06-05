@@ -9,7 +9,6 @@ import polsl.tab.skiresort.api.passes.service.InvoiceService;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
 @RequestMapping("/api/invoices")
 public class InvoicesApi {
