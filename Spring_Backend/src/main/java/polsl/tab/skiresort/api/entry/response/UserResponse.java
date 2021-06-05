@@ -27,7 +27,7 @@ public class UserResponse {
 
     private final List<String> roleList;
 
-    private final String token;
+    private String token;
 
     public UserResponse(User user) {
         this.firstName = user.getFirstName();
@@ -99,5 +99,9 @@ public class UserResponse {
 
     public String getToken() {
         return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

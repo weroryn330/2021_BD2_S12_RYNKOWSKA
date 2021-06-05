@@ -48,4 +48,17 @@ public class UserApi {
         userService.deleteUser(requestTokenHeader);
     }
 
+    @PutMapping("/password")
+    public ResponseEntity<UserResponse> updateUserPassword(@RequestHeader("Authorization") String token,
+                                                           @RequestBody UserRequest body
+    ) {
+        return ResponseEntity.ok(userService.updateUserPassword(token, body));
+    }
+
+    @PutMapping("/email")
+    public ResponseEntity<UserResponse> updateUserEmail(@RequestHeader("Authorization") String token,
+                                                        @RequestBody UserRequest body
+    ) {
+        return ResponseEntity.ok(userService.updateUserEmail(token, body));
+    }
 }
