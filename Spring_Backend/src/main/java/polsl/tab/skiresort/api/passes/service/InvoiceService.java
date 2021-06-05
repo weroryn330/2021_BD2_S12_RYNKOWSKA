@@ -10,6 +10,8 @@ import polsl.tab.skiresort.api.passes.response.PassResponse;
 import polsl.tab.skiresort.model.Invoice;
 import polsl.tab.skiresort.model.Pass;
 import polsl.tab.skiresort.repository.InvoiceRepository;
+import polsl.tab.skiresort.repository.PassRepository;
+import polsl.tab.skiresort.repository.PriceListRepository;
 import polsl.tab.skiresort.repository.UserRepository;
 
 import java.util.List;
@@ -24,13 +26,19 @@ public class InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
 
+    private final PassRepository passRepository;
+
+    private final PriceListRepository priceListRepository;
+
     public InvoiceService(JwtTokenUtility jwtTokenUtility,
                           UserRepository userRepository,
-                          InvoiceRepository invoiceRepository
-    ) {
+                          InvoiceRepository invoiceRepository,
+                          PassRepository passRepository, PriceListRepository priceListRepository) {
         this.jwtTokenUtility = jwtTokenUtility;
         this.userRepository = userRepository;
         this.invoiceRepository = invoiceRepository;
+        this.passRepository = passRepository;
+        this.priceListRepository = priceListRepository;
     }
 
     public List<InvoiceResponse> getAllUserInvoices(String token) {
@@ -46,7 +54,8 @@ public class InvoiceService {
 
     public InvoiceResponse addInvoiceToUser(String token, InvoiceRequest request) {
         var user = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token));
-        if (user.isPresent()) {
+        var currentPriceList = priceListRepository.findCurrentPriceList();
+        if (user.isPresent() && currentPriceList.isPresent()) {
             var invoice = new Invoice(
                 request.getInvoiceDate(),
                 request.getBillingAddress(),
@@ -67,7 +76,9 @@ public class InvoiceService {
                                     passRequest.getLastName(),
                                     passRequest.getBirthDate(),
                                     passRequest.getUsesTotal(),
-                                    passRequest.getUsesTotal()
+                                    passRequest.getUsesTotal(),
+                                    currentPriceList.get(),
+                                    invoice
                             );
                         } else {
                             // Time Pass
@@ -77,15 +88,19 @@ public class InvoiceService {
                                     passRequest.getEndDate(),
                                     passRequest.getFirstName(),
                                     passRequest.getLastName(),
-                                    passRequest.getBirthDate()
+                                    passRequest.getBirthDate(),
+                                    currentPriceList.get(),
+                                    invoice
                             );
                         }
                     }).collect(Collectors.toList())
             );
             invoice.setUserIdUser(user.get());
-            return new InvoiceResponse(invoiceRepository.save(invoice));
+            InvoiceResponse invoiceResponse = new InvoiceResponse(invoiceRepository.save(invoice));
+            invoice.getPassList().forEach(pass -> passRepository.save(pass));
+            return invoiceResponse;
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Check existence of user and price list");
     }
 
     public List<PassResponse> getAllInvoicePasses(String token, Integer invoiceId) {

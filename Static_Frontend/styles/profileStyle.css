@@ -1,7 +1,7 @@
 /* Main div container - background style */
 #profileContainer {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("profile.jpg");
+    url("/styles/images/profile.jpg");
   background-size: cover;
   background-position: center center;
 
@@ -81,7 +81,7 @@ main {
 }
 
 .userData .data h5 {
-  color:rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 300;
 }
 
@@ -109,7 +109,7 @@ main {
   box-shadow: 0 0 25px #fff;
 }
 
-.actions button  {
+.actions button {
   height: 100%;
   width: 100%;
   border-radius: 5px;

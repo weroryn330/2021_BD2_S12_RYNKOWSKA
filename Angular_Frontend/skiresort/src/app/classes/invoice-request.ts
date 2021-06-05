@@ -1,18 +1,24 @@
+import {PassRequest} from "./pass-request";
+
 export class InvoiceRequest {
-  billingCountry: string;
-  billingState: string;
-  billingPostalCode: string;
-  billingCity: string;
+  invoiceDate: string;
   billingAddress: string;
+  billingCity: string;
+  billingState: string;
+  billingCountry: string;
+  billingPostalCode: string;
   total: number;
+  passList: PassRequest[];
 
 
-  constructor(billingCountry: string, billingVoivodeship: string, billingPostalCode: string, billingCity: string, billingAddress: string, total: number) {
-    this.billingCountry = billingCountry;
-    this.billingState = billingVoivodeship;
-    this.billingPostalCode = billingPostalCode;
-    this.billingCity = billingCity;
+  constructor(invoiceDate: string, billingAddress: string, billingCity: string, billingState: string, billingCountry: string, billingPostalCode: string, total: number, passList: PassRequest[]) {
+    this.invoiceDate = invoiceDate;
     this.billingAddress = billingAddress;
+    this.billingCity = billingCity;
+    this.billingState = billingState;
+    this.billingCountry = billingCountry;
+    this.billingPostalCode = billingPostalCode;
     this.total = total;
+    this.passList = passList;
   }
 }

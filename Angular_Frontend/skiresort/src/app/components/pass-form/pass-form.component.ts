@@ -80,9 +80,11 @@ export class PassFormComponent implements OnInit {
       this.form.passTime = null;
       this.form.startDate = null;
     }
-    const passRequest = new PassRequest();
-    passRequest.setAtributes(this.form.firstName, this.form.lastName, this.form.birthDate, this.form.usesTotal, this.form.startDate, this.form.passTime, this.form.unitPrice);
-    this.isSubmitted = true;
+    const endDate = new Date();
+    endDate.setTime(new Date(this.form.startDate).getTime() + this.form.passTime*60*60*1000);
+    const passRequest = new PassRequest(this.form.unitPrice,this.form.firstName, this.form.lastName,
+      this.form.startDate, endDate, this.form.birthDate, this.form.usesTotal);
+     this.isSubmitted = true;
     this.addNewRequest(passRequest);
     this.passFormValidation(true);
   }
@@ -104,7 +106,7 @@ export class PassFormComponent implements OnInit {
       standardPrice = pass.price;
     }
     if (this.isDiscountActive) {
-      this.form.unitPrice = (standardPrice * (100 - this.discount.percentage) / 100).toPrecision(2);
+      this.form.unitPrice = parseInt((standardPrice * (100 - this.discount.percentage) / 100).toPrecision(2));
     } else {
       this.form.unitPrice = standardPrice;
     }

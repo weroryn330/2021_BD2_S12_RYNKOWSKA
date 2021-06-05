@@ -1,23 +1,28 @@
+import {formatDate} from "@angular/common";
+
 export class PassRequest {
-  firstName: string = '';
-  lastName: string = '';
-  birthDate: Date = {} as Date;
-  usesTotal: number = {} as number;
-  startDate: Date = {} as Date;
-  hours: number = {} as number;
-  unitPrice: number = {} as number;
+  unitPrice: number;
+  firstName: string;
+  lastName: string ;
+  startDate: any;
+  endDate: any;
+  birthDate: string;
+  usesTotal: number;
 
 
-  constructor() {
-  }
-
-  setAtributes(firstName: string, lastName: string, birthDate: Date, usesTotal: number, startDate: Date, hours: number, unitPrice: number){
+  constructor(unitPrice: number, firstName: string, lastName: string, startDate: Date, endDate: Date, birthDate: Date, usesTotal: number) {
+    this.unitPrice = unitPrice;
     this.firstName = firstName;
     this.lastName = lastName;
-    this.birthDate = birthDate;
+    if(startDate != null && endDate != null){
+      this.startDate = formatDate(startDate,'yyyy-MM-dd\'T\'HH:mm:ss.SSS', 'en-US');
+      this.endDate = formatDate(endDate,'yyyy-MM-dd\'T\'HH:mm:ss.SSS', 'en-US');
+    }
+    else{
+        this.startDate = null;
+        this.endDate = null;
+    }
+    this.birthDate = formatDate(birthDate,'yyyy-MM-dd', 'en-US');
     this.usesTotal = usesTotal;
-    this.startDate = startDate;
-    this.hours = hours;
-    this.unitPrice = unitPrice;
   }
 }

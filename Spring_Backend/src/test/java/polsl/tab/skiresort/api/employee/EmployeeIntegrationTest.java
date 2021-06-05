@@ -10,6 +10,12 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import polsl.tab.skiresort.model.Invoice;
+import polsl.tab.skiresort.model.Pass;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -35,12 +41,11 @@ class EmployeeIntegrationTest extends IntegrationEmployeeTestConfig{
                     .getContentAsString()
             );
             Assertions.assertEquals(
-                    2,
+                    passRepository.getAllActivePasses().size(),
                     jsonArray.length()
             );
-            Assertions.assertEquals(
-                    "test@test.pl",
-                    jsonArray.getJSONObject(0).get("invoiceOwnerEmail").toString()
+            Assertions.assertTrue(
+                    jsonArray.toString().contains("test@test.pl")
             );
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +66,7 @@ class EmployeeIntegrationTest extends IntegrationEmployeeTestConfig{
                     .getContentAsString()
             );
             Assertions.assertEquals(
-                    4,
+                    passRepository.findAll().size(),
                     jsonArray.length()
             );
         } catch (Exception e) {
