@@ -54,6 +54,27 @@ public class Pass {
                 String firstName,
                 String lastName,
                 Date birthDate,
+                Integer usesTotal,
+                Integer usesLeft,
+                PriceList priceList
+    ) {
+        this.unitPrice = unitPrice;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.usesTotal = usesTotal;
+        this.usesLeft = usesLeft;
+        this.priceList = priceList;
+    }
+
+    public Pass(Float unitPrice,
+                Date startDate,
+                Date endDate,
+                String firstName,
+                String lastName,
+                Date birthDate,
                 PriceList priceList
     ) {
         this.unitPrice = unitPrice;

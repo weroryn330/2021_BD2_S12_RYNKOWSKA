@@ -39,9 +39,13 @@ abstract class InvoiceIntegrationTestConfig {
     private PriceListRepository priceListRepository;
 
     @Autowired
-    private JwtTokenUtility jwtTokenUtility;
+    public JwtTokenUtility jwtTokenUtility;
 
     private String token;
+
+    public Invoice invoice;
+
+    public PriceList priceList;
 
     public String getToken()
     {
@@ -51,7 +55,7 @@ abstract class InvoiceIntegrationTestConfig {
     void setup() {
         this.token = "Bearer " + jwtTokenUtility.generateToken(new UserLoginRequest("test@test.pl", "testPassword"));
 
-        var priceList = new PriceList(
+        priceList = new PriceList(
                 Date.valueOf(LocalDate.of(2021, 5, 23)),
                 Date.valueOf(LocalDate.of(2022, 5, 23))
         );
@@ -62,6 +66,8 @@ abstract class InvoiceIntegrationTestConfig {
                 "Test Pass First Name",
                 "Test Pass Last Name",
                 Date.valueOf(LocalDate.of(2002, 3, 12)),
+                10,
+                10,
                 priceList
         );
         var user = new User(
@@ -76,8 +82,7 @@ abstract class InvoiceIntegrationTestConfig {
                 "test@test.pl",
                 passwordEncoder.encode("testPassword")
         );
-        var invoice = new Invoice(
-                25,
+        invoice = new Invoice(
                 Date.valueOf(LocalDate.of(2021, 5, 26)),
                 "Test Invoice Billing",
                 "Test Invoice City",
@@ -91,7 +96,9 @@ abstract class InvoiceIntegrationTestConfig {
         invoiceRepository.save(invoice);
         pass.setInvoicesIdInvoice(invoice);
         pass.setPriceList(priceList);
+        priceListRepository.save(priceList);
         passRepository.save(pass);
+
 
     }
 }

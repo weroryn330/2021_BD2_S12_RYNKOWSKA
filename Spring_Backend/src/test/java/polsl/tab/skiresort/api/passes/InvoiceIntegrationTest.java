@@ -31,17 +31,17 @@ public class InvoiceIntegrationTest extends InvoiceIntegrationTestConfig {
         try {
             JSONArray jsonArray = new JSONArray(mockMvc
                     .perform(
-                            MockMvcRequestBuilders.get("/api/invoices/25").header("Authorization",getToken())
+                            MockMvcRequestBuilders.get("/api/invoices/" + invoice.getIdInvoice()).header("Authorization",getToken())
                     ).andExpect(status().is2xxSuccessful())
                     .andReturn()
                     .getResponse()
                     .getContentAsString()
             );
-            Assertions.assertEquals(userRepository.findByEmail("test@test.pl").get()
+            Assertions.assertEquals(userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(getToken())).get()
                     .getInvoiceList()
                     .stream()
                     .filter(
-                            invoice -> invoice.getIdInvoice().equals(25))
+                            invoice -> invoice.getIdInvoice().equals(invoice.getIdInvoice()))
                     .findFirst()
                     .map(
                             invoice -> invoice.getPassList()
