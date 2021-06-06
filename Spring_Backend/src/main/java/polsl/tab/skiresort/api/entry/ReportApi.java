@@ -26,9 +26,8 @@ public class ReportApi {
 
         final InputStreamResource resource = new InputStreamResource(reportService.getPassReport(Integer.parseInt(passId)));
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"userReport.csv\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + reportService.getFileName(Integer.parseInt(passId)) + ".csv\"")
                 .contentType(MediaType.parseMediaType("text/csv;charset=utf-8"))
                 .body(resource);
     }
-
 }

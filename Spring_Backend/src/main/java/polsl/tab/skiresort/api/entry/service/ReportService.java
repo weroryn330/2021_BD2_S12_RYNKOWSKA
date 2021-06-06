@@ -15,6 +15,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -34,6 +35,13 @@ public class ReportService {
         this.skiReportRepository = skiReportRepository;
     }
 
+    public String getFileName(Integer passId){
+        Pass pass = passRepository.getOne(passId);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH-mm");
+        LocalDateTime now = LocalDateTime.now();
+        return "SkiReport"+ pass.getFirstName() + pass.getLastName() + now.format(dtf);
+    }
+
     //write data to csv
     public ByteArrayInputStream getPassReport(Integer passId) {
         try (final ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -46,15 +54,17 @@ public class ReportService {
             printer.println();
             printer.flush();
 
-            mainHeader = "Nr: " + pass.getIdPass();
+            mainHeader = "Karnet Nr: " + pass.getIdPass();
             stream.write(mainHeader.getBytes());
             printer.println();
             printer.flush();
 
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now = LocalDateTime.now();
-            mainHeader = "Z dnia: " + now;
+
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+            mainHeader = "Data: " + now.format(dtf);
             stream.write(mainHeader.getBytes());
+            printer.println();
             printer.println();
             printer.flush();
 
