@@ -10,7 +10,7 @@ INSERT INTO usages (id_usage, passes_id_invoice_item, ski_lift_id_ski_lift, use_
 VALUES (6, 2, 1, '2021-05-26 12:46:00', 1);
 
 CREATE OR REPLACE VIEW ski_report_view AS
-SELECT ps.id_pass, count(us.id_usage), sl.name
+SELECT ps.id_pass, count(us.id_usage), sl.name, sl.height
 FROM passes AS ps JOIN usages AS us ON ps.id_pass=us.passes_id_invoice_item
-                  JOIN ski_lifts AS sl ON sl.id_ski_lift=us.ski_lift_id_ski_lift
-GROUP BY sl.name, ps.id_pass, us.success_flag HAVING us.success_flag='1';
+JOIN ski_lifts AS sl ON sl.id_ski_lift=us.ski_lift_id_ski_lift
+GROUP BY sl.name, ps.id_pass, sl.height, us.success_flag HAVING us.success_flag='1';

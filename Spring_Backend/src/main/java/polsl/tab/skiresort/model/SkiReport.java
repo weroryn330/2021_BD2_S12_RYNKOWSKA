@@ -17,7 +17,17 @@ public class SkiReport {
 
     public Long count;
 
+    public Integer height;
+
     public SkiReport() {
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 
     public SkiReportId getSkiReportId() {

@@ -26,12 +26,10 @@ public class ReportService {
     private static final String[] HEADERS = {"Nazwa wyciagu", "Ilosc zjazdow", "Pokonana wysokosc"};
     private static final CSVFormat FORMAT = CSVFormat.DEFAULT;
 
-    private final UserRepository userRepository;
     private final PassRepository passRepository;
     private final SkiReportRepository skiReportRepository;
 
-    public ReportService(UserRepository userRepository, PassRepository passRepository, SkiReportRepository skiReportRepository) {
-        this.userRepository = userRepository;
+    public ReportService(PassRepository passRepository, SkiReportRepository skiReportRepository) {
         this.passRepository = passRepository;
         this.skiReportRepository = skiReportRepository;
     }
@@ -48,10 +46,14 @@ public class ReportService {
             printer.println();
             printer.flush();
 
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
+            mainHeader = "Nr: " + pass.getIdPass();
+            stream.write(mainHeader.getBytes());
+            printer.println();
+            printer.flush();
 
-            mainHeader = "Nr: " + pass.getIdPass() + " Z dnia: " + now;
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+            LocalDateTime now = LocalDateTime.now();
+            mainHeader = "Z dnia: " + now;
             stream.write(mainHeader.getBytes());
             printer.println();
             printer.flush();
@@ -65,7 +67,7 @@ public class ReportService {
                 data = Arrays.asList(
                         skiReport.skiReportId.getName(),
                         String.valueOf(skiReport.getCount()),
-                        "TODO ://"
+                        String.valueOf(skiReport.getHeight() * skiReport.getCount())
                 );
 
                 printer.printRecord(data);
