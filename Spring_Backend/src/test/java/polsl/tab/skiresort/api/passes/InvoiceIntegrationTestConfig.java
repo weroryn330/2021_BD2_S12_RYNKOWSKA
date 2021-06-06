@@ -41,16 +41,12 @@ abstract class InvoiceIntegrationTestConfig {
     @Autowired
     public JwtTokenUtility jwtTokenUtility;
 
-    private String token;
+    public String token;
 
     public Invoice invoice;
 
     public PriceList priceList;
 
-    public String getToken()
-    {
-        return this.token;
-    }
     @BeforeEach
     void setup() {
         this.token = "Bearer " + jwtTokenUtility.generateToken(new UserLoginRequest("test@test.pl", "testPassword"));
@@ -98,7 +94,5 @@ abstract class InvoiceIntegrationTestConfig {
         pass.setPriceList(priceList);
         priceListRepository.save(priceList);
         passRepository.save(pass);
-
-
     }
 }

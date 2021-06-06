@@ -61,25 +61,6 @@ public class Invoice {
         this.total = total;
     }
 
-    //For testing
-    public Invoice(Integer idInvoice,
-                   Date invoiceDate,
-                   String billingAddress,
-                   String billingCity,
-                   String billingState,
-                   String billingCountry,
-                   String billingPostalCode,
-                   Float total) {
-        this.idInvoice = idInvoice;
-        this.invoiceDate = invoiceDate;
-        this.billingAddress = billingAddress;
-        this.billingCity = billingCity;
-        this.billingState = billingState;
-        this.billingCountry = billingCountry;
-        this.billingPostalCode = billingPostalCode;
-        this.total = total;
-    }
-
     public Integer getIdInvoice() {
         return idInvoice;
     }

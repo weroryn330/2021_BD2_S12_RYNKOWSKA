@@ -103,18 +103,6 @@ public class Pass {
         this.priceList = priceList;
     }
 
-    public Pass(Pass pass)
-    {
-        this.idPass = pass.getIdPass();
-        this.unitPrice = pass.getUnitPrice();
-        this.startDate = pass.getStartDate();
-        this.endDate = pass.getEndDate();
-        this.firstName = pass.getFirstName();
-        this.lastName = pass.getLastName();
-        this.birthDate = pass.getBirthDate();
-        this.usesTotal = pass.getUsesTotal();
-        this.usesLeft = pass.getUsesLeft();
-    }
     public Integer getIdPass() {
         return idPass;
     }
