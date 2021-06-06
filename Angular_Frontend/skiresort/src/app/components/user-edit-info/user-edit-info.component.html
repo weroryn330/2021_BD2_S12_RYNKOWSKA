@@ -1,1 +1,97 @@
-<p>user-edit-info works!</p>
+<div class="mainContainerProfile">
+  <h2>Edycja danych osobowych</h2>
+  <form name="form">
+    <div class="user-details">
+      <div class="inputBoxBill">
+        <span class="details">Imię</span>
+        <input type="text" placeholder="Imię"
+               name="firstName" required
+               pattern="^[A-ZĄĆĘŁŃÓŚŻŹ]{1}[a-ząćęłńóśżź]{2,19}$">
+        <ul>
+          <li>i
+            <div class="dangerInfo">Imiona rozpoczynamy wielką literą.</div>
+          </li>
+        </ul>
+      </div>
+      <div class="inputBoxBill">
+        <span class="details">Nazwisko</span>
+        <input type="text" placeholder="Nazwisko" name="lastName"
+               required pattern="^[A-ZĄĆĘŁŃÓŚŻŹ]{1}[a-ząćęłńóśżź]{2,19}$">
+        <ul>
+          <li>i
+            <div class="dangerInfo">Nazwiska rozpoczynamy wielką literą.</div>
+          </li>
+        </ul>
+      </div>
+      <div class="inputBoxBill">
+        <span class="details">Kraj</span>
+        <input type="text" placeholder="Kraj" name="country" required
+               pattern="^[A-ZĄĆĘŁŃÓŚŻŹ]{1}[a-ząćęłńóśżź]{2,15} ?[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź]{0,15}$">
+        <ul>
+          <li>i
+            <div class="dangerInfo">Nazwy krajów rozpoczynamy wielką literą.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="inputBoxBill">
+        <span class="details">Numer telefonu</span>
+        <input type="text" placeholder="123456789" name="phone"
+               pattern="^[0-9]{9}$" required>
+        <ul>
+          <li>i
+            <div class="dangerInfo">Prawidłowy numer telefonu składa się z 9 cyfr, np:
+              600700800"
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="inputBoxBill">
+        <span class="details">Województwo</span>
+        <input type="text" placeholder="Wojewódźtwo"
+               name="voivodeship" pattern="^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź-]{2,19}$" required>
+        <ul>
+          <li>i
+            <div class="dangerInfo">Wpisz województwo</div>
+          </li>
+        </ul>
+      </div>
+      <div class="inputBoxBill">
+        <span class="details">Kod pocztowy</span>
+        <input type="" class="postalCode" placeholder="12-345"
+               name="postalCode" pattern="^[0-9]{2}-[0-9]{3}$" required>
+        <ul>
+          <li>i
+            <div class="dangerInfo">Wpisz kod w postaci: [][]-[][][], np: 44-100</div>
+          </li>
+        </ul>
+      </div>
+      <div class="inputBoxBill">
+        <span class="details">Miasto</span>
+        <input type="text" placeholder="Miasto" name="city"
+               pattern="^[A-ZĄĆĘŁŃÓŚŻŹ]{1}[a-ząćęłńóśżź]{2,15} ?[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź]{0,15}$" required>
+        <ul>
+          <li>i
+            <div class="dangerInfo">Nazwy miast rozpoczynamy wielką literą.</div>
+          </li>
+        </ul>
+      </div>
+      <div class="inputBoxBill">
+        <span class="details">Ulica</span>
+        <input type="text" placeholder="Ulica 123"
+               name="address"
+               pattern="^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź0-9]{1,15} ?[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź0-9]{1,15} ?[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź0-9]{1,15}$"
+               required>
+        <ul>
+          <li>i
+            <div class="dangerInfo">Wpisz adres, np: Katowicka 5</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="button">
+      <input id="button" type="submit"
+             value="Zmień dane">
+    </div>
+  </form>
+</div>

@@ -131,11 +131,11 @@ form .button:hover, .buttonInput:hover {
   border-radius: 5px;
   box-shadow: 0 0 25px #fff;
 }
-.user-details .inputBox input:invalid li {
+.user-details .inputBox input:invalid li, .user-details .inputBx input:invalid li {
   visibility: visible;
 }
 
-.user-details .inputBox input:invalid i {
+.user-details .inputBox input:invalid i, .user-details .inputBx input:invalid li {
   visibility: visible;
 }
 form li {

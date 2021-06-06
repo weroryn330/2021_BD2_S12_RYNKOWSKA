@@ -23,13 +23,13 @@ const routes: Routes = [
     path: 'profile', component: ProfileComponent, canActivate: [RouteGuard],
     data: {expectedRole: 'ROLE_USER'},
     children: [
-      {path: 'purchase', component: PurchaseComponent},
       {path: 'passes', component: UserPassesComponent},
+      {path: 'purchase', component: PurchaseComponent},
       {path: 'report', component: UserReportComponent},
       {path: 'info', component: UserInfoComponent},
       {path: 'edit-info', component: UserEditInfoComponent},
       {path: 'edit-credentials', component: UserEditCredentialsComponent},
-      {path: '', redirectTo: 'purchase', pathMatch: 'full'}
+      {path: '', redirectTo: 'passes', pathMatch: 'full'}
     ]
   },
   {path: 'lifts', component: LiftsComponent},
