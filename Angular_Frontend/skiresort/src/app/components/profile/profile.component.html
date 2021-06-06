@@ -20,7 +20,7 @@
     </div>
   </div>
   <main>
-    <router-outlet></router-outlet>
+    <router-outlet (deactivate)="ngOnInit()"></router-outlet>
   </main>
   <div class="userData">
     <picture>

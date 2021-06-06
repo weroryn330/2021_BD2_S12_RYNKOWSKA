@@ -9,7 +9,8 @@ import {TokenService} from "../../services/token.service";
   ]
 })
 export class ProfileComponent implements OnInit {
-user: any;
+  user: any;
+
   constructor(private token: TokenService) {
   }
 
