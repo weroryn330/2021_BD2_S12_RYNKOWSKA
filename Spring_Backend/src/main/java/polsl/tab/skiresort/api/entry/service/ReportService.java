@@ -48,6 +48,11 @@ public class ReportService {
 
             Pass pass = passRepository.getOne(passId);
 
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            List<SkiReportCount> skiReports = skiReportRepository.findCountByIdPass(passId,
+                    Timestamp.valueOf(LocalDate.parse(startDate, dtf).atStartOfDay()),
+                    Timestamp.valueOf(LocalDate.parse(endDate, dtf).atStartOfDay()));
+
             String mainHeader = "Raport narciarski: " + pass.getFirstName() + " " + pass.getLastName();
             stream.write(mainHeader.getBytes());
             printer.println();
@@ -61,28 +66,30 @@ public class ReportService {
             mainHeader = "Za okres od " + startDate + " do " + endDate;
             stream.write(mainHeader.getBytes());
             printer.println();
+            printer.flush();
+
+            Long sum = skiReports.stream().mapToLong(SkiReportCount::getCount).sum();
+            mainHeader = "Suma zjazdow: " + sum;
+            stream.write(mainHeader.getBytes());
+            printer.println();
             printer.println();
             printer.flush();
 
-            List<String> data = Arrays.asList(HEADERS);
-            printer.printRecord(data);
-
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            List<SkiReportCount> skiReports = skiReportRepository.findCountByIdPass(passId,
-                    Timestamp.valueOf(LocalDate.parse(startDate, dtf).atStartOfDay()),
-                    Timestamp.valueOf(LocalDate.parse(endDate, dtf).atStartOfDay()));
-
-            for (SkiReportCount skiReport : skiReports) {
-                data = Arrays.asList(
-                        skiReport.getName(),
-                        String.valueOf(skiReport.getCount()),
-                        String.valueOf(skiReport.getHeight() * skiReport.getCount())
-                );
-
+            if(sum != 0) {
+                List<String> data = Arrays.asList(HEADERS);
                 printer.printRecord(data);
+
+                for (SkiReportCount skiReport : skiReports) {
+                    data = Arrays.asList(
+                            skiReport.getName(),
+                            String.valueOf(skiReport.getCount()),
+                            String.valueOf(skiReport.getHeight() * skiReport.getCount())
+                    );
+                    printer.printRecord(data);
+                }
+                printer.flush();
             }
 
-            printer.flush();
             return new ByteArrayInputStream(stream.toByteArray());
 
         } catch (final IOException e) {
