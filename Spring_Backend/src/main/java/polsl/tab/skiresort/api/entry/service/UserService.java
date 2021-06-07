@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import polsl.tab.skiresort.api.entry.jwt.JwtTokenUtility;
+import polsl.tab.skiresort.api.entry.request.UserLoginRequest;
 import polsl.tab.skiresort.api.entry.request.UserRequest;
 import polsl.tab.skiresort.api.entry.response.UserResponse;
 import polsl.tab.skiresort.model.User;
@@ -133,5 +134,50 @@ public class UserService {
                 throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "JWT Token has expired");
             }
         }
+    }
+
+    public UserResponse updateUserPassword(String token, UserRequest body) {
+        var currentUser = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token));
+        if (currentUser.isPresent()) {
+            var newPassword = passwordEncoder.encode(body.getPassword());
+            currentUser.get().setPassword(newPassword);
+            var newUser = userRepository.save(currentUser.get());
+            return new UserResponse(
+                    newUser,
+                    jwtTokenUtility.generateToken(
+                            new UserLoginRequest(
+                                    newUser.getEmail(),
+                                    newUser.getPassword()
+                            )
+                    )
+            );
+        }
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist");
+    }
+
+    public UserResponse updateUserEmail(String token, UserRequest body) {
+        var currentUser = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token));
+        if (currentUser.isPresent()) {
+            var newEmail = body.getEmail();
+            if (userRepository.findByEmail(newEmail).isPresent()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with email exist");
+            }
+            currentUser.get().setEmail(newEmail);
+            var newUser = userRepository.save(currentUser.get());
+            return new UserResponse(
+                    newUser,
+                    jwtTokenUtility.generateToken(
+                            new UserLoginRequest(
+                                    newUser.getEmail(),
+                                    newUser.getPassword()
+                            )
+                    )
+            );
+        }
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist");
+    }
+
+    public UserResponse updateUserDetails(String token, UserRequest body) {
+        return this.updateUser(body, token);
     }
 }
