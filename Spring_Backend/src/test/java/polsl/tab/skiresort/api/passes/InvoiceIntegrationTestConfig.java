@@ -66,6 +66,17 @@ abstract class InvoiceIntegrationTestConfig {
                 10,
                 priceList
         );
+        var pass1 = new Pass(
+                100.00f,
+                Date.valueOf(LocalDate.of(2022, 5, 26)),
+                Date.valueOf(LocalDate.of(2022, 12, 12)),
+                "Test Pass1 First Name",
+                "Test Pass1 Last Name",
+                Date.valueOf(LocalDate.of(2001, 3, 12)),
+                10,
+                10,
+                priceList
+        );
         var user = new User(
                 "Test User First Name",
                 "Test User Last Name",
@@ -90,9 +101,11 @@ abstract class InvoiceIntegrationTestConfig {
         userRepository.save(user);
         invoice.setUserIdUser(user);
         invoiceRepository.save(invoice);
+        priceListRepository.save(priceList);
         pass.setInvoicesIdInvoice(invoice);
         pass.setPriceList(priceList);
-        priceListRepository.save(priceList);
+        pass1.setInvoicesIdInvoice(invoice);
+        pass1.setPriceList(priceList);
         passRepository.save(pass);
     }
 }
