@@ -61,4 +61,11 @@ public class UserApi {
     ) {
         return ResponseEntity.ok(userService.updateUserEmail(token, body));
     }
+
+    @PutMapping("/details")
+    public ResponseEntity<UserResponse> updateUserDetails(@RequestHeader("Authorization") String token,
+                                                          @RequestBody UserRequest body
+    ) {
+        return ResponseEntity.ok(userService.updateUserDetails(token, body));
+    }
 }
