@@ -5,10 +5,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import polsl.tab.skiresort.api.entry.service.ReportService;
 
 @RestController
@@ -22,11 +19,13 @@ public class ReportApi {
     }
 
     @GetMapping("/{passId}")
-    public ResponseEntity<Resource> getPassReport(@PathVariable String passId){
+    public ResponseEntity<Resource> getPassReport(@PathVariable Integer passId,
+                                                  @RequestParam("startDate") String startDate,
+                                                  @RequestParam("endDate") String endDate){ // format na timestamp a nie date
 
-        final InputStreamResource resource = new InputStreamResource(reportService.getPassReport(Integer.parseInt(passId)));
+        final InputStreamResource resource = new InputStreamResource(reportService.getPassReport(passId, startDate, endDate));
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + reportService.getFileName(Integer.parseInt(passId)) + ".csv\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + reportService.getFileName(passId) + ".csv\"")
                 .contentType(MediaType.parseMediaType("text/csv;charset=utf-8"))
                 .body(resource);
     }

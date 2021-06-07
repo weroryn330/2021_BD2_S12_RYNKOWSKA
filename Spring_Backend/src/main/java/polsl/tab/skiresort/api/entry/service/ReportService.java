@@ -5,16 +5,15 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.springframework.stereotype.Service;
 import polsl.tab.skiresort.model.Pass;
-import polsl.tab.skiresort.model.SkiReport;
-import polsl.tab.skiresort.model.User;
+import polsl.tab.skiresort.model.SkiReportCount;
 import polsl.tab.skiresort.repository.PassRepository;
 import polsl.tab.skiresort.repository.SkiReportRepository;
-import polsl.tab.skiresort.repository.UserRepository;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -43,7 +42,7 @@ public class ReportService {
     }
 
     //write data to csv
-    public ByteArrayInputStream getPassReport(Integer passId) {
+    public ByteArrayInputStream getPassReport(Integer passId, String startDate, String endDate) {
         try (final ByteArrayOutputStream stream = new ByteArrayOutputStream();
             final CSVPrinter printer = new CSVPrinter(new PrintWriter(stream), FORMAT)) {
 
@@ -59,10 +58,7 @@ public class ReportService {
             printer.println();
             printer.flush();
 
-            LocalDateTime now = LocalDateTime.now();
-
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-            mainHeader = "Data: " + now.format(dtf);
+            mainHeader = "Za okres od " + startDate + " do " + endDate;
             stream.write(mainHeader.getBytes());
             printer.println();
             printer.println();
@@ -71,11 +67,14 @@ public class ReportService {
             List<String> data = Arrays.asList(HEADERS);
             printer.printRecord(data);
 
-            List<SkiReport> skiReports = skiReportRepository.findBySkiReportId_IdPass(passId);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            List<SkiReportCount> skiReports = skiReportRepository.findCountByIdPass(passId,
+                    Timestamp.valueOf(LocalDate.parse(startDate, dtf).atStartOfDay()),
+                    Timestamp.valueOf(LocalDate.parse(endDate, dtf).atStartOfDay()));
 
-            for (final SkiReport skiReport : skiReports) {
+            for (SkiReportCount skiReport : skiReports) {
                 data = Arrays.asList(
-                        skiReport.skiReportId.getName(),
+                        skiReport.getName(),
                         String.valueOf(skiReport.getCount()),
                         String.valueOf(skiReport.getHeight() * skiReport.getCount())
                 );

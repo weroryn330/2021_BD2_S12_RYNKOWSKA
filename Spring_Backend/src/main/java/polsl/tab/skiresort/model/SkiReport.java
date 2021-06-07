@@ -5,7 +5,7 @@ import org.hibernate.annotations.Immutable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.math.BigInteger;
+import java.sql.Timestamp;
 
 @Entity
 @Immutable
@@ -15,11 +15,19 @@ public class SkiReport {
     @EmbeddedId
     public SkiReportId skiReportId;
 
-    public Long count;
+    public Timestamp useTimestamp;
 
     public Integer height;
 
     public SkiReport() {
+    }
+
+    public Timestamp getUseTimestamp() {
+        return useTimestamp;
+    }
+
+    public void setUseTimestamp(Timestamp useTimestamp) {
+        this.useTimestamp = useTimestamp;
     }
 
     public Integer getHeight() {
@@ -38,11 +46,4 @@ public class SkiReport {
         this.skiReportId = skiReportId;
     }
 
-    public Long getCount() {
-        return count;
-    }
-
-    public void setCount(Long count) {
-        this.count = count;
-    }
 }
