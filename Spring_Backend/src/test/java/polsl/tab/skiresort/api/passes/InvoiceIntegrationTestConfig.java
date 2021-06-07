@@ -47,8 +47,31 @@ abstract class InvoiceIntegrationTestConfig {
 
     public PriceList priceList;
 
+    public String jsonRequest;
+
     @BeforeEach
     void setup() {
+
+        this.jsonRequest = "{" +
+                "    \"invoiceDate\": \"22-04-2026\",\n" +
+                "    \"billingAddress\": \"Test Billing Address\",\n" +
+                "    \"billingCity\": \"Test Billing City\",\n" +
+                "    \"billingState\": \"Test Billing State\",\n" +
+                "    \"billingCountry\": \"Test Billing Country\",\n" +
+                "    \"billingPostalCode\": \"Test Billing Postal Code\",\n" +
+                "    \"total\": \"100.0\",\n" +
+                "    \"passList\": \n" +
+                "{" +
+                "    \"unitPrice\": \"100.0\",\n" +
+                "    \"startDate\": \"22-06-2021\",\n" +
+                "    \"endDate\": \"26-06-2021\",\n" +
+                "    \"firstName\": \"Test First Name\",\n" +
+                "    \"lastName\": \"Test Last Name\",\n" +
+                "    \"birthDate\": \"22-04-1999\",\n" +
+                "    \"usesTotal\": \"null\"\n" +
+                "}\n" +
+                "}";
+
         this.token = "Bearer " + jwtTokenUtility.generateToken(new UserLoginRequest("test@test.pl", "testPassword"));
 
         priceList = new PriceList(
