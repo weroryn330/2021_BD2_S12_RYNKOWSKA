@@ -14,9 +14,6 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 
-/**
- * Add jars in resource folder
- */
 public class ZxingQRGenerator {
 
     private String data;
