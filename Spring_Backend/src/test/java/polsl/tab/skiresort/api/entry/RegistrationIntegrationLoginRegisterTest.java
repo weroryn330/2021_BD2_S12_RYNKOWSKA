@@ -13,7 +13,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.nio.charset.StandardCharsets;
 
-@SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("integration")
 class RegistrationIntegrationLoginRegisterTest extends IntegrationLoginRegisterTestConfig {

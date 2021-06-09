@@ -8,7 +8,10 @@ import polsl.tab.skiresort.api.entry.jwt.JwtTokenUtility;
 import polsl.tab.skiresort.api.passes.qr.ZxingQRGenerator;
 import polsl.tab.skiresort.api.passes.request.PassRequest;
 import polsl.tab.skiresort.api.passes.response.PassResponse;
+import polsl.tab.skiresort.model.Pass;
+import polsl.tab.skiresort.repository.InvoiceRepository;
 import polsl.tab.skiresort.repository.PassRepository;
+import polsl.tab.skiresort.repository.PriceListRepository;
 import polsl.tab.skiresort.repository.UserRepository;
 
 import javax.imageio.ImageIO;
@@ -27,39 +30,41 @@ public class PassService {
 
     private final JwtTokenUtility jwtTokenUtility;
 
+    private final InvoiceRepository invoiceRepository;
+
+    private final PriceListRepository priceListRepository;
+
     private static final String USER_EXISTENCE_ERROR = "User does not exist";
 
     private static final String PASS_EXISTENCE_ERROR = "Pass does not exist";
 
     public PassService(PassRepository passRepository,
                        UserRepository userRepository,
-                       JwtTokenUtility jwtTokenUtility
-    ) {
+                       JwtTokenUtility jwtTokenUtility,
+                       InvoiceRepository invoiceRepository, PriceListRepository priceListRepository) {
         this.passRepository = passRepository;
         this.userRepository = userRepository;
         this.jwtTokenUtility = jwtTokenUtility;
+        this.invoiceRepository = invoiceRepository;
+        this.priceListRepository = priceListRepository;
     }
 
     public List<PassResponse> getAllUserPasses(String token) {
-        var user = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token));
-        if (user.isPresent()) {
-            return passRepository.getAllPassesForUser(user.get().getIdUser())
-                    .stream()
-                    .map(PassResponse::new)
-                    .collect(Collectors.toList());
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR);
+        return passRepository.getAllPassesForUser(
+                userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR)).getIdUser())
+                .stream()
+                .map(PassResponse::new)
+                .collect(Collectors.toList());
     }
 
     public List<PassResponse> getAllUserActivePasses(String token) {
-        var user = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token));
-        if (user.isPresent()) {
-            return passRepository.getAllActivePassesForUser(user.get().getIdUser())
-                    .stream()
-                    .map(PassResponse::new)
-                    .collect(Collectors.toList());
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR);
+        return passRepository.getAllActivePassesForUser(
+                userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR)).getIdUser())
+                .stream()
+                .map(PassResponse::new)
+                .collect(Collectors.toList());
     }
 
     public byte[] generateQr(String token, Integer passId) {
@@ -85,22 +90,28 @@ public class PassService {
     }
 
     public PassResponse getPassById(String token, Integer passId) {
-        var user = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token));
-        if (user.isPresent()) {
-            return new PassResponse(passRepository.getUserPass(
-                    user.get().getIdUser(), passId)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PASS_EXISTENCE_ERROR)));
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR);
+        return new PassResponse(passRepository.getUserPass(
+                userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR))
+                        .getIdUser(), passId)
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, PASS_EXISTENCE_ERROR)));
     }
 
     public List<PassResponse> addPassToUserInvoice(String token, Integer invoiceId, PassRequest request) {
-        var user = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token));
-        if (user.isPresent()) {
-            // TODO
-            return null;
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR);
+        var invoice = invoiceRepository.findByUserIdUserAndIdInvoice(
+            userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR)),
+            invoiceId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invoice not found"));
+        invoice.getPassList().add(Pass.from(
+            request,
+            invoice,
+            priceListRepository.findCurrentPriceList()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Price list not found"))));
+        return invoiceRepository.save(invoice).getPassList()
+                .stream()
+                .map(PassResponse::new)
+                .collect(Collectors.toList());
     }
 
     public PassResponse editSinglePass(String token, Integer passId, PassRequest request) {

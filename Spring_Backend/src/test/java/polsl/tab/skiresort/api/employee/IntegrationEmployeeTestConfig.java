@@ -70,7 +70,8 @@ abstract class IntegrationEmployeeTestConfig {
                 "Test Pass First Name",
                 "Test Pass Last Name",
                 Date.valueOf(LocalDate.of(2002, 3, 12)),
-                priceList
+                priceList,
+                invoice
         );
         var expiredPass = new Pass(
                 100.00f,
@@ -79,7 +80,8 @@ abstract class IntegrationEmployeeTestConfig {
                 "Expired Pass",
                 "Expired Pass",
                 Date.valueOf(LocalDate.of(1800, 1, 1)),
-                priceList
+                priceList,
+                invoice
         );
         var quantityPass = new Pass(
                 123.00f,
@@ -88,7 +90,8 @@ abstract class IntegrationEmployeeTestConfig {
                 Date.valueOf(LocalDate.of(2021, 1, 1)),
                 0,
                 20,
-                priceList
+                priceList,
+                invoice
         );
         var noUsesLeft = new Pass (
                 123.00f,
@@ -97,7 +100,8 @@ abstract class IntegrationEmployeeTestConfig {
                 Date.valueOf(LocalDate.of(2021, 1, 1)),
                 20,
                 0,
-                priceList
+                priceList,
+                invoice
         );
         userRepository.save(user);
         invoice.setUserIdUser(user);

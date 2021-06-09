@@ -17,7 +17,6 @@ import java.nio.charset.StandardCharsets;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("integration")
 class UserAPIIntegrationTest extends IntegrationTestConfig {
