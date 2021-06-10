@@ -6,26 +6,26 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import polsl.tab.skiresort.api.entry.service.ReportService;
+import polsl.tab.skiresort.api.entry.service.SkiReportService;
 
 @RestController
 @RequestMapping("/api/report")
-public class ReportApi {
+public class SkiReportApi {
 
-    private final ReportService reportService;
+    private final SkiReportService skiReportService;
 
-    public ReportApi(ReportService reportService) {
-        this.reportService = reportService;
+    public SkiReportApi(SkiReportService skiReportService) {
+        this.skiReportService = skiReportService;
     }
 
     @GetMapping("/{passId}")
     public ResponseEntity<Resource> getPassReport(@PathVariable Integer passId,
                                                   @RequestParam("startDate") String startDate,
-                                                  @RequestParam("endDate") String endDate){ // format na timestamp a nie date
+                                                  @RequestParam("endDate") String endDate){
 
-        final InputStreamResource resource = new InputStreamResource(reportService.getPassReport(passId, startDate, endDate));
+        final InputStreamResource resource = new InputStreamResource(skiReportService.getPassReport(passId, startDate, endDate));
         return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + reportService.getFileName(passId) + ".csv\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + skiReportService.getFileName(passId) + ".csv\"")
                 .contentType(MediaType.parseMediaType("text/csv;charset=utf-8"))
                 .body(resource);
     }

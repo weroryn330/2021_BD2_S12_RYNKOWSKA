@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
-public class ReportService {
+public class SkiReportService {
 
     private static final String[] HEADERS = {"Nazwa wyciagu", "Ilosc zjazdow", "Pokonana wysokosc"};
     private static final CSVFormat FORMAT = CSVFormat.DEFAULT;
@@ -29,7 +29,7 @@ public class ReportService {
     private final PassRepository passRepository;
     private final SkiReportRepository skiReportRepository;
 
-    public ReportService(PassRepository passRepository, SkiReportRepository skiReportRepository) {
+    public SkiReportService(PassRepository passRepository, SkiReportRepository skiReportRepository) {
         this.passRepository = passRepository;
         this.skiReportRepository = skiReportRepository;
     }
