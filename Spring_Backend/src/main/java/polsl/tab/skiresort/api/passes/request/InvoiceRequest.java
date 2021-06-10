@@ -1,6 +1,7 @@
 package polsl.tab.skiresort.api.passes.request;
 
 import java.sql.Date;
+import java.util.List;
 
 public class InvoiceRequest {
 
@@ -17,6 +18,8 @@ public class InvoiceRequest {
     private String billingPostalCode;
 
     private Float total;
+
+    private List<PassRequest> passList;
 
     public Date getInvoiceDate() {
         return invoiceDate;
@@ -72,5 +75,13 @@ public class InvoiceRequest {
 
     public void setTotal(Float total) {
         this.total = total;
+    }
+
+    public List<PassRequest> getPassList() {
+        return passList;
+    }
+
+    public void setPassRequestList(List<PassRequest> passList) {
+        this.passList = passList;
     }
 }
