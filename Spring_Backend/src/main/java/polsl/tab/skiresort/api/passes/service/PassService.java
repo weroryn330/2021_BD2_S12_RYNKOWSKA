@@ -115,12 +115,27 @@ public class PassService {
     }
 
     public PassResponse editSinglePass(String token, Integer passId, PassRequest request) {
-        // TODO
-        return null;
+        var user = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
+        var pass = passRepository.getUserPass(user.getIdUser(), passId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pass not found"));
+        pass.setUnitPrice(request.getUnitPrice());
+        pass.setStartDate(request.getStartDate());
+        pass.setEndDate(request.getEndDate());
+        pass.setFirstName(request.getFirstName());
+        pass.setLastName(request.getLastName());
+        pass.setBirthDate(request.getBirthDate());
+        pass.setUsesTotal(request.getUsesTotal());
+        pass.setUsesLeft(request.getUsesTotal());
+        return new PassResponse(passRepository.save(pass));
     }
 
     public PassResponse deletePassFromInvoice(String token, Integer invoiceId, Integer passId) {
-        // TODO
-        return null;
+        var user = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
+        var invoice = invoiceRepository.findByUserIdUserAndIdInvoice(user, invoiceId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invoice not found"));
+        return new PassResponse(passRepository.deleteByInvoicesIdInvoiceAndIdPass(invoice, passId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pass not found in invoice")));
     }
 }

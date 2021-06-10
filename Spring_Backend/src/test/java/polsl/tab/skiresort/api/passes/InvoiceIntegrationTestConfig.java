@@ -74,6 +74,19 @@ abstract class InvoiceIntegrationTestConfig {
 
         this.token = "Bearer " + jwtTokenUtility.generateToken(new UserLoginRequest("test@test.pl", "testPassword"));
 
+        var user = new User(
+                "Test User First Name",
+                "Test User Last Name",
+                "Test User Address",
+                "Test User City",
+                "Test User Voivodeship",
+                "Test User Country",
+                "Test User PostalCode",
+                "Test User Phone",
+                "test@test.pl",
+                passwordEncoder.encode("testPassword")
+        );
+
         invoice = new Invoice(
                 Date.valueOf(LocalDate.of(2021, 5, 26)),
                 "Test Invoice Billing",
@@ -81,7 +94,8 @@ abstract class InvoiceIntegrationTestConfig {
                 "Test Invoice State",
                 "Test Invoice Country",
                 "Test Invoice PostalCode",
-                123321.00f
+                123321.00f,
+                user
         );
 
         priceList = new PriceList(
@@ -111,19 +125,6 @@ abstract class InvoiceIntegrationTestConfig {
                 invoice
         );
 
-        var user = new User(
-                "Test User First Name",
-                "Test User Last Name",
-                "Test User Address",
-                "Test User City",
-                "Test User Voivodeship",
-                "Test User Country",
-                "Test User PostalCode",
-                "Test User Phone",
-                "test@test.pl",
-                passwordEncoder.encode("testPassword")
-        );
-        
         userRepository.save(user);
         invoice.setUserIdUser(user);
         invoiceRepository.save(invoice);

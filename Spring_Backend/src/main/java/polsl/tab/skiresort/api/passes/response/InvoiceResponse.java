@@ -3,8 +3,6 @@ package polsl.tab.skiresort.api.passes.response;
 import polsl.tab.skiresort.model.Invoice;
 
 import java.sql.Date;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class InvoiceResponse {
 
@@ -24,8 +22,6 @@ public class InvoiceResponse {
 
     private final Float total;
 
-    private final List<PassResponse> passesResponseList;
-
     public InvoiceResponse(Invoice invoice) {
         this.id = invoice.getIdInvoice();
         this.invoiceDate = invoice.getInvoiceDate();
@@ -35,7 +31,6 @@ public class InvoiceResponse {
         this.billingPostalCode = invoice.getBillingPostalCode();
         this.billingCity = invoice.getBillingCity();
         this.total = invoice.getTotal();
-        this.passesResponseList = invoice.getPassList().stream().map(PassResponse::new).collect(Collectors.toList());
     }
 
     public Integer getId() {
@@ -68,9 +63,5 @@ public class InvoiceResponse {
 
     public Float getTotal() {
         return total;
-    }
-
-    public List<PassResponse> getPassesResponseList() {
-        return passesResponseList;
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import polsl.tab.skiresort.model.Invoice;
 import polsl.tab.skiresort.model.Pass;
 
 import java.util.Collection;
@@ -47,4 +48,6 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
                     "AND p.id_pass = :passId"
     )
     Optional<Pass> getUserPass(@Param("userId") Integer userId, @Param("passId") Integer passId);
+
+    Optional<Pass> deleteByInvoicesIdInvoiceAndIdPass(Invoice invoice, Integer passId);
 }

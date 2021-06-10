@@ -61,7 +61,8 @@ abstract class IntegrationEmployeeTestConfig {
                 "Test Invoice State",
                 "Test Invoice Country",
                 "Test Invoice PostalCode",
-                123321.00f
+                123321.00f,
+                user
         );
         var pass = new Pass(
                 100.00f,
