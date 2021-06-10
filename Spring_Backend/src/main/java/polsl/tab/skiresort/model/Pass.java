@@ -1,5 +1,7 @@
 package polsl.tab.skiresort.model;
 
+import polsl.tab.skiresort.api.passes.request.PassRequest;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -45,77 +47,46 @@ public class Pass {
     @OneToMany(mappedBy = "passesIdInvoiceItem")
     private List<Usage> usageList;
 
+    public Pass(Float unitPrice,
+                Date startDate,
+                Date endDate,
+                String firstName,
+                String lastName,
+                Date birthDate,
+                PriceList priceList,
+                Invoice invoice
+    ) {
+        this.unitPrice = unitPrice;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.priceList = priceList;
+        this.invoicesIdInvoice = invoice;
+    }
+
+    public Pass(Float unitPrice,
+                String firstName,
+                String lastName,
+                Date birthDate,
+                Integer usesTotal,
+                Integer usesLeft,
+                PriceList priceList,
+                Invoice invoice
+    ) {
+        this.unitPrice = unitPrice;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.usesTotal = usesTotal;
+        this.usesLeft = usesLeft;
+        this.priceList = priceList;
+        this.invoicesIdInvoice = invoice;
+    }
+
     public Pass() {
-    }
-    public Pass(Float unitPrice,
-                Date startDate,
-                Date endDate,
-                String firstName,
-                String lastName,
-                Date birthDate,
-                PriceList priceList,
-                Invoice invoice
-    ) {
-        this.unitPrice = unitPrice;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.priceList = priceList;
-        this.invoicesIdInvoice = invoice;
-    }
 
-    public Pass(Float unitPrice,
-                String firstName,
-                String lastName,
-                Date birthDate,
-                Integer usesTotal,
-                Integer usesLeft,
-                PriceList priceList,
-                Invoice invoice
-    ) {
-        this.unitPrice = unitPrice;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.usesTotal = usesTotal;
-        this.usesLeft = usesLeft;
-        this.priceList = priceList;
-        this.invoicesIdInvoice = invoice;
-    }
-    public Pass(Float unitPrice,
-                Date startDate,
-                Date endDate,
-                String firstName,
-                String lastName,
-                Date birthDate,
-                PriceList priceList
-    ) {
-        this.unitPrice = unitPrice;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.priceList = priceList;
-    }
-
-    public Pass(Float unitPrice,
-                String firstName,
-                String lastName,
-                Date birthDate,
-                Integer usesTotal,
-                Integer usesLeft,
-                PriceList priceList
-    ) {
-        this.unitPrice = unitPrice;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.usesTotal = usesTotal;
-        this.usesLeft = usesLeft;
-        this.priceList = priceList;
     }
 
     public Integer getIdPass() {
@@ -215,5 +186,20 @@ public class Pass {
 
     public void setUsageList(List<Usage> usageList) {
         this.usageList = usageList;
+    }
+
+    public static Pass from(PassRequest request, Invoice invoice, PriceList priceList) {
+        var pass = new Pass();
+        pass.setUnitPrice(request.getUnitPrice());
+        pass.setInvoicesIdInvoice(invoice);
+        pass.setStartDate(request.getStartDate());
+        pass.setEndDate(request.getEndDate());
+        pass.setFirstName(request.getFirstName());
+        pass.setLastName(request.getLastName());
+        pass.setBirthDate(request.getBirthDate());
+        pass.setUsesTotal(request.getUsesTotal());
+        pass.setUsesLeft(request.getUsesTotal());
+        pass.setPriceList(priceList);
+        return pass;
     }
 }

@@ -51,7 +51,9 @@ public class Invoice {
                    String billingState,
                    String billingCountry,
                    String billingPostalCode,
-                   Float total) {
+                   Float total,
+                   User user
+    ) {
         this.invoiceDate = invoiceDate;
         this.billingAddress = billingAddress;
         this.billingCity = billingCity;
@@ -59,6 +61,7 @@ public class Invoice {
         this.billingCountry = billingCountry;
         this.billingPostalCode = billingPostalCode;
         this.total = total;
+        this.userIdUser = user;
     }
 
     public Integer getIdInvoice() {
