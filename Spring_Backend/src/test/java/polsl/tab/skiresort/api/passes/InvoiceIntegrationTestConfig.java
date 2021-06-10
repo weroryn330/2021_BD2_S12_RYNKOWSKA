@@ -53,23 +53,25 @@ abstract class InvoiceIntegrationTestConfig {
     void setup() {
 
         this.jsonRequest = "{" +
-                "    \"invoiceDate\": \"22-04-2026\",\n" +
+                "    \"invoiceDate\": \"2026-04-22\",\n" +
                 "    \"billingAddress\": \"Test Billing Address\",\n" +
                 "    \"billingCity\": \"Test Billing City\",\n" +
                 "    \"billingState\": \"Test Billing State\",\n" +
                 "    \"billingCountry\": \"Test Billing Country\",\n" +
                 "    \"billingPostalCode\": \"Test Billing Postal Code\",\n" +
-                "    \"total\": \"100.0\",\n" +
+                "    \"total\": 100.0,\n" +
                 "    \"passList\": \n" +
+                "[\n" +
                 "{" +
-                "    \"unitPrice\": \"100.0\",\n" +
-                "    \"startDate\": \"22-06-2021\",\n" +
-                "    \"endDate\": \"26-06-2021\",\n" +
+                "    \"unitPrice\": 100.0,\n" +
+                "    \"startDate\": \"2021-06-22\",\n" +
+                "    \"endDate\": \"2021-06-26\",\n" +
                 "    \"firstName\": \"Test First Name\",\n" +
                 "    \"lastName\": \"Test Last Name\",\n" +
-                "    \"birthDate\": \"22-04-1999\",\n" +
-                "    \"usesTotal\": \"null\"\n" +
+                "    \"birthDate\": \"1999-04-22\",\n" +
+                "    \"usesTotal\": null\n" +
                 "}\n" +
+                "]\n" +
                 "}";
 
         this.token = "Bearer " + jwtTokenUtility.generateToken(new UserLoginRequest("test@test.pl", "testPassword"));
