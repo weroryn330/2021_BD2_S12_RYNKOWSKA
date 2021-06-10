@@ -47,8 +47,6 @@ public class Pass {
     @OneToMany(mappedBy = "passesIdInvoiceItem")
     private List<Usage> usageList;
 
-    public Pass() {
-    }
     public Pass(Float unitPrice,
                 Date startDate,
                 Date endDate,
@@ -64,27 +62,8 @@ public class Pass {
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
-        this.usesTotal = usesTotal;
-        this.usesLeft = usesLeft;
         this.priceList = priceList;
         this.invoicesIdInvoice = invoice;
-    }
-
-    public Pass(Float unitPrice,
-                Date startDate,
-                Date endDate,
-                String firstName,
-                String lastName,
-                Date birthDate,
-                PriceList priceList
-    ) {
-        this.unitPrice = unitPrice;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.priceList = priceList;
     }
 
     public Pass(Float unitPrice,
@@ -104,6 +83,10 @@ public class Pass {
         this.usesLeft = usesLeft;
         this.priceList = priceList;
         this.invoicesIdInvoice = invoice;
+    }
+
+    public Pass() {
+
     }
 
     public Integer getIdPass() {

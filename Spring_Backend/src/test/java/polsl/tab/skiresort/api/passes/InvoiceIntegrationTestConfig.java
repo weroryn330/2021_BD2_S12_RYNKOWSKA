@@ -74,10 +74,21 @@ abstract class InvoiceIntegrationTestConfig {
 
         this.token = "Bearer " + jwtTokenUtility.generateToken(new UserLoginRequest("test@test.pl", "testPassword"));
 
+        invoice = new Invoice(
+                Date.valueOf(LocalDate.of(2021, 5, 26)),
+                "Test Invoice Billing",
+                "Test Invoice City",
+                "Test Invoice State",
+                "Test Invoice Country",
+                "Test Invoice PostalCode",
+                123321.00f
+        );
+
         priceList = new PriceList(
                 Date.valueOf(LocalDate.of(2021, 5, 23)),
                 Date.valueOf(LocalDate.of(2022, 5, 23))
         );
+
         var pass = new Pass(
                 100.00f,
                 Date.valueOf(LocalDate.of(2021, 5, 26)),
@@ -85,21 +96,21 @@ abstract class InvoiceIntegrationTestConfig {
                 "Test Pass First Name",
                 "Test Pass Last Name",
                 Date.valueOf(LocalDate.of(2002, 3, 12)),
-                10,
-                10,
-                priceList
+                priceList,
+                invoice
         );
+
         var pass1 = new Pass(
                 100.00f,
-                Date.valueOf(LocalDate.of(2022, 5, 26)),
-                Date.valueOf(LocalDate.of(2022, 12, 12)),
                 "Test Pass1 First Name",
                 "Test Pass1 Last Name",
                 Date.valueOf(LocalDate.of(2001, 3, 12)),
                 10,
                 10,
-                priceList
+                priceList,
+                invoice
         );
+
         var user = new User(
                 "Test User First Name",
                 "Test User Last Name",
@@ -112,15 +123,7 @@ abstract class InvoiceIntegrationTestConfig {
                 "test@test.pl",
                 passwordEncoder.encode("testPassword")
         );
-        invoice = new Invoice(
-                Date.valueOf(LocalDate.of(2021, 5, 26)),
-                "Test Invoice Billing",
-                "Test Invoice City",
-                "Test Invoice State",
-                "Test Invoice Country",
-                "Test Invoice PostalCode",
-                123321.00f
-        );
+        
         userRepository.save(user);
         invoice.setUserIdUser(user);
         invoiceRepository.save(invoice);
