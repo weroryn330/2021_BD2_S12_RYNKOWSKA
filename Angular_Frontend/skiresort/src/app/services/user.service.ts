@@ -22,4 +22,9 @@ export class UserService {
     return this.http.put<RegistrationRequest>(this.endPoint + '/email',
       userData ,this.httpOptions)
   }
+
+  changeUserInfo(newUserInfo: RegistrationRequest): Observable<any> {
+    return this.http.put<RegistrationRequest>(this.endPoint,
+      newUserInfo ,this.httpOptions)
+  }
 }
