@@ -1,5 +1,6 @@
 package polsl.tab.skiresort.api.employee;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import polsl.tab.skiresort.api.employee.request.AgeDiscountsRequest;
@@ -9,7 +10,7 @@ import polsl.tab.skiresort.api.employee.request.TimePassRequest;
 import polsl.tab.skiresort.api.employee.response.PriceListResponse;
 import polsl.tab.skiresort.api.employee.service.PriceListService;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -34,13 +35,16 @@ public class PriceListApi {
 
     @PutMapping("/edit/current")
     public ResponseEntity<PriceListResponse> editStartDateAndEndDateOfActivePriceList(
-            @RequestBody Date startDate,
-            @RequestBody Date endDate
+            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate
     ) {
-        return ResponseEntity.ok(priceListService.modifyActivePriceListStartDateEndDate(startDate, endDate));
+        return ResponseEntity.ok(priceListService.modifyActivePriceListStartDateEndDate(
+                new java.sql.Date(startDate.getTime()),
+                new java.sql.Date(endDate.getTime())
+        ));
     }
 
-    @PostMapping
+    @PostMapping("/edit/new")
     public ResponseEntity<PriceListResponse> addNewPriceList(@RequestBody PriceListRequest priceListRequest) {
         return ResponseEntity.ok(priceListService.addNewCurrentPriceList(priceListRequest));
     }
