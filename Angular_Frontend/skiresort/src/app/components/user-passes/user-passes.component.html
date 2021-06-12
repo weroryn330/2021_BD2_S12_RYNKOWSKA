@@ -1,1 +1,16 @@
-<p>user-passes works!</p>
+<div class="infoContainer">
+  <div class="infoTime" *ngFor="let pass of passesList" (click)="downloadQR(pass.idPass)">
+    <ul class="price" [ngClass]="{activePass : pass.isActive }" >
+      <li class="header">KARNET</li>
+      <li class="detail">{{pass.firstName}} {{pass.lastName}} </li>
+      <ng-container *ngIf="pass.endDate || pass.startDate">
+        <li class="detail">Ważny od: {{pass.startDate}}</li>
+        <li class="detail">Ważny do: {{pass.endDate}}</li>
+      </ng-container>
+      <ng-container *ngIf="pass.usesTotal">
+        <li class="detail">Zakupione zjazdy: {{pass.usesTotal}}</li>
+        <li class="detail">Zostało zjazdów: {{pass.usesLeft}}</li>
+      </ng-container>
+    </ul>
+  </div>
+</div>

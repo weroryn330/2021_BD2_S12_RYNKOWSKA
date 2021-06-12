@@ -24,7 +24,7 @@ export class UserService {
   }
 
   changeUserInfo(newUserInfo: RegistrationRequest): Observable<any> {
-    return this.http.put<RegistrationRequest>(this.endPoint,
+    return this.http.put<RegistrationRequest>(this.endPoint + '/details',
       newUserInfo ,this.httpOptions)
   }
 }
