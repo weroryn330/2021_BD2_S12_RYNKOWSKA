@@ -190,20 +190,7 @@ public class Pass {
 
     @Override
     public String toString() {
-        return "Pass{" +
-                "idPass=" + idPass +
-                ", unitPrice=" + unitPrice +
-                ", invoicesIdInvoice=" + invoicesIdInvoice +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate=" + birthDate +
-                ", usesTotal=" + usesTotal +
-                ", usesLeft=" + usesLeft +
-                ", priceList=" + priceList +
-                ", usageList=" + usageList +
-                '}';
+        return idPass.toString();
     }
 
     public static Pass from(PassRequest request, Invoice invoice, PriceList priceList) {
