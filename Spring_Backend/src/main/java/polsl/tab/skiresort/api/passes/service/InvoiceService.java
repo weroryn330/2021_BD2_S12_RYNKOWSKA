@@ -26,19 +26,20 @@ public class InvoiceService {
 
     private final InvoiceRepository invoiceRepository;
 
-    private final PassRepository passRepository;
-
     private final PriceListRepository priceListRepository;
+
+    private final PassRepository passRepository;
 
     public InvoiceService(JwtTokenUtility jwtTokenUtility,
                           UserRepository userRepository,
                           InvoiceRepository invoiceRepository,
-                          PassRepository passRepository, PriceListRepository priceListRepository) {
+                          PriceListRepository priceListRepository,
+                          PassRepository passRepository) {
         this.jwtTokenUtility = jwtTokenUtility;
         this.userRepository = userRepository;
         this.invoiceRepository = invoiceRepository;
-        this.passRepository = passRepository;
         this.priceListRepository = priceListRepository;
+        this.passRepository = passRepository;
     }
 
     public List<InvoiceResponse> getAllUserInvoices(String token) {
@@ -57,20 +58,21 @@ public class InvoiceService {
         var currentPriceList = priceListRepository.findCurrentPriceList();
         if (user.isPresent() && currentPriceList.isPresent()) {
             var invoice = new Invoice(
-                request.getInvoiceDate(),
-                request.getBillingAddress(),
-                request.getBillingCity(),
-                request.getBillingState(),
-                request.getBillingCountry(),
-                request.getBillingPostalCode(),
-                request.getTotal()
+                    request.getInvoiceDate(),
+                    request.getBillingAddress(),
+                    request.getBillingCity(),
+                    request.getBillingState(),
+                    request.getBillingCountry(),
+                    request.getBillingPostalCode(),
+                    request.getTotal(),
+                    user.get()
             );
             invoice.setPassList(
                     request.getPassList().stream().map(passRequest -> {
                         if (passRequest.getEndDate() == null &&
-                            passRequest.getStartDate() == null) {
+                                passRequest.getStartDate() == null) {
                             // Quantity Pass
-                            return new Pass(
+                            return passRepository.save(new Pass(
                                     passRequest.getUnitPrice(),
                                     passRequest.getFirstName(),
                                     passRequest.getLastName(),
@@ -79,10 +81,10 @@ public class InvoiceService {
                                     passRequest.getUsesTotal(),
                                     currentPriceList.get(),
                                     invoice
-                            );
+                            ));
                         } else {
                             // Time Pass
-                            return new Pass(
+                            return passRepository.save(new Pass(
                                     passRequest.getUnitPrice(),
                                     passRequest.getStartDate(),
                                     passRequest.getEndDate(),
@@ -91,14 +93,11 @@ public class InvoiceService {
                                     passRequest.getBirthDate(),
                                     currentPriceList.get(),
                                     invoice
-                            );
+                            ));
                         }
                     }).collect(Collectors.toList())
             );
-            invoice.setUserIdUser(user.get());
-            InvoiceResponse invoiceResponse = new InvoiceResponse(invoiceRepository.save(invoice));
-            invoice.getPassList().forEach(pass -> passRepository.save(pass));
-            return invoiceResponse;
+            return new InvoiceResponse(invoiceRepository.save(invoice));
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Check existence of user and price list");
     }

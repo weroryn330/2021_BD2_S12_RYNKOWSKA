@@ -24,7 +24,7 @@ public class InvoiceResponse {
 
     private final Float total;
 
-    private final List<PassResponse> passesResponseList;
+    private final List<PassResponse> passResponseList;
 
     public InvoiceResponse(Invoice invoice) {
         this.id = invoice.getIdInvoice();
@@ -35,7 +35,7 @@ public class InvoiceResponse {
         this.billingPostalCode = invoice.getBillingPostalCode();
         this.billingCity = invoice.getBillingCity();
         this.total = invoice.getTotal();
-        this.passesResponseList = invoice.getPassList().stream().map(PassResponse::new).collect(Collectors.toList());
+        this.passResponseList = invoice.getPassList().stream().map(PassResponse::new).collect(Collectors.toList());
     }
 
     public Integer getId() {
@@ -70,7 +70,7 @@ public class InvoiceResponse {
         return total;
     }
 
-    public List<PassResponse> getPassesResponseList() {
-        return passesResponseList;
+    public List<PassResponse> getPassResponseList() {
+        return passResponseList;
     }
 }

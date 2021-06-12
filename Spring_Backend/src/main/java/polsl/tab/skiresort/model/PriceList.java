@@ -37,6 +37,13 @@ public class PriceList {
         this.endDate = endDate;
     }
 
+    //For tests
+    public PriceList(Integer idPriceList ,Date startDate, Date endDate) {
+        this.idPriceList = idPriceList;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public PriceList(Date startDate, Date endDate, List<AgeDiscount> ageDiscountList, List<TimePass> timePassList, List<QuantityPass> quantityPassList)
     {
         this.startDate = startDate;

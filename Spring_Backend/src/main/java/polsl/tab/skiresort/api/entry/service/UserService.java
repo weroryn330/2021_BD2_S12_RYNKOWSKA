@@ -176,4 +176,8 @@ public class UserService {
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User does not exist");
     }
+
+    public UserResponse updateUserDetails(String token, UserRequest body) {
+        return this.updateUser(body, token);
+    }
 }

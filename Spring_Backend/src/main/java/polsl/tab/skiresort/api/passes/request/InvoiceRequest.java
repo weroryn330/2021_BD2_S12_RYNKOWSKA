@@ -81,7 +81,7 @@ public class InvoiceRequest {
         return passList;
     }
 
-    public void setPassList(List<PassRequest> passList) {
+    public void setPassRequestList(List<PassRequest> passList) {
         this.passList = passList;
     }
 }

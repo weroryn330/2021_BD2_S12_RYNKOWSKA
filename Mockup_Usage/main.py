@@ -1,4 +1,4 @@
-import requests
+
 import view as v
 from tkinter import *
 import tkinter as tk

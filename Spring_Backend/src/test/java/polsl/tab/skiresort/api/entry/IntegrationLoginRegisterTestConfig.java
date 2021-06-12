@@ -20,7 +20,7 @@ public abstract class IntegrationLoginRegisterTestConfig {
     private PasswordEncoder passwordEncoder;
 
     @BeforeEach
-    private void setup() {
+    void setup() {
         userRepository.save(
                 new User(
                        "Test",
