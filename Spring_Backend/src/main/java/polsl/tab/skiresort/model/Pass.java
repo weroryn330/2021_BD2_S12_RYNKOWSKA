@@ -188,11 +188,6 @@ public class Pass {
         this.usageList = usageList;
     }
 
-    @Override
-    public String toString() {
-        return idPass.toString();
-    }
-
     public static Pass from(PassRequest request, Invoice invoice, PriceList priceList) {
         var pass = new Pass();
         pass.setUnitPrice(request.getUnitPrice());

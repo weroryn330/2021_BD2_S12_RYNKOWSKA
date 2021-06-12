@@ -21,7 +21,7 @@ import java.time.LocalDate;
 
 @SpringBootTest
 @Transactional
-abstract class InvoiceIntegrationTestConfig {
+public abstract class InvoiceIntegrationTestConfig {
 
     @Autowired
     public PassRepository passRepository;

@@ -34,8 +34,8 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
                     "INNER JOIN INVOICES i on i.id_invoice = p.invoices_id_invoice " +
                     "INNER JOIN USERS u on u.id_user = i.users_id_user " +
                     "AND u.id_user = :userId " +
-                    "AND p.end_date > NOW() " +
-                    "OR p.uses_left != 0"
+                    "AND (p.end_date > NOW() " +
+                    "OR p.uses_left != 0)"
     )
     Collection<Pass> getAllActivePassesForUser(@Param("userId") Integer userId);
 
