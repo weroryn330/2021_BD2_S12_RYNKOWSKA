@@ -32,7 +32,7 @@ public class SkiReportService {
     }
 
 
-    public ByteArrayInputStream getPassReport(Integer passId, String startDate, String endDate) {
+    public ByteArrayInputStream getSkiReport(Integer passId, String startDate, String endDate) {
 
         Optional<Pass> passOpt = passRepository.findById(passId);
         Pass pass;
@@ -40,7 +40,7 @@ public class SkiReportService {
         if(passOpt.isPresent())
             pass = passOpt.get();
         else
-            throw new ResponseStatusException(HttpStatus.I_AM_A_TEAPOT, "Pass not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pass not found");
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 

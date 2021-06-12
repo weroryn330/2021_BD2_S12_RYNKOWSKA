@@ -23,7 +23,7 @@ public class SkiReportApi {
                                                   @RequestParam("startDate") String startDate,
                                                   @RequestParam("endDate") String endDate){
 
-        final InputStreamResource resource = new InputStreamResource(skiReportService.getPassReport(passId, startDate, endDate));
+        final InputStreamResource resource = new InputStreamResource(skiReportService.getSkiReport(passId, startDate, endDate));
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"skiReportId" + passId + startDate + "-" + endDate + ".csv\"")
                 .contentType(MediaType.parseMediaType("text/csv;charset=utf-8"))
