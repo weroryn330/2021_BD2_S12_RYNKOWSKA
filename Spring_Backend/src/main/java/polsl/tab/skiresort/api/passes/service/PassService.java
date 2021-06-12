@@ -51,21 +51,27 @@ public class PassService {
     }
 
     public List<PassResponse> getAllUserPasses(String token) {
-        return passRepository.getAllPassesForUser(
+        var passes = passRepository.getAllPassesForUser(
                 userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR)).getIdUser())
-                .stream()
-                .map(PassResponse::new)
-                .collect(Collectors.toList());
+                        .orElseThrow(() -> new ResponseStatusException(
+                                HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR))
+                        .getIdUser());
+        if (passes.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Passes not found");
+        }
+        return passes.stream().map(PassResponse::new).collect(Collectors.toList());
     }
 
     public List<PassResponse> getAllUserActivePasses(String token) {
-        return passRepository.getAllActivePassesForUser(
+        var passes = passRepository.getAllActivePassesForUser(
                 userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR)).getIdUser())
-                .stream()
-                .map(PassResponse::new)
-                .collect(Collectors.toList());
+                        .orElseThrow(() -> new ResponseStatusException(
+                                HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR))
+                        .getIdUser());
+        if (passes.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Passes not found");
+        }
+        return passes.stream().map(PassResponse::new).collect(Collectors.toList());
     }
 
     public byte[] generateQr(String token, Integer passId) {
