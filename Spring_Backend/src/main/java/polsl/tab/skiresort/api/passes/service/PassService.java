@@ -82,7 +82,10 @@ public class PassService {
             try {
                 var qr = ZxingQRGenerator.builder()
                         .setData(pass.toString())
-                        .setPath(user.get().getEmail() + "_" + LocalDateTime.now() + ".jpg")
+                        .setPath(user.get().getEmail() + "_" +
+                                LocalDateTime.now().toString().replace(':', '-')
+                                + ".jpg"
+                        )
                         .setHeight(400)
                         .setWidth(400)
                         .build();
