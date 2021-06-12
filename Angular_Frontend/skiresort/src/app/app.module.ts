@@ -22,6 +22,7 @@ import { UserPassesComponent } from './components/user-passes/user-passes.compon
 import { UserReportComponent } from './components/user-report/user-report.component';
 import { UserEditInfoComponent } from './components/user-edit-info/user-edit-info.component';
 import { UserEditCredentialsComponent } from './components/user-edit-credentials/user-edit-credentials.component';
+import { ActivePassesComponent } from './components/employee/active-passes/active-passes.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { UserEditCredentialsComponent } from './components/user-edit-credentials
     UserPassesComponent,
     UserReportComponent,
     UserEditInfoComponent,
-    UserEditCredentialsComponent
+    UserEditCredentialsComponent,
+    ActivePassesComponent
   ],
   imports: [
     BrowserModule,

@@ -14,10 +14,15 @@ import {UserReportComponent} from "./components/user-report/user-report.componen
 import {UserInfoComponent} from "./components/user-info/user-info.component";
 import {UserEditInfoComponent} from "./components/user-edit-info/user-edit-info.component";
 import {UserEditCredentialsComponent} from "./components/user-edit-credentials/user-edit-credentials.component";
+import {ActivePassesComponent} from "./components/employee/active-passes/active-passes.component";
 
 
 const routes: Routes = [
   {path: 'contact', component: ContactComponent},
+  {
+    path: 'employee/active-passes', component: ActivePassesComponent, canActivate: [RouteGuard],
+    data: {expectedRole: 'ROLE_EMPLOYEE'}
+  },
   {path: 'pricelist', component: PricelistComponent},
   {
     path: 'profile', component: ProfileComponent, canActivate: [RouteGuard],

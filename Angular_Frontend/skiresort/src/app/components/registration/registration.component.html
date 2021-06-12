@@ -58,7 +58,8 @@
                  [style.background-color]="(!emailRepetition.touched ||
                   (emailRepetition.value===email.value && emailRepetition.value !== null)) ? '#c4e2ff' : ''"
                  [ngClass]="{error :  emailRepetition.touched && (emailRepetition.errors || emailRepetition.value!==email.value)}"
-                 [(ngModel)]="form.emailRepetition" #emailRepetition="ngModel" name="emailRepetition" required>
+                 [(ngModel)]="form.emailRepetition" #emailRepetition="ngModel" name="emailRepetition"
+                 pattern="^{{email.value}}$" required>
           <ul>
             <li>i
               <div class="dangerInfo">Adresy email muszą być identyczne!</div>
@@ -143,8 +144,10 @@
           <input type="password" placeholder="Hasło" style="background-color: #c4e2ff"
                  [style.background-color]="(!passwordRepetition.touched ||
                   (passwordRepetition.value===password.value && passwordRepetition.value !== null)) ? '#c4e2ff' : ''"
-                 [ngClass]="{error :  passwordRepetition.touched && (passwordRepetition.errors || passwordRepetition.value!==password.value)}"
-                 [(ngModel)]="form.passwordRepetition" #passwordRepetition="ngModel" name="passwordRepetition" required>
+                 [ngClass]="{error :  passwordRepetition.touched && (passwordRepetition.errors ||
+                 passwordRepetition.value!==password.value)}"
+                 [(ngModel)]="form.passwordRepetition" #passwordRepetition="ngModel" name="passwordRepetition"
+                 pattern="^{{password.value}}$" required>
           <ul>
             <li>i
               <div class="dangerInfo">Hasła muszą być identyczne!</div>
