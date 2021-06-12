@@ -72,7 +72,12 @@ abstract class InvoiceIntegrationTestConfig {
                 "}\n" +
                 "}";
 
-        this.token = "Bearer " + jwtTokenUtility.generateToken(new UserLoginRequest("test@test.pl", "testPassword"));
+        this.token = "Bearer " + jwtTokenUtility.generateToken(
+                new UserLoginRequest(
+                        "test@test.pl",
+                        "testPassword",
+                        "ROLE_USER"
+                ));
 
         var user = new User(
                 "Test User First Name",
