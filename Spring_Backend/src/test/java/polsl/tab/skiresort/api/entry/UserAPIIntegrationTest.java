@@ -45,11 +45,14 @@ class UserAPIIntegrationTest extends IntegrationTestConfig {
                 "    \"password\": \"test\"\n" +
                 "}";
 
-        this.token = "Bearer " + jwtTokenUtility.generateToken(new UserLoginRequest("test@test.test", "testPassword"));
+        this.token = "Bearer " + jwtTokenUtility.generateToken(new UserLoginRequest(
+                "test@test.test",
+                "testPassword",
+                "ROLE_USER"
+        ));
     }
 
     @Test
-    @Order(1)
     void httpGet_returnUserDetails() {
         try {
             mockMvc
@@ -65,48 +68,11 @@ class UserAPIIntegrationTest extends IntegrationTestConfig {
     }
 
     @Test
-    @Order(2)
-    void httpDelete_deleteUser() {
-        try {
-            mockMvc
-                    .perform(
-                            MockMvcRequestBuilders.delete("/api/user")
-                                    .header("Authorization", token)
-                    )
-                    .andExpect(status().is2xxSuccessful());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    @Test
-    @Order(3)
-    void httpPost_returnSavedUserDetails() {
-        try {
-            mockMvc
-                    .perform(
-                            MockMvcRequestBuilders.post("/api/user")
-                                    .header("Authorization", token)
-                                    .contentType(MediaType.APPLICATION_JSON)
-                                    .characterEncoding(StandardCharsets.UTF_8.name())
-                                    .content(jsonRequest)
-                    )
-                    .andExpect(status().is2xxSuccessful());
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    @Order(4)
     void httpPut_returnUpdatedUserDetails() {
         try {
             mockMvc
                     .perform(
-                            MockMvcRequestBuilders.put("/api/user")
+                            MockMvcRequestBuilders.put("/api/user/details")
                                     .header("Authorization", token)
                                     .contentType(MediaType.APPLICATION_JSON)
                                     .characterEncoding(StandardCharsets.UTF_8.name())

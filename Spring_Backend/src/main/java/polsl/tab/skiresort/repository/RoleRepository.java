@@ -2,10 +2,12 @@ package polsl.tab.skiresort.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import polsl.tab.skiresort.model.Role;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.Optional;
 
 @Repository
@@ -16,4 +18,11 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
     @Modifying
     @Transactional
     void deleteAll();
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT * FROM ROLES " +
+                    "INNER JOIN users_roles ur on roles.id_role = ur.roles_id_role AND ur.users_id_user = :userId"
+    )
+    Collection<Role> findByUserId(Integer userId);
 }

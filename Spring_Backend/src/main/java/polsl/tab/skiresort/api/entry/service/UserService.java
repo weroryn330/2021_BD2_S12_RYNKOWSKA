@@ -19,15 +19,18 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    private final RoleService roleService;
+
     private static final String USER_EXISTENCE_ERROR = "User does not exist";
 
     public UserService(UserRepository userRepository,
                        JwtTokenUtility jwtTokenUtility,
-                       PasswordEncoder passwordEncoder
-    ) {
+                       PasswordEncoder passwordEncoder,
+                       RoleService roleService) {
         this.userRepository = userRepository;
         this.jwtTokenUtility = jwtTokenUtility;
         this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     public UserResponse getUserDetails(String requestTokenHeader){
@@ -46,7 +49,8 @@ public class UserService {
                     jwtTokenUtility.generateToken(
                             new UserLoginRequest(
                                     newUser.getEmail(),
-                                    newUser.getPassword()
+                                    newUser.getPassword(),
+                                    roleService.getUserRoleName(newUser.getEmail())
                             )
                     )
             );
@@ -68,7 +72,8 @@ public class UserService {
                     jwtTokenUtility.generateToken(
                             new UserLoginRequest(
                                     newUser.getEmail(),
-                                    newUser.getPassword()
+                                    newUser.getPassword(),
+                                    roleService.getUserRoleName(newUser.getEmail())
                             )
                     )
             );
