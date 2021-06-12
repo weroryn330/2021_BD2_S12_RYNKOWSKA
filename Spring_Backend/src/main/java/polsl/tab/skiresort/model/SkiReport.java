@@ -13,11 +13,11 @@ import java.sql.Timestamp;
 public class SkiReport {
 
     @EmbeddedId
-    public SkiReportId skiReportId;
+    private SkiReportId skiReportId;
 
-    public Timestamp useTimestamp;
+    private Timestamp useTimestamp;
 
-    public Integer height;
+    private Integer height;
 
     public SkiReport() {
     }

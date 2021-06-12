@@ -6,8 +6,8 @@ import java.io.Serializable;
 @Embeddable
 public class SkiReportId implements Serializable{
 
-    public Integer idPass;
-    public String name;
+    private Integer idPass;
+    private String name;
 
     public SkiReportId() {
     }
