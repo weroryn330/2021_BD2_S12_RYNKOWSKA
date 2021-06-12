@@ -68,7 +68,7 @@ public class InvoiceReportService {
             PDPageContentStream cos = new PDPageContentStream(document, page);
 
             float margin = 50;
-            float yStartNewPage = page.getMediaBox().getHeight() - (margin); // starting y position is whole page height subtracted by top and bottom margin
+            float yStartNewPage = page.getMediaBox().getHeight() - (margin); // starting y position is whole page height subtracted by top margin
             float tableWidth = page.getMediaBox().getWidth() - (2 * margin); // we want table across whole page width (subtracted by left and right margin of course)
             PDRectangle rect = page.getMediaBox();
             float bottomMargin = 70;
@@ -171,7 +171,7 @@ public class InvoiceReportService {
 
                 // Check age discount and set item name
                 String itemName = "Karnet ";
-                long age = TimeUnit.MILLISECONDS.toDays(invoice.getInvoiceDate().getTime() - pass.getBirthDate().getTime()) / 365; // jakies lepsze wyliczanie lat ?
+                long age = TimeUnit.MILLISECONDS.toDays(invoice.getInvoiceDate().getTime() - pass.getBirthDate().getTime()) / 365;
                 if(age < 3)
                     itemName += "ulgowy - dziecko";
                 else if(age < 18)
