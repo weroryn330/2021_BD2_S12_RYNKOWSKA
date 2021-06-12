@@ -1,4 +1,4 @@
-package polsl.tab.skiresort.api.passes.component;
+package polsl.tab.skiresort.api.passes.pdf;
 
 import be.quodlibet.boxable.BaseTable;
 import be.quodlibet.boxable.Cell;
@@ -24,12 +24,13 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class InvoiceReportBuilder {
 
-    static private final PDFont helveticaBold = PDType1Font.HELVETICA_BOLD;
-    static private final PDFont helvetica = PDType1Font.HELVETICA;
+    private static final PDFont helveticaBold = PDType1Font.HELVETICA_BOLD;
+    
+    private static final PDFont helvetica = PDType1Font.HELVETICA;
 
-    static private final float margin = 50;
-    static private final float bottomMargin = 70;
-
+    private static final float MARGIN = 50;
+    
+    private static final float BOTTOM_MARGIN = 70;
 
     public ByteArrayInputStream generateReportPDF(Invoice invoice) throws IOException {
 
@@ -43,14 +44,14 @@ public class InvoiceReportBuilder {
         PDPageContentStream cos = new PDPageContentStream(document, page);
 
         PDRectangle rect = page.getMediaBox();
-        float yStartNewPage = rect.getHeight() - (margin); // starting y position is whole page height subtracted by top margin
-        float tableWidth = rect.getWidth() - (2 * margin); // we want table across whole page width (subtracted by left and right margin of course)
+        float yStartNewPage = rect.getHeight() - (MARGIN); // starting y position is whole page height subtracted by top MARGIN
+        float tableWidth = rect.getWidth() - (2 * MARGIN); // we want table across whole page width (subtracted by left and right MARGIN of course)
         float yPosition = rect.getHeight() - 305; // y position is your coordinate of top left corner of the table
 
         // Company's logo/name
         cos.beginText();
         cos.setFont(helveticaBold, 32);
-        cos.newLineAtOffset(margin, rect.getHeight() - 75);
+        cos.newLineAtOffset(MARGIN, rect.getHeight() - 75);
         cos.showText("Narcikowo.pl");
         cos.endText();
 
@@ -103,14 +104,14 @@ public class InvoiceReportBuilder {
 
         // Items table header
         cos.beginText();
-        cos.newLineAtOffset(margin, rect.getHeight() - 280);
+        cos.newLineAtOffset(MARGIN, rect.getHeight() - 280);
         cos.setFont(helveticaBold, 14);
         cos.showText("Pozycje faktury: ");
         cos.endText();
 
         // Items table
         BaseTable table = new BaseTable(yPosition, yStartNewPage,
-                bottomMargin, tableWidth, margin, document, page, true, true);
+                BOTTOM_MARGIN, tableWidth, MARGIN, document, page, true, true);
 
         // Create and define header row
         Row<PDPage> headerRow = table.createRow(20);
@@ -207,19 +208,19 @@ public class InvoiceReportBuilder {
             PDPageContentStream newCos = new PDPageContentStream(document, newPage, PDPageContentStream.AppendMode.APPEND, true);
 
             newCos.setStrokingColor(Color.BLACK);
-            newCos.moveTo(margin, 50);
-            newCos.lineTo(rect.getWidth() - margin, 50);
+            newCos.moveTo(MARGIN, 50);
+            newCos.lineTo(rect.getWidth() - MARGIN, 50);
             newCos.stroke();
 
             newCos.beginText();
-            newCos.newLineAtOffset(margin, 40);
+            newCos.newLineAtOffset(MARGIN, 40);
             newCos.setFont(helvetica, 10);
             newCos.showText("Narcikowo.pl©");
             newCos.endText();
 
             newCos.beginText();
             String pageString = "Strona " + pageNum + "/" + pagesTotal;
-            newCos.newLineAtOffset(rect.getWidth() - margin - (helvetica.getStringWidth(pageString) / 100), 40);
+            newCos.newLineAtOffset(rect.getWidth() - MARGIN - (helvetica.getStringWidth(pageString) / 100), 40);
             newCos.setFont(helvetica, 10);
             newCos.showText(pageString);
             newCos.endText();
@@ -233,5 +234,4 @@ public class InvoiceReportBuilder {
 
         return new ByteArrayInputStream(stream.toByteArray());
     }
-
 }

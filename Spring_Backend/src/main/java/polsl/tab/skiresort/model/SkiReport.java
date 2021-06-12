@@ -19,9 +19,6 @@ public class SkiReport {
 
     private Integer height;
 
-    public SkiReport() {
-    }
-
     public Timestamp getUseTimestamp() {
         return useTimestamp;
     }

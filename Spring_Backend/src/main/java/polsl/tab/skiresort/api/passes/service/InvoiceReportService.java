@@ -3,7 +3,7 @@ package polsl.tab.skiresort.api.passes.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import polsl.tab.skiresort.api.passes.component.InvoiceReportBuilder;
+import polsl.tab.skiresort.api.passes.pdf.InvoiceReportBuilder;
 import polsl.tab.skiresort.model.Invoice;
 import polsl.tab.skiresort.repository.InvoiceRepository;
 
@@ -15,13 +15,13 @@ import java.util.Optional;
 public class InvoiceReportService {
 
     private final InvoiceRepository invoiceRepository;
+
     private final InvoiceReportBuilder invoiceReportBuilder;
 
     public InvoiceReportService(InvoiceRepository invoiceRepository, InvoiceReportBuilder invoiceReportBuilder) {
         this.invoiceRepository = invoiceRepository;
         this.invoiceReportBuilder = invoiceReportBuilder;
     }
-
 
     public ByteArrayInputStream getInvoiceReport(Integer idInvoice) {
 

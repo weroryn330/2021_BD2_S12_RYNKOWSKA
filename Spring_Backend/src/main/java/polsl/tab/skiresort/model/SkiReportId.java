@@ -7,10 +7,8 @@ import java.io.Serializable;
 public class SkiReportId implements Serializable{
 
     private Integer idPass;
-    private String name;
 
-    public SkiReportId() {
-    }
+    private String name;
 
     public Integer getIdPass() {
         return idPass;

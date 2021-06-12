@@ -1,4 +1,4 @@
-package polsl.tab.skiresort.api.component;
+package polsl.tab.skiresort.api.entry.csv;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -19,6 +19,7 @@ import java.util.List;
 public class SkiReportBuilder {
 
     private static final String[] HEADERS = {"Nazwa wyciagu", "Ilosc zjazdow", "Pokonana wysokosc"};
+
     private static final CSVFormat FORMAT = CSVFormat.DEFAULT;
 
     public ByteArrayInputStream generateReportCSV(Pass pass, List<SkiReportCount> skiReports,

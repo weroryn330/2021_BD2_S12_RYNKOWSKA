@@ -4,7 +4,7 @@ package polsl.tab.skiresort.api.entry.service;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import polsl.tab.skiresort.api.component.SkiReportBuilder;
+import polsl.tab.skiresort.api.entry.csv.SkiReportBuilder;
 import polsl.tab.skiresort.model.Pass;
 import polsl.tab.skiresort.model.SkiReportCount;
 import polsl.tab.skiresort.repository.PassRepository;
@@ -22,7 +22,9 @@ import java.util.Optional;
 public class SkiReportService {
 
     private final PassRepository passRepository;
+    
     private final SkiReportRepository skiReportRepository;
+
     private final SkiReportBuilder skiReportBuilder;
 
     public SkiReportService(PassRepository passRepository, SkiReportRepository skiReportRepository, SkiReportBuilder skiReportBuilder) {
@@ -30,7 +32,6 @@ public class SkiReportService {
         this.skiReportRepository = skiReportRepository;
         this.skiReportBuilder = skiReportBuilder;
     }
-
 
     public ByteArrayInputStream getSkiReport(Integer passId, String startDate, String endDate) {
 
