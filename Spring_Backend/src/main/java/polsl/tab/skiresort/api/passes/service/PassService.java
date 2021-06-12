@@ -17,6 +17,7 @@ import polsl.tab.skiresort.repository.UserRepository;
 import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -75,7 +76,7 @@ public class PassService {
             try {
                 var qr = ZxingQRGenerator.builder()
                         .setData(pass.toString())
-                        .setPath(UUID.randomUUID() + ".jpg")
+                        .setPath(user.get().getEmail() + "_" + LocalDateTime.now() + ".jpg")
                         .setHeight(400)
                         .setWidth(400)
                         .build();
