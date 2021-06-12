@@ -1,1 +1,30 @@
-<p>user-report works!</p>
+<div class="mainContainer">
+  <h2>Wybierz przedział czasu dla swoich raportów</h2>
+  <form name="form" (ngSubmit)="f.form.valid  && onSubmit()" #f="ngForm">
+    <div class="user-details">
+      <div class="inputBoxBill">
+        <span class="details">Data początkowa</span>
+        <input type="datetime-local" name="startDate" required [(ngModel)]="form.startDate" #startDate="ngModel"
+               [ngClass]="{error :  startDate.touched && startDate.errors}">
+      </div>
+      <div class="inputBoxBill">
+        <span class="details">Data końcowa</span>
+        <input type="datetime-local" name="endDate" required [(ngModel)]="form.endDate" #endDate="ngModel"
+               [ngClass]="{error :  endDate.touched && endDate.errors}">
+      </div>
+    </div>
+    <div class="button">
+      <input (click)="f.form.markAllAsTouched()" type="submit" id="button" value="Wyświetl raporty">
+    </div>
+  </form>
+  <div class="button" *ngFor="let pass of passesList" (click)="downloadReport(pass.idPass, startDate.value, endDate.value)">
+    <div>{{pass.firstName}} {{pass.lastName}}</div>
+    <ng-container *ngIf="pass.endDate || pass.startDate">
+      <div> Ważny od: {{pass.startDate}}</div>
+      <div> Ważny do: {{pass.endDate}}</div>
+    </ng-container>
+    <ng-container *ngIf="pass.usesTotal">
+      <div> Zakupione zjazdy: {{pass.usesTotal}}</div>
+    </ng-container>
+  </div>
+</div>

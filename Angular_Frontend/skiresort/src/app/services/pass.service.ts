@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {PassResponse} from "../classes/pass-response";
@@ -11,7 +11,9 @@ export class PassService {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
   endPoint = 'http://localhost:8080/api'
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+  }
 
   getUserPasses(): Observable<PassResponse[]> {
     return this.http.get<PassResponse[]>(this.endPoint + '/passes');
@@ -23,5 +25,14 @@ export class PassService {
 
   getQR(passId: number): Observable<any> {
     return this.http.get(this.endPoint + '/passes/qr/' + passId, {responseType: 'blob'});
+  }
+
+  getPassesUsedBeetwenDates(startDate: string, endDate: string): Observable<any> {
+    return this.http.get(this.endPoint + '/passes?startDate=' + startDate + '&endDate=' + endDate);
+  }
+
+  getReportPDF(passId: number, startDate: string, endDate: string): Observable<any> {
+    return this.http.get(this.endPoint + '/skiReport' + passId + '?startDate=' + startDate + '&endDate=' + endDate,
+      {responseType: 'blob'});
   }
 }
