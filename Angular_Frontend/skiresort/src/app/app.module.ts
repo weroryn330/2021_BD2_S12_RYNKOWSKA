@@ -23,6 +23,7 @@ import { UserReportComponent } from './components/user-report/user-report.compon
 import { UserEditInfoComponent } from './components/user-edit-info/user-edit-info.component';
 import { UserEditCredentialsComponent } from './components/user-edit-credentials/user-edit-credentials.component';
 import { ActivePassesComponent } from './components/employee/active-passes/active-passes.component';
+import { UserInvoicesComponent } from './components/user-invoices/user-invoices.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { ActivePassesComponent } from './components/employee/active-passes/activ
     UserReportComponent,
     UserEditInfoComponent,
     UserEditCredentialsComponent,
-    ActivePassesComponent
+    ActivePassesComponent,
+    UserInvoicesComponent
   ],
   imports: [
     BrowserModule,

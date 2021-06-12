@@ -15,6 +15,7 @@ import {UserInfoComponent} from "./components/user-info/user-info.component";
 import {UserEditInfoComponent} from "./components/user-edit-info/user-edit-info.component";
 import {UserEditCredentialsComponent} from "./components/user-edit-credentials/user-edit-credentials.component";
 import {ActivePassesComponent} from "./components/employee/active-passes/active-passes.component";
+import {UserInvoicesComponent} from "./components/user-invoices/user-invoices.component";
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
     data: {expectedRole: 'ROLE_USER'},
     children: [
       {path: 'passes', component: UserPassesComponent},
+      {path: 'invoices', component: UserInvoicesComponent},
       {path: 'purchase', component: PurchaseComponent},
       {path: 'report', component: UserReportComponent},
       {path: 'info', component: UserInfoComponent},

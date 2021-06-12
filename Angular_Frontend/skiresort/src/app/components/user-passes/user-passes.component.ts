@@ -35,7 +35,7 @@ export class UserPassesComponent implements OnInit {
   downloadQR(passId: number) {
     this.passService.getQR(passId).subscribe((data: any) => {
       let blob: any = new Blob([data], {type: 'text/json'});
-      fileSaver.saveAs(blob, 'karnet' + passId + '.jpeg');
+      fileSaver.saveAs(blob, 'karnet' + passId + '.jpg');
     }, error => {
       alert("Coś poszło nie tak...");
     })
