@@ -22,8 +22,8 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
     @Query (
             nativeQuery = true,
             value = "SELECT * FROM PASSES p " +
-                    "RIGHT JOIN INVOICES i on i.id_invoice = p.invoices_id_invoice " +
-                    "RIGHT JOIN USERS u on u.id_user = i.users_id_user " +
+                    "INNER JOIN INVOICES i on i.id_invoice = p.invoices_id_invoice " +
+                    "INNER JOIN USERS u on u.id_user = i.users_id_user " +
                     "AND u.id_user = :userId"
     )
     Collection<Pass> getAllPassesForUser(@Param("userId") Integer userId);
@@ -31,8 +31,8 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
     @Query (
             nativeQuery = true,
             value = "SELECT * FROM PASSES p " +
-                    "RIGHT JOIN INVOICES i on i.id_invoice = p.invoices_id_invoice " +
-                    "RIGHT JOIN USERS u on u.id_user = i.users_id_user " +
+                    "INNER JOIN INVOICES i on i.id_invoice = p.invoices_id_invoice " +
+                    "INNER JOIN USERS u on u.id_user = i.users_id_user " +
                     "AND u.id_user = :userId " +
                     "AND p.end_date > NOW() " +
                     "OR p.uses_left != 0"
@@ -42,8 +42,8 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
     @Query (
             nativeQuery = true,
             value = "SELECT * FROM PASSES p " +
-                    "RIGHT JOIN INVOICES i on i.id_invoice = p.invoices_id_invoice " +
-                    "RIGHT JOIN USERS u on u.id_user = i.users_id_user " +
+                    "INNER JOIN INVOICES i on i.id_invoice = p.invoices_id_invoice " +
+                    "INNER JOIN USERS u on u.id_user = i.users_id_user " +
                     "AND u.id_user = :userId " +
                     "AND p.id_pass = :passId"
     )
