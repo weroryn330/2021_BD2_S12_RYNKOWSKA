@@ -16,7 +16,9 @@ import polsl.tab.skiresort.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Transactional
 @SpringBootTest
@@ -81,11 +83,11 @@ abstract class InvoiceUnitTestConfig {
         invoiceRepository.save(invoice);
         pass = new Pass(
                 100F,
-                Date.valueOf(LocalDate.now().minusDays(5)),
-                Date.valueOf(LocalDate.now().plusDays(5)),
+                Timestamp.valueOf(LocalDateTime.now().minusDays(2)),
+                Timestamp.valueOf(LocalDateTime.now().plusDays(2)),
                 "Test",
                 "Test",
-                Date.valueOf(LocalDate.now().minusYears(20)),
+                Date.valueOf(LocalDate.now().minusYears(5)),
                 priceListRepository.findCurrentPriceList().get(),
                 invoice
         );

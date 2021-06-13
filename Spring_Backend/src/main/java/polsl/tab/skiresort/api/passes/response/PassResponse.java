@@ -3,6 +3,7 @@ package polsl.tab.skiresort.api.passes.response;
 import polsl.tab.skiresort.model.Pass;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class PassResponse {
 
@@ -10,9 +11,9 @@ public class PassResponse {
 
     private final Float unitPrice;
 
-    private final Date startDate;
+    private final Timestamp startDate;
 
-    private final Date endDate;
+    private final Timestamp endDate;
 
     private final String firstName;
 
@@ -44,11 +45,11 @@ public class PassResponse {
         return unitPrice;
     }
 
-    public Date getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public Timestamp getEndDate() {
         return endDate;
     }
 
