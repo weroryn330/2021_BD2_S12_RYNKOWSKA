@@ -1,14 +1,15 @@
 package polsl.tab.skiresort.api.passes.request;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class PassRequest {
 
     private Float unitPrice;
 
-    private Date startDate; // If quantity pass - send null
+    private Timestamp startDate; // If quantity pass - send null
 
-    private Date endDate;   // If quantity pass - send null
+    private Timestamp endDate;   // If quantity pass - send null
 
     private String firstName;
 
@@ -26,19 +27,19 @@ public class PassRequest {
         this.unitPrice = unitPrice;
     }
 
-    public Date getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public Timestamp getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
 

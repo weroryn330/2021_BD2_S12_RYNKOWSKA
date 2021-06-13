@@ -15,7 +15,9 @@ import polsl.tab.skiresort.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @SpringBootTest
 @Transactional
@@ -66,8 +68,8 @@ abstract class IntegrationEmployeeTestConfig {
         );
         var pass = new Pass(
                 100.00f,
-                Date.valueOf(LocalDate.of(2021, 5, 26)),
-                Date.valueOf(LocalDate.of(2021, 12, 12)),
+                Timestamp.valueOf(LocalDateTime.now().minusDays(5)),
+                Timestamp.valueOf(LocalDateTime.now().plusDays(5)),
                 "Test Pass First Name",
                 "Test Pass Last Name",
                 Date.valueOf(LocalDate.of(2002, 3, 12)),
@@ -76,8 +78,8 @@ abstract class IntegrationEmployeeTestConfig {
         );
         var expiredPass = new Pass(
                 100.00f,
-                Date.valueOf(LocalDate.of(1900, 1, 1)),
-                Date.valueOf(LocalDate.of(1999, 1, 12)),
+                Timestamp.valueOf(LocalDateTime.now().minusDays(200)),
+                Timestamp.valueOf(LocalDateTime.now().minusDays(100)),
                 "Expired Pass",
                 "Expired Pass",
                 Date.valueOf(LocalDate.of(1800, 1, 1)),
