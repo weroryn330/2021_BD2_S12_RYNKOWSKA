@@ -18,7 +18,7 @@ import java.util.List;
 @Component
 public class SkiReportBuilder {
 
-    private static final String[] HEADERS = {"Nazwa wyciagu", "Ilosc zjazdow", "Pokonana wysokosc"};
+    private static final String[] HEADERS = {"Nazwa wyciągu", "Ilość zjazdów", "Pokonana wysokość"};
 
     private static final CSVFormat FORMAT = CSVFormat.DEFAULT;
 
@@ -48,7 +48,7 @@ public class SkiReportBuilder {
 
         // Add sum of uses
         long sum = skiReports.stream().mapToLong(SkiReportCount::getCount).sum();
-        mainHeader = "Suma zjazdow: " + sum;
+        mainHeader = "Suma zjazdów: " + sum;
         stream.write(mainHeader.getBytes());
         printer.println();
         printer.println();
