@@ -10,7 +10,9 @@ import polsl.tab.skiresort.api.passes.service.InvoiceService;
 import polsl.tab.skiresort.model.Pass;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +37,8 @@ class InvoiceUnitTest extends InvoiceUnitTestConfig {
         List<PassRequest> passesToAddWithInvoice = new ArrayList<>();
         var timePass = new PassRequest();
         timePass.setBirthDate(Date.valueOf(LocalDate.now().minusYears(20)));
-        timePass.setStartDate(Date.valueOf(LocalDate.now().minusDays(2)));
-        timePass.setEndDate(Date.valueOf(LocalDate.now().plusDays(2)));
+        timePass.setStartDate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
+        timePass.setEndDate(Timestamp.valueOf(LocalDateTime.now().plusDays(2)));
         timePass.setFirstName("Test");
         timePass.setLastName("Test");
         timePass.setUnitPrice(100F);

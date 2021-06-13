@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +24,9 @@ public class Pass {
     @JoinColumn(name = "invoices_id_invoice")
     private Invoice invoicesIdInvoice;
 
-    private Date startDate;
+    private Timestamp startDate;
 
-    private Date endDate;
+    private Timestamp endDate;
 
     @NotBlank(message = "Your pass first name should not be empty!")
     private String firstName;
@@ -48,8 +49,8 @@ public class Pass {
     private List<Usage> usageList;
 
     public Pass(Float unitPrice,
-                Date startDate,
-                Date endDate,
+                Timestamp startDate,
+                Timestamp endDate,
                 String firstName,
                 String lastName,
                 Date birthDate,
@@ -113,19 +114,19 @@ public class Pass {
         this.invoicesIdInvoice = invoicesIdInvoice;
     }
 
-    public Date getStartDate() {
+    public Timestamp getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public Timestamp getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(Timestamp endDate) {
         this.endDate = endDate;
     }
 
