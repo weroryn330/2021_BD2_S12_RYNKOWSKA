@@ -13,6 +13,15 @@
   min-height: 100vh;
 }
 
+#technicContainer {
+  background-color: rgb(75, 75, 75);
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+}
+
 #aboutContainer {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
   url("assets/about.jpg");
@@ -89,6 +98,40 @@
   box-sizing: border-box;
 }
 
+
+/* Navigation bar container */
+.navContainerW {
+  width: 90vw;
+  height: 15vh;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  min-height: 90px;
+
+  position: relative;
+}
+
+/* Logo style */
+.navContainerW nav .logoW {
+  margin: 6px;
+  padding: 10px;
+
+  font-size: 40px;
+}
+
+.navContainerW nav .logoW:hover {
+  cursor: pointer;
+  color: #4fffd6;
+  text-shadow: 2px 2px 1px #000;
+}
+
+.navContainerW nav .mainNavW li a:hover {
+  color: #4fffd6;
+  text-shadow: 2px 2px 1px #000;
+}
+
+
 /* Navigation bar container */
 .navContainer {
   width: 90vw;
@@ -105,7 +148,7 @@ nav {
 }
 
 /* Displaying navbar items */
-nav .mainNav {
+nav .mainNav, nav .mainNavW {
   display: flex;
   list-style: none;
 }
@@ -119,7 +162,7 @@ nav .logo {
   text-shadow: 0 0 20px #ffffff;
 }
 
-nav .logo:hover {
+nav .logo:hover{
   margin: 6px;
   font-size: 40px;
   text-shadow: 0 0 20px #000000;
@@ -127,30 +170,12 @@ nav .logo:hover {
 }
 
 /* Sitelinks style */
-nav .mainNav li a {
+nav .mainNav li a , nav .mainNavW li a{
   display: inline-block;
   padding: 15px;
 
   text-decoration: none;
   font-size: 1.3rem;
-}
-
-/* For owners and employees there is a dropdown navbar */
-nav .mainNav li .dropdown {
-  display: none;
-  position: absolute;
-  background-color: rgba(0,0,0,0.8);
-  z-index: 1;
-}
-
-/* Content of a dropdown list */
-nav .mainNav li .dropdown a{
-  display: block;
-}
-
-/* Show items after link hover */
-nav .mainNav li:hover .dropdown {
-  display: block;
 }
 
 /* Underline effect */
@@ -182,7 +207,7 @@ nav .menuOpen {
 }
 
 /* Close menu 'button' style */
-nav .mainNav .menuClose {
+nav .mainNav .menuClose, nav .mainNavW .menuClose {
   cursor: pointer;
   display: none;
 
@@ -212,7 +237,7 @@ footer {
 /* Hamburger button menu */
 @media(max-width: 900px){
   /* Menu */
-  nav .mainNav {
+  nav .mainNav, nav .mainNavW {
     position: fixed;
     justify-content: center;
     align-items: center;
@@ -232,7 +257,7 @@ footer {
   }
 
   /* Close button */
-  nav .mainNav .menuClose {
+  nav .mainNav .menuClose, nav .mainNavW .menuClose {
     display: block;
     position: absolute;
 

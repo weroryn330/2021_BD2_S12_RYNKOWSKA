@@ -11,10 +11,17 @@ export class AppComponent implements OnInit {
   currentContainer = "container";
   loggedIn = false;
   roles: string[] = [];
+  currentNavContainer = 'navContainer';
+  currentLogo = 'logo';
+  currentNav = 'mainNav';
 
   constructor(private router: Router, private token: TokenService) {
     this.router.events.subscribe(event => {
         this.ngOnInit();
+        this.currentContainer = "container";
+        this.currentLogo = 'logo';
+        this.currentNav = 'mainNav';
+        this.currentNavContainer = 'navContainer';
         switch (this.router.url) {
           case "/login":
             this.currentContainer = "loginContainer";
@@ -31,8 +38,14 @@ export class AppComponent implements OnInit {
             this.currentContainer = "pricelistContainer";
             break;
           default:
-            if(this.router.url.match('profile')){
+            if (this.router.url.match('profile')) {
               this.currentContainer = "profileContainer";
+              break;
+            } else if (this.router.url.match('management')) {
+              this.currentContainer = "technicContainer";
+              this.currentLogo = 'logoW';
+              this.currentNav = 'mainNavW';
+              this.currentNavContainer = 'navContainerW';
               break;
             }
             this.currentContainer = "container";
@@ -50,13 +63,26 @@ export class AppComponent implements OnInit {
 
   openMenu() {
     const mainNav = document.querySelector('.mainNav') as HTMLElement;
-    mainNav.style.display = 'flex';
-    mainNav.style.top = '0';
+    const mainNavW = document.querySelector('.mainNavW') as HTMLElement;
+    if (mainNav !== null) {
+      mainNav.style.display = 'flex';
+      mainNav.style.top = '0';
+    }
+    if (mainNavW !== null) {
+      mainNavW.style.display = 'flex';
+      mainNavW.style.top = '0';
+    }
   }
 
   closeMenu() {
     const mainNav = document.querySelector('.mainNav') as HTMLElement;
-    mainNav.style.top = '-100%';
+    const mainNavW = document.querySelector('.mainNavW') as HTMLElement;
+    if (mainNav !== null) {
+      mainNav.style.top = '-100%';
+    }
+    if (mainNavW !== null) {
+      mainNavW.style.top = '-100%';
+    }
   }
 
   logout() {

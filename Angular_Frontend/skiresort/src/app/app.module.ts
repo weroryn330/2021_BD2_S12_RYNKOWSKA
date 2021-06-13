@@ -24,6 +24,15 @@ import { UserEditInfoComponent } from './components/user-edit-info/user-edit-inf
 import { UserEditCredentialsComponent } from './components/user-edit-credentials/user-edit-credentials.component';
 import { ActivePassesComponent } from './components/employee/active-passes/active-passes.component';
 import { UserInvoicesComponent } from './components/user-invoices/user-invoices.component';
+import { ManagementComponent } from './components/management/management.component';
+import { LiftManagementComponent } from './components/lift-management/lift-management.component';
+import { SchedulesComponent } from './components/employee/schedules/schedules.component';
+import { PricelistEditComponent } from './components/employee/pricelist-edit/pricelist-edit.component';
+import { EmployeeAddComponent } from './components/employee/employee-add/employee-add.component';
+import { EmployeeEditComponent } from './components/employee/employee-edit/employee-edit.component';
+import { UsersListComponent } from './components/employee/users-list/users-list.component';
+import { InvoicesListComponent } from './components/employee/invoices-list/invoices-list.component';
+import { BusinessReportsComponent } from './components/employee/business-reports/business-reports.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +52,16 @@ import { UserInvoicesComponent } from './components/user-invoices/user-invoices.
     UserEditInfoComponent,
     UserEditCredentialsComponent,
     ActivePassesComponent,
-    UserInvoicesComponent
+    UserInvoicesComponent,
+    ManagementComponent,
+    LiftManagementComponent,
+    SchedulesComponent,
+    PricelistEditComponent,
+    EmployeeAddComponent,
+    EmployeeEditComponent,
+    UsersListComponent,
+    InvoicesListComponent,
+    BusinessReportsComponent
   ],
   imports: [
     BrowserModule,
