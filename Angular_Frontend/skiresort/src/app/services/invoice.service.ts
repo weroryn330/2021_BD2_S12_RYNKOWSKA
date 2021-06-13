@@ -10,12 +10,19 @@ export class InvoiceService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  endPoint = 'http://localhost:8080/api/invoices'
+  endPoint = 'http://localhost:8080/api'
   constructor(private http: HttpClient) { }
 
   addInvoice(invoiceRequest: InvoiceRequest): Observable<any> {
-    console.log(invoiceRequest);
-    return this.http.post<InvoiceRequest>(this.endPoint,
+    return this.http.post<InvoiceRequest>(this.endPoint + '/invoices',
       invoiceRequest ,this.httpOptions);
   }
+  getUserInvoices(): Observable<any> {
+    return this.http.get(this.endPoint + '/invoices');
+  }
+
+  getUserInvoicePDF(invoiceId: number): Observable<any> {
+    return this.http.get(this.endPoint + '/invoiceReport/' + invoiceId, {responseType: 'blob'});
+  }
+
 }

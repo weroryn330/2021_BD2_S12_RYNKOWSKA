@@ -14,8 +14,7 @@ import {formatDate} from "@angular/common";
 @Component({
   selector: 'app-purchase',
   templateUrl: './purchase.component.html',
-  styleUrls: ['./purchase.component.css',
-    '../registration/registration.component.css']
+  styleUrls: ['./purchase.component.css']
 })
 export class PurchaseComponent implements OnInit {
   passForms: number[] = [];

@@ -18,7 +18,7 @@
     </div>
     <div class="inputBox">
       <span class="details">Data Urodzenia</span>
-      <input type="date" name="birthDate" required
+      <input type="date" name="birthDate" required min="1920-01-01"  max="{{todayDate | date: 'yyyy-MM-dd'}}"
              (change)="checkIfDiscountApply(birthDate.value)"
              [(ngModel)]="form.birthDate" #birthDate="ngModel"
              [ngClass]="{error :  birthDate.touched && birthDate.errors}">
@@ -41,7 +41,8 @@
       </div>
       <div class="inputBox">
         <span class="details">Data Rozpoczęcia</span>
-        <input type="datetime-local" name="startDate" required [(ngModel)]="form.startDate" #startDate="ngModel"
+        <input type="datetime-local" name="startDate" required min="{{todayDate | date: 'yyyy-MM-ddTHH:mm'}}"  max="2030-01-01T00:00"
+               [(ngModel)]="form.startDate" #startDate="ngModel"
                [ngClass]="{error :  startDate.touched && startDate.errors}">
       </div>
     </ng-container>
