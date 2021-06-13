@@ -28,7 +28,8 @@ export class UserPassesComponent implements OnInit {
         console.log(data);
       },
       error => {
-        alert("Coś poszło nie tak...");
+        alert("Brak karnetów");
+        this.passesList = [];
       })
   }
 

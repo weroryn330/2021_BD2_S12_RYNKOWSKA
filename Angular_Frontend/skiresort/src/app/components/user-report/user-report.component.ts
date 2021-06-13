@@ -26,7 +26,8 @@ export class UserReportComponent implements OnInit {
         this.passesList = data;
       },
       error => {
-        alert("Coś poszło nie tak...");
+        this.passesList = [];
+        alert("Nie znaleziono raportów");
       })
   }
 

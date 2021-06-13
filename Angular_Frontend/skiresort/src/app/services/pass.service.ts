@@ -28,7 +28,7 @@ export class PassService {
   }
 
   getPassesUsedBeetwenDates(startDate: string, endDate: string): Observable<any> {
-    return this.http.get(this.endPoint + '/passes?startDate=' + startDate + '&endDate=' + endDate);
+    return this.http.get(this.endPoint + '/passes/usages?startDate=' + startDate + ':00' + '&endDate=' + endDate +':00');
   }
 
   getReportCSV(passId: number, startDate: string, endDate: string): Observable<any> {
