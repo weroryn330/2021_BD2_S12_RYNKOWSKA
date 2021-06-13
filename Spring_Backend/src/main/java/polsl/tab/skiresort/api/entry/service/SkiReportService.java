@@ -43,7 +43,7 @@ public class SkiReportService {
         else
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pass not found");
 
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         LocalDate startDateLocalDate = LocalDate.parse(startDate, dtf);
         LocalDate endDateLocalDate = LocalDate.parse(endDate, dtf);

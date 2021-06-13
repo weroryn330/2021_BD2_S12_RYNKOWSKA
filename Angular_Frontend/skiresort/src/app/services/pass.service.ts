@@ -31,8 +31,11 @@ export class PassService {
     return this.http.get(this.endPoint + '/passes?startDate=' + startDate + '&endDate=' + endDate);
   }
 
-  getReportPDF(passId: number, startDate: string, endDate: string): Observable<any> {
-    return this.http.get(this.endPoint + '/skiReport' + passId + '?startDate=' + startDate + '&endDate=' + endDate,
+  getReportCSV(passId: number, startDate: string, endDate: string): Observable<any> {
+    console.log(startDate + "  " + endDate);
+    return this.http.get(this.endPoint + '/skiReport/' + passId + '?startDate=' +
+      startDate.replace('T',' ')+':00' + '&endDate=' +
+      endDate.replace('T',' ')+':00',
       {responseType: 'blob'});
   }
 }

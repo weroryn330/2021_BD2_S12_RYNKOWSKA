@@ -26,6 +26,7 @@ export class PassFormComponent implements OnInit {
     passTime: null,
     unitTotal: null
   }
+  todayDate: string = new Date().toString();
   activeDiscountPercentage: number = 0;
   unitPrice: any;
   passTypes = ['Karnet czasowy', 'Karnet zjazdowy'];

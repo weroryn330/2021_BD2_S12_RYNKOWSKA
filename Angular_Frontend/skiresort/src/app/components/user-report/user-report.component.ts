@@ -31,7 +31,7 @@ export class UserReportComponent implements OnInit {
   }
 
   downloadReport(passId: number, startDate: string, endDate: string) {
-  this.passService.getReportPDF(passId, startDate, endDate).subscribe((data: any) => {
+  this.passService.getReportCSV(passId, startDate, endDate).subscribe((data: any) => {
       let blob: any = new Blob([data], {type: 'text/csv'});
       fileSaver.saveAs(blob, 'raport' + passId + '.csv');
     }, error => {
