@@ -17,6 +17,7 @@ import polsl.tab.skiresort.repository.UserRepository;
 import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -147,5 +148,15 @@ public class PassService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invoice not found"));
         return new PassResponse(passRepository.deleteByInvoicesIdInvoiceAndIdPass(invoice, passId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pass not found in invoice")));
+    }
+
+    public List<PassResponse> getPassesUsedBetweenTimestamps(String token, Timestamp startDate, Timestamp endDate) {
+        var user = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
+        var passes = passRepository.getPassesUsedBetweenTimestamps(startDate, endDate, user.getIdUser());
+        if (!passes.isEmpty()) {
+            return passes.stream().map(PassResponse::new).collect(Collectors.toList());
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Passes between timestamps not found");
     }
 }

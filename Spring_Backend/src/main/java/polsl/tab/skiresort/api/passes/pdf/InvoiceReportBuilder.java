@@ -9,8 +9,8 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.font.*;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import polsl.tab.skiresort.model.Invoice;
 import polsl.tab.skiresort.model.Pass;
@@ -18,6 +18,7 @@ import polsl.tab.skiresort.model.Pass;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -37,6 +38,8 @@ public class InvoiceReportBuilder {
         // Create a document and add a page to it
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
+
+        PDType0Font attika = PDType0Font.load(document, new ClassPathResource("fonts/AttikaU.ttf").getFile());
 
         document.addPage(page);
 
@@ -76,10 +79,10 @@ public class InvoiceReportBuilder {
         cos.newLineAtOffset(75, rect.getHeight() - 135);
         cos.showText("Sprzedawca: ");
         cos.newLine();
-        cos.setFont(helvetica, 14);
+        cos.setFont(attika, 14);
         cos.showText("Narcikowo");
         cos.newLine();
-        cos.showText("ul. Jakasulica");
+        cos.showText("ul. Jakaśulica");
         cos.newLine();
         cos.showText("23041 Livigno");
         cos.newLine();
@@ -92,7 +95,7 @@ public class InvoiceReportBuilder {
         cos.newLineAtOffset(325, rect.getHeight() - 135);
         cos.showText("Nabywca: ");
         cos.newLine();
-        cos.setFont(helvetica, 14);
+        cos.setFont(attika, 14);
         cos.showText(invoice.getUserIdUser().getFirstName() + " " + invoice.getUserIdUser().getLastName());
         cos.newLine();
         cos.showText("ul. " + invoice.getUserIdUser().getAddress());
