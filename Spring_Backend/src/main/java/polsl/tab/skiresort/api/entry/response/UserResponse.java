@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserResponse {
+    private final Integer id;
+
     private final String firstName;
 
     private final String lastName;
@@ -27,9 +29,10 @@ public class UserResponse {
 
     private final List<String> roleList;
 
-    private String token;
+    private final String token;
 
     public UserResponse(User user) {
+        this.id = user.getIdUser();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.address = user.getAddress();
@@ -44,6 +47,7 @@ public class UserResponse {
     }
 
     public UserResponse(User user, String token) {
+        this.id = user.getIdUser();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.address = user.getAddress();
@@ -55,6 +59,10 @@ public class UserResponse {
         this.email = user.getEmail();
         this.roleList = user.getRoleList().stream().map(Role::getRoleName).collect(Collectors.toList());
         this.token = token;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -99,9 +107,5 @@ public class UserResponse {
 
     public String getToken() {
         return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 }

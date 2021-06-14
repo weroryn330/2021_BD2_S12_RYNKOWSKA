@@ -1,5 +1,7 @@
 package polsl.tab.skiresort.model;
 
+import polsl.tab.skiresort.api.entry.request.UserRequest;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
@@ -211,5 +213,20 @@ public class User {
         if (role.getUserList() != null) {
             role.getUserList().remove(this);
         }
+    }
+
+    public static User editMapping(User currentUser, UserRequest body, Boolean hardEdit) {
+        currentUser.setFirstName(body.getFirstName());
+        currentUser.setLastName(body.getLastName());
+        currentUser.setAddress(body.getAddress());
+        currentUser.setCity(body.getCity());
+        currentUser.setVoivodeship(body.getVoivodeship());
+        currentUser.setCountry(body.getCountry());
+        currentUser.setPostalCode(body.getPostalCode());
+        currentUser.setPhone(body.getPhone());
+        if (Boolean.TRUE.equals(hardEdit)) {
+            currentUser.setEmail(body.getEmail());
+        }
+        return currentUser;
     }
 }
