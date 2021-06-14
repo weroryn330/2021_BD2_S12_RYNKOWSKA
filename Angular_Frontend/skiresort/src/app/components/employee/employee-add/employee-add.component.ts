@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {EmployeeService} from "../../../services/employee.service";
+import {RegistrationRequest} from "../../../classes/registration-request";
 
 @Component({
   selector: 'app-employee-add',
@@ -20,16 +22,34 @@ export class EmployeeAddComponent implements OnInit {
     address: null,
     password: null,
     passwordRepetition: null,
-    employeeType: "ROLE_TECHNICAL_EMPLOYEE"
+    employeeType: "ROLE_TECHNICIAN"
   }
 
-  constructor() { }
+  constructor(private employeeService: EmployeeService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
-    return false;
+    const {
+      firstName,
+      lastName,
+      country,
+      email,
+      phone,
+      voivodeship,
+      postalCode,
+      city,
+      address,
+      password
+    } = this.form;
+    const registrationRequest = new RegistrationRequest(firstName, lastName, country, email, phone, voivodeship, postalCode, city, address, password);
+    this.employeeService.registerEmployee(registrationRequest, this.form.employeeType).subscribe(data => {
+        alert("Rejestracja przebiegła pomyślnie!");
+      },
+      error => {
+        alert("Użytkownik o podanym adresie email już istnieje!");
+      })
   }
 
   insertDash() {

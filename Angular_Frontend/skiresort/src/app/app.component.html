@@ -10,7 +10,7 @@
         <ng-container *ngIf="roles.includes('ROLE_EMPLOYEE')">
           <li><a routerLink="/management">Zarządzaj</a></li>
         </ng-container>
-        <ng-container *ngIf="roles.includes('ROLE_TECHNICAL_EMPLOYEE')">
+        <ng-container *ngIf="roles.includes('ROLE_TECHNICIAN')">
           <li><a routerLink="/skilift-management">Zarządzaj</a></li>
         </ng-container>
         <ng-container *ngIf="!roles.includes('ROLE_EMPLOYEE')">

@@ -50,7 +50,7 @@ const routes: Routes = [
     ]
   },
   {path: 'skilift-management', component: LiftManagementComponent, canActivate: [RouteGuard],
-    data: {expectedRole: 'ROLE_TECHNICAL_EMPLOYEE'}},
+    data: {expectedRole: 'ROLE_TECHNICIAN'}},
   {path: 'pricelist', component: PricelistComponent},
   {
     path: 'profile', component: ProfileComponent, canActivate: [RouteGuard],
