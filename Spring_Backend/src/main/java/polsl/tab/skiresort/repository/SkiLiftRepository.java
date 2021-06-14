@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import polsl.tab.skiresort.model.SkiLift;
 
 @Repository
-interface SkiLiftRepository extends JpaRepository<SkiLift, Integer> {
+public interface SkiLiftRepository extends JpaRepository<SkiLift, Integer> {
 }

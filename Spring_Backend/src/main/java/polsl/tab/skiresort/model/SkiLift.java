@@ -19,7 +19,7 @@ public class SkiLift {
     private Integer height;
 
     @NotBlank(message = "Your ski lift is opened should not be empty!")
-    private Character isOpened;
+    private Boolean isOpened;
 
     @OneToMany(mappedBy = "skiLiftIdSkiLift")
     private List<Usage> usageList;
@@ -51,11 +51,11 @@ public class SkiLift {
         this.height = height;
     }
 
-    public Character getIsOpened() {
+    public Boolean getIsOpened() {
         return isOpened;
     }
 
-    public void setIsOpened(Character isOpened) {
+    public void setIsOpened(Boolean isOpened) {
         this.isOpened = isOpened;
     }
 
