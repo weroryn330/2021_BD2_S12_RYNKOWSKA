@@ -11,6 +11,7 @@ import polsl.tab.skiresort.model.User;
 import polsl.tab.skiresort.repository.InvoiceRepository;
 import polsl.tab.skiresort.repository.UserRepository;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,13 @@ public class OwnerEmployeeService {
 
     public List<InvoiceResponse> getAllInvoices() {
         return invoiceRepository.findAll().stream().map(InvoiceResponse::new).collect(Collectors.toList());
+    }
+
+    public List<InvoiceResponse> getInvoicesBetweenDates(Date startDate, Date endDate) {
+        return invoiceRepository.findByInvoiceDateBetween(startDate, endDate)
+                .stream()
+                .map(InvoiceResponse::new)
+                .collect(Collectors.toList());
     }
 
     public InvoiceResponse getInvoiceById(Integer invoiceId) {
