@@ -9,7 +9,6 @@ import polsl.tab.skiresort.api.passes.request.PassRequest;
 import polsl.tab.skiresort.api.passes.response.PassResponse;
 import polsl.tab.skiresort.api.passes.service.PassService;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
