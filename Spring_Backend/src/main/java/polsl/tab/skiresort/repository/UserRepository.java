@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import polsl.tab.skiresort.model.User;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 import java.util.Optional;
 
 @Repository
@@ -22,4 +23,23 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Transactional
     void deleteByEmail(@Param("email") String email);
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT * FROM USERS u, USERS_ROLES ur, ROLES r " +
+                    "WHERE u.id_user = ur.users_id_user " +
+                    "AND ur.roles_id_role = r.id_role " +
+                    "AND (r.role_name like 'ROLE_EMPLOYEE' " +
+                    "OR r.role_name like 'ROLE_TECHNICIAN' )"
+    )
+    Collection<User> findAllEmployees();
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT * FROM USERS u, USERS_ROLES ur, ROLES r " +
+                    "WHERE u.id_user = ur.users_id_user " +
+                    "AND ur.roles_id_role = r.id_role " +
+                    "AND r.role_name like 'ROLE_USER' "
+    )
+    Collection<User> findAllSkiers();
 }

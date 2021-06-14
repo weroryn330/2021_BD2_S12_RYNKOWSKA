@@ -14,6 +14,8 @@ class RolesConfig {
 
     private static final String ROLE_EMPLOYEE = "ROLE_EMPLOYEE";
 
+    private static final String ROLE_TECHNICIAN = "ROLE_TECHNICIAN";
+
     private static final String ROLE_OWNER = "ROLE_OWNER";
 
     private static final Logger logger = LoggerFactory.getLogger(RolesConfig.class);
@@ -32,13 +34,18 @@ class RolesConfig {
         if (Boolean.TRUE.equals(recreate)) {
             deleteRoles();
         }
+        if (repository.findAll().size() == 3) {
+            roleRepository.save(new Role(ROLE_TECHNICIAN));
+        }
         if (repository.findAll().isEmpty()) {
             var roleUser = new Role(ROLE_USER);
             var roleEmployee = new Role(ROLE_EMPLOYEE);
+            var roleTechnician = new Role(ROLE_TECHNICIAN);
             var roleOwner = new Role(ROLE_OWNER);
 
             roleRepository.save(roleUser);
             roleRepository.save(roleEmployee);
+            roleRepository.save(roleTechnician);
             roleRepository.save(roleOwner);
             logger.info("Roles added to database");
         } else {
