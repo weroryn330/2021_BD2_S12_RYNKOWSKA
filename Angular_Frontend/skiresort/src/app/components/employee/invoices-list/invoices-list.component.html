@@ -1,6 +1,31 @@
 <div class="mainContainer">
-  <div class="button" *ngFor="let invoice of invoicesList" (click)="downloadInvoicePDF(invoice.id, invoice.invoiceDate)">
+  <h2>Wybierz przedział czasu dla faktur</h2>
+  <form name="form" (ngSubmit)="f.form.valid  && onSubmit()" #f="ngForm">
+    <div class="user-details">
+      <div class="inputBoxBill">
+        <span class="details">Data początkowa</span>
+        <input type="datetime-local" name="startDate" required [(ngModel)]="form.startDate" #startDate="ngModel"
+               [ngClass]="{error :  startDate.touched && startDate.errors}">
+      </div>
+      <div class="inputBoxBill">
+        <span class="details">Data końcowa</span>
+        <input type="datetime-local" name="endDate" required [(ngModel)]="form.endDate" #endDate="ngModel"
+               [ngClass]="{error :  endDate.touched && endDate.errors}">
+      </div>
+    </div>
+    <div class="button">
+      <input (click)="f.form.markAllAsTouched()" type="submit" id="button" value="Wyświetl faktury">
+    </div>
+  </form>
+
+  <div class="button" *ngFor="let invoice of invoicesList | paginate: {itemsPerPage: 5, currentPage: page}"
+       (click)="downloadInvoicePDF(invoice.id, invoice.invoiceDate)">
     Faktura z dnia: {{invoice.invoiceDate}}<br>
     Kwota: {{invoice.total}}
   </div>
+  <ng-container *ngIf="invoicesList">
+    <div class="pagination">
+      <pagination-controls (pageChange)="page= $event"></pagination-controls>
+    </div>
+  </ng-container>
 </div>

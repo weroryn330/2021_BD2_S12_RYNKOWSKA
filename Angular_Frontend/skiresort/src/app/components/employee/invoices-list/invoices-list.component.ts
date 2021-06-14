@@ -9,20 +9,25 @@ import * as fileSaver from "file-saver";
 })
 export class InvoicesListComponent implements OnInit {
   invoicesList: any;
+  form: any = {
+    startDate: null,
+    endDate: null
+  }
+  page = 1;
 
   constructor(private invoiceService: InvoiceService) {
   }
 
   ngOnInit(): void {
-    this.getInvoices();
   }
 
-  private getInvoices() {
-    this.invoiceService.getInvoices().subscribe((data: any) => {
+  getInvoicesBetweenDates() {
+    this.invoiceService.getInvoicesBetweenDates(this.form.startDate, this.form.endDate).subscribe((data: any) => {
         this.invoicesList = data;
         console.log(data);
       },
       error => {
+        this.invoicesList = [];
         alert("Coś poszło nie tak...");
       })
   }
@@ -34,5 +39,9 @@ export class InvoicesListComponent implements OnInit {
     }, error => {
       alert("Coś poszło nie tak...");
     })
+  }
+
+  onSubmit() {
+    this.getInvoicesBetweenDates();
   }
 }

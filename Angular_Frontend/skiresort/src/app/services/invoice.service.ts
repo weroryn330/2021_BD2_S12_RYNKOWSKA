@@ -26,6 +26,11 @@ export class InvoiceService {
   }
 
   getInvoices(): Observable<any> {
-    return this.http.get(this.endPoint + '/employee/invoices');
+    return this.http.get(this.endPoint + '/owner/invoices/all');
+  }
+
+  getInvoicesBetweenDates(startDate: string, endDate: string) {
+    return this.http.get(this.endPoint + '/owner/invoices/dates'+'?startDate=' + startDate + '&endDate=' + endDate);
+
   }
 }
