@@ -40,7 +40,7 @@ public class Invoice {
     @NotNull
     private User userIdUser;
 
-    @OneToMany(mappedBy = "invoicesIdInvoice")
+    @OneToMany(mappedBy = "invoicesIdInvoice", cascade = CascadeType.PERSIST)
     private List<Pass> passList;
 
     public Invoice() {}

@@ -17,6 +17,8 @@ import polsl.tab.skiresort.repository.UserRepository;
 import javax.imageio.ImageIO;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -50,21 +52,27 @@ public class PassService {
     }
 
     public List<PassResponse> getAllUserPasses(String token) {
-        return passRepository.getAllPassesForUser(
+        var passes = passRepository.getAllPassesForUser(
                 userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR)).getIdUser())
-                .stream()
-                .map(PassResponse::new)
-                .collect(Collectors.toList());
+                        .orElseThrow(() -> new ResponseStatusException(
+                                HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR))
+                        .getIdUser());
+        if (passes.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Passes not found");
+        }
+        return passes.stream().map(PassResponse::new).collect(Collectors.toList());
     }
 
     public List<PassResponse> getAllUserActivePasses(String token) {
-        return passRepository.getAllActivePassesForUser(
+        var passes = passRepository.getAllActivePassesForUser(
                 userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR)).getIdUser())
-                .stream()
-                .map(PassResponse::new)
-                .collect(Collectors.toList());
+                        .orElseThrow(() -> new ResponseStatusException(
+                                HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR))
+                        .getIdUser());
+        if (passes.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Passes not found");
+        }
+        return passes.stream().map(PassResponse::new).collect(Collectors.toList());
     }
 
     public byte[] generateQr(String token, Integer passId) {
@@ -75,7 +83,10 @@ public class PassService {
             try {
                 var qr = ZxingQRGenerator.builder()
                         .setData(pass.toString())
-                        .setPath(UUID.randomUUID() + ".jpg")
+                        .setPath(user.get().getEmail() + "_" +
+                                LocalDateTime.now().toString().replace(':', '-')
+                                + ".jpg"
+                        )
                         .setHeight(400)
                         .setWidth(400)
                         .build();
@@ -137,5 +148,15 @@ public class PassService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invoice not found"));
         return new PassResponse(passRepository.deleteByInvoicesIdInvoiceAndIdPass(invoice, passId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pass not found in invoice")));
+    }
+
+    public List<PassResponse> getPassesUsedBetweenTimestamps(String token, Timestamp startDate, Timestamp endDate) {
+        var user = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
+        var passes = passRepository.getPassesUsedBetweenTimestamps(startDate, endDate, user.getIdUser());
+        if (!passes.isEmpty()) {
+            return passes.stream().map(PassResponse::new).collect(Collectors.toList());
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Passes between timestamps not found");
     }
 }

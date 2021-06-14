@@ -31,6 +31,10 @@ export class AppComponent implements OnInit {
             this.currentContainer = "pricelistContainer";
             break;
           default:
+            if(this.router.url.match('profile')){
+              this.currentContainer = "profileContainer";
+              break;
+            }
             this.currentContainer = "container";
         }
       }

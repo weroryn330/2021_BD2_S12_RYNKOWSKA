@@ -3,6 +3,7 @@ package polsl.tab.skiresort.api.entry.request;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -15,10 +16,10 @@ public class UserLoginRequest implements UserDetails {
 
     private String role;
 
-    public UserLoginRequest(String email, String password) {
+    public UserLoginRequest(String email, String password, String role) {
         this.email = email;
         this.password = password;
-        this.role = "ROLE_USER";
+        this.role = role;
     }
 
     @Override

@@ -19,7 +19,7 @@
           </li>
           <li><a *ngIf="roles.includes('ROLE_EMPLOYEE')">Panel pracownika</a>
             <div class="dropdown">
-              <a *ngIf="roles.includes('ROLE_EMPLOYEE')" href="#">Aktywne karnety</a>
+              <a *ngIf="roles.includes('ROLE_EMPLOYEE')" routerLink="/employee/active-passes">Aktywne karnety</a>
               <a *ngIf="roles.includes('ROLE_EMPLOYEE')" href="#">Modyfikacja rozkładu wyciągów</a>
               <a *ngIf="roles.includes('ROLE_EMPLOYEE')" href="#">Modyfikacja cennika</a>
             </div>

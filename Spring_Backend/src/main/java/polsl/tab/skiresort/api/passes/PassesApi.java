@@ -1,11 +1,17 @@
 package polsl.tab.skiresort.api.passes;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import polsl.tab.skiresort.api.passes.request.PassRequest;
 import polsl.tab.skiresort.api.passes.response.PassResponse;
 import polsl.tab.skiresort.api.passes.service.PassService;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -66,4 +72,19 @@ public class PassesApi {
         return ResponseEntity.ok(passService.deletePassFromInvoice(token, invoiceId, passId));
     }
 
+    @GetMapping("/usages")
+    public ResponseEntity<List<PassResponse>> getPassesUsedBetweenTimestamps(
+            @RequestHeader("Authorization") String token,
+            @RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime startDate,
+            @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime endDate
+    ) {
+        if (startDate.isAfter(endDate)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Start date is after end date");
+        }
+        return ResponseEntity.ok(passService.getPassesUsedBetweenTimestamps(
+                token,
+                Timestamp.valueOf(startDate),
+                Timestamp.valueOf(endDate)
+        ));
+    }
 }

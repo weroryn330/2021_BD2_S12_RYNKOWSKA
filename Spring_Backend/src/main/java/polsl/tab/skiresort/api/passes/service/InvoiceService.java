@@ -34,7 +34,8 @@ public class InvoiceService {
                           UserRepository userRepository,
                           InvoiceRepository invoiceRepository,
                           PriceListRepository priceListRepository,
-                          PassRepository passRepository) {
+                          PassRepository passRepository
+    ) {
         this.jwtTokenUtility = jwtTokenUtility;
         this.userRepository = userRepository;
         this.invoiceRepository = invoiceRepository;
@@ -72,7 +73,7 @@ public class InvoiceService {
                         if (passRequest.getEndDate() == null &&
                                 passRequest.getStartDate() == null) {
                             // Quantity Pass
-                            return passRepository.save(new Pass(
+                            return new Pass(
                                     passRequest.getUnitPrice(),
                                     passRequest.getFirstName(),
                                     passRequest.getLastName(),
@@ -81,10 +82,10 @@ public class InvoiceService {
                                     passRequest.getUsesTotal(),
                                     currentPriceList.get(),
                                     invoice
-                            ));
+                            );
                         } else {
                             // Time Pass
-                            return passRepository.save(new Pass(
+                            return new Pass(
                                     passRequest.getUnitPrice(),
                                     passRequest.getStartDate(),
                                     passRequest.getEndDate(),
@@ -93,7 +94,7 @@ public class InvoiceService {
                                     passRequest.getBirthDate(),
                                     currentPriceList.get(),
                                     invoice
-                            ));
+                            );
                         }
                     }).collect(Collectors.toList())
             );

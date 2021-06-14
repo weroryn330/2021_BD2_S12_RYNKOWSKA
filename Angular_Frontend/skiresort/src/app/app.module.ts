@@ -16,6 +16,14 @@ import { ContactComponent } from './components/contact/contact.component';
 import { LiftsComponent } from './components/lifts/lifts.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { PassFormComponent } from './components/pass-form/pass-form.component';
+import { UserCredentialsComponent } from './components/user-credentials/user-credentials.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
+import { UserPassesComponent } from './components/user-passes/user-passes.component';
+import { UserReportComponent } from './components/user-report/user-report.component';
+import { UserEditInfoComponent } from './components/user-edit-info/user-edit-info.component';
+import { UserEditCredentialsComponent } from './components/user-edit-credentials/user-edit-credentials.component';
+import { ActivePassesComponent } from './components/employee/active-passes/active-passes.component';
+import { UserInvoicesComponent } from './components/user-invoices/user-invoices.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +35,15 @@ import { PassFormComponent } from './components/pass-form/pass-form.component';
     ContactComponent,
     LiftsComponent,
     RegistrationComponent,
-    PassFormComponent
+    PassFormComponent,
+    UserCredentialsComponent,
+    UserInfoComponent,
+    UserPassesComponent,
+    UserReportComponent,
+    UserEditInfoComponent,
+    UserEditCredentialsComponent,
+    ActivePassesComponent,
+    UserInvoicesComponent
   ],
   imports: [
     BrowserModule,

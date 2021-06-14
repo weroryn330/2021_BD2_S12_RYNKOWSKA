@@ -7,7 +7,7 @@
                    (newValidateEvent)="checkPassFormValidation($event)"
     ></app-pass-form>
     <h2>Dane płatnicze</h2>
-    <form name="form" (ngSubmit)="f.form.valid && isPassFormValid && onSubmit()" #f="ngForm" name="form">
+    <form name="form" (ngSubmit)="f.form.valid && isPassFormValid && onSubmit()" #f="ngForm" >
       <div class="user-details">
         <div class="inputBoxBill">
           <span class="details">Kraj</span>

@@ -75,7 +75,8 @@ class LoginIntegrationLoginRegisterTest extends IntegrationLoginRegisterTestConf
                     jsonObject.get("token").toString(),
                     new UserLoginRequest(
                             jsonObject.getString("email"),
-                            jsonObject.getString("password")
+                            jsonObject.getString("password"),
+                            jsonObject.getString("role")
                     )
             ));
         }

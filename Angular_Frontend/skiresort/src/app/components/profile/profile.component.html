@@ -1,3 +1,45 @@
-<div class="infoContainer">
-  <router-outlet></router-outlet>
+<div class="mainContainer">
+  <div class="actions">
+    <div class="button" routerLink="passes">
+      <button >Moje karnety</button>
+    </div>
+    <div class="button" routerLink="invoices">
+      <button >Moje faktury</button>
+    </div>
+    <div class="button" routerLink="report">
+      <button>Raport narciarski</button>
+    </div>
+    <div class="button" routerLink="info">
+      <button>Moje dane</button>
+    </div>
+    <div class="button" routerLink="edit-info">
+      <button>Edycja danych osobowych</button>
+    </div>
+    <div class="button" routerLink="edit-credentials">
+      <button>Edycja hasła i adresu email</button>
+    </div>
+    <div class="button" routerLink="purchase">
+      <button>Kup karnet</button>
+    </div>
+  </div>
+  <main>
+    <router-outlet (deactivate)="ngOnInit()"></router-outlet>
+  </main>
+  <div class="userData">
+    <picture>
+      <img src="./../../assets/icon.jpg">
+    </picture>
+    <div class="data">
+      <h5>Imię: </h5>
+      {{user.firstName}}
+    </div>
+    <div class="data">
+      <h5>Nazwisko: </h5>
+      {{user.lastName}}
+    </div>
+    <div class="data">
+      <h5>Email: </h5>
+      {{user.email}}
+    </div>
+  </div>
 </div>

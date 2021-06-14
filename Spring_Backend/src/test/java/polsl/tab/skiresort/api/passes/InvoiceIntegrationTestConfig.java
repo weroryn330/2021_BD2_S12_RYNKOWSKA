@@ -17,11 +17,13 @@ import polsl.tab.skiresort.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @SpringBootTest
 @Transactional
-abstract class InvoiceIntegrationTestConfig {
+public abstract class InvoiceIntegrationTestConfig {
 
     @Autowired
     public PassRepository passRepository;
@@ -74,7 +76,12 @@ abstract class InvoiceIntegrationTestConfig {
                 "]\n" +
                 "}";
 
-        this.token = "Bearer " + jwtTokenUtility.generateToken(new UserLoginRequest("test@test.pl", "testPassword"));
+        this.token = "Bearer " + jwtTokenUtility.generateToken(
+                new UserLoginRequest(
+                        "test@test.pl",
+                        "testPassword",
+                        "ROLE_USER"
+                ));
 
         var user = new User(
                 "Test User First Name",
@@ -107,8 +114,8 @@ abstract class InvoiceIntegrationTestConfig {
 
         var pass = new Pass(
                 100.00f,
-                Date.valueOf(LocalDate.of(2021, 5, 26)),
-                Date.valueOf(LocalDate.of(2021, 12, 12)),
+                Timestamp.valueOf(LocalDateTime.now().minusDays(5)),
+                Timestamp.valueOf(LocalDateTime.now().plusDays(5)),
                 "Test Pass First Name",
                 "Test Pass Last Name",
                 Date.valueOf(LocalDate.of(2002, 3, 12)),

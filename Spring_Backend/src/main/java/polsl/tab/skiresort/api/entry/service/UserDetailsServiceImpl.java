@@ -12,15 +12,22 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository) {
+    private final RoleService roleService;
+
+    public UserDetailsServiceImpl(UserRepository userRepository, RoleService roleService) {
         this.userRepository = userRepository;
+        this.roleService = roleService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         var user = userRepository.findByEmail(email);
         if (user.isPresent()) {
-            return new UserLoginRequest(user.get().getEmail(), user.get().getPassword());
+            return new UserLoginRequest(
+                    user.get().getEmail(),
+                    user.get().getPassword(),
+                    roleService.getUserRoleName(user.get().getEmail())
+            );
         }
         throw new UsernameNotFoundException("User not found!");
     }
