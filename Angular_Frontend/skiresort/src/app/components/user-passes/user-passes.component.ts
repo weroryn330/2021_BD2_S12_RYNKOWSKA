@@ -11,6 +11,7 @@ import {PassResponse} from "../../classes/pass-response";
 export class UserPassesComponent implements OnInit {
   passesList: PassResponse[] = [];
   page = 1;
+
   constructor(private passService: PassService) {
   }
 
@@ -24,7 +25,9 @@ export class UserPassesComponent implements OnInit {
         data.map(pass => this.passesList.push(new PassResponse(pass.idPass, pass.unitPrice, pass.firstName,
           pass.lastName, pass.startDate, pass.endDate, pass.birthDate, pass.usesTotal, pass.usesLeft))
         )
-      this.passesList.sort(function(x,y){ return (y.isActive? 1 : 0)-(x.isActive? 1 : 0)});
+        this.passesList.sort(function (x, y) {
+          return (y.isActive ? 1 : 0) - (x.isActive ? 1 : 0)
+        });
         console.log(data);
       },
       error => {
@@ -33,12 +36,30 @@ export class UserPassesComponent implements OnInit {
       })
   }
 
-  downloadQR(passId: number) {
-    this.passService.getQR(passId).subscribe((data: any) => {
+  downloadQR(idPass: number) {
+    this.passService.getQR(idPass).subscribe((data: any) => {
       let blob: any = new Blob([data], {type: 'text/json'});
-      fileSaver.saveAs(blob, 'karnet' + passId + '.jpg');
+      fileSaver.saveAs(blob, 'karnet' + idPass + '.jpg');
     }, error => {
       alert("Coś poszło nie tak...");
     })
+  }
+
+  refundPass(idPass: number) {
+    this.passService.refundPass(idPass).subscribe((data: any) => {
+      alert("Pomyślny zwrot karnetu");
+    }, error => {
+      alert("Niepomyślny zwrot karnetu");
+    })
+  }
+
+  canBeRefunded(pass: PassResponse): boolean {
+    if(pass.startDate && pass.endDate){
+      return new Date(pass.startDate).getTime() > Date.now();
+    }
+    else if(pass.usesTotal){
+      return pass.usesTotal === pass.usesLeft;
+    }
+    return false;
   }
 }

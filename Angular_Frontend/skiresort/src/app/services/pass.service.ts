@@ -38,4 +38,8 @@ export class PassService {
       endDate.replace('T',' ')+':00',
       {responseType: 'blob'});
   }
+
+  refundPass(idPass: number): Observable<any> {
+    return this.http.delete(this.endPoint+'/passes/' + idPass);
+  }
 }

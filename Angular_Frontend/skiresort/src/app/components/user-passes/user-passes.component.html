@@ -5,7 +5,7 @@
     </div>
   </ng-container>
   <div class="infoTime" *ngFor="let pass of passesList | paginate: {itemsPerPage: 2, currentPage: page}"
-       (click)="downloadQR(pass.idPass)">
+      >
     <ul class="price" [ngClass]="{activePass : pass.isActive }">
       <li class="header">KARNET</li>
       <li class="detail">{{pass.firstName}} {{pass.lastName}} </li>
@@ -18,5 +18,9 @@
         <li class="detail">Zostało zjazdów: {{pass.usesLeft}}</li>
       </ng-container>
     </ul>
+    <div class="buttonInput" (click)="downloadQR(pass.idPass)">Pobierz karnet</div>
+    <ng-container *ngIf="canBeRefunded(pass)">
+      <div class="buttonInput" (click)="refundPass(pass.idPass)">Zwróć karnet</div>
+    </ng-container>
   </div>
 </div>
