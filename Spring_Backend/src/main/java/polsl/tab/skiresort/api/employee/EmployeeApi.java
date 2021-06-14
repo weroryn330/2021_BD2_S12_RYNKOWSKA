@@ -1,9 +1,7 @@
 package polsl.tab.skiresort.api.employee;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import polsl.tab.skiresort.api.employee.response.PassesResponse;
 import polsl.tab.skiresort.api.employee.service.EmployeePassesService;
 
@@ -29,5 +27,13 @@ public class EmployeeApi {
         return ResponseEntity.ok(employeePassesService.getAllPasses());
     }
 
+    @PostMapping("/blockPass/{passId}")
+    public ResponseEntity<PassesResponse> blockPass(@PathVariable Integer passId){
+        return ResponseEntity.ok(employeePassesService.setPassBlock(passId, '1'));
+    }
 
+    @PostMapping("/unblockPass/{passId}")
+    public ResponseEntity<PassesResponse> unblockPass(@PathVariable Integer passId){
+        return ResponseEntity.ok(employeePassesService.setPassBlock(passId, '0'));
+    }
 }

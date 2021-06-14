@@ -14,22 +14,33 @@ public class SkiLiftSchedule {
     @Column(nullable = false)
     private Integer idSkiLiftSchedule;
 
-    @NotBlank(message = "Your ski lift schedule start date should not be empty!")
+    @NotNull(message = "Your ski lift schedule start date should not be empty!")
     private Date startDate;
 
-    @NotBlank(message = "Your ski lift schedule end date should not be empty!")
+    @NotNull(message = "Your ski lift schedule end date should not be empty!")
     private Date endDate;
 
-    @NotBlank(message = "Your ski lift schedule opens time should not be empty!")
+    @NotNull(message = "Your ski lift schedule opens time should not be empty!")
     private Time opensTime;
 
-    @NotBlank(message = "Your ski lift schedule closes time should not be empty!")
+    @NotNull(message = "Your ski lift schedule closes time should not be empty!")
     private Time closesTime;
 
     @ManyToOne
     @JoinColumn(name = "ski_lift_id_ski_lift")
     @NotNull
     private SkiLift skiLiftIdSkiLift;
+
+    public SkiLiftSchedule() {
+    }
+
+    public SkiLiftSchedule(Date startDate, Date endDate, Time opensTime, Time closesTime, SkiLift skiLiftIdSkiLift) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.opensTime = opensTime;
+        this.closesTime = closesTime;
+        this.skiLiftIdSkiLift = skiLiftIdSkiLift;
+    }
 
     public Integer getIdSkiLiftSchedule() {
         return idSkiLiftSchedule;
