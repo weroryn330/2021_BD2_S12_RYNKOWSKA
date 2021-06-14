@@ -30,7 +30,8 @@ public class SkiLiftScheduleValidation {
         SkiLiftScheduleRequest skiLiftScheduleRequest = (SkiLiftScheduleRequest) joinPoint.getArgs()[0];
         if(skiLiftScheduleRequest.getStartDate().compareTo(skiLiftScheduleRequest.getEndDate()) < 0){
 
-            List<SkiLiftSchedule> oldSchedules = skiLiftScheduleRepository.findAllWithEndDateAfter(skiLiftScheduleRequest.getStartDate());
+            List<SkiLiftSchedule> oldSchedules = skiLiftScheduleRepository.findBySkiLiftIdWithEndDateAfter(
+                    skiLiftScheduleRequest.getStartDate(), skiLiftScheduleRequest.getSkiLiftId());
             if(oldSchedules.isEmpty() ||
                     oldSchedules.stream().allMatch(
                     schedule -> schedule.getEndDate().compareTo(skiLiftScheduleRequest.getStartDate()) < 0 ||

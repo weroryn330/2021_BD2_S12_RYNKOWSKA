@@ -31,8 +31,8 @@ public interface SkiLiftScheduleRepository extends JpaRepository<SkiLiftSchedule
 
     @Query(nativeQuery = true,
     value = "SELECT * FROM ski_lift_schedules s " +
-            "WHERE s.end_date >= :date")
-    List<SkiLiftSchedule> findAllWithEndDateAfter(@Param("date") Date date);
+            "WHERE s.end_date >= :date AND s.ski_lift_id_ski_lift=:skiLiftId")
+    List<SkiLiftSchedule> findBySkiLiftIdWithEndDateAfter(@Param("date") Date date, @Param("skiLiftId") Integer skiLiftId);
 
     @Query(nativeQuery = true,
             value = "SELECT * FROM ski_lift_schedules s " +
