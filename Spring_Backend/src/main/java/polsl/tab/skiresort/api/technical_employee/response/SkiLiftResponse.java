@@ -10,7 +10,7 @@ public class SkiLiftResponse {
 
     private final Integer height;
 
-    private final Character isOpened;
+    private final Boolean isOpened;
 
     public SkiLiftResponse(SkiLift skiLift) {
         this.idSkiLift = skiLift.getIdSkiLift();
@@ -31,7 +31,7 @@ public class SkiLiftResponse {
         return height;
     }
 
-    public Character getIsOpened() {
+    public Boolean getIsOpened() {
         return isOpened;
     }
 }
