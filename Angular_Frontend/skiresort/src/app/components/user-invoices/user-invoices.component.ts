@@ -24,7 +24,8 @@ export class UserInvoicesComponent implements OnInit {
         console.log(data);
       },
       error => {
-        alert("Coś poszło nie tak...");
+        alert("Nie znaleziono faktur");
+        this.invoicesList = [];
       })
   }
 

@@ -27,8 +27,8 @@ export class PassService {
     return this.http.get(this.endPoint + '/passes/qr/' + passId, {responseType: 'blob'});
   }
 
-  getPassesUsedBetwenDates(startDate: string, endDate: string): Observable<any> {
-    return this.http.get(this.endPoint + '/passes/usages?startDate=' + startDate + '&endDate=' + endDate);
+  getPassesUsedBeetwenDates(startDate: string, endDate: string): Observable<any> {
+    return this.http.get(this.endPoint + '/passes/usages?startDate=' + startDate + ':00' + '&endDate=' + endDate +':00');
   }
 
   getReportCSV(passId: number, startDate: string, endDate: string): Observable<any> {
