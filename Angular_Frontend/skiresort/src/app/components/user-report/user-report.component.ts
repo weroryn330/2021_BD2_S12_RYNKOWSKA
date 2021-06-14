@@ -22,7 +22,7 @@ export class UserReportComponent implements OnInit {
   }
 
   onSubmit() {
-    this.passService.getPassesUsedBetwenDates(this.form.startDate, this.form.endDate).subscribe((data: any) => {
+    this.passService.getPassesUsedBetweenDates(this.form.startDate, this.form.endDate).subscribe((data: any) => {
         console.log(data);
         this.passesList = data;
       },
