@@ -9,6 +9,7 @@ import * as fileSaver from "file-saver";
 })
 export class UserInvoicesComponent implements OnInit {
   invoicesList: any;
+  page = 1;
 
   constructor(private invoiceService: InvoiceService) {
   }

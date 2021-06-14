@@ -1,1 +1,6 @@
-<p>invoices-list works!</p>
+<div class="mainContainer">
+  <div class="button" *ngFor="let invoice of invoicesList" (click)="downloadInvoicePDF(invoice.id, invoice.invoiceDate)">
+    Faktura z dnia: {{invoice.invoiceDate}}<br>
+    Kwota: {{invoice.total}}
+  </div>
+</div>

@@ -10,7 +10,7 @@ import {PassResponse} from "../../classes/pass-response";
 })
 export class UserPassesComponent implements OnInit {
   passesList: PassResponse[] = [];
-
+  page = 1;
   constructor(private passService: PassService) {
   }
 

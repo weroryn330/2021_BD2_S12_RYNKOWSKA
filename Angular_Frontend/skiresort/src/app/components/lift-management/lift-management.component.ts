@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SkiliftService} from "../../services/skilift.service";
 
 @Component({
   selector: 'app-lift-management',
@@ -6,10 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lift-management.component.css']
 })
 export class LiftManagementComponent implements OnInit {
+skiliftsList: any;
 
-  constructor() { }
+  constructor(private skiliftService: SkiliftService) { }
 
   ngOnInit(): void {
+    this.getSkilifts();
   }
 
+  private getSkilifts() {
+    this.skiliftService.getTechnicalSkilifts().subscribe((data: any) => {
+        this.skiliftsList = data;
+        console.log(data);
+      },
+      error => {
+        alert("Coś poszło nie tak...");
+      })
+  }
+
+  changeSkiliftState(idSkiLift: number) {
+    this.skiliftService.changeSkiliftState(idSkiLift).subscribe((data: any) => {
+        console.log(data);
+      },
+      error => {
+        alert("Coś poszło nie tak...");
+      })
+  }
 }

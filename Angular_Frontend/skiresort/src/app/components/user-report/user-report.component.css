@@ -8,8 +8,14 @@
   font-size: 18px;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   text-align: center;
+  margin: auto;
 }
-
+.pagination {
+  width: 100%;
+  padding: 30px;
+  margin: auto;
+  justify-content: center;
+}
 /* Layout inside of the box
 .content form .user-details {
   display: flex;

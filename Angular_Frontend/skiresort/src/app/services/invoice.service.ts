@@ -25,4 +25,7 @@ export class InvoiceService {
     return this.http.get(this.endPoint + '/invoiceReport/' + invoiceId, {responseType: 'blob'});
   }
 
+  getInvoices(): Observable<any> {
+    return this.http.get(this.endPoint + '/employee/invoices');
+  }
 }

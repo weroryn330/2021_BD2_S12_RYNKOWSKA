@@ -7,11 +7,18 @@
   align-items: center;
   text-align: center;
   flex-wrap: wrap;
+  margin: auto;
 
   max-height: fit-content;
   padding: 30px;
 }
 
+.pagination {
+  width: 100%;
+  padding: 30px;
+  margin: auto;
+  justify-content: center;
+}
 .activePass {
   background: rgba(150, 255, 150, 0.1);
 }

@@ -1,6 +1,12 @@
 <div class="infoContainer">
-  <div class="infoTime" *ngFor="let pass of passesList" (click)="downloadQR(pass.idPass)">
-    <ul class="price" [ngClass]="{activePass : pass.isActive }" >
+  <ng-container *ngIf="passesList">
+    <div class="pagination">
+      <pagination-controls (pageChange)="page= $event"></pagination-controls>
+    </div>
+  </ng-container>
+  <div class="infoTime" *ngFor="let pass of passesList | paginate: {itemsPerPage: 2, currentPage: page}"
+       (click)="downloadQR(pass.idPass)">
+    <ul class="price" [ngClass]="{activePass : pass.isActive }">
       <li class="header">KARNET</li>
       <li class="detail">{{pass.firstName}} {{pass.lastName}} </li>
       <ng-container *ngIf="pass.endDate || pass.startDate">

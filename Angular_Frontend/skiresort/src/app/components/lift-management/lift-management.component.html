@@ -2,24 +2,10 @@
   <div class="title">
     <h1>Panel technika</h1>
   </div>
-  <div class="lift">
-    <h2>Ciowianka</h2>
+  <div class="lift" *ngFor="let skilift of skiliftsList">
+    <h2>{{skilift.name}}}</h2>
     <label class="switch">
-      <input type="checkbox">
-      <span class="slider"></span>
-    </label>
-  </div>
-  <div class="lift">
-    <h2>Jakiśwyciąg3</h2>
-    <label class="switch">
-      <input type="checkbox">
-      <span class="slider"></span>
-    </label>
-  </div>
-  <div class="lift">
-    <h2>Jakiśwyciąg2</h2>
-    <label class="switch">
-      <input type="checkbox">
+      <input type="checkbox" value="{{skilift.isOpened}}" (change)="changeSkiliftState(skilift.idSkiLift)">
       <span class="slider"></span>
     </label>
   </div>

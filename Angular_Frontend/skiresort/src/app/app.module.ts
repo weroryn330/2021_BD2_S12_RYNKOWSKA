@@ -33,6 +33,7 @@ import { EmployeeEditComponent } from './components/employee/employee-edit/emplo
 import { UsersListComponent } from './components/employee/users-list/users-list.component';
 import { InvoicesListComponent } from './components/employee/invoices-list/invoices-list.component';
 import { BusinessReportsComponent } from './components/employee/business-reports/business-reports.component';
+import {NgxPaginationModule} from "ngx-pagination";
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,12 +64,13 @@ import { BusinessReportsComponent } from './components/employee/business-reports
     InvoicesListComponent,
     BusinessReportsComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        NgxPaginationModule
+    ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
