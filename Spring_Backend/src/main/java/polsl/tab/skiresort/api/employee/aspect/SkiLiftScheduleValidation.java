@@ -24,7 +24,7 @@ public class SkiLiftScheduleValidation {
         this.skiLiftScheduleRepository = skiLiftScheduleRepository;
     }
 
-    @Before("execution(* polsl.tab.skiresort.api.employee.SkiLiftScheduleApi.addNewSkiLiftSchedule(..))")
+    @Before("execution(* polsl.tab.skiresort.api.employee.EmployeeApi.addNewSkiLiftSchedule(..))")
     void validateNewSkiLiftSchedule(JoinPoint joinPoint){
 
         SkiLiftScheduleRequest skiLiftScheduleRequest = (SkiLiftScheduleRequest) joinPoint.getArgs()[0];
@@ -43,7 +43,7 @@ public class SkiLiftScheduleValidation {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "End date cannot be before start date");
     }
 
-    @Before("execution(* polsl.tab.skiresort.api.employee.SkiLiftScheduleApi.editSkiLiftSchedule(..))")
+    @Before("execution(* polsl.tab.skiresort.api.employee.EmployeeApi.editSkiLiftSchedule(..))")
     void validateEditingCurrentSkiLiftSchedule(JoinPoint joinPoint){
 
         SkiLiftScheduleRequest skiLiftScheduleRequest = (SkiLiftScheduleRequest) joinPoint.getArgs()[0];

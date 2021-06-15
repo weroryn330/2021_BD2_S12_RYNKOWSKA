@@ -34,19 +34,6 @@ public class EmployeeSkiLiftScheduleService {
         this.skiLiftRepository = skiLiftRepository;
     }
 
-    public List<SkiLiftScheduleResponse> getAllCurrentSchedules() {
-
-        return skiLiftScheduleRepository.findAllCurrent()
-                .stream().map(this::mapSkiLiftSchedule)
-                .collect(Collectors.toList());
-    }
-
-    public SkiLiftScheduleResponse getSkiLiftCurrentSchedule(Integer skiLiftId) {
-
-        return mapSkiLiftSchedule(skiLiftScheduleRepository.findSkiLiftScheduleBySkiLiftIdSkiLift(skiLiftId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Schedule not found")));
-    }
-
     public SkiLiftScheduleResponse addNewSkiLiftSchedule(SkiLiftScheduleRequest skiLiftScheduleRequest) {
         SkiLiftSchedule skiLiftSchedule = new SkiLiftSchedule(
                 skiLiftScheduleRequest.getStartDate(),
