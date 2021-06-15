@@ -31,11 +31,20 @@ public class ReturnPassService {
         var pass = passRepository.findById(passId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Pass does not exist"));
         if(!pass.getUsesTotal().equals(pass.getUsesLeft()) && pass.getUsesTotal() != null)
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,"Pass already used, cannot return");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Pass already used, cannot return");
         if(!pass.getStartDate().after(new Timestamp(System.currentTimeMillis())) && pass.getStartDate() != null)
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,"Pass already active, cannot return");
-
-
-        return null;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Pass already active, cannot return");
+        var invoice = invoiceRepository.findById(pass.getInvoicesIdInvoice().getIdInvoice())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Invoice not found"));
+        if(invoice.getPassList().size() != 1) {
+            invoice.setTotal(invoice.getTotal() - pass.getUnitPrice());
+            invoiceRepository.save(invoice);
+            return new PassResponse(passRepository.deleteByIdPass(passId).get());
+        }
+        else {
+            var returnPass = passRepository.deleteByIdPass(passId).get();
+            invoiceRepository.deleteById(invoice.getIdInvoice());
+            return new PassResponse(returnPass);
+        }
     }
 }
