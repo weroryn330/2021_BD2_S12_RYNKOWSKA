@@ -19,4 +19,8 @@ export class EmployeeService {
     return this.http.post<RegistrationRequest>(this.endPoint + 'owner/employees/add?roleName=' + employeeType,
       registrationRequest ,this.httpOptions)
   }
+
+  getEmployees() {
+    return this.http.get(this.endPoint + 'owner/employees');
+  }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {EmployeeService} from "../../../services/employee.service";
 
 @Component({
   selector: 'app-employee-edit',
@@ -6,10 +7,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./employee-edit.component.css']
 })
 export class EmployeeEditComponent implements OnInit {
+  employeesList: any;
+  page = 1;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private employeeService: EmployeeService) {
   }
 
+  ngOnInit(): void {
+    this.getEmployeesList();
+  }
+
+  private getEmployeesList() {
+    this.employeeService.getEmployees().subscribe((data: any) => {
+      this.employeesList = data;
+      console.log(data);
+    },
+      error => {
+        alert("Nie znaleziono pracowników");
+        this.employeesList = [];
+      })
+  }
 }
