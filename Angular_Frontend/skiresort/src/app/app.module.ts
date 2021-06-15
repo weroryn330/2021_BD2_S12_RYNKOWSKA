@@ -34,6 +34,9 @@ import { UsersListComponent } from './components/employee/users-list/users-list.
 import { InvoicesListComponent } from './components/employee/invoices-list/invoices-list.component';
 import { BusinessReportsComponent } from './components/employee/business-reports/business-reports.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { UserElementComponent } from './components/employee/users-list/user-element/user-element.component';
+import { ElementInvoicesComponent } from './components/employee/users-list/user-element/element-invoices/element-invoices.component';
+import { ElementPersonalDataComponent } from './components/employee/users-list/user-element/element-personal-data/element-personal-data.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +65,10 @@ import {NgxPaginationModule} from "ngx-pagination";
     EmployeeEditComponent,
     UsersListComponent,
     InvoicesListComponent,
-    BusinessReportsComponent
+    BusinessReportsComponent,
+    UserElementComponent,
+    ElementInvoicesComponent,
+    ElementPersonalDataComponent
   ],
     imports: [
         BrowserModule,

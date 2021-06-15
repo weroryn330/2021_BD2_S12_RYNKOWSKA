@@ -13,6 +13,33 @@
   text-align: center;
 }
 
+
+
+
+
+
+.buttonQuit:hover {
+  border-radius: 5px;
+  box-shadow: 0 0 25px #fff;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.buttonQuit {
+  height: 100%;
+  width: 50%;
+  margin: auto;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+
 .pagination {
   width: 100%;
   padding: 30px;
@@ -133,6 +160,8 @@ form .inputBox span.details, form .inputBx span.details, form .inputBoxBill span
 }
 
 ul {
+  margin-top: 15px;
+  margin-bottom: 15px;
   list-style-type: none;
 }
 

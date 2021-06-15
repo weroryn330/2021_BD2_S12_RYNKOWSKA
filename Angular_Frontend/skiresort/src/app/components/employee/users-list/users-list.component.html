@@ -1,1 +1,10 @@
-<p>users-list works!</p>
+<div class="mainContainer">
+  <ng-container *ngIf="usersList">
+    <div class="pagination">
+      <pagination-controls (pageChange)="page= $event"></pagination-controls>
+    </div>
+  </ng-container>
+  <div class="userElement" *ngFor="let user of usersList | paginate: {itemsPerPage: 5, currentPage: page}; index as i;">
+    <app-user-element [user]="user" ></app-user-element>
+  </div>
+</div>

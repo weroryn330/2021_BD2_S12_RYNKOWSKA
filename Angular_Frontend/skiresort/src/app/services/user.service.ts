@@ -10,21 +10,25 @@ export class UserService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
-  endPoint = 'http://localhost:8080/api/user'
+  endPoint = 'http://localhost:8080/api'
   constructor(private http: HttpClient) { }
 
   changePassword(userData: RegistrationRequest): Observable<any> {
-    return this.http.put<RegistrationRequest>(this.endPoint + '/password',
+    return this.http.put<RegistrationRequest>(this.endPoint + '/user/password',
       userData ,this.httpOptions)
   }
 
   changeEmail(userData: RegistrationRequest): Observable<any> {
-    return this.http.put<RegistrationRequest>(this.endPoint + '/email',
+    return this.http.put<RegistrationRequest>(this.endPoint + '/user/email',
       userData ,this.httpOptions)
   }
 
   changeUserInfo(newUserInfo: RegistrationRequest): Observable<any> {
-    return this.http.put<RegistrationRequest>(this.endPoint + '/details',
+    return this.http.put<RegistrationRequest>(this.endPoint + '/user/details',
       newUserInfo ,this.httpOptions)
+  }
+
+  getUsers(): Observable<any>  {
+    return this.http.get(this.endPoint + '/owner/skiers');
   }
 }

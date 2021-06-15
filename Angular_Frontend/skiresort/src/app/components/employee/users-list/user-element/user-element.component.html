@@ -1,0 +1,14 @@
+<ul>
+  <li>{{user.firstName}} {{user.lastName}}</li>
+  <li>Email: {{user.email}}</li>
+  <li class="buttonContainer">
+    <div class="button" (click)="showInvoices()">Faktury</div>
+    <div class="button" (click)="showPersonalData()">Dane osobowe</div>
+  </li>
+</ul>
+<ng-container *ngIf="areInvoicesVisible">
+  <app-element-invoices [userEmail]="user.email" (newCloseComponentEvent)="closeComponent($event)"></app-element-invoices>
+</ng-container>
+<ng-container *ngIf="arePersonalDataVisible">
+  <app-element-personal-data [user]="user" (newCloseComponentEvent)="closeComponent($event)"></app-element-personal-data>
+</ng-container>
