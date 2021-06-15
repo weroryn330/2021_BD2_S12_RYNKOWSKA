@@ -1,5 +1,5 @@
 <div class="mainContainer">
-  <ng-container *ngIf="invoicesList">
+  <ng-container *ngIf="invoicesList && invoicesList.length">
     <div class="pagination">
       <pagination-controls (pageChange)="page= $event"></pagination-controls>
     </div>
@@ -9,6 +9,6 @@
     Faktura z dnia: {{invoice.invoiceDate}}<br>
     Kwota: {{invoice.total}}
   </div>
-  <div class="buttonQuit" (click)="closeInvoices()">element-invoices works!</div>
+  <div class="buttonQuit" (click)="closeInvoices()">Zamknij podgląd</div>
 </div>
 
