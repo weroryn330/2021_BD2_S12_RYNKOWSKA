@@ -44,7 +44,7 @@ public class SkiLiftScheduleValidation {
     }
 
     @Before("execution(* polsl.tab.skiresort.api.employee.SkiLiftScheduleApi.editSkiLiftSchedule(..))")
-    void validateEditingCurrentSkiLiftSchedule(JoinPoint joinPoint) throws Throwable {
+    void validateEditingCurrentSkiLiftSchedule(JoinPoint joinPoint){
 
         SkiLiftScheduleRequest skiLiftScheduleRequest = (SkiLiftScheduleRequest) joinPoint.getArgs()[0];
         if(skiLiftScheduleRequest.getStartDate().compareTo(skiLiftScheduleRequest.getEndDate()) < 0){

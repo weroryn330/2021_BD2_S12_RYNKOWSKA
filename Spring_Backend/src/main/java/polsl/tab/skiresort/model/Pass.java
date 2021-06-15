@@ -41,7 +41,7 @@ public class Pass {
 
     private Integer usesLeft;
 
-    private Character blocked;
+    private Boolean blocked;
 
     @ManyToOne
     @JoinColumn(name = "price_list_id_price_list")
@@ -191,11 +191,11 @@ public class Pass {
         this.usageList = usageList;
     }
 
-    public Character getBlocked() {
+    public Boolean getBlocked() {
         return blocked;
     }
 
-    public void setBlocked(Character blocked) {
+    public void setBlocked(Boolean blocked) {
         this.blocked = blocked;
     }
 

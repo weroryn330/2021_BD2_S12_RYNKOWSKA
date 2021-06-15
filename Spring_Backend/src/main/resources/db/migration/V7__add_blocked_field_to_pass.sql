@@ -1,1 +1,1 @@
-ALTER TABLE passes ADD COLUMN blocked CHAR(1);
+ALTER TABLE passes ADD COLUMN blocked BOOLEAN;

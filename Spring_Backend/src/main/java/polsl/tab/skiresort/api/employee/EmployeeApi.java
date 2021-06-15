@@ -27,13 +27,8 @@ public class EmployeeApi {
         return ResponseEntity.ok(employeePassesService.getAllPasses());
     }
 
-    @PostMapping("/blockPass/{passId}")
+    @PutMapping("/blockPass/{passId}")
     public ResponseEntity<PassesResponse> blockPass(@PathVariable Integer passId){
-        return ResponseEntity.ok(employeePassesService.setPassBlock(passId, '1'));
-    }
-
-    @PostMapping("/unblockPass/{passId}")
-    public ResponseEntity<PassesResponse> unblockPass(@PathVariable Integer passId){
-        return ResponseEntity.ok(employeePassesService.setPassBlock(passId, '0'));
+        return ResponseEntity.ok(employeePassesService.setPassBlock(passId));
     }
 }

@@ -49,9 +49,9 @@ public class EmployeePassesService {
                 .collect(Collectors.toList());
     }
 
-    public PassesResponse setPassBlock(Integer passId, char val) {
+    public PassesResponse setPassBlock(Integer passId) {
         Pass pass=passRepository.findById(passId).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pass not found"));
-        pass.setBlocked(val);
+        pass.setBlocked(!pass.getBlocked());
         passRepository.save(pass);
         return mapPassResponse(pass);
     }
