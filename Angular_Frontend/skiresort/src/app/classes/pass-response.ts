@@ -8,7 +8,9 @@ export class PassResponse {
   birthDate: string;
   usesTotal: number;
   usesLeft: number;
+  blocked: boolean = false;
   isActive: boolean;
+
 
 
   constructor(idPass: number, unitPrice: number, firstName: string, lastName: string, startDate: any, endDate: any, birthDate: string, usesTotal: number, usesLeft: number) {

@@ -42,4 +42,8 @@ export class PassService {
   refundPass(idPass: number): Observable<any> {
     return this.http.delete(this.endPoint+'/passes/' + idPass);
   }
+
+  changeBlockage(idPass: number): Observable<any> {
+    return this.http.put(this.endPoint+'/passes/' + idPass, this.httpOptions);
+  }
 }
