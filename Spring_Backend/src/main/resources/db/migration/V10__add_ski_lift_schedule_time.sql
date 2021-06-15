@@ -1,0 +1,10 @@
+UPDATE ski_lift_schedules SET opens_time = '9:00:00', closes_time = '20:00:00' WHERE id_ski_lift_schedule = 1;
+UPDATE ski_lift_schedules SET opens_time = '9:00:00', closes_time = '20:00:00' WHERE id_ski_lift_schedule = 2;
+UPDATE ski_lift_schedules SET opens_time = '9:00:00', closes_time = '20:00:00' WHERE id_ski_lift_schedule = 3;
+UPDATE ski_lift_schedules SET opens_time = '9:00:00', closes_time = '20:00:00' WHERE id_ski_lift_schedule = 4;
+UPDATE ski_lift_schedules SET opens_time = '9:00:00', closes_time = '20:00:00' WHERE id_ski_lift_schedule = 5;
+UPDATE ski_lift_schedules SET opens_time = '9:00:00', closes_time = '20:00:00' WHERE id_ski_lift_schedule = 6;
+UPDATE ski_lift_schedules SET opens_time = '9:00:00', closes_time = '20:00:00' WHERE id_ski_lift_schedule = 7;
+UPDATE ski_lift_schedules SET opens_time = '9:00:00', closes_time = '20:00:00' WHERE id_ski_lift_schedule = 8;
+UPDATE ski_lift_schedules SET opens_time = '9:00:00', closes_time = '20:00:00' WHERE id_ski_lift_schedule = 9;
+UPDATE ski_lift_schedules SET opens_time = '9:00:00', closes_time = '20:00:00' WHERE id_ski_lift_schedule = 10;
