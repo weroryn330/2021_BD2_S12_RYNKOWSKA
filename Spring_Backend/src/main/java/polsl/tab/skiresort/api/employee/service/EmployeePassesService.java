@@ -21,6 +21,7 @@ public class EmployeePassesService {
 
     private PassesResponse mapPassResponse(Pass pass) {
         return new PassesResponse(
+                pass.getIdPass(),
                 pass.getUnitPrice(),
                 pass.getInvoicesIdInvoice().getUserIdUser().getEmail(),
                 pass.getStartDate(),
