@@ -64,6 +64,11 @@ public class OwnerApi {
         ));
     }
 
+    @GetMapping("/invoices/{email}")
+    public ResponseEntity<List<InvoiceResponse>> getAllUserInvoices(@PathVariable("email") String email) {
+        return ResponseEntity.ok(ownerEmployeeService.getAllUserInvoices(email));
+    }
+
     @PutMapping("/editAccount")
     public ResponseEntity<UserResponse> editEmployeeAccount(@RequestBody UserRequest request) {
         return ResponseEntity.ok(ownerEmployeeService.editEmployeeAccount(request));
