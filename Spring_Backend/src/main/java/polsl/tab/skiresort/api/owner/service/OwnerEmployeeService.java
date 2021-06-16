@@ -49,6 +49,18 @@ public class OwnerEmployeeService {
         return invoiceRepository.findAll().stream().map(InvoiceResponse::new).collect(Collectors.toList());
     }
 
+    public List<InvoiceResponse> getAllUserInvoices(String email)
+    {
+        var user = userRepository.findByEmail(email);
+        if(user.isPresent()) {
+            return invoiceRepository.findByUserIdUser(user.get())
+                    .stream()
+                    .map(InvoiceResponse::new)
+                    .collect(Collectors.toList());
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+    }
+
     public List<InvoiceResponse> getInvoicesBetweenDates(Date startDate, Date endDate) {
         return invoiceRepository.findByInvoiceDateBetween(startDate, endDate)
                 .stream()
