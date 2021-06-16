@@ -1,10 +1,10 @@
 <div class="mainContainer">
   <ng-container *ngIf="invoicesList && invoicesList.length">
     <div class="pagination">
-      <pagination-controls (pageChange)="page= $event"></pagination-controls>
+      <pagination-controls (pageChange)="page= $event" [id]="userEmail"></pagination-controls>
     </div>
   </ng-container>
-  <div class="button" *ngFor="let invoice of invoicesList | paginate: {itemsPerPage: 4, currentPage: page}"
+  <div class="button" *ngFor="let invoice of invoicesList | paginate: {itemsPerPage: 4, currentPage: page, id: userEmail}"
        (click)="downloadInvoicePDF(invoice.id, invoice.invoiceDate)">
     Faktura z dnia: {{invoice.invoiceDate}}<br>
     Kwota: {{invoice.total}}

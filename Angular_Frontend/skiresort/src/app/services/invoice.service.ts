@@ -22,7 +22,7 @@ export class InvoiceService {
   }
 
   getUserInvoicesForOwner(email: string): Observable<any> {
-    return this.http.get(this.endPoint + '/owner/invoices?email=' + email);
+    return this.http.get(this.endPoint + '/owner/invoices/' + email);
   }
   getUserInvoicePDF(invoiceId: number): Observable<any> {
     return this.http.get(this.endPoint + '/invoiceReport/' + invoiceId, {responseType: 'blob'});
