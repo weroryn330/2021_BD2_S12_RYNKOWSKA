@@ -1,0 +1,10 @@
+UPDATE ski_lifts SET is_opened = TRUE WHERE id_ski_lift = 1;
+UPDATE ski_lifts SET is_opened = TRUE WHERE id_ski_lift = 2;
+UPDATE ski_lifts SET is_opened = TRUE WHERE id_ski_lift = 3;
+UPDATE ski_lifts SET is_opened = TRUE WHERE id_ski_lift = 4;
+UPDATE ski_lifts SET is_opened = TRUE WHERE id_ski_lift = 5;
+UPDATE ski_lifts SET is_opened = TRUE WHERE id_ski_lift = 6;
+UPDATE ski_lifts SET is_opened = TRUE WHERE id_ski_lift = 7;
+UPDATE ski_lifts SET is_opened = TRUE WHERE id_ski_lift = 8;
+UPDATE ski_lifts SET is_opened = TRUE WHERE id_ski_lift = 9;
+UPDATE ski_lifts SET is_opened = TRUE WHERE id_ski_lift = 10;
