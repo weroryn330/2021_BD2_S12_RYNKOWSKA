@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import polsl.tab.skiresort.api.entry.request.UserRequest;
 import polsl.tab.skiresort.api.entry.response.UserResponse;
+import polsl.tab.skiresort.api.owner.pdf.BusinessReportBuilder;
 import polsl.tab.skiresort.api.passes.response.InvoiceResponse;
 import polsl.tab.skiresort.model.User;
-import polsl.tab.skiresort.repository.InvoiceRepository;
-import polsl.tab.skiresort.repository.UserRepository;
+import polsl.tab.skiresort.repository.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,13 +26,25 @@ public class OwnerEmployeeService {
 
     private final InvoiceRepository invoiceRepository;
 
+    private final PassRepository passRepository;
+
+    private final UsageRepository usageRepository;
+
+    private final BusinessReportBuilder businessReportBuilder;
+
+    private final SkiLiftRepository skiLiftRepository;
+
     public OwnerEmployeeService(
             UserRepository userRepository,
             PasswordEncoder passwordEncoder,
-            InvoiceRepository invoiceRepository) {
+            InvoiceRepository invoiceRepository, PassRepository passRepository, UsageRepository usageRepository, BusinessReportBuilder businessReportBuilder, SkiLiftRepository skiLiftRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.invoiceRepository = invoiceRepository;
+        this.passRepository = passRepository;
+        this.usageRepository = usageRepository;
+        this.businessReportBuilder = businessReportBuilder;
+        this.skiLiftRepository = skiLiftRepository;
     }
 
     public List<UserResponse> getAllSkiers() {
@@ -68,5 +82,19 @@ public class OwnerEmployeeService {
             user.setPassword(passwordEncoder.encode(request.getPassword()));
         }
         return new UserResponse(userRepository.save(User.editMapping(user, request, true)));
+    }
+
+    public ByteArrayInputStream getBusinessReport(java.util.Date startDate, java.util.Date endDate) {
+
+        try {
+            return businessReportBuilder.generateReportPDF(
+                    invoiceRepository.findAllWithInvoiceDateBetween(startDate, endDate),
+                    skiLiftRepository.findAll(),
+                    usageRepository.findAllWithUseTimestampBetween(new Date(startDate.getTime()), new Date(endDate.getTime())),
+                    startDate,
+                    endDate);
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Could not create PDF file");
+        }
     }
 }
