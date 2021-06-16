@@ -10,6 +10,9 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+import java.sql.Date;
+import java.util.Optional;
+
 @Repository
 public interface SkiLiftScheduleRepository extends JpaRepository<SkiLiftSchedule, Integer> {
 
@@ -41,4 +44,18 @@ public interface SkiLiftScheduleRepository extends JpaRepository<SkiLiftSchedule
                     "AND s.ski_lift_id_ski_lift=:skiLiftId")
     List<SkiLiftSchedule> findBySkiLiftIdWithEndDateAfterWithoutCurrent(@Param("date") Date date, @Param("skiLiftId") Integer skiLiftId);
 
+public interface SkiLiftScheduleRepository extends JpaRepository<SkiLiftSchedule, Integer> {
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT ss FROM ski_lift_schedules ss, ski_lifts sl " +
+                    "WHERE ss.ski_lift_id_ski_lift = sl.id_ski_lift " +
+                    "AND sl.id_ski_lift = :skiLiftId " +
+                    "AND :currentDate >= ss.start_date " +
+                    "AND :currentDate <= ss.end_date"
+    )
+    Optional<SkiLiftSchedule> findCurrentScheduleForSkiLiftId(
+            @Param("skiLiftId") Integer id,
+            @Param("currentDate") Date startDate
+    );
 }

@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import polsl.tab.skiresort.api.entry.request.UserRequest;
 import polsl.tab.skiresort.api.entry.response.UserResponse;
+import polsl.tab.skiresort.model.Role;
 import polsl.tab.skiresort.model.User;
 import polsl.tab.skiresort.repository.RoleRepository;
 import polsl.tab.skiresort.repository.UserRepository;
+
+import java.util.Optional;
 
 @Service
 public class RegisterService {
@@ -27,7 +30,7 @@ public class RegisterService {
         this.roleRepository = roleRepository;
     }
 
-    public UserResponse registerUser(UserRequest userRequest) {
+    public UserResponse registerUser(UserRequest userRequest, String roleName) {
         if (userRepository.findByEmail(userRequest.getEmail()).isEmpty()) {
             var user = new User(
                     userRequest.getFirstName(),
@@ -41,11 +44,10 @@ public class RegisterService {
                     userRequest.getEmail(),
                     passwordEncoder.encode(userRequest.getPassword())
             );
-            var role = this.roleRepository.findByRoleName("ROLE_USER");
-            if (role.isPresent()) {
-                user.addRole(role.get());
-                return new UserResponse(userRepository.save(user));
-            }
+            var role = this.roleRepository.findByRoleName(roleName)
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid role name"));
+            user.addRole(role);
+            return new UserResponse(userRepository.save(user));
         }
         throw new ResponseStatusException(HttpStatus.CONFLICT, "User with email " + userRequest.getEmail() + " exists!");
     }

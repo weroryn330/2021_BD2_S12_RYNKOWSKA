@@ -8,6 +8,7 @@ import polsl.tab.skiresort.api.entry.jwt.JwtTokenUtility;
 import polsl.tab.skiresort.api.entry.request.UserLoginRequest;
 import polsl.tab.skiresort.api.entry.request.UserRequest;
 import polsl.tab.skiresort.api.entry.response.UserResponse;
+import polsl.tab.skiresort.model.User;
 import polsl.tab.skiresort.repository.UserRepository;
 
 @Service
@@ -84,14 +85,6 @@ public class UserService {
     public UserResponse updateUserDetails(String token, UserRequest body) {
         var currentUser = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
-        currentUser.setFirstName(body.getFirstName());
-        currentUser.setLastName(body.getLastName());
-        currentUser.setAddress(body.getAddress());
-        currentUser.setCity(body.getCity());
-        currentUser.setVoivodeship(body.getVoivodeship());
-        currentUser.setCountry(body.getCountry());
-        currentUser.setPostalCode(body.getPostalCode());
-        currentUser.setPhone(body.getPhone());
-        return new UserResponse(userRepository.save(currentUser));
+        return new UserResponse(userRepository.save(User.editMapping(currentUser, body, false)));
     }
 }
