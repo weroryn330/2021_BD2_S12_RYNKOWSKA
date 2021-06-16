@@ -52,7 +52,10 @@ public class EmployeePassesService {
 
     public PassesResponse setPassBlock(Integer passId) {
         Pass pass=passRepository.findById(passId).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pass not found"));
-        pass.setBlocked(!pass.getBlocked());
+        if(pass.getBlocked() == null)
+            pass.setBlocked(true);
+        else
+            pass.setBlocked(!pass.getBlocked());
         passRepository.save(pass);
         return mapPassResponse(pass);
     }

@@ -1,5 +1,7 @@
 package polsl.tab.skiresort.api.employee.response;
 
+import polsl.tab.skiresort.model.SkiLiftSchedule;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -24,6 +26,14 @@ public class SkiLiftScheduleResponse {
         this.closesTime = closesTime;
         this.skiLiftId = skiLiftId;
         this.skiLiftScheduleId = skiLiftScheduleId;
+    }
+
+    public SkiLiftScheduleResponse(SkiLiftSchedule s){
+        this.startDate = s.getStartDate();
+        this.endDate = s.getEndDate();
+        this.opensTime = s.getOpensTime();
+        this.closesTime = s.getClosesTime();
+        this.skiLiftId = s.getSkiLiftIdSkiLift().getIdSkiLift();
     }
 
     public Integer getSkiLiftScheduleId() {

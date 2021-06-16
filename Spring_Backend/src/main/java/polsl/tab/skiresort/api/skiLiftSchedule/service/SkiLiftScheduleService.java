@@ -19,26 +19,16 @@ public class SkiLiftScheduleService {
         this.skiLiftScheduleRepository = skiLiftScheduleRepository;
     }
 
-    private SkiLiftScheduleResponse mapSkiLiftSchedule(SkiLiftSchedule skiLiftSchedule){
-        return new SkiLiftScheduleResponse(
-                skiLiftSchedule.getStartDate(),
-                skiLiftSchedule.getEndDate(),
-                skiLiftSchedule.getOpensTime(),
-                skiLiftSchedule.getClosesTime(),
-                skiLiftSchedule.getSkiLiftIdSkiLift().getIdSkiLift(),
-                skiLiftSchedule.getIdSkiLiftSchedule());
-    }
-
     public List<SkiLiftScheduleResponse> getAllCurrentSchedules() {
 
         return skiLiftScheduleRepository.findAllCurrent()
-                .stream().map(this::mapSkiLiftSchedule)
+                .stream().map(SkiLiftScheduleResponse::new)
                 .collect(Collectors.toList());
     }
 
     public SkiLiftScheduleResponse getSkiLiftCurrentSchedule(Integer skiLiftId) {
 
-        return mapSkiLiftSchedule(skiLiftScheduleRepository.findSkiLiftScheduleBySkiLiftIdSkiLift(skiLiftId)
+        return new SkiLiftScheduleResponse(skiLiftScheduleRepository.findSkiLiftScheduleBySkiLiftIdSkiLift(skiLiftId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Schedule not found")));
     }
 

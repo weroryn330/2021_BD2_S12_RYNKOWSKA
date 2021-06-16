@@ -16,18 +16,8 @@ import java.util.stream.Collectors;
 public class EmployeeSkiLiftScheduleService {
 
     private final SkiLiftScheduleRepository skiLiftScheduleRepository;
+
     private final SkiLiftRepository skiLiftRepository;
-
-
-    private SkiLiftScheduleResponse mapSkiLiftSchedule(SkiLiftSchedule skiLiftSchedule){
-        return new SkiLiftScheduleResponse(
-                skiLiftSchedule.getStartDate(),
-                skiLiftSchedule.getEndDate(),
-                skiLiftSchedule.getOpensTime(),
-                skiLiftSchedule.getClosesTime(),
-                skiLiftSchedule.getSkiLiftIdSkiLift().getIdSkiLift(),
-                skiLiftSchedule.getIdSkiLiftSchedule());
-    }
 
     public EmployeeSkiLiftScheduleService(SkiLiftScheduleRepository skiLiftScheduleRepository, SkiLiftRepository skiLiftRepository) {
         this.skiLiftScheduleRepository = skiLiftScheduleRepository;
@@ -45,7 +35,7 @@ public class EmployeeSkiLiftScheduleService {
 
         skiLiftScheduleRepository.save(skiLiftSchedule);
 
-        return mapSkiLiftSchedule(skiLiftSchedule);
+        return new SkiLiftScheduleResponse(skiLiftSchedule);
 
     }
 
@@ -61,6 +51,6 @@ public class EmployeeSkiLiftScheduleService {
 
         skiLiftScheduleRepository.save(skiLiftSchedule);
 
-        return mapSkiLiftSchedule(skiLiftSchedule);
+        return new SkiLiftScheduleResponse(skiLiftSchedule);
     }
 }

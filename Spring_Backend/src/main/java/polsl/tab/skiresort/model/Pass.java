@@ -67,6 +67,7 @@ public class Pass {
         this.birthDate = birthDate;
         this.priceList = priceList;
         this.invoicesIdInvoice = invoice;
+        this.blocked = false;
     }
 
     public Pass(Float unitPrice,
@@ -86,6 +87,7 @@ public class Pass {
         this.usesLeft = usesLeft;
         this.priceList = priceList;
         this.invoicesIdInvoice = invoice;
+        this.blocked = false;
     }
 
     public Pass() {
