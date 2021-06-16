@@ -37,35 +37,6 @@
           </ul>
         </div>
         <div class="inputBox">
-          <span class="details">Email</span>
-          <input type="email" placeholder="adres@email.com"
-                 [style.background-color]="(!email.touched || email.valid) ? '#c4e2ff' : ''" [(ngModel)]="form.email"
-                 #email="ngModel" name="email"
-                 [ngClass]="{error :  email.touched && email.errors}"
-                 pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" required>
-          <ul>
-            <li>i
-              <div class="dangerInfo">Wpisz email w postaci: zzzzz@zzzz.zzz, np:
-                narcikowo@gmail.com
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="inputBox">
-          <span class="details">Powtórz email</span>
-          <input type="email" placeholder="adres@email.com" style="background-color: #c4e2ff;"
-                 [style.background-color]="(!emailRepetition.touched ||
-                  (emailRepetition.value===email.value && emailRepetition.value !== null)) ? '#c4e2ff' : ''"
-                 [ngClass]="{error :  emailRepetition.touched && (emailRepetition.errors || emailRepetition.value!==email.value)}"
-                 [(ngModel)]="form.emailRepetition" #emailRepetition="ngModel" name="emailRepetition"
-                 pattern="^{{email.value}}$" required>
-          <ul>
-            <li>i
-              <div class="dangerInfo">Adresy email muszą być identyczne!</div>
-            </li>
-          </ul>
-        </div>
-        <div class="inputBox">
           <span class="details">Numer telefonu</span>
           <input type="text" placeholder="123456789" [(ngModel)]="form.phone" #phone="ngModel" name="phone"
                  [ngClass]="{error :  phone.touched && phone.errors}"
@@ -124,56 +95,9 @@
             </li>
           </ul>
         </div>
-        <div class="inputBox">
-          <span class="details">Hasło</span>
-          <input type="password" placeholder="Hasło" style="background-color: #c4e2ff" [(ngModel)]="form.password"
-                 [style.background-color]="(!password.touched || password.valid) ? '#c4e2ff' : ''"
-                 [ngClass]="{error :  password.touched && password.errors}"
-                 #password="ngModel" name="password" pattern="^[a-zA-Z0-9_-]{5,25}$" required>
-          <ul>
-            <li>i
-              <div class="dangerInfo">Prawidłowe hasło zawiera litery, liczby i ma długość od 5 do
-                25 znaków.
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="inputBox">
-          <span class="details">Powtórz hasło</span>
-          <input type="password" placeholder="Hasło" style="background-color: #c4e2ff"
-                 [style.background-color]="(!passwordRepetition.touched ||
-                  (passwordRepetition.value===password.value && passwordRepetition.value !== null)) ? '#c4e2ff' : ''"
-                 [ngClass]="{error :  passwordRepetition.touched && (passwordRepetition.errors ||
-                 passwordRepetition.value!==password.value)}"
-                 [(ngModel)]="form.passwordRepetition" #passwordRepetition="ngModel" name="passwordRepetition"
-                 pattern="^{{password.value}}$" required>
-          <ul>
-            <li>i
-              <div class="dangerInfo">Hasła muszą być identyczne!</div>
-            </li>
-          </ul>
-        </div>
-        <div class="inputBox">
-          <input type="radio" id="technical_employee" name="userType" [(ngModel)]="form.employeeType"
-                 #employeeType="ngModel" value="ROLE_TECHNICIAN" checked>
-          <label for="technical_employee">Pracownik techniczny</label>
-        </div>
-        <div class="inputBox">
-          <input type="radio" id="owner" name="userType" [(ngModel)]="form.employeeType"
-                 #employeeType="ngModel" value="ROLE_OWNER">
-          <label for="technical_employee">Właściciel</label>
-        </div>
-        <div class="inputBox">
-          <input type="radio" id="employee" name="userType" [(ngModel)]="form.employeeType"
-                 #employeeType="ngModel" value="ROLE_EMPLOYEE">
-          <label for="employee">Pracownik zwykły</label>
-        </div>
-      </div>
-      <div>
-
       </div>
       <div class="button">
-        <input type="submit" (click)="f.form.markAllAsTouched()" id="button" value="Edytuj pracownika">
+        <input type="submit" (click)="f.form.markAllAsTouched()" id="button" value="Edytuj dane osobowe">
       </div>
     </form>
   </div>

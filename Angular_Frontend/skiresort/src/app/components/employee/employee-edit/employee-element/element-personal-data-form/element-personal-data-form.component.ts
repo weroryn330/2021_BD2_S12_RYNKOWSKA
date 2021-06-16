@@ -13,16 +13,16 @@ export class ElementPersonalDataFormComponent implements OnInit {
     firstName: null,
     lastName: null,
     country: null,
-    email: null,
-    emailRepetition: null,
+   // email: null,
+   // emailRepetition: null,
     phone: null,
     voivodeship: null,
     postalCode: null,
     city: null,
-    address: null,
-    password: null,
-    passwordRepetition: null,
-    employeeType: "ROLE_TECHNICIAN"
+    address: null
+   // password: null,
+    //passwordRepetition: null,
+    //employeeType: "ROLE_TECHNICIAN"
   }
 
   constructor(private employeeService: EmployeeService) { }
@@ -48,8 +48,6 @@ export class ElementPersonalDataFormComponent implements OnInit {
     this.form.postalCode = this.employee.postalCode;
     this.form.city = this.employee.city;
     this.form.address = this.employee.address;
-    this.form.email = this.employee.email;
-    this.form.emailRepetition = this.employee.email;
   }
 
   onSubmit() {
@@ -57,19 +55,19 @@ export class ElementPersonalDataFormComponent implements OnInit {
       firstName,
       lastName,
       country,
-      email,
-      phone,
       voivodeship,
       postalCode,
       city,
       address,
-      password
+      phone
     } = this.form;
-    const registrationRequest = new RegistrationRequest(firstName, lastName, country, email, phone, voivodeship, postalCode, city, address, password);
-    this.employeeService.updateEmployee(registrationRequest, this.form.employeeType, this.employee.id).subscribe(data => {
-        alert("Rejestracja przebiegła pomyślnie!");
+    const registrationRequest = new RegistrationRequest(firstName, lastName, country, this.employee.email,
+      phone, voivodeship, postalCode, city, address, '');
+    this.employeeService.updateEmployeePersonalData(registrationRequest).subscribe(data => {
+        alert("Zmiana danych osobowych przebiegła pomyślnie");
       },
       error => {
+        console.log(error.message);
         alert("Użytkownik o podanym adresie email już istnieje!");
       })
   }

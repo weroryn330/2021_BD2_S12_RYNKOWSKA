@@ -7,4 +7,7 @@
 </ul>
 <ng-container *ngIf="isFormVisible">
   <app-element-personal-data-form [employee]="employee"></app-element-personal-data-form>
+  <app-element-email-form> [employee]="employee"</app-element-email-form>
+  <app-element-password-form [employee]="employee"></app-element-password-form>
+  <app-element-role-form [employee]="employee"></app-element-role-form>
 </ng-container>
