@@ -52,7 +52,7 @@
   margin-bottom: 40px;
 
   max-height: fit-content;
-  min-width: 300px;
+  width: calc(100% / 2 - 20px);
 
   font-weight: 600;
   font-size: 18px;

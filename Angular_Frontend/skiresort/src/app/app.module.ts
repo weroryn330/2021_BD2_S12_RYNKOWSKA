@@ -39,6 +39,9 @@ import { ElementInvoicesComponent } from './components/employee/users-list/user-
 import { ElementPersonalDataComponent } from './components/employee/users-list/user-element/element-personal-data/element-personal-data.component';
 import { EmployeeElementComponent } from './components/employee/employee-edit/employee-element/employee-element.component';
 import { ElementPersonalDataFormComponent } from './components/employee/employee-edit/employee-element/element-personal-data-form/element-personal-data-form.component';
+import { DiscountsElementComponent } from './components/employee/pricelist-edit/discounts-element/discounts-element.component';
+import { TimePassesElementComponent } from './components/employee/pricelist-edit/time-passes-element/time-passes-element.component';
+import { QuantityPassesElementComponent } from './components/employee/pricelist-edit/quantity-passes-element/quantity-passes-element.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +75,10 @@ import { ElementPersonalDataFormComponent } from './components/employee/employee
     ElementInvoicesComponent,
     ElementPersonalDataComponent,
     EmployeeElementComponent,
-    ElementPersonalDataFormComponent
+    ElementPersonalDataFormComponent,
+    DiscountsElementComponent,
+    TimePassesElementComponent,
+    QuantityPassesElementComponent
   ],
     imports: [
         BrowserModule,
