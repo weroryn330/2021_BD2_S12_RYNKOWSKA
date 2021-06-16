@@ -69,9 +69,27 @@ public class OwnerApi {
         return ResponseEntity.ok(ownerEmployeeService.getAllUserInvoices(email));
     }
 
-    @PutMapping("/editAccount")
-    public ResponseEntity<UserResponse> editEmployeeAccount(@RequestBody UserRequest request) {
-        return ResponseEntity.ok(ownerEmployeeService.editEmployeeAccount(request));
+    @PutMapping("/editAccount/details")
+    public ResponseEntity<UserResponse> editEmployeeDetails(@RequestBody UserRequest request) {
+        return ResponseEntity.ok(ownerEmployeeService.editEmployeeDetails(request));
+    }
+
+    @PutMapping("/ediAccount/password")
+    public ResponseEntity<UserResponse> editEmployeePassword(@RequestBody UserRequest request) {
+        return ResponseEntity.ok(ownerEmployeeService.editEmployeePassword(request));
+    }
+
+    @PutMapping("/ediAccount/email")
+    public ResponseEntity<UserResponse> editEmployeeEmail(@RequestBody UserRequest request) {
+        return ResponseEntity.ok(ownerEmployeeService.editEmployeeEmail(request));
+    }
+
+    @PutMapping("/editAccount/editRole")
+    public ResponseEntity<UserResponse> deleteCurrentRolesAndAddNewEmployeeRole(
+            @RequestParam("email") String email,
+            @RequestParam("roleName") String roleName
+    ) {
+        return ResponseEntity.ok(ownerEmployeeService.deleteCurrentRolesAndAddNewEmployeeRole(email, roleName));
     }
 
     @PostMapping("/employees/add")
