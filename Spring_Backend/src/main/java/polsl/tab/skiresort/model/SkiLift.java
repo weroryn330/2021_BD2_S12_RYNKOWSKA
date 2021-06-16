@@ -2,6 +2,7 @@ package polsl.tab.skiresort.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -15,10 +16,10 @@ public class SkiLift {
     @NotBlank(message = "Your ski lift name should not be empty!")
     private String name;
 
-    @NotBlank(message = "Your ski lift height should not be empty!")
+    @NotNull
     private Integer height;
 
-    @NotBlank(message = "Your ski lift is opened should not be empty!")
+    @NotNull
     private Boolean isOpened;
 
     @OneToMany(mappedBy = "skiLiftIdSkiLift")
