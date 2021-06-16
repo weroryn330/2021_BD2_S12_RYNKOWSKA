@@ -1,4 +1,5 @@
-.mainContainer {
+/* Main container style */
+.mainContainerEditForm {
   max-width: 700px;
   width: 100%;
   background-color: transparent;
@@ -13,54 +14,19 @@
   text-align: center;
 }
 
-.pagination {
-  width: 100%;
-  padding: 30px;
-  margin: auto;
-  justify-content: center;
-}
 
-.button:hover{
-  border-radius: 5px;
-  box-shadow: 0 0 25px #fff;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.employeeElement{
-  height: auto;
-  margin: 5% auto auto;
-  margin-bot: 5%;
-  width: 80%;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.buttonContainer{
+/* Layout inside of the box
+.content form .user-details {
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 12px 0;
-  display: flex;
+}*/
+
+select option {
+  color: black;
 }
-.buttonContainer .button{
-  height: 30px;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background: rgba(0, 0, 0, 0.3);
-  width: calc(100% / 2 - 20px);
-  justify-content: center;
-}
+
 form .user-details {
   display: flex;
   flex-wrap: wrap;
@@ -132,20 +98,66 @@ form .inputBox span.details, form .inputBx span.details, form .inputBoxBill span
   border: 4px solid #7dbeff;
 }
 
-ul {
-  list-style-type: none;
+.buttonInput {
+  margin-bottom: 5%;
+  height: 45px;
+  width: 50%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
 }
 
-form .button {
+form .button, form .buttonSubmitted {
   height: 45px;
   margin: 35px 0;
 }
 
-form .button:hover {
+form .button:hover, .buttonInput:hover {
   border-radius: 5px;
   box-shadow: 0 0 25px #fff;
 }
+.user-details .inputBox input:invalid li, .user-details .inputBx input:invalid li {
+  visibility: visible;
+}
 
+.user-details .inputBox input:invalid i, .user-details .inputBx input:invalid li {
+  visibility: visible;
+}
+form li {
+  position: relative;
+  list-style: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid black;
+  color: black;
+  font-size: 15px;
+  border-radius: 20px;
+  bottom: 30px;
+  left: 85%;
+  cursor: pointer;
+}
+
+form li:hover .dangerInfo {
+  visibility: visible;
+}
+
+form li .dangerInfo {
+  position: absolute;
+  bottom: -300%;
+  left: -930%;
+  width: 200px;
+  background-color: rgba(0, 0, 0, 1);
+  padding: 5px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  visibility: hidden;
+}
 form .button input {
   height: 100%;
   width: 100%;
@@ -158,6 +170,18 @@ form .button input {
   cursor: pointer;
   transition: all 0.3s ease;
   background: rgba(0, 0, 0, 0.3);
+}
+form .buttonSubmitted  input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  background-color: rgba(0, 255, 0, 0.5);
+  color: white;
 }
 
 form .button input:hover {
@@ -176,6 +200,10 @@ form .button input:hover {
 
   form .category {
     width: 100%;
+  }
+
+  form li .dangerInfo {
+    right: 300px;
   }
 
   .content form .user-details {

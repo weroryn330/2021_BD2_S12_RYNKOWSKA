@@ -1,0 +1,10 @@
+<ul>
+  <li>{{employee.firstName}} {{employee.lastName}}</li>
+  <li>Email: {{employee.email}}</li>
+  <li class="buttonContainer">
+    <div class="button" (click)="showEditForm()">Edytuj dane pracownika</div>
+  </li>
+</ul>
+<ng-container *ngIf="isFormVisible">
+  <app-element-personal-data-form [employee]="employee"></app-element-personal-data-form>
+</ng-container>

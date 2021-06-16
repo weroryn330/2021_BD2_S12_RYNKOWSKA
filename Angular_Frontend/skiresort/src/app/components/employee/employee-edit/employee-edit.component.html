@@ -4,7 +4,7 @@
       <pagination-controls (pageChange)="page= $event"></pagination-controls>
     </div>
   </ng-container>
-  <div class="button" *ngFor="let employee of employeesList | paginate: {itemsPerPage: 4, currentPage: page}">
-      Imię: {{employee.firstName}}  Nazwisko: {{employee.lastName}}
+  <div class="employeeElement" *ngFor="let employee of employeesList | paginate: {itemsPerPage: 4, currentPage: page}">
+    <app-employee-element [employee]="employee"></app-employee-element>
   </div>
 </div>

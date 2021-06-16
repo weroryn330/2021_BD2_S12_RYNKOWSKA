@@ -23,4 +23,9 @@ export class EmployeeService {
   getEmployees() {
     return this.http.get(this.endPoint + 'owner/employees');
   }
+
+  updateEmployee(registrationRequest: RegistrationRequest, employeeType: string, employeeId: number) {
+    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/employees/'+ employeeId +'?roleName=' + employeeType,
+      registrationRequest ,this.httpOptions)
+  }
 }

@@ -52,7 +52,11 @@ export class EmployeeAddComponent implements OnInit {
       })
   }
 
-  insertDash() {
-
+  insertDash(): void {
+    if (this.form.postalCode) {
+      if (this.form.postalCode.length === 2) {
+        this.form.postalCode = this.form.postalCode + '-'
+      }
+    }
   }
 }
