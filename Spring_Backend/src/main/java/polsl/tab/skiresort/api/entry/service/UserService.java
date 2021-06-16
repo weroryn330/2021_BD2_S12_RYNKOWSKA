@@ -85,6 +85,6 @@ public class UserService {
     public UserResponse updateUserDetails(String token, UserRequest body) {
         var currentUser = userRepository.findByEmail(jwtTokenUtility.getUsernameFromToken(token))
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
-        return new UserResponse(userRepository.save(User.editMapping(currentUser, body, false)));
+        return new UserResponse(userRepository.save(User.editMapping(currentUser, body)));
     }
 }
