@@ -19,15 +19,6 @@ public class SkiLiftScheduleResponse {
 
     private Integer skiLiftScheduleId;
 
-    public SkiLiftScheduleResponse(Date startDate, Date endDate, Time opensTime, Time closesTime, Integer skiLiftId, Integer skiLiftScheduleId) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.opensTime = opensTime;
-        this.closesTime = closesTime;
-        this.skiLiftId = skiLiftId;
-        this.skiLiftScheduleId = skiLiftScheduleId;
-    }
-
     public SkiLiftScheduleResponse(SkiLiftSchedule s){
         this.startDate = s.getStartDate();
         this.endDate = s.getEndDate();
