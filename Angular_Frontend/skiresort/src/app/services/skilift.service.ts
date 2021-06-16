@@ -13,7 +13,7 @@ export class SkiliftService {
   constructor(private http: HttpClient) { }
 
   getTechnicalSkilifts() {
-    return this.http.get(this.endPoint + '/technical_employee');
+    return this.http.get(this.endPoint + '/technical_employee/all');
   }
 
   changeSkiliftState(idSkiLift: number) {

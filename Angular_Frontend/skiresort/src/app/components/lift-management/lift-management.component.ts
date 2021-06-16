@@ -25,12 +25,17 @@ skiliftsList: any;
       })
   }
 
-  changeSkiliftState(idSkiLift: number) {
+  changeSkiliftState(idSkiLift: number, name: string): any{
+    const element = window.document.getElementById(name) as HTMLInputElement;
     this.skiliftService.changeSkiliftState(idSkiLift).subscribe((data: any) => {
         console.log(data);
+        element.checked = data.isOpened;
+        return data.isOpened;
       },
       error => {
         alert("Coś poszło nie tak...");
+        element.checked = false;
+        return false;
       })
   }
 }

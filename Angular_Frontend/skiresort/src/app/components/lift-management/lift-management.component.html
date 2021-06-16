@@ -3,10 +3,15 @@
     <h1>Panel technika</h1>
   </div>
   <div class="lift" *ngFor="let skilift of skiliftsList">
-    <h2>{{skilift.name}}}</h2>
+    <h2>{{skilift.name}}</h2>
     <label class="switch">
-      <input type="checkbox" value="{{skilift.isOpened}}" (change)="changeSkiliftState(skilift.idSkiLift)">
-      <span class="slider"></span>
+      <ng-container *ngIf="skilift.isOpened">
+        <input id="{{skilift.name}}" type="checkbox" checked (click)="skilift.isOpened = changeSkiliftState(skilift.idSkiLift,skilift.name)"/>
+      </ng-container>
+      <ng-container *ngIf="!skilift.isOpened">
+        <input id="{{skilift.name}}" type="checkbox" (click)="skilift.isOpened = changeSkiliftState(skilift.idSkiLift,skilift.name)"/>
+      </ng-container>
+      <span class="slider" ></span>
     </label>
   </div>
 </div>
