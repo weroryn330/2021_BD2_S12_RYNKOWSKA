@@ -45,9 +45,10 @@ export class UserPassesComponent implements OnInit {
     })
   }
 
-  refundPass(idPass: number) {
+  refundPass(idPass: number, index: number) {
     this.passService.refundPass(idPass).subscribe((data: any) => {
       alert("Pomyślny zwrot karnetu");
+      this.passesList.splice(index, 1);
     }, error => {
       alert("Niepomyślny zwrot karnetu");
     })

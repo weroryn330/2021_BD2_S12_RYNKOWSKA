@@ -4,7 +4,7 @@
       <pagination-controls (pageChange)="page= $event"></pagination-controls>
     </div>
   </ng-container>
-  <div class="infoTime" *ngFor="let pass of passesList | paginate: {itemsPerPage: 2, currentPage: page}"
+  <div class="infoTime" *ngFor="let pass of passesList | paginate: {itemsPerPage: 2, currentPage: page}; index as i"
       >
     <ul class="price" [ngClass]="{activePass : pass.isActive }">
       <li class="header">KARNET</li>
@@ -20,7 +20,7 @@
     </ul>
     <div class="buttonInput" (click)="downloadQR(pass.idPass)">Pobierz karnet</div>
     <ng-container *ngIf="canBeRefunded(pass)">
-      <div class="buttonInput" (click)="refundPass(pass.idPass)">Zwróć karnet</div>
+      <div class="buttonInput" (click)="refundPass(pass.idPass, i)">Zwróć karnet</div>
     </ng-container>
   </div>
 </div>

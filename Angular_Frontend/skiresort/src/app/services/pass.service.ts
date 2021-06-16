@@ -40,7 +40,7 @@ export class PassService {
   }
 
   refundPass(idPass: number): Observable<any> {
-    return this.http.delete(this.endPoint+'/passes/' + idPass);
+    return this.http.delete(this.endPoint+'/return_passes/' + idPass);
   }
 
   changeBlockage(idPass: number): Observable<any> {
