@@ -112,6 +112,15 @@ public class OwnerEmployeeService {
         var user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
         var userRoles = roleRepository.findByUserId(user.getIdUser());
+        if (roleRepository.findByUserId(user.getIdUser())
+                .stream()
+                .anyMatch(role -> role.getRoleName().equals("ROLE_OWNER")
+                && roleRepository.countOwners() == 1)
+        ) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "You are the only owner and you can not run away from your responsibilities");
+        }
         if (userRoles.stream().anyMatch(role -> role.getRoleName().equals(roleName))) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already in role");
         } else {

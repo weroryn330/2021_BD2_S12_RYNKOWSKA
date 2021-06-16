@@ -34,4 +34,13 @@ public interface RoleRepository extends JpaRepository<Role, Integer> {
     @Modifying
     @Transactional
     void deleteRolesByUserId(@Param("userId") Integer userId);
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT COUNT(*) FROM ROLES " +
+                    "INNER JOIN users_roles ur on roles.id_role = ur.roles_id_role " +
+                    "AND roles.role_name LIKE 'ROLE_OWNER'"
+    )
+    @Transactional
+    Integer countOwners();
 }
