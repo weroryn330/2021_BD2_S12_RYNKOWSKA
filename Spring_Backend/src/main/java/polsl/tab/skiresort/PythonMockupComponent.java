@@ -10,10 +10,10 @@ import java.io.*;
 import java.util.Optional;
 
 enum OS {
-    WINDOWS("cmd"),
+    WINDOWS(""),
     LINUX("bash"),
     MAC("bash"),
-    NONE("");
+    NONE("NONE");
 
     public final String commandLineRunner;
 
@@ -36,6 +36,10 @@ public class PythonMockupComponent {
     private final String postgresUsername;
 
     private final String postgresPassword;
+
+    private final Float pause;
+
+    private final Integer duration;
 
     private OS checkOS() {
         var os = System.getProperty("os.name").toLowerCase();
@@ -75,6 +79,8 @@ public class PythonMockupComponent {
     public PythonMockupComponent(
             @Value("${resort.mockup.pythonCommandLineInterpreter:#{null}}") Optional<String> interpreter,
             @Value("${resort.mockup.pythonMockupAbsolutePathToMain:#{null}}") Optional<String> path,
+            @Value("${resort.python.mockup.pause}") Float pause,
+            @Value("${resort.python.mockup.duration}") Integer mockupDuration,
             @Value("${spring.datasource.username}") String postgresUsername,
             @Value("${spring.datasource.password}") String postgresPassword
     ) {
@@ -82,6 +88,8 @@ public class PythonMockupComponent {
         this.pythonMockupAbsolutePathToMain = path.orElse("");
         this.postgresPassword = postgresPassword;
         this.postgresUsername = postgresUsername;
+        this.duration = mockupDuration;
+        this.pause = pause;
     }
 
     @Async("pythonMockupExecutor")
@@ -92,14 +100,16 @@ public class PythonMockupComponent {
             logger.error("Path or interpreter not provided");
             return;
         }
-        if (operatingSystem.commandLineRunner.isBlank()) {
+        if (operatingSystem.commandLineRunner.equals("NONE")) {
             logger.error("Operating system not detected could not execute script");
             return;
         }
         processBuilder.command(operatingSystem.commandLineRunner, "-c", pythonCommandLineInterpreter + " "
                         + pythonMockupAbsolutePathToMain + " "
                         + postgresUsername + " "
-                        + postgresPassword);
+                        + postgresPassword + " "
+                        + pause + " "
+                        + duration);
         this.runtime();
     }
 }

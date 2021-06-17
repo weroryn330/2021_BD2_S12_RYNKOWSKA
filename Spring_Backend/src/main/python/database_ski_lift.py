@@ -1,11 +1,24 @@
 import psycopg2
 
-def connection(dbUsername, dbPassword):
+
+class User:
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+    def get_username(self):
+        return self.username
+
+    def get_password(self):
+        return self.password
+
+
+def connection(user, password):
     conn = psycopg2.connect(
         host="localhost",
         database="Ski_Resort",
-        user=dbUsername,
-        password=dbPassword)
+        user=user,
+        password=password)
     return conn
 
 
@@ -56,11 +69,15 @@ def update_passes_uses(conn, usages, id_pass):
     cur = conn.cursor()
     cur.execute("UPDATE passes SET uses_left = " + str(usages) + " WHERE id_pass = " + str(id_pass))
 
-def insert_to_usages(conn, passes_id, ski_lift_id, time_stamp):
+
+def insert_to_usages(conn, index, passes_id, ski_lift_id, time_stamp):
     cur = conn.cursor()
-    cur.execute("INSERT INTO usages(passes_id_invoice_item, ski_lift_id_ski_lift, use_timestamp, success_flag) "
-                "VALUES (" + str(passes_id) + "," + str(ski_lift_id) + ",'" + time_stamp +"', 1)")
-    conn.commit()
+    try:
+        cur.execute("INSERT INTO usages(id_usage, passes_id_invoice_item, ski_lift_id_ski_lift, use_timestamp, success_flag) "
+                    "VALUES ("+ str(index) +"," + str(passes_id) + "," + str(ski_lift_id) + ",'" + time_stamp +"', 1)")
+        conn.commit()
+    except:
+        print("Exception: id_usage " + str(index) + " already exists ")
 
 
 def get_skilifts_count(conn):
@@ -75,6 +92,13 @@ def get_passes_count(conn):
     cur.execute('SELECT MAX(id_pass) FROM passes')
     ski_lifts_count = cur.fetchall()
     return ski_lifts_count[0][0]
+
+
+def delete_mockup_usages(conn, all_used_ids):
+    cur = conn.cursor()
+    for _id in all_used_ids:
+        cur.execute("DELETE FROM usages WHERE id_usage = " + str(_id))
+    conn.commit()
 
 
 

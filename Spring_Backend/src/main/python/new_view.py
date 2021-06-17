@@ -15,54 +15,49 @@ class Time:
         return self.time
 
 
-def start_up(min_max_on_one_ski_lift, max_on_one_ski_lift, dbUsername, dbPassword):
-    conn = db.connection(dbUsername, dbPassword)
+def start_up(min_max_on_one_ski_lift, max_on_one_ski_lift, user, all_used_ids):
+    conn = db.connection(user.get_username(), user.get_password())
     ski_lifts_count = db.get_skilifts_count(conn)
-
+    conn.close()
+    index = 55
     for ski_lift_id in range(1, ski_lifts_count+1):
         for _ in range(10, randint(min_max_on_one_ski_lift, max_on_one_ski_lift)):
+            all_used_ids.append(index)
             actual_time = int(time.time()) - randint(30, 300)
             timestamp = datetime.datetime.fromtimestamp(actual_time).strftime('%Y-%m-%d %H:%M:%S')
-            db.insert_to_usages(conn, randint(1, db.get_passes_count(conn)), ski_lift_id,
+            conn = db.connection(user.get_username(), user.get_password())
+            db.insert_to_usages(conn, index, randint(1, db.get_passes_count(conn)), ski_lift_id,
                                 str(timestamp))
+            conn.close()
+            index += 1
             time.sleep(0.02)
 
 
 
 
 
-def simulation(pause_value, dbUsername, dbPassword):
-    actual_time = int(time.time())
-    mad = datetime.datetime.fromtimestamp(actual_time).strftime('%Y-%m-%d %H:%M:%S')
-    conn = db.connection(dbUsername, dbPassword)
-    passes = db.get_passes(conn)
-    db.insert_to_usages(conn, 3, 2, str(mad))
-    passes_count = db.get_passes_count(conn)
-    index_skilifts = db.get_skilifts_count(conn)
-    # print(" SKI LIFTSSSS = " + str(index_skilifts))
-    # print(" PASEES = " + str(passes_count))
-
-    while 1 == 1:
-        actual_time = int(time.time())
-        timestamp = datetime.datetime.fromtimestamp(actual_time).strftime('%Y-%m-%d %H:%M:%S')
-        db.insert_to_usages(conn, randint(1, db.get_passes_count(conn)), randint(1, db.get_skilifts_count(conn)),
-                            str(timestamp))
-        time.sleep(pause_value)
-
-
-def initialize_view(tk, wrapper, dbUsername, dbPassword):
-    start_up(20, 30, dbUsername, dbPassword)
-    wrapper.pack(fill="both", expand="yes", padx=20, pady=20)
+def simulation(pause_value, user:db.User, delta_t:int, all_used_ids):
+    start_time_unix = int(time.time())
+    index = 1000
+    try:
+        while (int(time.time()) - delta_t) < start_time_unix:
+            all_used_ids.append(index)
+            actual_time = int(time.time())
+            timestamp = datetime.datetime.fromtimestamp(actual_time).strftime('%Y-%m-%d %H:%M:%S')
+            conn = db.connection(user.get_username(), user.get_password())
+            db.insert_to_usages(conn, index, randint(1, db.get_passes_count(conn)),
+                                randint(1, db.get_skilifts_count(conn)), str(timestamp))
+            conn.close()
+            index += 1
+            time.sleep(pause_value)
+    except KeyboardInterrupt:
+        pass
 
 
-    btn_simulation_low = Button(wrapper, text="low",
-                                command=lambda: simulation(1.5))
-    btn_simulation_low.place(relx=0.45, rely=0.06)
-
-    btn_simulation_medium = Button(wrapper, text="medium",
-                                   command=lambda: simulation(1))
-    btn_simulation_medium.place(relx=0.45, rely=0.40)
-
-    btn_simulation_high = Button(wrapper, text="high",
-                                 command=lambda: simulation(0.5))
-    btn_simulation_high.place(relx=0.45, rely=0.76)
+def initialize_view(user: db.User, delta_t: int, pause_sec: float):
+    all_used_ids = []
+    start_up(20, 30, user, all_used_ids)
+    simulation(pause_sec, user, delta_t, all_used_ids)
+    conn = db.connection(user.get_username(), user.get_password())
+    db.delete_mockup_usages(conn, all_used_ids)
+    conn.close()
