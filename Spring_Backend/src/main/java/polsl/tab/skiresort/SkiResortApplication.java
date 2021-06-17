@@ -10,6 +10,8 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import java.io.IOException;
+
 @SpringBootApplication
 @EnableAsync
 public class SkiResortApplication implements CommandLineRunner {
@@ -29,7 +31,7 @@ public class SkiResortApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) {
+    public void run(String... args) throws IOException {
         logger.info("Starting python mockup process");
         pythonMockupComponent.startPythonProcess();
     }

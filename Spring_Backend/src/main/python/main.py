@@ -3,15 +3,22 @@ import new_view as v
 from tkinter import *
 import tkinter as tk
 import database_ski_lift as db
-root = tk.Tk()
 
-wrapper = LabelFrame(root, text="Symulejszyn")
-wrapper_skilifts = LabelFrame(root, text="Ski Lifts")
-v.initialize_view(tk, wrapper)
+def main():
+    root = tk.Tk()
 
-root.title("DOSKOZAAAA")
-root.geometry("300x200")
-root.mainloop()
+    print("Python mockup invoked!")
+    wrapper = LabelFrame(root, text="Symulejszyn")
+    wrapper_skilifts = LabelFrame(root, text="Ski Lifts")
+    v.initialize_view(tk, wrapper)
+
+    root.title("DOSKOZAAAA")
+    root.geometry("300x200")
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
+
 # def convertTuple(tuple):
 #     str = ''.join(tuple)
 #     return str
