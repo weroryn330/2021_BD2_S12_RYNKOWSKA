@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EmployeeService} from "../../../../../services/employee.service";
 import {RegistrationRequest} from "../../../../../classes/registration-request";
 
@@ -26,7 +26,7 @@ export class ElementPasswordFormComponent implements OnInit {
         alert("Zmiana hasła przebiegła pomyślnie");
       },
       error => {
-        console.log(error.message);
+        console.log(error.error);
         alert("Hasło nie może być takie samo");
       })
   }

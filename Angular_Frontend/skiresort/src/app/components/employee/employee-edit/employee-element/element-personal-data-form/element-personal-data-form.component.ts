@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EmployeeService} from "../../../../../services/employee.service";
 import {RegistrationRequest} from "../../../../../classes/registration-request";
 
@@ -9,23 +9,20 @@ import {RegistrationRequest} from "../../../../../classes/registration-request";
 })
 export class ElementPersonalDataFormComponent implements OnInit {
   @Input() employee: any;
+  @Output() newEmployeeChangeEvent = new EventEmitter<any>();
   form: any = {
     firstName: null,
     lastName: null,
     country: null,
-   // email: null,
-   // emailRepetition: null,
     phone: null,
     voivodeship: null,
     postalCode: null,
     city: null,
     address: null
-   // password: null,
-    //passwordRepetition: null,
-    //employeeType: "ROLE_TECHNICIAN"
   }
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService) {
+  }
 
   ngOnInit(): void {
     this.fillData();
@@ -65,6 +62,7 @@ export class ElementPersonalDataFormComponent implements OnInit {
       phone, voivodeship, postalCode, city, address, '');
     this.employeeService.updateEmployeePersonalData(registrationRequest).subscribe(data => {
         alert("Zmiana danych osobowych przebiegła pomyślnie");
+        this.newEmployeeChangeEvent.emit(data);
       },
       error => {
         console.log(error.message);

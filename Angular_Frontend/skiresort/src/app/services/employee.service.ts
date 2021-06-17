@@ -30,14 +30,14 @@ export class EmployeeService {
   }
 
   updateEmployeePassword(registrationRequest: RegistrationRequest) {
-    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/password', this.httpOptions);
+    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/password',registrationRequest, this.httpOptions);
   }
 
   updateEmployeeEmail(registrationRequest: RegistrationRequest) {
-    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/email', this.httpOptions);
+    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/email',registrationRequest, this.httpOptions);
   }
 
   updateEmployeePersonalData(registrationRequest: RegistrationRequest) {
-    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/details', this.httpOptions);
+    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/details',registrationRequest, this.httpOptions);
   }
 }

@@ -19,12 +19,17 @@ export class EmployeeEditComponent implements OnInit {
 
   private getEmployeesList() {
     this.employeeService.getEmployees().subscribe((data: any) => {
-      this.employeesList = data;
-      console.log(data);
-    },
+        this.employeesList = data;
+        console.log(data);
+      },
       error => {
         alert("Nie znaleziono pracowników");
         this.employeesList = [];
       })
+  }
+
+  updateEmployee(newEmployee: any, index: number) {
+    if (index === newEmployee[1])
+      this.employeesList[index] = newEmployee[0];
   }
 }

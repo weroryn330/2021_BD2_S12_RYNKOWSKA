@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EmployeeService} from "../../../../../services/employee.service";
 import {RegistrationRequest} from "../../../../../classes/registration-request";
 
@@ -9,11 +9,13 @@ import {RegistrationRequest} from "../../../../../classes/registration-request";
 })
 export class ElementRoleFormComponent implements OnInit {
   @Input() employee: any;
+  @Output() newEmployeeChangeEvent = new EventEmitter<any>();
   form: any = {
     employeeType: "ROLE_TECHNICIAN"
   }
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService) {
+  }
 
   ngOnInit(): void {
   }
@@ -21,6 +23,7 @@ export class ElementRoleFormComponent implements OnInit {
   onSubmit() {
     this.employeeService.updateEmployeeRole(this.employee.email, this.form.employeeType).subscribe(data => {
         alert("Zmiana roli przebiegła pomyślnie");
+        this.newEmployeeChangeEvent.emit(data);
       },
       error => {
         console.log(error.message);

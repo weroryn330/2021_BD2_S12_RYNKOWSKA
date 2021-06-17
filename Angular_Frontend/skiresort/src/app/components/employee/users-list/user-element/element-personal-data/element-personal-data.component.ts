@@ -11,14 +11,15 @@ export class ElementPersonalDataComponent implements OnInit {
   @Input() user: any;
   @Output() newCloseComponentEvent = new EventEmitter<number>();
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-    closePersonalData(){
+  closePersonalData() {
     this.newCloseComponentEvent.emit(1);
-    }
+  }
 
 
 }
