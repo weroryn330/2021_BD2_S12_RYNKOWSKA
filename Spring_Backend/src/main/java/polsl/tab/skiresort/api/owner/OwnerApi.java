@@ -74,14 +74,17 @@ public class OwnerApi {
         return ResponseEntity.ok(ownerEmployeeService.editEmployeeDetails(request));
     }
 
-    @PutMapping("/ediAccount/password")
+    @PutMapping("/editAccount/password")
     public ResponseEntity<UserResponse> editEmployeePassword(@RequestBody UserRequest request) {
         return ResponseEntity.ok(ownerEmployeeService.editEmployeePassword(request));
     }
 
-    @PutMapping("/ediAccount/email")
-    public ResponseEntity<UserResponse> editEmployeeEmail(@RequestBody UserRequest request) {
-        return ResponseEntity.ok(ownerEmployeeService.editEmployeeEmail(request));
+    @PutMapping("/editAccount/email")
+    public ResponseEntity<UserResponse> editEmployeeEmail(
+            @RequestBody UserRequest request,
+            @RequestParam("newEmail") String newEmail
+    ) {
+        return ResponseEntity.ok(ownerEmployeeService.editEmployeeEmail(request, newEmail));
     }
 
     @PutMapping("/editAccount/editRole")

@@ -88,11 +88,11 @@ public class OwnerEmployeeService {
         return new UserResponse(userRepository.save(User.editMapping(user, request)));
     }
 
-    public UserResponse editEmployeeEmail(UserRequest request) {
+    public UserResponse editEmployeeEmail(UserRequest request, String newEmail) {
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-        if (userRepository.findByEmail(request.getEmail()).isEmpty()) {
-            user.setEmail(request.getEmail());
+        if (userRepository.findByEmail(newEmail).isEmpty()) {
+            user.setEmail(newEmail);
             return new UserResponse(userRepository.save(user));
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User with email already exists");
