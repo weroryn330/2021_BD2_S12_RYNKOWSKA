@@ -33,8 +33,8 @@ export class EmployeeService {
     return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/password',registrationRequest, this.httpOptions);
   }
 
-  updateEmployeeEmail(registrationRequest: RegistrationRequest) {
-    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/email',registrationRequest, this.httpOptions);
+  updateEmployeeEmail(registrationRequest: RegistrationRequest, newEmail: string) {
+    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/email?newEmail=' + newEmail,registrationRequest, this.httpOptions);
   }
 
   updateEmployeePersonalData(registrationRequest: RegistrationRequest) {

@@ -23,10 +23,10 @@ export class ElementEmailFormComponent implements OnInit {
 
   onSubmit() {
     const registrationRequest = new RegistrationRequest(this.employee.firstName, this.employee.lastName,
-      this.employee.country, this.form.email, this.employee.phone, this.employee.voivodeship,
+      this.employee.country, this.employee.email, this.employee.phone, this.employee.voivodeship,
       this.employee.postalCode, this.employee.city, this.employee.address, '');
 
-    this.employeeService.updateEmployeeEmail(registrationRequest).subscribe(data => {
+    this.employeeService.updateEmployeeEmail(registrationRequest, this.form.email).subscribe(data => {
         alert("Zmiana adresu email przebiegła pomyślnie");
         this.newEmployeeChangeEvent.emit(data);
       },
