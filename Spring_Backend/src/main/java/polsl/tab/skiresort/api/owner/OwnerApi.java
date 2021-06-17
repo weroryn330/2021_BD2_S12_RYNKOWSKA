@@ -1,6 +1,10 @@
 package polsl.tab.skiresort.api.owner;
 
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import polsl.tab.skiresort.api.entry.request.UserRequest;
@@ -102,4 +106,18 @@ public class OwnerApi {
     ) {
         return ResponseEntity.ok(registerService.registerUser(request, roleName));
     }
+
+    @GetMapping("/businessReport")
+    public ResponseEntity<Resource> downloadBusinessReport(@RequestParam("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                                           @RequestParam("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate){
+
+        final InputStreamResource resource = new InputStreamResource(ownerEmployeeService.getBusinessReport(
+                startDate,
+                endDate));
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"businessReport" + startDate +"-" + endDate + ".pdf\"")
+                .contentType(MediaType.parseMediaType("application/pdf"))
+                .body(resource);
+    }
+    
 }
