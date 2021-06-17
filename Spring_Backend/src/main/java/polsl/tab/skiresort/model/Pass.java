@@ -41,6 +41,8 @@ public class Pass {
 
     private Integer usesLeft;
 
+    private Boolean blocked;
+
     @ManyToOne
     @JoinColumn(name = "price_list_id_price_list")
     private PriceList priceList;
@@ -65,6 +67,7 @@ public class Pass {
         this.birthDate = birthDate;
         this.priceList = priceList;
         this.invoicesIdInvoice = invoice;
+        this.blocked = false;
     }
 
     public Pass(Float unitPrice,
@@ -84,6 +87,7 @@ public class Pass {
         this.usesLeft = usesLeft;
         this.priceList = priceList;
         this.invoicesIdInvoice = invoice;
+        this.blocked = false;
     }
 
     public Pass() {
@@ -187,6 +191,14 @@ public class Pass {
 
     public void setUsageList(List<Usage> usageList) {
         this.usageList = usageList;
+    }
+
+    public Boolean getBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(Boolean blocked) {
+        this.blocked = blocked;
     }
 
     public static Pass from(PassRequest request, Invoice invoice, PriceList priceList) {

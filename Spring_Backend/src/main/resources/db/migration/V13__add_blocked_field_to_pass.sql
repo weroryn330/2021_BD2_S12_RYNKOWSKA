@@ -1,0 +1,1 @@
+ALTER TABLE passes ADD COLUMN blocked BOOLEAN;

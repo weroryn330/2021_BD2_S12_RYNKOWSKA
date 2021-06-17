@@ -1,6 +1,8 @@
 package polsl.tab.skiresort.api.employee.service;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import polsl.tab.skiresort.api.employee.response.PassesResponse;
 import polsl.tab.skiresort.model.Pass;
 import polsl.tab.skiresort.repository.PassRepository;
@@ -19,6 +21,7 @@ public class EmployeePassesService {
 
     private PassesResponse mapPassResponse(Pass pass) {
         return new PassesResponse(
+                pass.getIdPass(),
                 pass.getUnitPrice(),
                 pass.getInvoicesIdInvoice().getUserIdUser().getEmail(),
                 pass.getStartDate(),
@@ -46,4 +49,15 @@ public class EmployeePassesService {
                 .map(this::mapPassResponse)
                 .collect(Collectors.toList());
     }
+
+    public PassesResponse setPassBlock(Integer passId) {
+        Pass pass=passRepository.findById(passId).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pass not found"));
+        if(pass.getBlocked() == null)
+            pass.setBlocked(true);
+        else
+            pass.setBlocked(!pass.getBlocked());
+        passRepository.save(pass);
+        return mapPassResponse(pass);
+    }
+
 }
