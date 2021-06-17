@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class PassesResponse {
 
-    private final Integer idPass;
+    private final Integer id;
 
     private final Float unitPrice;
 
@@ -24,7 +24,8 @@ public class PassesResponse {
 
     private final Integer usesLeft;
 
-    public PassesResponse(Integer idPass, Float unitPrice,
+    public PassesResponse(Integer id,
+                          Float unitPrice,
                           String invoiceOwnerEmail,
                           Date startDate,
                           Date endDate,
@@ -34,7 +35,7 @@ public class PassesResponse {
                           Integer usesTotal,
                           Integer usesLeft
     ) {
-        this.idPass = idPass;
+        this.id = id;
         this.unitPrice = unitPrice;
         this.invoiceOwnerEmail = invoiceOwnerEmail;
         this.startDate = startDate;
@@ -46,7 +47,9 @@ public class PassesResponse {
         this.usesLeft = usesLeft;
     }
 
-    public Integer getIdPass() { return idPass; }
+    public Integer getId() {
+        return id;
+    }
 
     public Float getUnitPrice() {
         return unitPrice;
