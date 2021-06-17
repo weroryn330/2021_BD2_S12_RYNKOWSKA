@@ -23,7 +23,7 @@
     </div>
   </ng-container>
   <div class="button" *ngFor="let pass of passesList | paginate: {itemsPerPage: 2, currentPage: page}"
-       (click)="downloadReport(pass.idPass, startDate.value, endDate.value)">
+       (click)="downloadReport(pass.id, startDate.value, endDate.value)">
     <div>{{pass.firstName}} {{pass.lastName}}</div>
     <ng-container *ngIf="pass.endDate || pass.startDate">
       <div> Ważny od: {{pass.startDate | date: 'dd-MM-yyyy HH:mm:ss'}}</div>

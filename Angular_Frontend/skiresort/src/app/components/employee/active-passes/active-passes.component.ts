@@ -19,7 +19,7 @@ export class ActivePassesComponent implements OnInit {
   private loadActivePasses() {
   this.passService.getActivePasses().subscribe(data => {
     console.log(data);
-      data.map((pass: any) => this.activePasses.push(new PassResponse(pass.idPass, pass.unitPrice, pass.firstName,
+      data.map((pass: any) => this.activePasses.push(new PassResponse(pass.id, pass.unitPrice, pass.firstName,
         pass.lastName, pass.startDate, pass.endDate, pass.birthDate, pass.usesTotal, pass.usesLeft))
       )
       this.activePasses.sort(function (x, y) {
@@ -32,10 +32,12 @@ export class ActivePassesComponent implements OnInit {
       })
   }
 
-  changeBlockage(idPass: number) {
-    console.log(idPass);
-    this.passService.changeBlockage(idPass).subscribe(data => {
+  changeBlockage(id: number, index: number) {
+    console.log(id);
+    this.passService.changeBlockage(id).subscribe(data => {
         alert("Blokada karnetu została zmieniona");
+        console.log(data);
+        this.activePasses[index] = data;
       },
       error => {
         alert("Nie udało się zmienić ustawienia blokady karnetu");

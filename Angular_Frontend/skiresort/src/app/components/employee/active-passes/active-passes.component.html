@@ -4,7 +4,7 @@
       <pagination-controls (pageChange)="page= $event"></pagination-controls>
     </div>
   </ng-container>
-  <div class="infoTime" *ngFor="let pass of activePasses | paginate: {itemsPerPage: 4, currentPage: page}">
+  <div class="infoTime" *ngFor="let pass of activePasses | paginate: {itemsPerPage: 4, currentPage: page} ; index as i">
     <ul class="price">
       <li class="header">{{pass.firstName}} {{pass.lastName}}</li>
       <li class="detail">Data urodzenia: {{pass.birthDate}}</li>
@@ -19,10 +19,10 @@
       </ng-container>
     </ul>
     <ng-container *ngIf="pass.blocked">
-      <div class="buttonInput" (click)="changeBlockage(pass.idPass)">Odblokuj karnet</div>
+      <div class="buttonInput" (click)="changeBlockage(pass.id, i)">Odblokuj karnet</div>
     </ng-container>
     <ng-container *ngIf="!pass.blocked">
-      <div class="buttonInput" (click)="changeBlockage(pass.idPass)">Zablokuj karnet</div>
+      <div class="buttonInput" (click)="changeBlockage(pass.id, i)">Zablokuj karnet</div>
     </ng-container>
   </div>
 </div>

@@ -39,11 +39,11 @@ export class PassService {
       {responseType: 'blob'});
   }
 
-  refundPass(idPass: number): Observable<any> {
-    return this.http.delete(this.endPoint+'/return_passes/' + idPass);
+  refundPass(id: number): Observable<any> {
+    return this.http.delete(this.endPoint+'/return_passes/' + id);
   }
 
-  changeBlockage(idPass: number): Observable<any> {
-    return this.http.put(this.endPoint+'/passes/' + idPass, this.httpOptions);
+  changeBlockage(id: number): Observable<any> {
+    return this.http.put(this.endPoint+'/employee/blockPass/' + id, this.httpOptions);
   }
 }

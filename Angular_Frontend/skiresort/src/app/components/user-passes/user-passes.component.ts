@@ -22,7 +22,7 @@ export class UserPassesComponent implements OnInit {
 
   private getUserPasses() {
     this.passService.getUserPasses().subscribe(data => {
-        data.map(pass => this.passesList.push(new PassResponse(pass.idPass, pass.unitPrice, pass.firstName,
+        data.map(pass => this.passesList.push(new PassResponse(pass.id, pass.unitPrice, pass.firstName,
           pass.lastName, pass.startDate, pass.endDate, pass.birthDate, pass.usesTotal, pass.usesLeft))
         )
         this.passesList.sort(function (x, y) {
@@ -36,17 +36,17 @@ export class UserPassesComponent implements OnInit {
       })
   }
 
-  downloadQR(idPass: number) {
-    this.passService.getQR(idPass).subscribe((data: any) => {
+  downloadQR(id: number) {
+    this.passService.getQR(id).subscribe((data: any) => {
       let blob: any = new Blob([data], {type: 'text/json'});
-      fileSaver.saveAs(blob, 'karnet' + idPass + '.jpg');
+      fileSaver.saveAs(blob, 'karnet' + id + '.jpg');
     }, error => {
       alert("Coś poszło nie tak...");
     })
   }
 
-  refundPass(idPass: number, index: number) {
-    this.passService.refundPass(idPass).subscribe((data: any) => {
+  refundPass(id: number, index: number) {
+    this.passService.refundPass(id).subscribe((data: any) => {
       alert("Pomyślny zwrot karnetu");
       this.passesList.splice(index, 1);
     }, error => {

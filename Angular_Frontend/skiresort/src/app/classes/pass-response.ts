@@ -1,5 +1,5 @@
 export class PassResponse {
-  idPass: number;
+  id: number;
   unitPrice: number;
   firstName: string;
   lastName: string ;
@@ -13,8 +13,8 @@ export class PassResponse {
 
 
 
-  constructor(idPass: number, unitPrice: number, firstName: string, lastName: string, startDate: any, endDate: any, birthDate: string, usesTotal: number, usesLeft: number) {
-    this.idPass = idPass;
+  constructor(id: number, unitPrice: number, firstName: string, lastName: string, startDate: any, endDate: any, birthDate: string, usesTotal: number, usesLeft: number) {
+    this.id = id;
     this.unitPrice = unitPrice;
     this.firstName = firstName;
     this.lastName = lastName;

@@ -18,9 +18,9 @@
         <li class="detail">Zostało zjazdów: {{pass.usesLeft}}</li>
       </ng-container>
     </ul>
-    <div class="buttonInput" (click)="downloadQR(pass.idPass)">Pobierz karnet</div>
+    <div class="buttonInput" (click)="downloadQR(pass.id)">Pobierz karnet</div>
     <ng-container *ngIf="canBeRefunded(pass)">
-      <div class="buttonInput" (click)="refundPass(pass.idPass, i)">Zwróć karnet</div>
+      <div class="buttonInput" (click)="refundPass(pass.id, i)">Zwróć karnet</div>
     </ng-container>
   </div>
 </div>
