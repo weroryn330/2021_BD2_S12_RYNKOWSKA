@@ -15,8 +15,8 @@ class Time:
         return self.time
 
 
-def start_up(min_max_on_one_ski_lift, max_on_one_ski_lift):
-    conn = db.connection()
+def start_up(min_max_on_one_ski_lift, max_on_one_ski_lift, dbUsername, dbPassword):
+    conn = db.connection(dbUsername, dbPassword)
     ski_lifts_count = db.get_skilifts_count(conn)
 
     for ski_lift_id in range(1, ski_lifts_count+1):
@@ -31,10 +31,10 @@ def start_up(min_max_on_one_ski_lift, max_on_one_ski_lift):
 
 
 
-def simulation(pause_value):
+def simulation(pause_value, dbUsername, dbPassword):
     actual_time = int(time.time())
     mad = datetime.datetime.fromtimestamp(actual_time).strftime('%Y-%m-%d %H:%M:%S')
-    conn = db.connection()
+    conn = db.connection(dbUsername, dbPassword)
     passes = db.get_passes(conn)
     db.insert_to_usages(conn, 3, 2, str(mad))
     passes_count = db.get_passes_count(conn)
@@ -50,8 +50,8 @@ def simulation(pause_value):
         time.sleep(pause_value)
 
 
-def initialize_view(tk, wrapper):
-    start_up(20, 30)
+def initialize_view(tk, wrapper, dbUsername, dbPassword):
+    start_up(20, 30, dbUsername, dbPassword)
     wrapper.pack(fill="both", expand="yes", padx=20, pady=20)
 
 

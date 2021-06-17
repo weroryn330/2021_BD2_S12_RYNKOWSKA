@@ -1,11 +1,11 @@
 import psycopg2
 
-def connection():
+def connection(dbUsername, dbPassword):
     conn = psycopg2.connect(
         host="localhost",
         database="Ski_Resort",
-        user="postgres",
-        password="root")
+        user=dbUsername,
+        password=dbPassword)
     return conn
 
 

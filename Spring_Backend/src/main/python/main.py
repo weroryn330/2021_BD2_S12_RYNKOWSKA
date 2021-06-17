@@ -3,14 +3,16 @@ import new_view as v
 from tkinter import *
 import tkinter as tk
 import database_ski_lift as db
+import sys
 
 def main():
+    dbUsername = sys.argv[1]
+    dbPassword = sys.argv[2]
     root = tk.Tk()
-
     print("Python mockup invoked!")
     wrapper = LabelFrame(root, text="Symulejszyn")
     wrapper_skilifts = LabelFrame(root, text="Ski Lifts")
-    v.initialize_view(tk, wrapper)
+    v.initialize_view(tk, wrapper, dbUsername, dbPassword)
 
     root.title("DOSKOZAAAA")
     root.geometry("300x200")

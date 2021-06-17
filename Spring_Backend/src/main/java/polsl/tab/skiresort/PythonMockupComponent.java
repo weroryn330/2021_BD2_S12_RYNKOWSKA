@@ -32,6 +32,10 @@ public class PythonMockupComponent {
 
     private final String pythonMockupAbsolutePathToMain;
 
+    private final String postgresUsername;
+
+    private final String postgresPassword;
+
     private OS checkOS() {
         var os = System.getProperty("os.name").toLowerCase();
         if (os.contains("unix") || os.contains("nux") || os.contains("aix")) {
@@ -68,10 +72,14 @@ public class PythonMockupComponent {
 
     public PythonMockupComponent(
             @Value("${resort.mockup.pythonCommandLineInterpreter}") String interpreter,
-            @Value("${resort.mockup.pythonMockupAbsolutePathToMain}") String path
+            @Value("${resort.mockup.pythonMockupAbsolutePathToMain}") String path,
+            @Value("${spring.datasource.username}") String postgresUsername,
+            @Value("${spring.datasource.password}") String postgresPassword
     ) {
         this.pythonCommandLineInterpreter = interpreter;
         this.pythonMockupAbsolutePathToMain = path;
+        this.postgresPassword = postgresPassword;
+        this.postgresUsername = postgresUsername;
     }
 
     @Async("pythonMockupExecutor")
@@ -83,7 +91,11 @@ public class PythonMockupComponent {
             case LINUX: {
                 processBuilder.command(operatingSystem.commandLineRunner,
                         "-c",
-                        pythonCommandLineInterpreter + " " + pythonMockupAbsolutePathToMain);
+                        pythonCommandLineInterpreter + " "
+                                + pythonMockupAbsolutePathToMain + " "
+                                + postgresUsername + " "
+                                + postgresPassword
+                );
                 break;
             }
             case WINDOWS: {
