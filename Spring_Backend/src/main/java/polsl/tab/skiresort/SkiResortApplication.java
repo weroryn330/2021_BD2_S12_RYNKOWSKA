@@ -2,6 +2,7 @@ package polsl.tab.skiresort;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,8 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
-import java.io.IOException;
 
 @SpringBootApplication
 @EnableAsync
@@ -22,8 +21,14 @@ public class SkiResortApplication implements CommandLineRunner {
 
     private final PythonMockupComponent pythonMockupComponent;
 
-    public SkiResortApplication(PythonMockupComponent pythonMockupComponent) {
+    private final Boolean pythonMockupRun;
+
+    public SkiResortApplication(
+            @Value("${resort.python.mockup.run}") Boolean pythonMockupRun,
+            PythonMockupComponent pythonMockupComponent
+    ) {
         this.pythonMockupComponent = pythonMockupComponent;
+        this.pythonMockupRun = pythonMockupRun;
     }
 
     public static void main(String[] args) {
@@ -31,9 +36,11 @@ public class SkiResortApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws IOException {
-        logger.info("Starting python mockup process");
-        pythonMockupComponent.startPythonProcess();
+    public void run(String... args) {
+        if (Boolean.TRUE.equals(pythonMockupRun)) {
+            logger.info("Starting python mockup process");
+            pythonMockupComponent.startPythonProcess();
+        }
     }
 
     @Bean("pythonMockupExecutor")

@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.util.Optional;
 
 enum OS {
     WINDOWS("cmd"),
@@ -51,6 +52,7 @@ public class PythonMockupComponent {
 
     private void runtime() {
         try {
+            logger.info("--------- Welcome to python mockup ---------");
             var process = processBuilder.start();
             var bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             var bufferedErrorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
@@ -71,13 +73,13 @@ public class PythonMockupComponent {
     }
 
     public PythonMockupComponent(
-            @Value("${resort.mockup.pythonCommandLineInterpreter}") String interpreter,
-            @Value("${resort.mockup.pythonMockupAbsolutePathToMain}") String path,
+            @Value("${resort.mockup.pythonCommandLineInterpreter:#{null}}") Optional<String> interpreter,
+            @Value("${resort.mockup.pythonMockupAbsolutePathToMain:#{null}}") Optional<String> path,
             @Value("${spring.datasource.username}") String postgresUsername,
             @Value("${spring.datasource.password}") String postgresPassword
     ) {
-        this.pythonCommandLineInterpreter = interpreter;
-        this.pythonMockupAbsolutePathToMain = path;
+        this.pythonCommandLineInterpreter = interpreter.orElse("");
+        this.pythonMockupAbsolutePathToMain = path.orElse("");
         this.postgresPassword = postgresPassword;
         this.postgresUsername = postgresUsername;
     }
@@ -86,28 +88,18 @@ public class PythonMockupComponent {
     public void startPythonProcess() {
         var operatingSystem = checkOS();
         processBuilder = new ProcessBuilder();
-        logger.info("--------- Welcome to python mockup ---------");
-        switch (operatingSystem) {
-            case LINUX: {
-                processBuilder.command(operatingSystem.commandLineRunner,
-                        "-c",
-                        pythonCommandLineInterpreter + " "
-                                + pythonMockupAbsolutePathToMain + " "
-                                + postgresUsername + " "
-                                + postgresPassword
-                );
-                break;
-            }
-            case WINDOWS: {
-                return;
-            }
-            case MAC: {
-                return;
-            }
-            case NONE: {
-                logger.error("Operating system not detected could not execute script");
-            }
+        if (pythonCommandLineInterpreter.isBlank() || pythonMockupAbsolutePathToMain.isBlank()) {
+            logger.error("Path or interpreter not provided");
+            return;
         }
+        if (operatingSystem.commandLineRunner.isBlank()) {
+            logger.error("Operating system not detected could not execute script");
+            return;
+        }
+        processBuilder.command(operatingSystem.commandLineRunner, "-c", pythonCommandLineInterpreter + " "
+                        + pythonMockupAbsolutePathToMain + " "
+                        + postgresUsername + " "
+                        + postgresPassword);
         this.runtime();
     }
 }
