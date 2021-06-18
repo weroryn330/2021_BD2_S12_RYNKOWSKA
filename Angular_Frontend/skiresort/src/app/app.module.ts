@@ -45,6 +45,9 @@ import { QuantityPassesElementComponent } from './components/employee/pricelist-
 import { ElementEmailFormComponent } from './components/employee/employee-edit/employee-element/element-email-form/element-email-form.component';
 import { ElementPasswordFormComponent } from './components/employee/employee-edit/employee-element/element-password-form/element-password-form.component';
 import { ElementRoleFormComponent } from './components/employee/employee-edit/employee-element/element-role-form/element-role-form.component';
+import { ElementSingleDiscountComponent } from './components/employee/pricelist-edit/discounts-element/element-single-discount/element-single-discount.component';
+import { ElementSingleQuantityPassComponent } from './components/employee/pricelist-edit/quantity-passes-element/element-single-quantity-pass/element-single-quantity-pass.component';
+import { ElementSingleTimePassComponent } from './components/employee/pricelist-edit/time-passes-element/element-single-time-pass/element-single-time-pass.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +87,10 @@ import { ElementRoleFormComponent } from './components/employee/employee-edit/em
     QuantityPassesElementComponent,
     ElementEmailFormComponent,
     ElementPasswordFormComponent,
-    ElementRoleFormComponent
+    ElementRoleFormComponent,
+    ElementSingleDiscountComponent,
+    ElementSingleQuantityPassComponent,
+    ElementSingleTimePassComponent
   ],
     imports: [
         BrowserModule,
