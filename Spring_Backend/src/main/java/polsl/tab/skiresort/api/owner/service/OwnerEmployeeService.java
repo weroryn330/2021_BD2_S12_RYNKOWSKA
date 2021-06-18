@@ -145,6 +145,9 @@ public class OwnerEmployeeService {
             var newRoleList = new ArrayList<Role>();
             newRoleList.add(roleRepository.findByRoleName(roleName)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no such role")));
+            if(roleName.equals("ROLE_OWNER"))
+                newRoleList.add(roleRepository.findByRoleName("ROLE_EMPLOYEE")
+                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no such role")));
             user.setRoleList(newRoleList);
             return new UserResponse(userRepository.save(user));
         }

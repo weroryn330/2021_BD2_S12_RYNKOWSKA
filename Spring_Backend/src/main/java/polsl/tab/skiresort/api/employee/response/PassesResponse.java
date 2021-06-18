@@ -24,6 +24,8 @@ public class PassesResponse {
 
     private final Integer usesLeft;
 
+    private final Boolean blocked;
+
     public PassesResponse(Integer id,
                           Float unitPrice,
                           String invoiceOwnerEmail,
@@ -33,7 +35,8 @@ public class PassesResponse {
                           String lastName,
                           Date birthDate,
                           Integer usesTotal,
-                          Integer usesLeft
+                          Integer usesLeft,
+                          Boolean blocked
     ) {
         this.id = id;
         this.unitPrice = unitPrice;
@@ -45,6 +48,7 @@ public class PassesResponse {
         this.birthDate = birthDate;
         this.usesTotal = usesTotal;
         this.usesLeft = usesLeft;
+        this.blocked = blocked;
     }
 
     public Integer getId() {
@@ -85,5 +89,9 @@ public class PassesResponse {
 
     public Integer getUsesLeft() {
         return usesLeft;
+    }
+
+    public Boolean getBlocked() {
+        return blocked;
     }
 }
