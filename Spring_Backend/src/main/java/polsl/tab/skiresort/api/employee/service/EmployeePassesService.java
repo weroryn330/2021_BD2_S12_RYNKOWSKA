@@ -30,7 +30,8 @@ public class EmployeePassesService {
                 pass.getLastName(),
                 pass.getBirthDate(),
                 pass.getUsesTotal(),
-                pass.getUsesLeft()
+                pass.getUsesLeft(),
+                pass.getBlocked()
         );
     }
 
