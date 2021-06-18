@@ -26,18 +26,28 @@ export class EmployeeService {
 
 
   updateEmployeeRole(email: string, role: string) {
-    return this.http.put(this.endPoint + 'owner/editAccount/editRole?email=' + email + '&roleName=' + role, '', this.httpOptions);
+    return this.http.put(this.endPoint + 'owner/editAccount/editRole?email=' +
+      email + '&roleName=' + role, '', this.httpOptions);
   }
 
   updateEmployeePassword(registrationRequest: RegistrationRequest) {
-    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/password',registrationRequest, this.httpOptions);
+    return this.http.put<RegistrationRequest>(this.endPoint +
+      'owner/editAccount/password', registrationRequest, this.httpOptions);
   }
 
   updateEmployeeEmail(registrationRequest: RegistrationRequest, newEmail: string) {
-    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/email?newEmail=' + newEmail,registrationRequest, this.httpOptions);
+    return this.http.put<RegistrationRequest>(this.endPoint +
+      'owner/editAccount/email?newEmail=' + newEmail, registrationRequest, this.httpOptions);
   }
 
   updateEmployeePersonalData(registrationRequest: RegistrationRequest) {
-    return this.http.put<RegistrationRequest>(this.endPoint + 'owner/editAccount/details',registrationRequest, this.httpOptions);
+    return this.http.put<RegistrationRequest>(this.endPoint +
+      'owner/editAccount/details', registrationRequest, this.httpOptions);
+  }
+
+
+  getBusinessReportPDF(startDate: string, endDate: string): Observable<any> {
+    return this.http.get(this.endPoint + 'owner/businessReport?startDate=' +
+      startDate + '&endDate=' + endDate, {responseType: 'blob'});
   }
 }

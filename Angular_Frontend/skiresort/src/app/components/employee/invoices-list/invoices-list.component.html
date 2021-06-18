@@ -21,6 +21,7 @@
   <div class="button" *ngFor="let invoice of invoicesList | paginate: {itemsPerPage: 5, currentPage: page}"
        (click)="downloadInvoicePDF(invoice.id, invoice.invoiceDate)">
     Faktura z dnia: {{invoice.invoiceDate}}<br>
+    Email: {{invoice.userEmail}}<br>
     Kwota: {{invoice.total}}
   </div>
   <ng-container *ngIf="invoicesList">
