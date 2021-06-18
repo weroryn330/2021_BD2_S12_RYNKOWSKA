@@ -10,6 +10,7 @@ import {PassResponse} from "../../../classes/pass-response";
 export class ActivePassesComponent implements OnInit {
   activePasses: PassResponse[] = [];
   page = 1;
+  itemsPerPage=4;
   constructor(private passService: PassService) { }
 
   ngOnInit(): void {
