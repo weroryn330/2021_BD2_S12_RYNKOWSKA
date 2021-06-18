@@ -1,0 +1,118 @@
+#liftsStyleContainer {
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("/styles/images/about.jpg");
+  background-size: cover;
+  background-position: center center;
+
+  position: relative;
+
+  height: 100%;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.liftsContainer {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+
+  max-height: fit-content;
+  padding: 30px;
+}
+
+.card {
+  background: rgba(0, 0, 0, 0.26);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+
+  border: 10px;
+
+  margin: auto;
+  margin-bottom: 40px;
+
+  max-height: fit-content;
+  min-width: 300px;
+
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.cardLogo {
+  background-color: rgba(255, 255, 255, 0.5);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  list-style-type: none;
+}
+
+img {
+  margin: 5px 0;
+  width: 120px;
+  border-radius: 100px;
+  border: 3px solid black;
+}
+
+.name {
+    background-color: rgba(2, 133, 255, 0.199);
+    list-style-type: none;
+    font-size: 35px;
+    padding: 5px;
+    text-shadow: 2px 2px 1px black;
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+}
+
+.height {
+    border-bottom: 2px solid black;
+    padding: 5px;
+    text-shadow: 1px 1px 4px black;
+    list-style-type: none;
+}
+
+span {
+    font-size: 10px;
+}
+
+.people {
+    border-bottom: 2px solid black;
+    padding: 5px;
+    text-shadow: 1px 1px 4px black;
+    list-style-type: none;
+}
+
+.height {
+    border-bottom: 2px solid black;
+    padding: 5px;
+    text-shadow: 1px 1px 4px black;
+    list-style-type: none;
+}
+
+.openingTime {
+    border-bottom: 2px solid black;
+    padding: 5px;
+    text-shadow: 1px 1px 4px black;
+    list-style-type: none;
+}
+
+.closeTime {
+    border-bottom: 2px solid black;
+    padding: 5px;
+    text-shadow: 1px 1px 4px black;
+    list-style-type: none;
+}
+
+.isOpen {
+    background-color: rgba(94, 247, 6, 0.247);
+    padding: 5px;
+    text-shadow: 1px 1px 4px black;
+    list-style-type: none;
+}

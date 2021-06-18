@@ -46,7 +46,7 @@ public interface SkiLiftScheduleRepository extends JpaRepository<SkiLiftSchedule
 
     @Query(
             nativeQuery = true,
-            value = "SELECT ss FROM ski_lift_schedules ss, ski_lifts sl " +
+            value = "SELECT ss.* FROM ski_lift_schedules ss, ski_lifts sl " +
                     "WHERE ss.ski_lift_id_ski_lift = sl.id_ski_lift " +
                     "AND sl.id_ski_lift = :skiLiftId " +
                     "AND :currentDate >= ss.start_date " +
