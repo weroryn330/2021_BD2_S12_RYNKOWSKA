@@ -47,44 +47,6 @@ main {
   flex-direction: column;
 }
 
-.userData {
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-left: 1px solid rgba(255, 255, 255, 0.5);
-
-  border-radius: 10px;
-
-  margin: 15px;
-  padding: 30px;
-
-  min-height: 60vh;
-  min-width: 250px;
-
-  font-weight: 600;
-  font-size: 18px;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-
-  display: flex;
-  flex-direction: column;
-}
-
-.userData img {
-  width: 80px;
-  border: 2px solid rgba(0, 0, 0, 0.5);
-  border-radius: 50px;
-}
-
-.userData .data {
-  margin-top: 30px;
-}
-
-.userData .data h5 {
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 300;
-}
-
 .actions {
   margin: 15px;
 
@@ -96,6 +58,9 @@ main {
 
   display: flex;
   flex-direction: column;
+  position: sticky;
+  bottom: 40px;
+  top: 40px;
 }
 
 .actions .button {
@@ -127,4 +92,65 @@ main {
   border-left: 1px solid rgba(255, 255, 255, 0.5);
   border-right: 1px solid rgba(0, 0, 0, 1);
   border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+.userData {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+
+  border-radius: 10px;
+
+  margin: 15px;
+  padding: 30px;
+
+  min-height: 60vh;
+  min-width: 250px;
+
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  flex-direction: column;
+
+  position: sticky;
+  bottom: 40px;
+  top: 40px;
+}
+
+.userData img {
+  width: 80px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50px;
+}
+
+.userData .data {
+  margin-top: 30px;
+}
+
+.userData .data h5 {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+}
+
+.mainData {
+  margin-top: 25px;
+}
+
+.mainData h5 {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+@media (max-width: 900px) {
+  .actions {
+    top: unset;
+  }
+  .userData {
+    bottom: unset;
+  }
 }
