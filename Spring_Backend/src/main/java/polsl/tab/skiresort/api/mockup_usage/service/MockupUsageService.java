@@ -42,8 +42,6 @@ public class MockupUsageService {
     }
 
     public List<SkiLiftMockupUsageResponse> getCurrentSkiLiftsUsage() {
-        return new ArrayList<>();
-        /*
         return skiLiftRepository
                 .findAll()
                 .stream()
@@ -59,9 +57,13 @@ public class MockupUsageService {
                                     skiLift.getIdSkiLift(),
                                     Date.valueOf(LocalDate.now())
                         ).orElseThrow(() -> new ResponseStatusException(
-                                HttpStatus.BAD_REQUEST, "Ski lift schedule does not exist for " + skiLift.getName()
-                                )))
-                )).collect(Collectors.toList());
-                */
+                                HttpStatus.BAD_REQUEST,
+                                        "Ski lift schedule does not exist for " + skiLift.getName()
+                                )
+                            )
+                        )
+                    )
+                ).collect(Collectors.toList())
+        ;
     }
 }
