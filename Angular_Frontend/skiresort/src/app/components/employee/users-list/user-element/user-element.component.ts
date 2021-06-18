@@ -16,13 +16,13 @@ export class UserElementComponent implements OnInit {
   }
 
   showInvoices() {
-    this.areInvoicesVisible = true;
+    this.areInvoicesVisible = !this.areInvoicesVisible;
     this.arePersonalDataVisible = false;
   }
 
   showPersonalData() {
     this.areInvoicesVisible = false;
-    this.arePersonalDataVisible = true;
+    this.arePersonalDataVisible = !this.arePersonalDataVisible;
   }
 
   closeComponent(option: number) {

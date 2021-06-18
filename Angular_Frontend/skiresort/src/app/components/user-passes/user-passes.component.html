@@ -7,7 +7,15 @@
   <div class="infoTime" *ngFor="let pass of passesList |
   paginate: {itemsPerPage: 2, currentPage: page}; index as i">
     <ul class="price" [ngClass]="{activePass : pass.isActive && !pass.blocked, blockedPass : pass.blocked }">
-      <li class="header">KARNET</li>
+      <ng-container *ngIf="pass.blocked && pass.isActive">
+        <li class="header">KARNET ZABLOKOWANY</li>
+      </ng-container>
+      <ng-container *ngIf="!pass.blocked && pass.isActive">
+        <li class="header">KARNET AKTYWNY</li>
+      </ng-container>
+      <ng-container *ngIf="!pass.isActive">
+        <li class="header">KARNET NIEAKTYWNY</li>
+      </ng-container>
       <li class="detail">{{pass.firstName}} {{pass.lastName}} </li>
       <ng-container *ngIf="pass.endDate || pass.startDate">
         <li class="detail">Ważny od: {{pass.startDate | date: 'dd-MM-yyyy HH:mm:ss'}}</li>
