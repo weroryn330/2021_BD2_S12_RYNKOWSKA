@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.Optional;
 
 enum OS {
-    WINDOWS(""),
+    WINDOWS("cmd"),
     LINUX("bash"),
     MAC("bash"),
     NONE("NONE");
@@ -28,6 +28,8 @@ public class PythonMockupComponent {
     private static final Logger logger = LoggerFactory.getLogger(PythonMockupComponent.class);
 
     private ProcessBuilder processBuilder;
+
+    private Process process;
 
     private final String pythonCommandLineInterpreter;
 
@@ -54,24 +56,34 @@ public class PythonMockupComponent {
         }
     }
 
-    private void runtime() {
+    private void startProcess() {
         try {
+            process = processBuilder.start();
+            this.runtime();
+        } catch(IOException e) {
+            logger.error(e.getMessage());
+        }
+    }
+
+    private void runtime() {
+        try(
+                var bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                var bufferedErrorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()))
+        ) {
             logger.info("--------- Welcome to python mockup ---------");
-            var process = processBuilder.start();
-            var bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            var bufferedErrorReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
             var message = "";
             while ((message = bufferedErrorReader.readLine()) != null) {
-                logger.info("Python: " + message);
+                logger.info("Python: {}", message);
             }
             while ((message = bufferedReader.readLine()) != null) {
-                logger.info("Python: " + message);
+                logger.info("Python: {}", message);
             }
-            logger.info("Python: Exited with code " + process.waitFor());
-            bufferedReader.close();
-            logger.info("---------- Goodbye python mockup -----------");
-        } catch (IOException | InterruptedException e) {
+            logger.info("Python: Exited with code {}", process.waitFor());
+        } catch (IOException e) {
             logger.error(e.getMessage());
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } finally {
             logger.info("---------- Goodbye python mockup -----------");
         }
     }
@@ -100,16 +112,30 @@ public class PythonMockupComponent {
             logger.error("Path or interpreter not provided");
             return;
         }
-        if (operatingSystem.commandLineRunner.equals("NONE")) {
-            logger.error("Operating system not detected could not execute script");
-            return;
+        var command = pythonCommandLineInterpreter + " "
+                + pythonMockupAbsolutePathToMain + " "
+                + postgresUsername + " "
+                + postgresPassword + " "
+                + pause + " "
+                + duration;
+        switch (operatingSystem) {
+            case LINUX: {
+                processBuilder.command(operatingSystem.commandLineRunner, "-c", command);
+                break;
+            }
+            case WINDOWS: {
+                processBuilder.command(operatingSystem.commandLineRunner, "/C", command);
+                break;
+            }
+            case MAC: {
+                logger.error("Macs are not supported yet - contact developers");
+                return;
+            }
+            case NONE: {
+                logger.error("Operating system not detected could not execute script");
+                return;
+            }
         }
-        processBuilder.command(operatingSystem.commandLineRunner, "-c", pythonCommandLineInterpreter + " "
-                        + pythonMockupAbsolutePathToMain + " "
-                        + postgresUsername + " "
-                        + postgresPassword + " "
-                        + pause + " "
-                        + duration);
-        this.runtime();
+        this.startProcess();
     }
 }
