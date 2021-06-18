@@ -215,7 +215,7 @@ public class User {
         }
     }
 
-    public static User editMapping(User currentUser, UserRequest body, Boolean hardEdit) {
+    public static User editMapping(User currentUser, UserRequest body) {
         currentUser.setFirstName(body.getFirstName());
         currentUser.setLastName(body.getLastName());
         currentUser.setAddress(body.getAddress());
@@ -224,9 +224,6 @@ public class User {
         currentUser.setCountry(body.getCountry());
         currentUser.setPostalCode(body.getPostalCode());
         currentUser.setPhone(body.getPhone());
-        if (Boolean.TRUE.equals(hardEdit)) {
-            currentUser.setEmail(body.getEmail());
-        }
         return currentUser;
     }
 }

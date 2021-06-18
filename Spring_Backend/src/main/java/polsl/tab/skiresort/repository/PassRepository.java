@@ -52,6 +52,8 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
 
     Optional<Pass> deleteByInvoicesIdInvoiceAndIdPass(Invoice invoice, Integer passId);
 
+    Optional<Pass> deleteByIdPass(Integer passId);
+
     @Query(
             nativeQuery = true,
             value = "SELECT * FROM PASSES p " +

@@ -74,14 +74,12 @@
             <artifactId>pdfbox</artifactId>
             <version>3.0.0-RC1</version>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.github.dhorions/boxable -->
         <dependency>
             <groupId>com.github.dhorions</groupId>
             <artifactId>boxable</artifactId>
             <version>1.6</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
