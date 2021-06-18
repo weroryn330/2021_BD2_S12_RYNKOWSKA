@@ -91,7 +91,7 @@ public class Pass {
     }
 
     public Pass() {
-
+        this.blocked = false;
     }
 
     public Integer getIdPass() {
