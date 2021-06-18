@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import * as fileSaver from "file-saver";
 import {EmployeeService} from "../../../services/employee.service";
 
@@ -13,7 +13,8 @@ export class BusinessReportsComponent implements OnInit {
     endDate: null
   }
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService) {
+  }
 
   ngOnInit(): void {
   }
@@ -21,11 +22,13 @@ export class BusinessReportsComponent implements OnInit {
   downloadBusinessReportPDF(startDate: string, endDate: string) {
     this.employeeService.getBusinessReportPDF(startDate, endDate).subscribe((data: any) => {
       let blob: any = new Blob([data], {type: 'application/pdf'});
-      fileSaver.saveAs(blob, 'raport-biznesowy_' + startDate + '_' + endDate + '.pdf');
+      fileSaver.saveAs(blob, 'raport-biznesowy_' + startDate.replace('-', '') +
+        '_' + endDate.replace('-', '') + '.pdf');
     }, error => {
       alert("Coś poszło nie tak...");
     })
   }
+
   onSubmit() {
     this.downloadBusinessReportPDF(this.form.startDate, this.form.endDate);
   }

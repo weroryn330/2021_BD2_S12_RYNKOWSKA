@@ -35,7 +35,8 @@ export class InvoicesListComponent implements OnInit {
   downloadInvoicePDF(invoiceId: number, invoiceDate: string) {
     this.invoiceService.getUserInvoicePDF(invoiceId).subscribe((data: any) => {
       let blob: any = new Blob([data], {type: 'application/pdf'});
-      fileSaver.saveAs(blob, 'faktura_' + invoiceId + '_' + invoiceDate + '.pdf');
+      fileSaver.saveAs(blob, 'faktura_' + invoiceId + '_' +
+        invoiceDate.replace('-', '') + '.pdf');
     }, error => {
       alert("Coś poszło nie tak...");
     })
