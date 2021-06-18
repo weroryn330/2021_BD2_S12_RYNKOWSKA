@@ -1,1 +1,27 @@
-<p>element-single-discount works!</p>
+<div class="mainContainer">
+  <div class="content">
+    <form #f="ngForm" name="form">
+      <div class="user-details">
+        <ng-container *ngIf="discount.ageMin>=0 && discount.ageMax<=3 ">
+          <div class="inputBoxBill">Zniżka dla dzieci:</div>
+        </ng-container>
+        <ng-container *ngIf="discount.ageMin>=4 && discount.ageMax<=18 ">
+          <div class="inputBoxBill">Zniżka szkolna:</div>
+        </ng-container>
+        <ng-container *ngIf="discount.ageMin>=19 && discount.ageMax<=26 ">
+          <div class="inputBoxBill">Zniżka studencka:</div>
+        </ng-container>
+        <div class="inputBoxBill">
+          <input type="number" placeholder="{{discount.percentage}}" [disabled]="discountsApproved"
+                 [(ngModel)]="form.percentage" #percentage="ngModel" name="percentage" required
+                 [ngClass]="{error :  percentage.touched && percentage.errors}"
+                 (blur)="(f.form.valid || onSubmitInvalidData()) && onSubmit()"
+                 min="0" max="100" step="0.5">
+        </div>
+        <ng-container *ngIf="isSubmitted">
+          OK
+        </ng-container>
+      </div>
+    </form>
+  </div>
+</div>

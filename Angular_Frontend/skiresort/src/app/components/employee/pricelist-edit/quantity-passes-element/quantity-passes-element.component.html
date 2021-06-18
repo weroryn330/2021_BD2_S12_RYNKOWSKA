@@ -1,1 +1,27 @@
-<p>quantity-passes-element works!</p>
+<div class="mainContainer">
+  <h2>Karnety zjazdowe</h2>
+  <div *ngFor="let quantityPass of quantityPasses; index as i">
+    <app-element-single-quantity-pass [quantityPass]="quantityPass" [index]="i" [passesApproved]="areQuantityPassesValid"
+                                      (newQuantityPassDeletionEvent)="deleteQuantityPass($event)"
+                                      (newQuantityPassModificationEvent)="modifyQuantityPass($event)">
+    </app-element-single-quantity-pass>
+  </div>
+  <ng-container *ngIf="!areQuantityPassesValid && isButtonClicked">Niepoprawne lub niezatwierdzone karnety!
+  </ng-container>
+  <ng-container *ngIf="!areQuantityPassesValid">
+    <div class="buttonContainer">
+      <div class="button" (click)="addNewPass()">Dodaj nowy karnet</div>
+    </div>
+    <div class="buttonContainer">
+      <div class="button" (click)="acceptQuantityPasses()">Zatwierdź karnety zjazdowe</div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="areQuantityPassesValid && isButtonClicked">
+    <div class="buttonContainer">
+      <div class="buttonDisabled" >Dodaj nowy karnet</div>
+    </div>
+    <div class="buttonContainer">
+      <div class="buttonDisabled" >Zatwierdź karnety zjazdowe</div>
+    </div>
+  </ng-container>
+</div>

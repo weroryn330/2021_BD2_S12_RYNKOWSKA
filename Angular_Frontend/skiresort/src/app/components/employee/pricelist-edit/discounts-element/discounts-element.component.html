@@ -1,1 +1,19 @@
-<p>discounts-element works!</p>
+<div class="mainContainer">
+  <h2>Zniżki</h2>
+  <div *ngFor="let discount  of ageDiscounts; index as i">
+    <app-element-single-discount [discount]="discount" [index]="i" [discountsApproved]="areDiscountsValid"
+                                 (newInvalidInput)="invalidInputOccured($event)"
+                                 (newDiscountModification)="modifyDiscountsList($event)"></app-element-single-discount>
+  </div>
+  <ng-container *ngIf="!areDiscountsValid && isButtonClicked">Niepoprawne zniżki!</ng-container>
+  <ng-container *ngIf="!areDiscountsValid">
+    <div class="buttonContainer">
+      <div class="button" (click)="acceptDiscounts()">Zatwierdź zniżki</div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="areDiscountsValid">
+    <div class="buttonContainer">
+      <div class="buttonDisabled">Zatwierdź zniżki</div>
+    </div>
+  </ng-container>
+</div>
