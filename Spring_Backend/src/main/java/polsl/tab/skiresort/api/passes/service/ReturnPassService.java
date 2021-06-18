@@ -39,10 +39,10 @@ public class ReturnPassService {
         if(invoice.getPassList().size() != 1) {
             invoice.setTotal(invoice.getTotal() - pass.getUnitPrice());
             invoiceRepository.save(invoice);
-            return new PassResponse(passRepository.deleteByIdPass(passId).get());
+            return new PassResponse(passRepository.deleteByIdPass(pass).get());
         }
         else {
-            var returnPass = passRepository.deleteByIdPass(passId).get();
+            var returnPass = passRepository.deleteByIdPass(pass).get();
             invoiceRepository.deleteById(invoice.getIdInvoice());
             return new PassResponse(returnPass);
         }
