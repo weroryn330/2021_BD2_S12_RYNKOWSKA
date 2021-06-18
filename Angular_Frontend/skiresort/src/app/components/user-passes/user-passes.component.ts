@@ -23,7 +23,7 @@ export class UserPassesComponent implements OnInit {
   private getUserPasses() {
     this.passService.getUserPasses().subscribe(data => {
         data.map(pass => this.passesList.push(new PassResponse(pass.id, pass.unitPrice, pass.firstName,
-          pass.lastName, pass.startDate, pass.endDate, pass.birthDate, pass.usesTotal, pass.usesLeft))
+          pass.lastName, pass.startDate, pass.endDate, pass.birthDate, pass.usesTotal, pass.usesLeft, pass.blocked))
         )
         this.passesList.sort(function (x, y) {
           return (y.isActive ? 1 : 0) - (x.isActive ? 1 : 0)
@@ -56,10 +56,10 @@ export class UserPassesComponent implements OnInit {
 
   canBeRefunded(pass: PassResponse): boolean {
     if(pass.startDate && pass.endDate){
-      return new Date(pass.startDate).getTime() > Date.now();
+      return (new Date(pass.startDate).getTime() > Date.now()) && !pass.blocked;
     }
     else if(pass.usesTotal){
-      return pass.usesTotal === pass.usesLeft;
+      return (pass.usesTotal === pass.usesLeft) && !pass.blocked;
     }
     return false;
   }

@@ -20,7 +20,7 @@ export class ActivePassesComponent implements OnInit {
   this.passService.getActivePasses().subscribe(data => {
     console.log(data);
       data.map((pass: any) => this.activePasses.push(new PassResponse(pass.id, pass.unitPrice, pass.firstName,
-        pass.lastName, pass.startDate, pass.endDate, pass.birthDate, pass.usesTotal, pass.usesLeft))
+        pass.lastName, pass.startDate, pass.endDate, pass.birthDate, pass.usesTotal, pass.usesLeft, pass.blocked))
       )
       this.activePasses.sort(function (x, y) {
         return x.lastName.localeCompare(y.lastName);

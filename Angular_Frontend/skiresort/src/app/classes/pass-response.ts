@@ -2,18 +2,18 @@ export class PassResponse {
   id: number;
   unitPrice: number;
   firstName: string;
-  lastName: string ;
+  lastName: string;
   startDate: any;
   endDate: any;
   birthDate: string;
   usesTotal: number;
   usesLeft: number;
-  blocked: boolean = false;
+  blocked: boolean;
   isActive: boolean;
 
 
-
-  constructor(id: number, unitPrice: number, firstName: string, lastName: string, startDate: any, endDate: any, birthDate: string, usesTotal: number, usesLeft: number) {
+  constructor(id: number, unitPrice: number, firstName: string, lastName: string, startDate: any,
+              endDate: any, birthDate: string, usesTotal: number, usesLeft: number, blocked: boolean) {
     this.id = id;
     this.unitPrice = unitPrice;
     this.firstName = firstName;
@@ -23,11 +23,11 @@ export class PassResponse {
     this.birthDate = birthDate;
     this.usesTotal = usesTotal;
     this.usesLeft = usesLeft;
-    if(startDate || endDate){
+    this.blocked = blocked;
+    if (startDate || endDate) {
       this.isActive = (new Date() < new Date(endDate)) ? true : false;
-    }
-    else{
-      this.isActive = usesLeft>0 ? true : false;
+    } else {
+      this.isActive = usesLeft > 0 ? true : false;
     }
   }
 

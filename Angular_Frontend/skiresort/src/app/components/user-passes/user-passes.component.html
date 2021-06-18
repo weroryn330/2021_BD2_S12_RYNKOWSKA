@@ -4,9 +4,9 @@
       <pagination-controls (pageChange)="page= $event"></pagination-controls>
     </div>
   </ng-container>
-  <div class="infoTime" *ngFor="let pass of passesList | paginate: {itemsPerPage: 2, currentPage: page}; index as i"
-      >
-    <ul class="price" [ngClass]="{activePass : pass.isActive }">
+  <div class="infoTime" *ngFor="let pass of passesList |
+  paginate: {itemsPerPage: 2, currentPage: page}; index as i">
+    <ul class="price" [ngClass]="{activePass : pass.isActive && !pass.blocked, blockedPass : pass.blocked }">
       <li class="header">KARNET</li>
       <li class="detail">{{pass.firstName}} {{pass.lastName}} </li>
       <ng-container *ngIf="pass.endDate || pass.startDate">

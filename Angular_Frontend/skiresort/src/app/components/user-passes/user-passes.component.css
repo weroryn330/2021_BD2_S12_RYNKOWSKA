@@ -35,9 +35,11 @@
   justify-content: center;
 }
 .activePass {
-  background: rgba(150, 255, 150, 0.1);
+  background: rgba(50, 255, 50, 0.3);
 }
-
+.blockedPass {
+  background: rgba(255, 50, 50, 0.3);
+}
 /* Info block div */
 .infoTime, .infoQua {
   background: rgba(255, 255, 255, 0.1);
