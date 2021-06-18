@@ -381,16 +381,21 @@ public class BusinessReportBuilder {
             for(int i = 0; i < TIME_PASS_TYPES.length; i++){
                 Color color = i % 2 != 1 ? Color.LIGHT_GRAY : Color.WHITE;
                 int finalI = i;
-                List<Pass> passesFiltered = timePasses.stream().filter(pass -> TimeUnit.MILLISECONDS.toHours(pass.getEndDate().getTime() - pass.getStartDate().getTime()) == TIME_PASS_TYPES[finalI]).collect(Collectors.toList());
                 Row<PDPage> row = table.createRow(20);
-                cell = row.createCell(50, TIME_PASS_TYPES[i] + " godzin");
+                String hours;
+                if(i % 2 == 0 && i != TIME_PASS_TYPES.length - 1)
+                    hours = " godziny";
+                else
+                    hours = " godzin";
+
+                cell = row.createCell(50, TIME_PASS_TYPES[i] + hours);
                 cell.setFontSize(12);cell.setFillColor(color);
                 cell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
                 cell.setBottomBorderStyle(new LineStyle(Color.DARK_GRAY, 1));
                 cell = row.createCell(50, Long.toString(usages.stream().filter(
                         usage -> usage.getSkiLiftIdSkiLift().equals(skiLift) &&
                                 usage.getPassesIdInvoiceItem().getUsesTotal() == null &&
-                                usage.getPassesIdInvoiceItem().getEndDate().getTime() - usage.getPassesIdInvoiceItem().getStartDate().getTime() == TIME_PASS_TYPES[finalI]).count()));
+                                TimeUnit.MILLISECONDS.toHours(usage.getPassesIdInvoiceItem().getEndDate().getTime() - usage.getPassesIdInvoiceItem().getStartDate().getTime()) == TIME_PASS_TYPES[finalI]).count()));
                 cell.setFontSize(12);cell.setFillColor(color);
                 cell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
                 cell.setBottomBorderStyle(new LineStyle(Color.DARK_GRAY, 1));

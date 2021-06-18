@@ -25,6 +25,8 @@ public class PassResponse {
 
     private final Integer usesLeft;
 
+    private final Boolean blocked;
+
     public PassResponse(Pass pass) {
         this.id = pass.getIdPass();
         this.unitPrice = pass.getUnitPrice();
@@ -35,6 +37,7 @@ public class PassResponse {
         this.birthDate = pass.getBirthDate();
         this.usesTotal = pass.getUsesTotal();
         this.usesLeft = pass.getUsesLeft();
+        this.blocked = pass.getBlocked();
     }
 
     public Integer getId() {
@@ -71,5 +74,9 @@ public class PassResponse {
 
     public Integer getUsesLeft() {
         return usesLeft;
+    }
+
+    public Boolean getBlocked() {
+        return blocked;
     }
 }
