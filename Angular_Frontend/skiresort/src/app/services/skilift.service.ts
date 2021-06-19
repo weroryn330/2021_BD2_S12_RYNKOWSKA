@@ -30,7 +30,7 @@ export class SkiliftService {
   }
 
   updateSchedule(scheduleUpdateRequest: ScheduleUpdateRequest) {
-    return this.http.put(this.endPoint + '/skiLiftSchedule/',
+    return this.http.put(this.endPoint + '/employee/skiLiftSchedule',
       scheduleUpdateRequest, this.httpOptions );
   }
 }

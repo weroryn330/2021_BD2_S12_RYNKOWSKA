@@ -10,28 +10,29 @@ import {ScheduleUpdateRequest} from "../../../../classes/schedule-update-request
 export class SingleScheduleElementComponent implements OnInit {
   @Input() schedule: any;
   @Input() index: any;
-  @Output() newScheduleModificationEvent = new EventEmitter<[ any, number]>();
+  @Output() newScheduleModificationEvent = new EventEmitter<[any, number]>();
   form: any = {
     opensTime: null,
     closesTime: null
   }
 
-  constructor(private skiliftService: SkiliftService) { }
+  constructor(private skiliftService: SkiliftService) {
+  }
 
   ngOnInit(): void {
-    this.form.opensTime = this.schedule.opensTime;
-    this.form.closesTime = this.schedule.closesTime;
+    this.form.opensTime = this.schedule.opensTime.substring(0, 5);
+    this.form.closesTime = this.schedule.closesTime.substring(0, 5);
   }
 
   onSubmit() {
-    this.skiliftService.updateSchedule(new ScheduleUpdateRequest(this.form.opensTime,
-      this.form.closesTime, this.schedule.skiLiftId, this.schedule.skiLiftScheduleId)).subscribe( data => {
-        console.log(data);
-        this.newScheduleModificationEvent.emit([data,this.index]);
-        alert("Pomyślnie zmodyfikowano rozkład dla wyciągu "+ this.schedule.skiLiftName);
+    this.skiliftService.updateSchedule(new ScheduleUpdateRequest(this.form.opensTime + ':00',
+      this.form.closesTime + ':00', this.schedule.skiLiftId)).subscribe(data => {
+      console.log(data);
+      this.newScheduleModificationEvent.emit([data, this.index]);
+      alert("Pomyślnie zmodyfikowano rozkład dla wyciągu " + this.schedule.skiLiftName);
     }, error => {
       console.log(error.error.message);
-      alert("Niepomyślnie zmodyfikowano rozkład dla wyciągu "+ this.schedule.skiLiftName);
+      alert("Niepomyślnie zmodyfikowano rozkład dla wyciągu " + this.schedule.skiLiftName);
     })
   }
 }
