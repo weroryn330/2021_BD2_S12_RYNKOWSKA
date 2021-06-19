@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import polsl.tab.skiresort.model.Invoice;
 import polsl.tab.skiresort.model.Pass;
 
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Optional;
@@ -52,7 +53,11 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
 
     Optional<Pass> deleteByInvoicesIdInvoiceAndIdPass(Invoice invoice, Integer passId);
 
+    @Transactional
     Optional<Pass> deleteByIdPass(Integer passId);
+
+    @Transactional
+    Optional<Pass> deleteByIdPass(Pass pass);
 
     @Query(
             nativeQuery = true,
