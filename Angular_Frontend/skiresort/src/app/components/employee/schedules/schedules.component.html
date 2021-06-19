@@ -1,1 +1,6 @@
-<p>schedules works!</p>
+<div class="mainContainer">
+  <div *ngFor="let schedule of skiliftSchedulesList; index as i">
+    <app-single-schedule-element [schedule]="schedule" [index]="i"
+                                 (newScheduleModificationEvent)="updateSchedule($event)"></app-single-schedule-element>
+  </div>
+</div>
