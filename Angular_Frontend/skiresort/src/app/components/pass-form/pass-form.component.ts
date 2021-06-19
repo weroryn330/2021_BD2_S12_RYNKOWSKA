@@ -129,4 +129,9 @@ export class PassFormComponent implements OnInit {
       this.calculatePrice(this.form.usesTotal);
     }
   }
+
+  invalidBirthDate() {
+    return (new Date(this.form.birthDate) < new Date('1920-01-01')) ||
+      (new Date(this.form.birthDate) > new Date())
+  }
 }

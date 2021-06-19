@@ -25,17 +25,17 @@ export class LoginComponent implements OnInit {
   }
 
 
-
   onSubmit() {
     const {email, password} = this.form;
     this.loginService.login(email, password).subscribe(data => {
         this.token.saveToken(data.token);
         this.token.saveUser(data);
-        alert("Zalogowano pomyślnie!" + data.token);
-        this.router.navigateByUrl('/welcome');      },
+        alert("Zalogowano pomyślnie!");
+        this.router.navigateByUrl('/welcome');
+      },
       error => {
-
-        alert("Logowanie niepomyślne!" + error.error);
+        console.log(error);
+        alert("Logowanie niepomyślne!" + error.error.message);
       })
   }
 }
