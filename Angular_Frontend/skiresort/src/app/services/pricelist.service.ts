@@ -19,6 +19,6 @@ export class PricelistService {
   }
 
   editPricelist(newPricelist: PricelistResponse): Observable<any> {
-    return this.http.put(this.endPoint, newPricelist, this.httpOptions );
+    return this.http.put(this.endPoint + 'employee/edit/priceList', newPricelist, this.httpOptions );
   }
 }
