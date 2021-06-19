@@ -18,6 +18,7 @@ import polsl.tab.skiresort.model.TimePass;
 import polsl.tab.skiresort.repository.PriceListRepository;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -182,5 +183,40 @@ public class PriceListService {
                 .stream()
                 .map(this::mapPriceListResponse)
                 .collect(Collectors.toList());
+    }
+
+    public PriceListResponse modifyCurrentPriceListAndDeactivateOldOne(PriceListRequest request) {
+        var oldPriceList = getCurrentPriceList();
+        oldPriceList.setEndDate(request.getStartDate());
+        priceListRepository.save(oldPriceList);
+        var c = Calendar.getInstance();
+        c.setTime(request.getStartDate());
+        c.add(Calendar.DATE,1);
+        var newStartDate = new Date(c.getTimeInMillis());
+        return mapPriceListResponse(priceListRepository.save(
+                new PriceList(
+                        newStartDate,
+                        request.getEndDate(),
+                        request.getAgeDiscountsRequest().stream().map(
+                                age -> new AgeDiscount(
+                                        age.getAgeMin(),
+                                        age.getAgeMax(),
+                                        age.getPercentage()
+                                )
+                        ).collect(Collectors.toList()),
+                        request.getTimePassRequest().stream().map(
+                                time -> new TimePass(
+                                        time.getHours(),
+                                        time.getPrice()
+                                )
+                        ).collect(Collectors.toList()),
+                        request.getQuantityPassRequest().stream().map(
+                                quantity -> new QuantityPass(
+                                        quantity.getQuantity(),
+                                        quantity.getPrice()
+                                )
+                        ).collect(Collectors.toList())
+                )
+        ));
     }
 }
