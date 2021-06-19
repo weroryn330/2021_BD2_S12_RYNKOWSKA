@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 
 public class PassResponse {
 
-    private final Integer idPass;
+    private final Integer id;
 
     private final Float unitPrice;
 
@@ -28,7 +28,7 @@ public class PassResponse {
     private final Boolean blocked;
 
     public PassResponse(Pass pass) {
-        this.idPass = pass.getIdPass();
+        this.id = pass.getIdPass();
         this.unitPrice = pass.getUnitPrice();
         this.startDate = pass.getStartDate();
         this.endDate = pass.getEndDate();
@@ -40,8 +40,8 @@ public class PassResponse {
         this.blocked = pass.getBlocked();
     }
 
-    public Integer getIdPass() {
-        return idPass;
+    public Integer getId() {
+        return id;
     }
 
     public Float getUnitPrice() {

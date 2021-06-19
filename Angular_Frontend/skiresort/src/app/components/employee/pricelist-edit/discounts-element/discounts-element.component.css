@@ -1,0 +1,214 @@
+.mainContainer {
+  max-width: 700px;
+  width: 100%;
+  background-color: transparent;
+
+  margin: auto;
+
+  max-height: fit-content;
+
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  text-align: center;
+}
+
+.pagination {
+  width: 100%;
+  padding: 30px;
+  margin: auto;
+  justify-content: center;
+}
+
+.button:hover{
+  border-radius: 5px;
+  box-shadow: 0 0 25px #fff;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.employeeElement{
+  height: auto;
+  margin: 5% auto auto;
+  margin-bot: 5%;
+  width: 80%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.buttonContainer{
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+  display: flex;
+}
+
+.buttonContainer .buttonDisabled{
+  height: 30px;
+  border-radius: 5px;
+  margin: auto;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  background: rgba(0, 150, 0, 0.3);
+  width: calc(100% / 2 - 20px);
+  justify-content: center;
+}
+
+.buttonContainer .button{
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  margin:auto;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+  width: calc(100% / 2 - 20px);
+  justify-content: center;
+}
+form .user-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+
+/* Inputs layout */
+form .user-details .inputBox {
+  margin-bottom: 10px;
+  width: calc(100% / 3 - 20px);
+}
+
+form .user-details .inputBoxBill {
+  margin-bottom: 10px;
+  width: calc(100% / 2 - 20px);
+}
+
+form .user-details .inputBx {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* input labels */
+form .inputBox span.details, form .inputBx span.details, form .inputBoxBill span.details {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.input {
+  height: 40px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  color: black;
+}
+
+.user-details .inputBox input, .user-details .inputBx input, .user-details .inputBoxBill input {
+  height: 40px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  color: black;
+}
+
+.error {
+  background-color: rgba(255, 0, 0, 0.5);
+  color: white;
+}
+
+.user-details .inputBox input:focus,
+.user-details .inputBox input:valid,
+.user-details .inputBoxBill input:focus,
+.user-details .inputBoxBill input:valid,
+.user-details .inputBx input:focus,
+.user-details .inputBx input:valid,
+.input:focus, .input:valid {
+  border: 4px solid #7dbeff;
+}
+
+ul {
+  list-style-type: none;
+}
+
+form .button {
+  height: 45px;
+  margin: 35px 0;
+}
+
+form .button:hover {
+  border-radius: 5px;
+  box-shadow: 0 0 25px #fff;
+}
+
+form .button input {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+form .button input:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 900px) {
+  .container {
+    max-width: 100%;
+  }
+
+  form .user-details .inputBox {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+
+  form .category {
+    width: 100%;
+  }
+
+  .content form .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+
+  .user-details::-webkit-scrollbar {
+    width: 5px;
+  }
+}
+
+@media (max-width: 459px) {
+  .container .content .category {
+    flex-direction: column;
+  }
+}
+
+

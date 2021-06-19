@@ -27,7 +27,7 @@ export class PassService {
     return this.http.get(this.endPoint + '/passes/qr/' + passId, {responseType: 'blob'});
   }
 
-  getPassesUsedBeetwenDates(startDate: string, endDate: string): Observable<any> {
+  getPassesUsedBetweenDates(startDate: string, endDate: string): Observable<any> {
     return this.http.get(this.endPoint + '/passes/usages?startDate=' + startDate + ':00' + '&endDate=' + endDate +':00');
   }
 
@@ -37,5 +37,13 @@ export class PassService {
       startDate.replace('T',' ')+':00' + '&endDate=' +
       endDate.replace('T',' ')+':00',
       {responseType: 'blob'});
+  }
+
+  refundPass(id: number): Observable<any> {
+    return this.http.delete(this.endPoint+'/return_passes/' + id);
+  }
+
+  changeBlockage(id: number): Observable<any> {
+    return this.http.put(this.endPoint+'/employee/blockPass/' + id, this.httpOptions);
   }
 }

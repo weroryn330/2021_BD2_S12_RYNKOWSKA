@@ -24,6 +24,30 @@ import { UserEditInfoComponent } from './components/user-edit-info/user-edit-inf
 import { UserEditCredentialsComponent } from './components/user-edit-credentials/user-edit-credentials.component';
 import { ActivePassesComponent } from './components/employee/active-passes/active-passes.component';
 import { UserInvoicesComponent } from './components/user-invoices/user-invoices.component';
+import { ManagementComponent } from './components/management/management.component';
+import { LiftManagementComponent } from './components/lift-management/lift-management.component';
+import { SchedulesComponent } from './components/employee/schedules/schedules.component';
+import { PricelistEditComponent } from './components/employee/pricelist-edit/pricelist-edit.component';
+import { EmployeeAddComponent } from './components/employee/employee-add/employee-add.component';
+import { EmployeeEditComponent } from './components/employee/employee-edit/employee-edit.component';
+import { UsersListComponent } from './components/employee/users-list/users-list.component';
+import { InvoicesListComponent } from './components/employee/invoices-list/invoices-list.component';
+import { BusinessReportsComponent } from './components/employee/business-reports/business-reports.component';
+import {NgxPaginationModule} from "ngx-pagination";
+import { UserElementComponent } from './components/employee/users-list/user-element/user-element.component';
+import { ElementInvoicesComponent } from './components/employee/users-list/user-element/element-invoices/element-invoices.component';
+import { ElementPersonalDataComponent } from './components/employee/users-list/user-element/element-personal-data/element-personal-data.component';
+import { EmployeeElementComponent } from './components/employee/employee-edit/employee-element/employee-element.component';
+import { ElementPersonalDataFormComponent } from './components/employee/employee-edit/employee-element/element-personal-data-form/element-personal-data-form.component';
+import { DiscountsElementComponent } from './components/employee/pricelist-edit/discounts-element/discounts-element.component';
+import { TimePassesElementComponent } from './components/employee/pricelist-edit/time-passes-element/time-passes-element.component';
+import { QuantityPassesElementComponent } from './components/employee/pricelist-edit/quantity-passes-element/quantity-passes-element.component';
+import { ElementEmailFormComponent } from './components/employee/employee-edit/employee-element/element-email-form/element-email-form.component';
+import { ElementPasswordFormComponent } from './components/employee/employee-edit/employee-element/element-password-form/element-password-form.component';
+import { ElementRoleFormComponent } from './components/employee/employee-edit/employee-element/element-role-form/element-role-form.component';
+import { ElementSingleDiscountComponent } from './components/employee/pricelist-edit/discounts-element/element-single-discount/element-single-discount.component';
+import { ElementSingleQuantityPassComponent } from './components/employee/pricelist-edit/quantity-passes-element/element-single-quantity-pass/element-single-quantity-pass.component';
+import { ElementSingleTimePassComponent } from './components/employee/pricelist-edit/time-passes-element/element-single-time-pass/element-single-time-pass.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,14 +67,38 @@ import { UserInvoicesComponent } from './components/user-invoices/user-invoices.
     UserEditInfoComponent,
     UserEditCredentialsComponent,
     ActivePassesComponent,
-    UserInvoicesComponent
+    UserInvoicesComponent,
+    ManagementComponent,
+    LiftManagementComponent,
+    SchedulesComponent,
+    PricelistEditComponent,
+    EmployeeAddComponent,
+    EmployeeEditComponent,
+    UsersListComponent,
+    InvoicesListComponent,
+    BusinessReportsComponent,
+    UserElementComponent,
+    ElementInvoicesComponent,
+    ElementPersonalDataComponent,
+    EmployeeElementComponent,
+    ElementPersonalDataFormComponent,
+    DiscountsElementComponent,
+    TimePassesElementComponent,
+    QuantityPassesElementComponent,
+    ElementEmailFormComponent,
+    ElementPasswordFormComponent,
+    ElementRoleFormComponent,
+    ElementSingleDiscountComponent,
+    ElementSingleQuantityPassComponent,
+    ElementSingleTimePassComponent
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        AppRoutingModule,
+        NgxPaginationModule
+    ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })

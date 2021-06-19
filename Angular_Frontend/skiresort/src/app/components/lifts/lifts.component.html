@@ -1,13 +1,40 @@
-<div class="infoContainer">
-  <div class="info">
-    Dysponujemy 40 kilometrami tras o różnym stopniu trudności, od tych
-    łagodnie nachylonych aż po trasy posiadające homologację
-    Międzynarodowej Federacji Narciarskiej FIS. Coś dla siebie znajdą
-    tutaj również biegacze narciarscy, dla których przygotowywanych jest
-    kilkanaście kilometrów tras biegowych. Nasz ośrodek góruje w
-    rankingach jakości i przyciąga narciarzy z całej Europy.
-  </div>
-  <div class="info">
-    <img src="../../../assets/map.jpg" alt="Nasze trasy">
+<div class="liftsContainer">
+  <div class="card" *ngFor="let skilift of skiliftsList">
+    <ul class="cardUl">
+      <li class="cardLogo">
+        <picture>
+          <img src="./../../../assets/lift.jpg" alt="">
+        </picture>
+      </li>
+      <li class="name">
+        {{skilift.name}}
+      </li>
+      <li class="height">
+        <h3>{{skilift.height}}m</h3>
+        <span>wysokości</span>
+      </li>
+      <li class="people">
+        <h3>{{skilift.peopleUsingLift}}</h3>
+        <span>osoby aktualnie korzystające</span>
+      </li>
+      <li class="openingTime">
+        <h3>{{skilift.opensTime}}</h3>
+        <span>pierwszy wjazd</span>
+      </li>
+      <li class="closeTime">
+        <h3>{{skilift.closesTime}}</h3>
+        <span>ostatni wjazd</span>
+      </li>
+      <ng-container *ngIf="skilift.isOpened">
+        <li class="isOpen">
+          OTWARTY
+        </li>
+      </ng-container>
+      <ng-container *ngIf="!skilift.isOpened">
+        <li class="isClosed">
+          ZAMKNIĘTY
+        </li>
+      </ng-container>
+    </ul>
   </div>
 </div>

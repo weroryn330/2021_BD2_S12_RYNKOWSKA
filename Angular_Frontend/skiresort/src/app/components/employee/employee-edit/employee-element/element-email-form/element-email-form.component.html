@@ -1,0 +1,40 @@
+<div class="mainContainerEditForm">
+  <div class="content">
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" name="form">
+      <div class="user-details">
+        <div class="inputBoxBill">
+          <span class="details">Email</span>
+          <input type="email" placeholder="adres@email.com"
+                 [style.background-color]="(!email.touched || email.valid) ? '#c4e2ff' : ''" [(ngModel)]="form.email"
+                 #email="ngModel" name="email"
+                 [ngClass]="{error :  email.touched && email.errors}"
+                 pattern="^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$" required>
+          <ul>
+            <li>i
+              <div class="dangerInfo">Wpisz email w postaci: zzzzz@zzzz.zzz, np:
+                narcikowo@gmail.com
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="inputBoxBill">
+          <span class="details">Powtórz email</span>
+          <input type="email" placeholder="adres@email.com" style="background-color: #c4e2ff;"
+                 [style.background-color]="(!emailRepetition.touched ||
+                  (emailRepetition.value===email.value && emailRepetition.value !== null)) ? '#c4e2ff' : ''"
+                 [ngClass]="{error :  emailRepetition.touched && (emailRepetition.errors || emailRepetition.value!==email.value)}"
+                 [(ngModel)]="form.emailRepetition" #emailRepetition="ngModel" name="emailRepetition"
+                 pattern="^{{email.value}}$" required>
+          <ul>
+            <li>i
+              <div class="dangerInfo">Adresy email muszą być identyczne!</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="button">
+        <input type="submit" (click)="f.form.markAllAsTouched()" id="button" value="Edytuj email">
+      </div>
+    </form>
+  </div>
+</div>

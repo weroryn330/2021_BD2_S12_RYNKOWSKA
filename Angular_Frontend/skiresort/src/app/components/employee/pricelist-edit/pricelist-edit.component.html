@@ -1,0 +1,11 @@
+<div class="mainContainer">
+  <app-discounts-element [ageDiscounts]="ageDiscountsList" (newDiscountChangeEvent)="editDiscounts($event)"></app-discounts-element>
+  <hr>
+  <app-quantity-passes-element [quantityPasses]="quantityPassesList" (newQuantityPassesChangeEvent)="editQuantityPasses($event)"></app-quantity-passes-element>
+  <hr>
+  <app-time-passes-element [timePasses]="timePassesList" (newTimePassesChangeEvent)="editTimePasses($event)"></app-time-passes-element>
+  <hr>
+  <div class="buttonContainer">
+    <div class="button" (click)="editPricelist()">Modyfikuj cennik</div>
+  </div>
+</div>

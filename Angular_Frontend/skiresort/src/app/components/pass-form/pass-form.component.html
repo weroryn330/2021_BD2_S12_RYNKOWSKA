@@ -26,7 +26,8 @@
     <div class="inputBox">
       <span class="details">Typ karnetu</span>
       <select class="input" name="passType" [(ngModel)]="form.passType" #passType="ngModel"
-              [ngClass]="{error :  passType.touched && passType.errors}" required>
+              [ngClass]="{error :  passType.touched && passType.errors}" (change)="recalculatePrice()"
+              required>
         <option class="input">Karnet czasowy</option>
         <option class="input">Karnet zjazdowy</option>
       </select>
@@ -55,10 +56,6 @@
         </select>
       </div>
     </ng-container>
-   <!-- <div class="inputBoxBill">
-      <span class="details">Cena karnetu</span>
-      <div class="input">{{unitPrice | number: '1.0-0'}}</div>
-    </div> -->
     <div class="inputBoxBill">
       <span class="details">Cena karnetu</span>
       <input type="number" disabled

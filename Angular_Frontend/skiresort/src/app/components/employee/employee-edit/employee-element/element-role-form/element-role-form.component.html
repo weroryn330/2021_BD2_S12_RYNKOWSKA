@@ -1,0 +1,26 @@
+<div class="mainContainerEditForm">
+  <div class="content">
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" name="form">
+      <div class="user-details">
+        <div class="inputBox">
+          <input type="radio" id="technical_employee" name="userType" [(ngModel)]="form.employeeType"
+                 #employeeType="ngModel" value="ROLE_TECHNICIAN" checked>
+          <label for="technical_employee">Pracownik techniczny</label>
+        </div>
+        <div class="inputBox">
+          <input type="radio" id="owner" name="userType" [(ngModel)]="form.employeeType"
+                 #employeeType="ngModel" value="ROLE_OWNER">
+          <label for="technical_employee">Właściciel</label>
+        </div>
+        <div class="inputBox">
+          <input type="radio" id="employee" name="userType" [(ngModel)]="form.employeeType"
+                 #employeeType="ngModel" value="ROLE_EMPLOYEE">
+          <label for="employee">Pracownik zwykły</label>
+        </div>
+      </div>
+      <div class="button">
+        <input type="submit" (click)="f.form.markAllAsTouched()" id="button" value="Edytuj rolę">
+      </div>
+    </form>
+  </div>
+</div>

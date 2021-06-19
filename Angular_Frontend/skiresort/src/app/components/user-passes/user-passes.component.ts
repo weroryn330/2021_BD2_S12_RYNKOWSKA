@@ -10,6 +10,7 @@ import {PassResponse} from "../../classes/pass-response";
 })
 export class UserPassesComponent implements OnInit {
   passesList: PassResponse[] = [];
+  page = 1;
 
   constructor(private passService: PassService) {
   }
@@ -21,10 +22,12 @@ export class UserPassesComponent implements OnInit {
 
   private getUserPasses() {
     this.passService.getUserPasses().subscribe(data => {
-        data.map(pass => this.passesList.push(new PassResponse(pass.idPass, pass.unitPrice, pass.firstName,
-          pass.lastName, pass.startDate, pass.endDate, pass.birthDate, pass.usesTotal, pass.usesLeft))
+        data.map(pass => this.passesList.push(new PassResponse(pass.id, pass.unitPrice, pass.firstName,
+          pass.lastName, pass.startDate, pass.endDate, pass.birthDate, pass.usesTotal, pass.usesLeft, pass.blocked))
         )
-      this.passesList.sort(function(x,y){ return (y.isActive? 1 : 0)-(x.isActive? 1 : 0)});
+        this.passesList.sort(function (x, y) {
+          return (y.isActive ? 1 : 0) - (x.isActive ? 1 : 0)
+        });
         console.log(data);
       },
       error => {
@@ -33,12 +36,31 @@ export class UserPassesComponent implements OnInit {
       })
   }
 
-  downloadQR(passId: number) {
-    this.passService.getQR(passId).subscribe((data: any) => {
+  downloadQR(id: number) {
+    this.passService.getQR(id).subscribe((data: any) => {
       let blob: any = new Blob([data], {type: 'text/json'});
-      fileSaver.saveAs(blob, 'karnet' + passId + '.jpg');
+      fileSaver.saveAs(blob, 'karnet' + id + '.jpg');
     }, error => {
       alert("Coś poszło nie tak...");
     })
+  }
+
+  refundPass(id: number, index: number) {
+    this.passService.refundPass(id).subscribe((data: any) => {
+      alert("Pomyślny zwrot karnetu");
+      this.passesList.splice(index, 1);
+    }, error => {
+      alert("Niepomyślny zwrot karnetu");
+    })
+  }
+
+  canBeRefunded(pass: PassResponse): boolean {
+    if(pass.startDate && pass.endDate){
+      return (new Date(pass.startDate).getTime() > Date.now()) && !pass.blocked;
+    }
+    else if(pass.usesTotal){
+      return (pass.usesTotal === pass.usesLeft) && !pass.blocked;
+    }
+    return false;
   }
 }

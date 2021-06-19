@@ -1,0 +1,105 @@
+<div class="mainContainerEditForm">
+  <div class="content">
+    <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" name="form">
+      <div class="user-details">
+        <div class="inputBox">
+          <span class="details">Imię</span>
+          <input type="text" placeholder="Imię"
+                 [(ngModel)]="form.firstName" #firstName="ngModel" name="firstName" required
+                 [ngClass]="{error :  firstName.touched && firstName.errors}"
+                 pattern="^[A-ZĄĆĘŁŃÓŚŻŹ]{1}[a-ząćęłńóśżź]{2,19}$">
+          <ul>
+            <li>i
+              <div class="dangerInfo">Imiona rozpoczynamy wielką literą.</div>
+            </li>
+          </ul>
+        </div>
+        <div class="inputBox">
+          <span class="details">Nazwisko</span>
+          <input type="text" placeholder="Nazwisko" [(ngModel)]="form.lastName" #lastName="ngModel" name="lastName"
+                 [ngClass]="{error :  lastName.touched && lastName.errors}"
+                 required pattern="^[A-ZĄĆĘŁŃÓŚŻŹ]{1}[a-ząćęłńóśżź]{2,19}$">
+          <ul>
+            <li>i
+              <div class="dangerInfo">Nazwiska rozpoczynamy wielką literą.</div>
+            </li>
+          </ul>
+        </div>
+        <div class="inputBox">
+          <span class="details">Kraj</span>
+          <input type="text" placeholder="Kraj" [(ngModel)]="form.country" #country="ngModel" name="country" required
+                 [ngClass]="{error :  country.touched && country.errors}"
+                 pattern="^[A-ZĄĆĘŁŃÓŚŻŹ]{1}[a-ząćęłńóśżź]{2,15} ?[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź]{0,15}$">
+          <ul>
+            <li>i
+              <div class="dangerInfo">Nazwy krajów rozpoczynamy wielką literą.</div>
+            </li>
+          </ul>
+        </div>
+        <div class="inputBox">
+          <span class="details">Numer telefonu</span>
+          <input type="text" placeholder="123456789" [(ngModel)]="form.phone" #phone="ngModel" name="phone"
+                 [ngClass]="{error :  phone.touched && phone.errors}"
+                 pattern="^[0-9]{9}$" required>
+          <ul>
+            <li>i
+              <div class="dangerInfo">Prawidłowy numer telefonu składa się z 9 cyfr, np:
+                600700800"
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="inputBox">
+          <span class="details">Województwo</span>
+          <input type="text" placeholder="Wojewódźtwo" [(ngModel)]="form.voivodeship" #voivodeship="ngModel"
+                 [ngClass]="{error :  voivodeship.touched && voivodeship.errors}"
+                 name="voivodeship" pattern="^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź-]{2,19}$" required>
+          <ul>
+            <li>i
+              <div class="dangerInfo">Wpisz województwo</div>
+            </li>
+          </ul>
+        </div>
+        <div class="inputBox">
+          <span class="details">Kod pocztowy</span>
+          <input type="" class="postalCode" placeholder="12-345" (keyup)="insertDash()" [(ngModel)]="form.postalCode"
+                 [ngClass]="{error :  postalCode.touched && postalCode.errors}"
+                 #postalCode="ngModel" name="postalCode" pattern="^[0-9]{2}-[0-9]{3}$" required>
+          <ul>
+            <li>i
+              <div class="dangerInfo">Wpisz kod w postaci: [][]-[][][], np: 44-100</div>
+            </li>
+          </ul>
+        </div>
+        <div class="inputBox">
+          <span class="details">Miasto</span>
+          <input type="text" placeholder="Miasto" [(ngModel)]="form.city" #city="ngModel" name="city"
+                 [ngClass]="{error :  city.touched && city.errors}"
+                 pattern="^[A-ZĄĆĘŁŃÓŚŻŹ]{1}[a-ząćęłńóśżź]{2,15} ?[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź]{0,15}$" required>
+          <ul>
+            <li>i
+              <div class="dangerInfo">Nazwy miast rozpoczynamy wielką literą.</div>
+            </li>
+          </ul>
+        </div>
+        <div class="inputBox">
+          <span class="details">Ulica</span>
+          <input type="text" placeholder="Ulica 123" [(ngModel)]="form.address" #address="ngModel"
+                 name="address"
+                 [ngClass]="{error :  address.touched && address.errors}"
+                 pattern="^[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź0-9]{1,15} ?[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź0-9]{1,15} ?[A-Za-zĄĆĘŁŃÓŚŻŹąćęłńóśżź0-9]{1,15}$"
+                 required>
+          <ul>
+            <li>i
+              <div class="dangerInfo">Wpisz adres, np: Katowicka 5</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="button">
+        <input type="submit" (click)="f.form.markAllAsTouched()" id="button" value="Edytuj dane osobowe">
+      </div>
+    </form>
+  </div>
+</div>
+

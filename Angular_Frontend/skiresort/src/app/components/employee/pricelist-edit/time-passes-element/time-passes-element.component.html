@@ -1,0 +1,26 @@
+<div class="mainContainer">
+  <h2>Karnety czasowe</h2>
+  <div *ngFor="let timePass of timePasses ; index as i">
+    <app-element-single-time-pass [timePass]="timePass" [index]="i" [passesApproved]="areTimePassesValid"
+                                  (newTimePassDeletionEvent)="deleteTimePass($event)"
+                                  (newTimePassModificationEvent)="modifyTimePass($event)"></app-element-single-time-pass>
+  </div>
+  <ng-container *ngIf="!areTimePassesValid && isButtonClicked">Niepoprawne lub niezatwierdzone karnety!
+  </ng-container>
+  <ng-container *ngIf="!areTimePassesValid">
+    <div class="buttonContainer">
+      <div class="button" (click)="addNewPass()">Dodaj nowy karnet</div>
+    </div>
+    <div class="buttonContainer">
+      <div class="button" (click)="acceptTimePasses()">Zatwierdź karnety czasowe</div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="areTimePassesValid && isButtonClicked">
+    <div class="buttonContainer">
+      <div class="buttonDisabled" >Dodaj nowy karnet</div>
+    </div>
+    <div class="buttonContainer">
+      <div class="buttonDisabled" >Zatwierdź karnety czasowe</div>
+    </div>
+  </ng-container>
+</div>

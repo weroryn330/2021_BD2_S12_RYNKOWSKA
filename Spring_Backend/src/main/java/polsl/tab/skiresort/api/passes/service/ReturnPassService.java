@@ -30,9 +30,9 @@ public class ReturnPassService {
     public PassResponse returnPass(Integer passId) {
         var pass = passRepository.findById(passId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Pass does not exist"));
-        if(!pass.getUsesTotal().equals(pass.getUsesLeft()) && pass.getUsesTotal() != null)
+        if(pass.getUsesTotal() != null && !pass.getUsesTotal().equals(pass.getUsesLeft()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Pass already used, cannot return");
-        if(!pass.getStartDate().after(new Timestamp(System.currentTimeMillis())) && pass.getStartDate() != null)
+        if(pass.getStartDate() != null && !pass.getStartDate().after(new Timestamp(System.currentTimeMillis())))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Pass already active, cannot return");
         var invoice = invoiceRepository.findById(pass.getInvoicesIdInvoice().getIdInvoice())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Invoice not found"));

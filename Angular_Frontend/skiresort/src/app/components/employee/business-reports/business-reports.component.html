@@ -1,0 +1,20 @@
+<div class="mainContainer">
+  <h2>Wybierz przedział czasu raportu biznesowego</h2>
+  <form name="form" (ngSubmit)="f.form.valid  && onSubmit()" #f="ngForm">
+    <div class="user-details">
+      <div class="inputBoxBill">
+        <span class="details">Data początkowa</span>
+        <input type="date" name="startDate" required [(ngModel)]="form.startDate" #startDate="ngModel"
+               [ngClass]="{error :  startDate.touched && startDate.errors}">
+      </div>
+      <div class="inputBoxBill">
+        <span class="details">Data końcowa</span>
+        <input type="date" name="endDate" required [(ngModel)]="form.endDate" #endDate="ngModel"
+               [ngClass]="{error :  endDate.touched && endDate.errors}">
+      </div>
+    </div>
+    <div class="button">
+      <input (click)="f.form.markAllAsTouched()" type="submit" id="button" value="Pobierz raport">
+    </div>
+  </form>
+</div>

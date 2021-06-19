@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PassService} from "../../../services/pass.service";
+import {PassResponse} from "../../../classes/pass-response";
 
 @Component({
   selector: 'app-active-passes',
@@ -7,7 +8,9 @@ import {PassService} from "../../../services/pass.service";
   styleUrls: ['./active-passes.component.css']
 })
 export class ActivePassesComponent implements OnInit {
-  activePasses: any;
+  activePasses: PassResponse[] = [];
+  page = 1;
+  itemsPerPage=4;
   constructor(private passService: PassService) { }
 
   ngOnInit(): void {
@@ -16,10 +19,29 @@ export class ActivePassesComponent implements OnInit {
 
   private loadActivePasses() {
   this.passService.getActivePasses().subscribe(data => {
-      this.activePasses = data;
+    console.log(data);
+      data.map((pass: any) => this.activePasses.push(new PassResponse(pass.id, pass.unitPrice, pass.firstName,
+        pass.lastName, pass.startDate, pass.endDate, pass.birthDate, pass.usesTotal, pass.usesLeft, pass.blocked))
+      )
+      this.activePasses.sort(function (x, y) {
+        return x.lastName.localeCompare(y.lastName);
+      });
       },
       error => {
-        alert("Coś poszło nie tak...");
+        this.activePasses = [];
+        alert("Brak aktywnych karnetów do wyświetlenia");
+      })
+  }
+
+  changeBlockage(id: number, index: number) {
+    console.log(id);
+    this.passService.changeBlockage(id).subscribe(data => {
+        alert("Blokada karnetu została zmieniona");
+        console.log(data);
+        this.activePasses[index] = data;
+      },
+      error => {
+        alert("Nie udało się zmienić ustawienia blokady karnetu");
       })
   }
 }

@@ -1,0 +1,31 @@
+<div class="mainContainer">
+  <ul>
+    <li>
+      <h3>Dane osobowe: </h3>
+    </li>
+    <li>
+      Imię: {{user.firstName}}
+    </li>
+    <li>
+      Nazwisko: {{user.lastName}}
+    </li>
+    <li>
+      Numer telefonu: {{user.phone}}
+    </li>
+    <li>
+      Kraj: {{user.country}}
+    </li>
+    <li>
+      Wojewódźtwo: {{user.voivodeship}}
+    </li>
+    <li>
+      Miejscowość: {{user.city}}
+    </li>
+    <li>
+      Ulica: {{user.address}}
+    </li>
+  </ul>
+  <div class="buttonQuit" (click)="closePersonalData()">Zamknij podgląd</div>
+</div>
+
+

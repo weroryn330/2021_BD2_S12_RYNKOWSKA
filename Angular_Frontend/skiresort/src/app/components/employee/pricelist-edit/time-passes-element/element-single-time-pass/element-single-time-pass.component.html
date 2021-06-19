@@ -1,0 +1,40 @@
+<div class="mainContainer">
+  <div class="content">
+    <form #f="ngForm" name="form">
+      <div class="user-details">
+        <div class="inputBox">Karnet nr {{index + 1}}.</div>
+        <div class="inputBox">
+          <span class="details">Czas trwania (h)</span>
+          <input type="number" [disabled]="isPassConfirmed || passesApproved"
+                 [(ngModel)]="form.hours" #hours="ngModel" name="hours" required
+                 [ngClass]="{error :  hours.touched && hours.errors}"
+                 min="1">
+        </div>
+        <div class="inputBox">
+          <span class="details">Cena</span>
+          <input type="number" [disabled]="isPassConfirmed || passesApproved"
+                 [(ngModel)]="form.price" #price="ngModel" name="price" required
+                 [ngClass]="{error :  price.touched && price.errors}"
+                 min="1">
+        </div>
+        <ng-container *ngIf="isPassConfirmed">
+          OK
+        </ng-container>
+      </div>
+      <ng-container *ngIf="!passesApproved">
+        <div class="buttonContainer">
+          <div class="button" (click)="f.form.markAllAsTouched()" (click)="f.form.valid && editTimePass()">Zatwierdź
+            karnet
+          </div>
+          <div class="button" (click)="deleteTimePass()">Usuń karnet</div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="passesApproved">
+        <div class="buttonContainer">
+          <div class="buttonDisabled" >Zatwierdź karnet</div>
+          <div class="buttonDisabled">Usuń karnet</div>
+        </div>
+      </ng-container>
+    </form>
+  </div>
+</div>
