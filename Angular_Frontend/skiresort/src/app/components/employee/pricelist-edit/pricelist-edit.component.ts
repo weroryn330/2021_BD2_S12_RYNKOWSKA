@@ -39,8 +39,9 @@ export class PricelistEditComponent implements OnInit {
 
   editPricelist() {
     if (this.discountsChanged && this.quantityPassesChanged && this.timePassesChanged) {
-      this.pricelistService.editPricelist(new PriceListRequest('2000-01-01', '2000-01-01',
-        this.ageDiscountsList, this.quantityPassesList, this.timePassesList)).subscribe(data => {
+      const newPricelist = new PriceListRequest('2000-01-01', '2000-01-01',
+        this.ageDiscountsList, this.quantityPassesList, this.timePassesList);
+      this.pricelistService.editPricelist(newPricelist).subscribe(data => {
           console.log(data);
           this.ageDiscountsList = data.ageDiscountsResponse;
           this.quantityPassesList = data.quantityPassResponse;

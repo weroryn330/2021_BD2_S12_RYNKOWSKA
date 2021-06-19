@@ -22,12 +22,10 @@ export class DiscountsElementComponent implements OnInit {
   }
 
   invalidInputOccured(index: any) {
-    console.log('INVALID INPUT: ' + index);
     this.validationArray[index] = false;
   }
 
   modifyDiscountsList(discountAndIndex: [any, any]) {
-    console.log('NEW INPUT: ' + discountAndIndex[0]);
     this.ageDiscounts[discountAndIndex[1]].percentage = discountAndIndex[0];
     this.validationArray[discountAndIndex[1]] = true;
   }
