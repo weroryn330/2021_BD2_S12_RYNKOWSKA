@@ -146,11 +146,12 @@ main {
   padding: 5px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1290px) {
   .actions {
     top: unset;
   }
   .userData {
     bottom: unset;
+    width: 100%;
   }
 }
