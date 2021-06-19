@@ -1,0 +1,42 @@
+.mainContainer {
+  max-width: 700px;
+  width: 100%;
+  background-color: transparent;
+
+  margin: auto;
+
+  max-height: fit-content;
+
+  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  text-align: center;
+}
+
+.button:hover{
+  border-radius: 5px;
+  box-shadow: 0 0 25px #fff;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.buttonContainer{
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+  display: flex;
+}
+.buttonContainer .button{
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+  width: calc(100% / 2 - 20px);
+  justify-content: center;
+  margin: auto;
+}

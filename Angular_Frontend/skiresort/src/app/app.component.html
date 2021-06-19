@@ -1,54 +1,35 @@
 <!--Header with title of the page-->
 <div id="{{currentContainer}}">
-  <div class="navContainer">
+  <div class="{{currentNavContainer}}">
     <nav>
-      <div class="logo" routerLink="/welcome">
+      <div class="{{currentLogo}}" routerLink="/welcome">
         narcikowo.pl
       </div>
-      <ng-container *ngIf="roles.includes('ROLE_EMPLOYEE')">
-        <div class="menuOpen" (click)="openMenu()"><i class="gg-menu"></i></div>
-        <ul class="mainNav">
-          <li><a *ngIf="roles.includes('ROLE_OWNER')">Panel właściciela</a>
-            <div class="dropdown">
-              <a *ngIf="roles.includes('ROLE_OWNER')" href="#">Dodaj pracownika</a>
-              <a *ngIf="roles.includes('ROLE_OWNER')" href="#">Moi pracownicy</a>
-              <a *ngIf="roles.includes('ROLE_OWNER')" href="#">Moi klienci</a>
-              <a *ngIf="roles.includes('ROLE_OWNER')" href="#">Faktury</a>
-              <a *ngIf="roles.includes('ROLE_OWNER')" href="#">Raporty biznesowe</a>
-            </div>
-          </li>
-          <li><a *ngIf="roles.includes('ROLE_EMPLOYEE')">Panel pracownika</a>
-            <div class="dropdown">
-              <a *ngIf="roles.includes('ROLE_EMPLOYEE')" routerLink="/employee/active-passes">Aktywne karnety</a>
-              <a *ngIf="roles.includes('ROLE_EMPLOYEE')" href="#">Modyfikacja rozkładu wyciągów</a>
-              <a *ngIf="roles.includes('ROLE_EMPLOYEE')" href="#">Modyfikacja cennika</a>
-            </div>
-          </li>
-          <li><a *ngIf="roles.includes('ROLE_EMPLOYEE')">Panel Klienta</a>
-            <div class="dropdown">
-              <a routerLink="/welcome">O nas</a>
-              <a routerLink="/pricelist">Karnety i ceny</a>
-              <a routerLink="/lifts">Wyciągi i trasy</a>
-              <a routerLink="/contact">Dojazd i kontakt</a>
-              <a (click)="logout()">Wyloguj</a>
-            </div>
-          </li>
-          <div class="menuClose" (click)="closeMenu()"><i class="gg-close"></i></div>
-        </ul>
-      </ng-container>
-      <ng-container *ngIf="roles.length == 0 || roles.includes('ROLE_USER')">
-        <div class="menuOpen" (click)="openMenu()"><i class="gg-menu"></i></div>
-        <ul class="mainNav">
-          <li><a *ngIf="!roles.includes('ROLE_EMPLOYEE')" routerLink="/welcome">O nas</a></li>
-          <li><a routerLink="/pricelist">Karnety i ceny</a></li>
-          <li><a routerLink="/lifts">Wyciągi i trasy</a></li>
-          <li><a routerLink="/contact">Dojazd i kontakt</a></li>
-          <li><a *ngIf="roles.includes('ROLE_USER')" routerLink="/profile">Moje konto</a></li>
-          <li><a *ngIf="!loggedIn" routerLink="/login">Logowanie</a></li>
-          <li><a *ngIf="loggedIn" (click)="logout()">Wyloguj</a></li>
-          <div class="menuClose" (click)="closeMenu()"><i class="gg-close"></i></div>
-        </ul>
-      </ng-container>
+      <div class="menuOpen" (click)="openMenu()"><i class="gg-menu"></i></div>
+      <ul class="{{currentNav}}">
+        <ng-container *ngIf="roles.includes('ROLE_EMPLOYEE')">
+          <li><a routerLink="/management">Zarządzaj</a></li>
+        </ng-container>
+        <ng-container *ngIf="roles.includes('ROLE_TECHNICIAN')">
+          <li><a routerLink="/skilift-management">Zarządzaj</a></li>
+        </ng-container>
+        <ng-container *ngIf="!roles.includes('ROLE_EMPLOYEE')">
+          <li><a routerLink="/welcome">O nas</a></li>
+        </ng-container>
+        <li><a routerLink="/pricelist">Karnety i ceny</a></li>
+        <li><a routerLink="/lifts">Wyciągi i trasy</a></li>
+        <li><a routerLink="/contact">Dojazd i kontakt</a></li>
+        <ng-container *ngIf="roles.includes('ROLE_USER')">
+          <li><a routerLink="/profile">Moje konto</a></li>
+        </ng-container>
+        <ng-container *ngIf="!loggedIn">
+          <li><a routerLink="/login">Logowanie</a></li>
+        </ng-container>
+        <ng-container *ngIf="loggedIn">
+          <li><a (click)="logout()">Wyloguj</a></li>
+        </ng-container>
+        <div class="menuClose" (click)="closeMenu()"><i class="gg-close"></i></div>
+      </ul>
     </nav>
   </div>
   <div>

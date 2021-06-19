@@ -13,6 +13,7 @@ export class UserReportComponent implements OnInit {
     endDate: null
   }
   passesList: any;
+  page = 1;
 
   constructor(private passService: PassService) {
   }
@@ -21,7 +22,7 @@ export class UserReportComponent implements OnInit {
   }
 
   onSubmit() {
-    this.passService.getPassesUsedBeetwenDates(this.form.startDate, this.form.endDate).subscribe((data: any) => {
+    this.passService.getPassesUsedBetweenDates(this.form.startDate, this.form.endDate).subscribe((data: any) => {
         console.log(data);
         this.passesList = data;
       },

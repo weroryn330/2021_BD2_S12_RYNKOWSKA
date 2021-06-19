@@ -52,7 +52,7 @@ export class PassFormComponent implements OnInit {
   checkIfDiscountApply(birthDate: Date) {
     this.activeDiscountPercentage = 0;
     const age = (Date.now() - new Date(birthDate).getTime()) / 31536000000;
-    for(const discount of this.pricelist.ageDiscountsList) {
+    for (const discount of this.pricelist.ageDiscountsList) {
       if (age > discount.ageMin && age < discount.ageMax) {
         this.activeDiscountPercentage = discount.percentage;
         break;
@@ -81,10 +81,10 @@ export class PassFormComponent implements OnInit {
       this.form.startDate = null;
     }
     const endDate = new Date();
-    endDate.setTime(new Date(this.form.startDate).getTime() + this.form.passTime*60*60*1000);
-    const passRequest = new PassRequest(this.form.unitPrice,this.form.firstName, this.form.lastName,
+    endDate.setTime(new Date(this.form.startDate).getTime() + this.form.passTime * 60 * 60 * 1000);
+    const passRequest = new PassRequest(this.form.unitPrice, this.form.firstName, this.form.lastName,
       this.form.startDate, endDate, this.form.birthDate, this.form.usesTotal);
-     this.isSubmitted = true;
+    this.isSubmitted = true;
     this.addNewRequest(passRequest);
     this.passFormValidation(true);
   }
@@ -92,6 +92,10 @@ export class PassFormComponent implements OnInit {
 
   calculatePrice(value: number) {
     let standardPrice: number;
+    if (value == null || value == undefined) {
+      this.form.unitPrice = 0;
+      return;
+    }
     if (this.form.passType == 'Karnet czasowy') {
       let pass = this.pricelist.timePassesList.find((i: any) => i.hours == value);
       if (!pass) {
@@ -105,7 +109,7 @@ export class PassFormComponent implements OnInit {
       }
       standardPrice = pass.price;
     }
-      this.form.unitPrice = parseInt((standardPrice * (100 - this.activeDiscountPercentage) / 100).toPrecision(3));
+    this.form.unitPrice = parseInt((standardPrice * (100 - this.activeDiscountPercentage) / 100).toPrecision(3));
   }
 
   convertToDays(hours: number): string {
@@ -118,4 +122,11 @@ export class PassFormComponent implements OnInit {
     }
   }
 
+  recalculatePrice() {
+    if (this.form.passType == this.passTypes[0]) {
+      this.calculatePrice(this.form.passTime);
+    } else {
+      this.calculatePrice(this.form.usesTotal);
+    }
+  }
 }

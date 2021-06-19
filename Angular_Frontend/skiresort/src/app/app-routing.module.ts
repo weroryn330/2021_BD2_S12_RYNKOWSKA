@@ -16,14 +16,41 @@ import {UserEditInfoComponent} from "./components/user-edit-info/user-edit-info.
 import {UserEditCredentialsComponent} from "./components/user-edit-credentials/user-edit-credentials.component";
 import {ActivePassesComponent} from "./components/employee/active-passes/active-passes.component";
 import {UserInvoicesComponent} from "./components/user-invoices/user-invoices.component";
+import {ManagementComponent} from "./components/management/management.component";
+import {LiftManagementComponent} from "./components/lift-management/lift-management.component";
+import {SchedulesComponent} from "./components/employee/schedules/schedules.component";
+import {PricelistEditComponent} from "./components/employee/pricelist-edit/pricelist-edit.component";
+import {EmployeeAddComponent} from "./components/employee/employee-add/employee-add.component";
+import {EmployeeEditComponent} from "./components/employee/employee-edit/employee-edit.component";
+import {UsersListComponent} from "./components/employee/users-list/users-list.component";
+import {InvoicesListComponent} from "./components/employee/invoices-list/invoices-list.component";
+import {BusinessReportsComponent} from "./components/employee/business-reports/business-reports.component";
 
 
 const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {
-    path: 'employee/active-passes', component: ActivePassesComponent, canActivate: [RouteGuard],
-    data: {expectedRole: 'ROLE_EMPLOYEE'}
+    path: 'management', component: ManagementComponent, canActivate: [RouteGuard],
+    data: {expectedRole: 'ROLE_EMPLOYEE'},
+    children: [
+      {path: 'active-passes', component: ActivePassesComponent},
+      {path: 'schedules', component: SchedulesComponent},
+      {path: 'pricelists', component: PricelistEditComponent},
+      {path: 'add-employee', component: EmployeeAddComponent, canActivate: [RouteGuard],
+      data: {expectedRole: 'ROLE_OWNER'}},
+      {path: 'edit-employee', component: EmployeeEditComponent, canActivate: [RouteGuard],
+        data: {expectedRole: 'ROLE_OWNER'}},
+      {path: 'users', component: UsersListComponent, canActivate: [RouteGuard],
+        data: {expectedRole: 'ROLE_OWNER'}},
+      {path: 'invoices', component: InvoicesListComponent, canActivate: [RouteGuard],
+        data: {expectedRole: 'ROLE_OWNER'}},
+      {path: 'reports', component: BusinessReportsComponent, canActivate: [RouteGuard],
+        data: {expectedRole: 'ROLE_OWNER'}},
+      {path: '', redirectTo: 'active-passes', pathMatch: 'full'}
+    ]
   },
+  {path: 'skilift-management', component: LiftManagementComponent, canActivate: [RouteGuard],
+    data: {expectedRole: 'ROLE_TECHNICIAN'}},
   {path: 'pricelist', component: PricelistComponent},
   {
     path: 'profile', component: ProfileComponent, canActivate: [RouteGuard],

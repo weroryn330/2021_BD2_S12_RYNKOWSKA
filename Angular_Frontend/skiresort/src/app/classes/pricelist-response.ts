@@ -3,9 +3,9 @@ import {AgeDiscountResponse} from "./age-discount-response";
 import {QuantityPassResponse} from "./quantity-pass-response";
 
 export class PricelistResponse {
-  ageDiscountsList: AgeDiscountResponse[] = [];
-  timePassesList: TimePassResponse[] = [];
-  quantityPassesList: QuantityPassResponse[] = [];
+  ageDiscountsList: AgeDiscountResponse[];
+  timePassesList: TimePassResponse[];
+  quantityPassesList: QuantityPassResponse[];
 
   constructor(ageDiscountsList: AgeDiscountResponse[], timePassesList: TimePassResponse[], quantityPassesList: QuantityPassResponse[]) {
     this.ageDiscountsList = ageDiscountsList;

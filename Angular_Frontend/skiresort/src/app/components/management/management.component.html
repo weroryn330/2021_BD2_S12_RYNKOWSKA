@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="actions">
+    <div class="button" routerLink="active-passes"><button>Aktywne karnety</button></div>
+    <div class="button" routerLink="schedules"><button>Modyfikuj rozkład wyciągów</button></div>
+    <div class="button" routerLink="pricelists"><button>Modyfikuj cennik</button></div>
+    <ng-container *ngIf="userRoles.includes('ROLE_OWNER')">
+      <div class="button" routerLink="add-employee"><button>Stwórz nowego pracownika</button></div>
+      <div class="button" routerLink="edit-employee"><button>Edytuj pracownika</button></div>
+      <div class="button" routerLink="users"><button>Przeglądaj konta użytkowników</button></div>
+      <div class="button" routerLink="invoices"><button>Przeglądaj faktury</button></div>
+      <div class="button" routerLink="reports"><button>Generuj raport biznesowy</button></div>
+    </ng-container>
+  </div>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

@@ -1,0 +1,10 @@
+<div class="mainContainer">
+  <ng-container *ngIf="employeesList">
+    <div class="pagination">
+      <pagination-controls (pageChange)="page= $event"></pagination-controls>
+    </div>
+  </ng-container>
+  <div class="employeeElement" *ngFor="let employee of employeesList | paginate: {itemsPerPage: 2, currentPage: page}; index as i">
+    <app-employee-element [employee]="employee" [index]="i" (newUpdateEmployeeEvent)="updateEmployee($event, i)" ></app-employee-element>
+  </div>
+</div>
