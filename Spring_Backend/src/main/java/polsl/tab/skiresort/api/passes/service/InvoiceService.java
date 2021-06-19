@@ -10,7 +10,6 @@ import polsl.tab.skiresort.api.passes.response.PassResponse;
 import polsl.tab.skiresort.model.Invoice;
 import polsl.tab.skiresort.model.Pass;
 import polsl.tab.skiresort.repository.InvoiceRepository;
-import polsl.tab.skiresort.repository.PassRepository;
 import polsl.tab.skiresort.repository.PriceListRepository;
 import polsl.tab.skiresort.repository.UserRepository;
 
@@ -28,19 +27,15 @@ public class InvoiceService {
 
     private final PriceListRepository priceListRepository;
 
-    private final PassRepository passRepository;
-
     public InvoiceService(JwtTokenUtility jwtTokenUtility,
                           UserRepository userRepository,
                           InvoiceRepository invoiceRepository,
-                          PriceListRepository priceListRepository,
-                          PassRepository passRepository
+                          PriceListRepository priceListRepository
     ) {
         this.jwtTokenUtility = jwtTokenUtility;
         this.userRepository = userRepository;
         this.invoiceRepository = invoiceRepository;
         this.priceListRepository = priceListRepository;
-        this.passRepository = passRepository;
     }
 
     public List<InvoiceResponse> getAllUserInvoices(String token) {
@@ -48,7 +43,7 @@ public class InvoiceService {
         if (user.isPresent()) {
             return invoiceRepository.findByUserIdUser(user.get())
                     .stream()
-                    .map(InvoiceResponse::new)
+                    .map(invoice -> new InvoiceResponse(invoice, user.get().getEmail()))
                     .collect(Collectors.toList());
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
@@ -98,7 +93,7 @@ public class InvoiceService {
                         }
                     }).collect(Collectors.toList())
             );
-            return new InvoiceResponse(invoiceRepository.save(invoice));
+            return new InvoiceResponse(invoiceRepository.save(invoice), user.get().getEmail());
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Check existence of user and price list");
     }
