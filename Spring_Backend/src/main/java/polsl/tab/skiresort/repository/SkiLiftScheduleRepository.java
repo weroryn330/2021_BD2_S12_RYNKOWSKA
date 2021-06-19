@@ -29,20 +29,8 @@ public interface SkiLiftScheduleRepository extends JpaRepository<SkiLiftSchedule
 
     @Query(nativeQuery = true,
             value="SELECT * FROM ski_lift_schedules s " +
-                    "WHERE CURRENT_DATE BETWEEN s.start_date AND s.end_date AND s.ski_lift_id_ski_lift=:skiLiftId")
+                    "WHERE s.ski_lift_id_ski_lift=:skiLiftId")
     Optional<SkiLiftSchedule> findCurrentBySkiLiftId(@Param("skiLiftId") Integer skiLiftId);
-
-    @Query(nativeQuery = true,
-    value = "SELECT * FROM ski_lift_schedules s " +
-            "WHERE s.end_date >= :date AND s.ski_lift_id_ski_lift=:skiLiftId")
-    List<SkiLiftSchedule> findBySkiLiftIdWithEndDateAfter(@Param("date") Date date, @Param("skiLiftId") Integer skiLiftId);
-
-    @Query(nativeQuery = true,
-            value = "SELECT * FROM ski_lift_schedules s " +
-                    "WHERE s.end_date > :date " +
-                    "AND CURRENT_DATE NOT BETWEEN s.start_date AND s.end_date " +
-                    "AND s.ski_lift_id_ski_lift=:skiLiftId")
-    List<SkiLiftSchedule> findBySkiLiftIdWithEndDateAfterWithoutCurrent(@Param("date") Date date, @Param("skiLiftId") Integer skiLiftId);
 
     @Query(
             nativeQuery = true,

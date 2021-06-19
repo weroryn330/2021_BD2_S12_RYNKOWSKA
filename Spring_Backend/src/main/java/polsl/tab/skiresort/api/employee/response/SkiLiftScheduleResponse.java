@@ -7,10 +7,6 @@ import java.sql.Time;
 
 public class SkiLiftScheduleResponse {
 
-    private Date startDate;
-
-    private Date endDate;
-
     private Time opensTime;
 
     private Time closesTime;
@@ -20,10 +16,9 @@ public class SkiLiftScheduleResponse {
     private Integer skiLiftScheduleId;
 
     public SkiLiftScheduleResponse(SkiLiftSchedule s){
-        this.startDate = s.getStartDate();
-        this.endDate = s.getEndDate();
         this.opensTime = s.getOpensTime();
         this.closesTime = s.getClosesTime();
+        this.skiLiftScheduleId = s.getIdSkiLiftSchedule();
         this.skiLiftId = s.getSkiLiftIdSkiLift().getIdSkiLift();
     }
 
@@ -33,22 +28,6 @@ public class SkiLiftScheduleResponse {
 
     public void setSkiLiftScheduleId(Integer skiLiftScheduleId) {
         this.skiLiftScheduleId = skiLiftScheduleId;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
     }
 
     public Time getOpensTime() {
