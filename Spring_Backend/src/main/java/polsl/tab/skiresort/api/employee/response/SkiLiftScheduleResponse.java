@@ -15,11 +15,22 @@ public class SkiLiftScheduleResponse {
 
     private Integer skiLiftScheduleId;
 
+    private String skiLiftName;
+
     public SkiLiftScheduleResponse(SkiLiftSchedule s){
         this.opensTime = s.getOpensTime();
         this.closesTime = s.getClosesTime();
         this.skiLiftScheduleId = s.getIdSkiLiftSchedule();
         this.skiLiftId = s.getSkiLiftIdSkiLift().getIdSkiLift();
+        this.skiLiftName = s.getSkiLiftIdSkiLift().getName();
+    }
+
+    public String getSkiLiftName() {
+        return skiLiftName;
+    }
+
+    public void setSkiLiftName(String skiLiftName) {
+        this.skiLiftName = skiLiftName;
     }
 
     public Integer getSkiLiftScheduleId() {

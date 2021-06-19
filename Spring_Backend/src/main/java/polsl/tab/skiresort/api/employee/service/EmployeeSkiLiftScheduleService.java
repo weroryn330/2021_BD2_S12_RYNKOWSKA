@@ -11,7 +11,6 @@ import polsl.tab.skiresort.repository.SkiLiftRepository;
 import polsl.tab.skiresort.repository.SkiLiftScheduleRepository;
 
 import java.sql.Date;
-import java.sql.Time;
 
 @Service
 public class EmployeeSkiLiftScheduleService {
@@ -32,7 +31,7 @@ public class EmployeeSkiLiftScheduleService {
             skiLiftSchedule = skiLiftScheduleRepository.findCurrentBySkiLiftId(skiLiftScheduleRequest.getSkiLiftId())
                     .orElse(new SkiLiftSchedule(
                             new Date(System.currentTimeMillis()),
-                            new Date(System.currentTimeMillis() + (630720000000L)), // 
+                            new Date(System.currentTimeMillis() + (630720000000L)),
                             skiLiftScheduleRequest.getOpensTime(),
                             skiLiftScheduleRequest.getClosesTime(),
                             skiLiftRepository.findById(skiLiftScheduleRequest.getSkiLiftId()).orElseThrow(() -> new ResponseStatusException(
