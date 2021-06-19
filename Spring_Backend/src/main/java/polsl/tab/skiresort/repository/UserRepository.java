@@ -42,4 +42,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
                     "AND r.role_name like 'ROLE_USER' "
     )
     Collection<User> findAllSkiers();
+
+    @Query(
+            nativeQuery = true,
+            value = "SELECT DISTINCT * " +
+                    "FROM USERS u, INVOICES i " +
+                    "WHERE u.id_user = i.users_id_user " +
+                    "AND i.id_invoice = :invoiceId"
+    )
+    Optional<User> findUserEmailByInvoiceId(@Param("invoiceId") Integer invoiceId);
 }

@@ -10,6 +10,8 @@ public class InvoiceResponse {
 
     private final Integer id;
 
+    private final String userEmail;
+
     private final Date invoiceDate;
 
     private final String billingAddress;
@@ -26,8 +28,9 @@ public class InvoiceResponse {
 
     private final List<PassResponse> passResponseList;
 
-    public InvoiceResponse(Invoice invoice) {
+    public InvoiceResponse(Invoice invoice, String userEmail) {
         this.id = invoice.getIdInvoice();
+        this.userEmail = userEmail;
         this.invoiceDate = invoice.getInvoiceDate();
         this.billingAddress = invoice.getBillingAddress();
         this.billingState = invoice.getBillingState();
@@ -40,6 +43,10 @@ public class InvoiceResponse {
 
     public Integer getId() {
         return id;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
     }
 
     public Date getInvoiceDate() {

@@ -25,6 +25,10 @@ import java.util.stream.Collectors;
 @Service
 public class OwnerEmployeeService {
 
+    private static final String USER_EXISTENCE_ERROR = "User not found";
+
+    private static final String INVOICE_EMAIL_EXISTENCE_ERROR = "User email for invoice not found";
+
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -70,7 +74,16 @@ public class OwnerEmployeeService {
     }
 
     public List<InvoiceResponse> getAllInvoices() {
-        return invoiceRepository.findAll().stream().map(InvoiceResponse::new).collect(Collectors.toList());
+        return invoiceRepository.findAll().stream().map(
+                invoice ->
+                    new InvoiceResponse(
+                            invoice,
+                            userRepository.findUserEmailByInvoiceId(invoice.getIdInvoice())
+                                .orElseThrow(() -> new ResponseStatusException(
+                                        HttpStatus.NOT_FOUND,
+                                        INVOICE_EMAIL_EXISTENCE_ERROR)).getEmail()
+                    )
+                ).collect(Collectors.toList());
     }
 
     public List<InvoiceResponse> getAllUserInvoices(String email)
@@ -79,33 +92,56 @@ public class OwnerEmployeeService {
         if(user.isPresent()) {
             return invoiceRepository.findByUserIdUser(user.get())
                     .stream()
-                    .map(InvoiceResponse::new)
+                    .map(invoice ->
+                            new InvoiceResponse(
+                                    invoice,
+                                    userRepository.findUserEmailByInvoiceId(invoice.getIdInvoice())
+                                            .orElseThrow(() -> new ResponseStatusException(
+                                                    HttpStatus.NOT_FOUND,
+                                                    INVOICE_EMAIL_EXISTENCE_ERROR)).getEmail()
+                            )
+                    )
                     .collect(Collectors.toList());
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR);
     }
 
     public List<InvoiceResponse> getInvoicesBetweenDates(Date startDate, Date endDate) {
         return invoiceRepository.findByInvoiceDateBetween(startDate, endDate)
                 .stream()
-                .map(InvoiceResponse::new)
+                .map(invoice ->
+                        new InvoiceResponse(
+                                invoice,
+                                userRepository.findUserEmailByInvoiceId(invoice.getIdInvoice())
+                                        .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND,
+                                                INVOICE_EMAIL_EXISTENCE_ERROR)).getEmail()
+                        ))
                 .collect(Collectors.toList());
     }
 
     public InvoiceResponse getInvoiceById(Integer invoiceId) {
-        return new InvoiceResponse(invoiceRepository.findById(invoiceId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invoice not found")));
+        return new InvoiceResponse(
+                invoiceRepository.findById(invoiceId)
+                    .orElseThrow(() -> new ResponseStatusException(
+                            HttpStatus.NOT_FOUND,
+                            "Invoice not found")),
+                userRepository.findUserEmailByInvoiceId(invoiceId)
+                    .orElseThrow(() -> new ResponseStatusException(
+                            HttpStatus.NOT_FOUND,
+                            INVOICE_EMAIL_EXISTENCE_ERROR))
+                        .getEmail());
     }
 
     public UserResponse editEmployeeDetails(UserRequest request) {
         var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
         return new UserResponse(userRepository.save(User.editMapping(user, request)));
     }
 
     public UserResponse editEmployeeEmail(UserRequest request, String newEmail) {
         var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
         if (userRepository.findByEmail(newEmail).isEmpty()) {
             user.setEmail(newEmail);
             return new UserResponse(userRepository.save(user));
@@ -115,7 +151,7 @@ public class OwnerEmployeeService {
 
     public UserResponse editEmployeePassword(UserRequest request) {
         var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             user.setPassword(passwordEncoder.encode(request.getPassword()));
             return new UserResponse(userRepository.save(user));
@@ -125,7 +161,7 @@ public class OwnerEmployeeService {
 
     public UserResponse deleteCurrentRolesAndAddNewEmployeeRole(String email, String roleName) {
         var user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
         var userRoles = roleRepository.findByUserId(user.getIdUser());
         if (roleRepository.findByUserId(user.getIdUser())
                 .stream()
@@ -141,7 +177,7 @@ public class OwnerEmployeeService {
         } else {
             roleRepository.deleteRolesByUserId(user.getIdUser());
             user = userRepository.findByEmail(email)
-                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, USER_EXISTENCE_ERROR));
             var newRoleList = new ArrayList<Role>();
             newRoleList.add(roleRepository.findByRoleName(roleName)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no such role")));
