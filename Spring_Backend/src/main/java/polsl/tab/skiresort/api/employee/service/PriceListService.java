@@ -186,17 +186,20 @@ public class PriceListService {
     }
 
     public PriceListResponse modifyCurrentPriceListAndDeactivateOldOne(PriceListRequest request) {
+        var todayDate = new Date(new java.util.Date().getTime());
         var oldPriceList = getCurrentPriceList();
-        oldPriceList.setEndDate(request.getStartDate());
+        oldPriceList.setEndDate(todayDate);
         priceListRepository.save(oldPriceList);
         var c = Calendar.getInstance();
-        c.setTime(request.getStartDate());
+        c.setTime(todayDate);
         c.add(Calendar.DATE,1);
         var newStartDate = new Date(c.getTimeInMillis());
+        c.add(Calendar.YEAR, 20);
+        var newEndDate = new Date(c.getTimeInMillis());
         return mapPriceListResponse(priceListRepository.save(
                 new PriceList(
                         newStartDate,
-                        request.getEndDate(),
+                        newEndDate,
                         request.getAgeDiscountsRequest().stream().map(
                                 age -> new AgeDiscount(
                                         age.getAgeMin(),
