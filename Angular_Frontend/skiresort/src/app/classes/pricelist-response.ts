@@ -3,16 +3,12 @@ import {AgeDiscountResponse} from "./age-discount-response";
 import {QuantityPassResponse} from "./quantity-pass-response";
 
 export class PricelistResponse {
-  startDate: string;
-  endDate: string;
   ageDiscountsList: AgeDiscountResponse[];
   timePassesList: TimePassResponse[];
   quantityPassesList: QuantityPassResponse[];
 
 
-  constructor(startDate: string, endDate: string, ageDiscountsList: AgeDiscountResponse[], timePassesList: TimePassResponse[], quantityPassesList: QuantityPassResponse[]) {
-    this.startDate = startDate;
-    this.endDate = endDate;
+  constructor(ageDiscountsList: AgeDiscountResponse[], timePassesList: TimePassResponse[], quantityPassesList: QuantityPassResponse[]) {
     this.ageDiscountsList = ageDiscountsList;
     this.timePassesList = timePassesList;
     this.quantityPassesList = quantityPassesList;

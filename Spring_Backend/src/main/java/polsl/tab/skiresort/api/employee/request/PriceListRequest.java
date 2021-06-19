@@ -9,11 +9,11 @@ public class PriceListRequest {
 
     private Date endDate;
 
-    private List<AgeDiscountsRequest> ageDiscountsResponse;
+    private List<AgeDiscountsRequest> ageDiscountsRequest;
 
-    private List<QuantityPassRequest> quantityPassResponse;
+    private List<QuantityPassRequest> quantityPassRequest;
 
-    private List<TimePassRequest> timePassResponse;
+    private List<TimePassRequest> timePassRequest;
 
     public Date getStartDate() {
         return startDate;
@@ -24,14 +24,14 @@ public class PriceListRequest {
     }
 
     public List<AgeDiscountsRequest> getAgeDiscountsRequest() {
-        return ageDiscountsResponse;
+        return ageDiscountsRequest;
     }
 
     public List<QuantityPassRequest> getQuantityPassRequest() {
-        return quantityPassResponse;
+        return quantityPassRequest;
     }
 
     public List<TimePassRequest> getTimePassRequest() {
-        return timePassResponse;
+        return timePassRequest;
     }
 }
