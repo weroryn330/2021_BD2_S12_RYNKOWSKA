@@ -16,6 +16,10 @@ export class SkiliftService {
     return this.http.get(this.endPoint + '/technical_employee/all');
   }
 
+  getSkilifts() {
+    return this.http.get(this.endPoint + '/mockup_usage');
+  }
+
   changeSkiliftState(idSkiLift: number) {
     return this.http.put(this.endPoint + '/technical_employee/' + idSkiLift, this.httpOptions );
   }

@@ -1,0 +1,9 @@
+.mainData {
+  margin-top: 25px;
+}
+
+.mainData h5 {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  padding: 5px;
+}

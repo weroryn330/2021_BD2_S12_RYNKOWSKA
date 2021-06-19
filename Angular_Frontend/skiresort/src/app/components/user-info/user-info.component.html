@@ -1,8 +1,33 @@
-<h3>Dane osobowe: </h3>
-<p>Imię: {{user.firstName}}</p>
-<p>Nazwisko: {{user.lastName}}</p>
-<p>Numer telefonu: {{user.phone}}</p>
-<p>Kraj: {{user.country}}</p>
-<p>Wojewódźtwo: {{user.voivodeship}}</p>
-<p>Miejscowość: {{user.city}}</p>
-<p>Adres: {{user.address}}</p>
+Witaj na swoim profilu, {{user.firstName}} {{user.lastName}}.
+<div class="mainData">
+  <h5>Imię: </h5>
+  {{user.firstName}}
+</div>
+<div class="mainData">
+  <h5>Nazwisko: </h5>
+  {{user.lastName}}
+</div>
+<div class="mainData">
+  <h5>Numer telefonu: </h5>
+  {{user.phone}}
+</div>
+<div class="mainData">
+  <h5>Kraj: </h5>
+  {{user.country}}
+</div>
+<div class="mainData">
+  <h5>Wojewódźtwo: </h5>
+  {{user.voivodeship}}
+</div>
+<div class="mainData">
+  <h5>Kod pocztowy: </h5>
+  {{user.postalCode}}
+</div>
+<div class="mainData">
+  <h5>Miasto: </h5>
+  {{user.city}}
+</div>
+<div class="mainData">
+  <h5>Ulica: </h5>
+  {{user.address}}
+</div>
