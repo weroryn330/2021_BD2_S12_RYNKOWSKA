@@ -37,12 +37,6 @@ public class EmployeeApi {
         return ResponseEntity.ok(employeePassesService.setPassBlock(passId));
     }
 
-    @PostMapping("/skiLiftSchedule")
-    public ResponseEntity<SkiLiftScheduleResponse> addNewSkiLiftSchedule(@RequestBody SkiLiftScheduleRequest skiLiftScheduleRequest){
-
-        return ResponseEntity.ok(employeeSkiLiftScheduleService.addNewSkiLiftSchedule(skiLiftScheduleRequest));
-    }
-
     @PutMapping("/skiLiftSchedule")
     public ResponseEntity<SkiLiftScheduleResponse> editSkiLiftSchedule(@RequestBody SkiLiftScheduleRequest skiLiftScheduleRequest){
 
