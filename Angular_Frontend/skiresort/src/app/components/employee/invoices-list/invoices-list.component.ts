@@ -14,6 +14,7 @@ export class InvoicesListComponent implements OnInit {
     endDate: null
   }
   page = 1;
+  todayDate: string = new Date().toString();
 
   constructor(private invoiceService: InvoiceService) {
   }
@@ -40,6 +41,20 @@ export class InvoicesListComponent implements OnInit {
     }, error => {
       alert("Coś poszło nie tak...");
     })
+  }
+
+  invalidStartDate() {
+    return (new Date(this.form.startDate) < new Date('2010-01-01')) ||
+      (new Date(this.form.startDate) > new Date())
+  }
+
+  invalidEndDate() {
+    return (new Date(this.form.endDate) < new Date('2010-01-01')) ||
+      (new Date(this.form.endDate) > new Date())
+  }
+
+  invalidDatesInput(){
+    return this.invalidStartDate() || this.invalidEndDate();
   }
 
   onSubmit() {

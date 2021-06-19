@@ -1,16 +1,28 @@
 <div class="mainContainer">
   <h2>Wybierz przedział czasu dla faktur</h2>
-  <form name="form" (ngSubmit)="f.form.valid  && onSubmit()" #f="ngForm">
+  <form name="form" (ngSubmit)="f.form.valid && !invalidDatesInput() && onSubmit()" #f="ngForm">
     <div class="user-details">
       <div class="inputBoxBill">
         <span class="details">Data początkowa</span>
         <input type="date" name="startDate" required [(ngModel)]="form.startDate" #startDate="ngModel"
-               [ngClass]="{error :  startDate.touched && startDate.errors}">
+               [ngClass]="{error :  startDate.touched && (startDate.errors || invalidStartDate())}"
+               min="2010-01-01"  max="{{ todayDate | date: 'yyyy-MM-dd'}}">
+        <ul>
+          <li>i
+            <div class="dangerInfo">Data początkowa nie może być wcześniejsza niż 01-01-2010</div>
+          </li>
+        </ul>
       </div>
       <div class="inputBoxBill">
         <span class="details">Data końcowa</span>
         <input type="date" name="endDate" required [(ngModel)]="form.endDate" #endDate="ngModel"
-               [ngClass]="{error :  endDate.touched && endDate.errors}">
+               [ngClass]="{error :  endDate.touched && (endDate.errors || invalidEndDate())}"
+               min="2010-01-01"  max="{{ todayDate | date: 'yyyy-MM-dd'}}">
+        <ul>
+          <li>i
+            <div class="dangerInfo">Data końcowa nie może odnosić się do przyszłości</div>
+          </li>
+        </ul>
       </div>
     </div>
     <div class="button">
