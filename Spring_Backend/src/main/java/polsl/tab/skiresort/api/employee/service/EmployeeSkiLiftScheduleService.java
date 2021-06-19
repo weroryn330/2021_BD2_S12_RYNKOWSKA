@@ -1,5 +1,6 @@
 package polsl.tab.skiresort.api.employee.service;
 
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -9,8 +10,8 @@ import polsl.tab.skiresort.model.SkiLiftSchedule;
 import polsl.tab.skiresort.repository.SkiLiftRepository;
 import polsl.tab.skiresort.repository.SkiLiftScheduleRepository;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.sql.Date;
+import java.sql.Time;
 
 @Service
 public class EmployeeSkiLiftScheduleService {
@@ -24,32 +25,29 @@ public class EmployeeSkiLiftScheduleService {
         this.skiLiftRepository = skiLiftRepository;
     }
 
-    public SkiLiftScheduleResponse addNewSkiLiftSchedule(SkiLiftScheduleRequest skiLiftScheduleRequest) {
-        SkiLiftSchedule skiLiftSchedule = new SkiLiftSchedule(
-                skiLiftScheduleRequest.getStartDate(),
-                skiLiftScheduleRequest.getEndDate(),
-                skiLiftScheduleRequest.getOpensTime(),
-                skiLiftScheduleRequest.getClosesTime(),
-                skiLiftRepository.findById(skiLiftScheduleRequest.getSkiLiftId())
-                        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ski lift not found")));
-
-        skiLiftScheduleRepository.save(skiLiftSchedule);
-
-        return new SkiLiftScheduleResponse(skiLiftSchedule);
-
-    }
-
     public SkiLiftScheduleResponse editSkiLiftSchedule(SkiLiftScheduleRequest skiLiftScheduleRequest) {
 
-        SkiLiftSchedule skiLiftSchedule = skiLiftScheduleRepository.findCurrentBySkiLiftId(skiLiftScheduleRequest.getSkiLiftId())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Current schedule not found"));
+        SkiLiftSchedule skiLiftSchedule;
+        try {
+            skiLiftSchedule = skiLiftScheduleRepository.findCurrentBySkiLiftId(skiLiftScheduleRequest.getSkiLiftId())
+                    .orElse(new SkiLiftSchedule(
+                            new Date(System.currentTimeMillis()),
+                            new Date(System.currentTimeMillis() + (630720000000L)), // 
+                            skiLiftScheduleRequest.getOpensTime(),
+                            skiLiftScheduleRequest.getClosesTime(),
+                            skiLiftRepository.findById(skiLiftScheduleRequest.getSkiLiftId()).orElseThrow(() -> new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND, "Ski lift with id not found"
+                            ))
+                    ));
 
-        skiLiftSchedule.setEndDate(skiLiftScheduleRequest.getEndDate());
-        skiLiftSchedule.setStartDate(skiLiftScheduleRequest.getStartDate());
-        skiLiftSchedule.setOpensTime(skiLiftScheduleRequest.getOpensTime());
-        skiLiftSchedule.setClosesTime(skiLiftScheduleRequest.getClosesTime());
+            skiLiftSchedule.setOpensTime(skiLiftScheduleRequest.getOpensTime());
+            skiLiftSchedule.setClosesTime(skiLiftScheduleRequest.getClosesTime());
 
-        skiLiftScheduleRepository.save(skiLiftSchedule);
+            skiLiftScheduleRepository.save(skiLiftSchedule);
+
+        }catch(IncorrectResultSizeDataAccessException e){
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "More than one ski lift schedule present");
+        }
 
         return new SkiLiftScheduleResponse(skiLiftSchedule);
     }
