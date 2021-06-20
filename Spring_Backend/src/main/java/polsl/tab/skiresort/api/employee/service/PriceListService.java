@@ -170,7 +170,7 @@ public class PriceListService {
         );
     }
 
-    private PriceList getCurrentPriceList() {
+    public PriceList getCurrentPriceList() {
         var list = priceListRepository.findCurrentPriceList();
         if (list.isPresent()) {
             return list.get();

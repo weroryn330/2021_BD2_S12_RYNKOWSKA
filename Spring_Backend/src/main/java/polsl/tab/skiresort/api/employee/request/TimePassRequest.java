@@ -10,7 +10,15 @@ public class TimePassRequest {
         return hours;
     }
 
+    public void setHours(Integer hours) {
+        this.hours = hours;
+    }
+
     public Float getPrice() {
         return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 }
