@@ -10,7 +10,9 @@ import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 import polsl.tab.skiresort.model.Invoice;
 import polsl.tab.skiresort.model.Pass;
@@ -53,6 +55,8 @@ public class BusinessReportBuilder {
         // Create a document and add a page to it
         PDDocument document = new PDDocument();
         PDPage page = new PDPage(PDRectangle.A4);
+
+        PDType0Font attika = PDType0Font.load(document, new ClassPathResource("fonts/AttikaU.ttf").getFile());
 
         document.addPage(page);
 
@@ -129,6 +133,7 @@ public class BusinessReportBuilder {
 
             passCell = row.createCell(INVOICE_TABLE_CELL_WIDTHS[1], invoice.getUserIdUser().getFirstName() + " " + invoice.getUserIdUser().getLastName());
             passCell.setFontSize(12);passCell.setFillColor(color);passCell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
+            passCell.setFont(attika);
 
             passCell = row.createCell(INVOICE_TABLE_CELL_WIDTHS[2], invoice.getInvoiceDate().toString());
             passCell.setFontSize(12);passCell.setFillColor(color);passCell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
