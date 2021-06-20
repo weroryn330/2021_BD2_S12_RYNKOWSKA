@@ -1,6 +1,7 @@
 package polsl.tab.skiresort.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -54,11 +55,13 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
 
     Optional<Pass> deleteByInvoicesIdInvoiceAndIdPass(Invoice invoice, Integer passId);
 
+    @Query(
+            nativeQuery = true,
+            value = "DELETE FROM PASSES p WHERE p.id_pass = :passId"
+    )
     @Transactional
-    Optional<Pass> deleteByIdPass(Integer passId);
-
-    @Transactional
-    Optional<Pass> deleteByIdPass(Pass pass);
+    @Modifying
+    void deletePass(@Param("passId") Integer passId);
 
     @Query(
             nativeQuery = true,
