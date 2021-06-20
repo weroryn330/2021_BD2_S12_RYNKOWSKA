@@ -1,0 +1,26 @@
+<div class="mainContainer">
+  <h2>Wyciąg: {{schedule.skiLiftName}}</h2>
+  <div class="content">
+    <form #f="ngForm" name="form" (ngSubmit)="f.form.valid && onSubmit()">
+      <div class="user-details">
+        <div class="inputBoxBill">
+          <span class="details">Godzina otwarcia</span>
+          <input type="time"
+                 [(ngModel)]="form.opensTime" #opensTime="ngModel" name="opensTime" required
+                 [ngClass]="{error :  opensTime.touched && opensTime.errors}"
+                 min="00:00:00" max="24:00:00">
+        </div>
+        <div class="inputBoxBill">
+          <span class="details">Godzina zamknięcia</span>
+          <input type="time"
+                 [(ngModel)]="form.closesTime" #closesTime="ngModel" name="closesTime" required
+                 [ngClass]="{error :  closesTime.touched && closesTime.errors}"
+                 min="00:00" max="24:00">
+        </div>
+      </div>
+      <div class="button">
+        <input type="submit" (click)="f.form.markAllAsTouched()" id="button" value="Zatwierdź rozkład wyciągu">
+      </div>
+    </form>
+  </div>
+</div>

@@ -48,6 +48,7 @@ import { ElementRoleFormComponent } from './components/employee/employee-edit/em
 import { ElementSingleDiscountComponent } from './components/employee/pricelist-edit/discounts-element/element-single-discount/element-single-discount.component';
 import { ElementSingleQuantityPassComponent } from './components/employee/pricelist-edit/quantity-passes-element/element-single-quantity-pass/element-single-quantity-pass.component';
 import { ElementSingleTimePassComponent } from './components/employee/pricelist-edit/time-passes-element/element-single-time-pass/element-single-time-pass.component';
+import { SingleScheduleElementComponent } from './components/employee/schedules/single-schedule-element/single-schedule-element.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +91,8 @@ import { ElementSingleTimePassComponent } from './components/employee/pricelist-
     ElementRoleFormComponent,
     ElementSingleDiscountComponent,
     ElementSingleQuantityPassComponent,
-    ElementSingleTimePassComponent
+    ElementSingleTimePassComponent,
+    SingleScheduleElementComponent
   ],
     imports: [
         BrowserModule,

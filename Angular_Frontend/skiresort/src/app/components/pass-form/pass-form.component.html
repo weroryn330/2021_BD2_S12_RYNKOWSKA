@@ -1,4 +1,4 @@
-<form #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()"
+<form #f="ngForm" (ngSubmit)="f.form.valid && !invalidBirthDate() && onSubmit()"
       style="border-bottom:5px solid rgba(0,0,0,0.5); margin-bottom:5%;" name="form">
   <div class="user-details">
     <div class="inputBox">
@@ -21,7 +21,7 @@
       <input type="date" name="birthDate" required min="1920-01-01"  max="{{todayDate | date: 'yyyy-MM-dd'}}"
              (change)="checkIfDiscountApply(birthDate.value)"
              [(ngModel)]="form.birthDate" #birthDate="ngModel"
-             [ngClass]="{error :  birthDate.touched && birthDate.errors}">
+             [ngClass]="{error :  birthDate.touched && (birthDate.errors || invalidBirthDate())}">
     </div>
     <div class="inputBox">
       <span class="details">Typ karnetu</span>

@@ -70,4 +70,11 @@ public class PriceListApi {
         return ResponseEntity.ok(priceListService.modifyTimePassForActivePriceList(request));
     }
 
+    @PostMapping("/edit/priceList")
+    public ResponseEntity<PriceListResponse> modifyCurrentPriceListAndDeactivateOldOne(
+            @RequestBody PriceListRequest request
+    ) {
+        return ResponseEntity.ok(priceListService.modifyCurrentPriceListAndDeactivateOldOne(request));
+    }
+
 }

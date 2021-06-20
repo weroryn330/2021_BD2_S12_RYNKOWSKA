@@ -27,6 +27,8 @@ export class ElementSingleTimePassComponent implements OnInit {
 
 
   editTimePass() {
+    this.timePass.hours = this.form.hours;
+    this.timePass.price = this.form.price;
     this.newTimePassModificationEvent.emit([this.timePass, this.index]);
     this.isPassConfirmed = true;
   }

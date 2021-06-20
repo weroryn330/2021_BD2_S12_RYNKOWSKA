@@ -7,6 +7,7 @@ export class PricelistResponse {
   timePassesList: TimePassResponse[];
   quantityPassesList: QuantityPassResponse[];
 
+
   constructor(ageDiscountsList: AgeDiscountResponse[], timePassesList: TimePassResponse[], quantityPassesList: QuantityPassResponse[]) {
     this.ageDiscountsList = ageDiscountsList;
     this.timePassesList = timePassesList;
