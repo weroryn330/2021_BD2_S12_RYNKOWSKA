@@ -26,8 +26,8 @@ public interface PriceListRepository extends JpaRepository<PriceList, Integer> {
 
     @Query(
             nativeQuery = true,
-            value = "SELECT * FROM price_lists WHERE start_date < NOW() " +
-                    "AND end_date > NOW() " +
+            value = "SELECT * FROM price_lists WHERE start_date <= NOW() " +
+                    "AND end_date >= NOW() " +
                     "AND id_price_list != 1 " +
                     "AND id_price_list != 2"
     )

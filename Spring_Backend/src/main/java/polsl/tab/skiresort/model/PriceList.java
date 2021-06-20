@@ -21,13 +21,13 @@ public class PriceList {
     @OneToMany(mappedBy = "priceList")
     private List<Pass> passList;
 
-    @OneToMany(mappedBy = "priceListIdPriceList")
+    @OneToMany(mappedBy = "priceListIdPriceList",cascade = CascadeType.PERSIST)
     private List<AgeDiscount> ageDiscountList;
 
-    @OneToMany(mappedBy = "priceListIdPriceList")
+    @OneToMany(mappedBy = "priceListIdPriceList",cascade = CascadeType.PERSIST)
     private List<TimePass> timePassList;
 
-    @OneToMany(mappedBy = "priceListIdPriceList")
+    @OneToMany(mappedBy = "priceListIdPriceList",cascade = CascadeType.PERSIST)
     private List<QuantityPass> quantityPassList;
 
     public PriceList() {}
