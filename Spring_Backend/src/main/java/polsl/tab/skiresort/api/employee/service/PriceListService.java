@@ -187,39 +187,40 @@ public class PriceListService {
 
     public PriceListResponse modifyCurrentPriceListAndDeactivateOldOne(PriceListRequest request) {
         var todayDate = new Date(new java.util.Date().getTime());
-        var oldPriceList = getCurrentPriceList();
-        oldPriceList.setEndDate(todayDate);
-        priceListRepository.save(oldPriceList);
         var c = Calendar.getInstance();
         c.setTime(todayDate);
+        c.add(Calendar.DATE, -1);
+        var oldEndDate = new Date(c.getTimeInMillis());
+        var oldPriceList = getCurrentPriceList();
+        oldPriceList.setEndDate(oldEndDate);
+        priceListRepository.save(oldPriceList);
         c.add(Calendar.DATE,1);
         var newStartDate = new Date(c.getTimeInMillis());
         c.add(Calendar.YEAR, 20);
         var newEndDate = new Date(c.getTimeInMillis());
-        return mapPriceListResponse(priceListRepository.save(
-                new PriceList(
-                        newStartDate,
-                        newEndDate,
-                        request.getAgeDiscountsRequest().stream().map(
-                                age -> new AgeDiscount(
-                                        age.getAgeMin(),
-                                        age.getAgeMax(),
-                                        age.getPercentage()
-                                )
-                        ).collect(Collectors.toList()),
-                        request.getTimePassRequest().stream().map(
-                                time -> new TimePass(
-                                        time.getHours(),
-                                        time.getPrice()
-                                )
-                        ).collect(Collectors.toList()),
-                        request.getQuantityPassRequest().stream().map(
-                                quantity -> new QuantityPass(
-                                        quantity.getQuantity(),
-                                        quantity.getPrice()
-                                )
-                        ).collect(Collectors.toList())
-                )
-        ));
+        var newPriceList = new PriceList(newStartDate,newEndDate);
+        newPriceList.setAgeDiscountList(
+                request.getAgeDiscountsRequest().stream().map(
+                        age -> new AgeDiscount(
+                                age.getAgeMin(),
+                                age.getAgeMax(),
+                                age.getPercentage(),
+                                newPriceList
+                )).collect(Collectors.toList()));
+        newPriceList.setTimePassList(
+                request.getTimePassRequest().stream().map(
+                        time -> new TimePass(
+                                time.getHours(),
+                                time.getPrice(),
+                                newPriceList
+                )).collect(Collectors.toList()));
+        newPriceList.setQuantityPassList(
+                request.getQuantityPassRequest().stream().map(
+                        quantity -> new QuantityPass(
+                                quantity.getQuantity(),
+                                quantity.getPrice(),
+                                newPriceList
+                )).collect(Collectors.toList()));
+        return mapPriceListResponse(priceListRepository.save(newPriceList));
     }
 }
