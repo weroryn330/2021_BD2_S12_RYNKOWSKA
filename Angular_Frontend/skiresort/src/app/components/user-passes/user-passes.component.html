@@ -5,7 +5,7 @@
     </div>
   </ng-container>
   <div class="infoTime" *ngFor="let pass of passesList |
-  paginate: {itemsPerPage: 2, currentPage: page}; index as i">
+  paginate: {itemsPerPage: itemsPerPage, currentPage: page}; index as i">
     <ul class="price" [ngClass]="{activePass : pass.isActive && !pass.blocked, blockedPass : pass.blocked }">
       <ng-container *ngIf="pass.blocked && pass.isActive">
         <li class="header">KARNET ZABLOKOWANY</li>
@@ -28,7 +28,7 @@
     </ul>
     <div class="buttonInput" (click)="downloadQR(pass.id)">Pobierz karnet</div>
     <ng-container *ngIf="canBeRefunded(pass)">
-      <div class="buttonInput" (click)="refundPass(pass.id, i)">Zwróć karnet</div>
+      <div class="buttonInput" (click)="refundPass(pass.id, (page-1)*itemsPerPage +i)">Zwróć karnet</div>
     </ng-container>
   </div>
 </div>
