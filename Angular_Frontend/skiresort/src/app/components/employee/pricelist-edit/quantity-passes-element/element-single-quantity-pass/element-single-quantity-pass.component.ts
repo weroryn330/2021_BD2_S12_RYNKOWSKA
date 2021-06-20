@@ -24,6 +24,8 @@ export class ElementSingleQuantityPassComponent implements OnInit {
   }
 
   editQuantityPass() {
+    this.quantityPass.quantity = this.form.quantity;
+    this.quantityPass.price = this.form.price;
     this.newQuantityPassModificationEvent.emit([this.quantityPass , this.index]);
     this.isPassConfirmed = true;
   }

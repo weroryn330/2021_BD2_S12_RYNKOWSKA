@@ -11,6 +11,7 @@ import {PassResponse} from "../../classes/pass-response";
 export class UserPassesComponent implements OnInit {
   passesList: PassResponse[] = [];
   page = 1;
+  itemsPerPage = 2;
 
   constructor(private passService: PassService) {
   }

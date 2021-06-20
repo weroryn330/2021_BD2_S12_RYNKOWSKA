@@ -248,7 +248,7 @@ footer {
 }
 
 /* Hamburger button menu */
-@media(max-width: 900px){
+@media(max-width: 1100px){
   /* Menu */
   nav .mainNav, nav .mainNavW {
     position: fixed;

@@ -18,6 +18,7 @@ import polsl.tab.skiresort.model.TimePass;
 import polsl.tab.skiresort.repository.PriceListRepository;
 
 import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -182,5 +183,44 @@ public class PriceListService {
                 .stream()
                 .map(this::mapPriceListResponse)
                 .collect(Collectors.toList());
+    }
+
+    public PriceListResponse modifyCurrentPriceListAndDeactivateOldOne(PriceListRequest request) {
+        var todayDate = new Date(new java.util.Date().getTime());
+        var c = Calendar.getInstance();
+        c.setTime(todayDate);
+        c.add(Calendar.DATE, -1);
+        var oldEndDate = new Date(c.getTimeInMillis());
+        var oldPriceList = getCurrentPriceList();
+        oldPriceList.setEndDate(oldEndDate);
+        priceListRepository.save(oldPriceList);
+        c.add(Calendar.DATE,1);
+        var newStartDate = new Date(c.getTimeInMillis());
+        c.add(Calendar.YEAR, 20);
+        var newEndDate = new Date(c.getTimeInMillis());
+        var newPriceList = new PriceList(newStartDate,newEndDate);
+        newPriceList.setAgeDiscountList(
+                request.getAgeDiscountsRequest().stream().map(
+                        age -> new AgeDiscount(
+                                age.getAgeMin(),
+                                age.getAgeMax(),
+                                age.getPercentage(),
+                                newPriceList
+                )).collect(Collectors.toList()));
+        newPriceList.setTimePassList(
+                request.getTimePassRequest().stream().map(
+                        time -> new TimePass(
+                                time.getHours(),
+                                time.getPrice(),
+                                newPriceList
+                )).collect(Collectors.toList()));
+        newPriceList.setQuantityPassList(
+                request.getQuantityPassRequest().stream().map(
+                        quantity -> new QuantityPass(
+                                quantity.getQuantity(),
+                                quantity.getPrice(),
+                                newPriceList
+                )).collect(Collectors.toList()));
+        return mapPriceListResponse(priceListRepository.save(newPriceList));
     }
 }

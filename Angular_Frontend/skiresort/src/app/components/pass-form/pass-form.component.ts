@@ -109,7 +109,7 @@ export class PassFormComponent implements OnInit {
       }
       standardPrice = pass.price;
     }
-    this.form.unitPrice = parseInt((standardPrice * (100 - this.activeDiscountPercentage) / 100).toPrecision(3));
+    this.form.unitPrice = parseInt((standardPrice * (100 - this.activeDiscountPercentage) / 100).toPrecision());
   }
 
   convertToDays(hours: number): string {
@@ -128,5 +128,10 @@ export class PassFormComponent implements OnInit {
     } else {
       this.calculatePrice(this.form.usesTotal);
     }
+  }
+
+  invalidBirthDate() {
+    return (new Date(this.form.birthDate) < new Date('1920-01-01')) ||
+      (new Date(this.form.birthDate) > new Date())
   }
 }

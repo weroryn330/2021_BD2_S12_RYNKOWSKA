@@ -25,13 +25,12 @@ export class QuantityPassesElementComponent implements OnInit {
   deleteQuantityPass(quantityPassAndIndexTuple: [any, any]) {
     this.quantityPasses.splice(quantityPassAndIndexTuple[1], 1);
     this.validationArray.splice(quantityPassAndIndexTuple[1], 1);
-    console.log('PASS DELETED: ' + quantityPassAndIndexTuple[0]);
   }
 
   modifyQuantityPass(quantityPassAndIndexTuple: [any, any]) {
+
     this.quantityPasses[quantityPassAndIndexTuple[1]] = quantityPassAndIndexTuple[0];
     this.validationArray[quantityPassAndIndexTuple[1]] = true;
-    console.log('PASS CHANGED: ' + quantityPassAndIndexTuple[0]);
   }
 
   addNewPass() {

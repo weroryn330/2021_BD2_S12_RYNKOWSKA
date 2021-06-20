@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {PricelistService} from "../../../services/pricelist.service";
-import {PricelistResponse} from "../../../classes/pricelist-response";
-import {AgeDiscountResponse} from "../../../classes/age-discount-response";
-import {QuantityPassResponse} from "../../../classes/quantity-pass-response";
-import {TimePassResponse} from "../../../classes/time-pass-response";
+import {PriceListRequest} from "../../../classes/pricelist-request";
+import {AgeDiscountRequest} from "../../../classes/age-discount-request";
+import {QuantityPassRequest} from "../../../classes/quantity-pass-request";
+import {TimePassRequest} from "../../../classes/time-pass-request";
 
 @Component({
   selector: 'app-pricelist-edit',
@@ -11,9 +11,9 @@ import {TimePassResponse} from "../../../classes/time-pass-response";
   styleUrls: ['./pricelist-edit.component.css']
 })
 export class PricelistEditComponent implements OnInit {
-  ageDiscountsList: AgeDiscountResponse[] = [];
-  quantityPassesList: QuantityPassResponse[] = [];
-  timePassesList: TimePassResponse[] = [];
+  ageDiscountsList: AgeDiscountRequest[] = [];
+  quantityPassesList: QuantityPassRequest[] = [];
+  timePassesList: TimePassRequest[] = [];
   discountsChanged = false;
   quantityPassesChanged = false;
   timePassesChanged = false;
@@ -39,8 +39,9 @@ export class PricelistEditComponent implements OnInit {
 
   editPricelist() {
     if (this.discountsChanged && this.quantityPassesChanged && this.timePassesChanged) {
-      this.pricelistService.editPricelist(new PricelistResponse(this.ageDiscountsList,
-        this.timePassesList, this.quantityPassesList)).subscribe(data => {
+      const newPricelist = new PriceListRequest('2000-01-01', '2000-01-01',
+        this.ageDiscountsList, this.quantityPassesList, this.timePassesList);
+      this.pricelistService.editPricelist(newPricelist).subscribe(data => {
           console.log(data);
           this.ageDiscountsList = data.ageDiscountsResponse;
           this.quantityPassesList = data.quantityPassResponse;

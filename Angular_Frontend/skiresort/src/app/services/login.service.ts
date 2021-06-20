@@ -8,7 +8,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 export class LoginService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
+  }
   endPoint = 'http://localhost:8080/api'
   constructor(private http: HttpClient) { }
 

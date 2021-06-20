@@ -15,17 +15,16 @@ import {QuantityPassResponse} from "../../classes/quantity-pass-response";
 })
 export class PricelistComponent implements OnInit {
   pricelist: PricelistResponse = {} as PricelistResponse;
-    isUser = false;
+  isUser = false;
 
   constructor(private pricelistService: PricelistService, private router: Router, private token: TokenService) {
   }
 
   ngOnInit(): void {
     this.getPricelist();
-    if(!this.token.getToken()){
+    if (!this.token.getToken()) {
       this.isUser = false;
-    }
-    else{
+    } else {
       this.isUser = this.token.getUser().roleList.includes("ROLE_USER");
     }
   }
@@ -53,6 +52,6 @@ export class PricelistComponent implements OnInit {
 
   calculateDiscountPrice(price: number, discountNumber: number): number {
     const discount = this.pricelist.ageDiscountsList[discountNumber].percentage;
-    return price*((100-discount)/100);
+    return price * ((100 - discount) / 100);
   }
 }

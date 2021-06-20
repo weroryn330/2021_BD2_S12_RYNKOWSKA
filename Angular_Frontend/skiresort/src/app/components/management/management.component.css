@@ -135,6 +135,9 @@ main {
 
   display: flex;
   flex-direction: column;
+  position: sticky;
+  bottom: 40px;
+  top: 40px;
 }
 
 .actions {
@@ -148,6 +151,9 @@ main {
 
   display: flex;
   flex-direction: column;
+  position: sticky;
+  bottom: 40px;
+  top: 40px;
 }
 
 .actions .button {
@@ -179,4 +185,16 @@ main {
   border-left: 1px solid rgba(255, 255, 255, 0.5);
   border-right: 1px solid rgba(0, 0, 0, 1);
   border-bottom: 1px solid rgba(0, 0, 0, 1);
+}
+
+@media (max-width: 2500px) {
+  .actions {
+    top: 40px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .actions {
+    top: unset;
+  }
 }
