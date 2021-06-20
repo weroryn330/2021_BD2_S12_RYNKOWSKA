@@ -6,6 +6,7 @@ import polsl.tab.skiresort.config.components.PriceListComponent;
 import polsl.tab.skiresort.config.components.QuantityPassComponent;
 import polsl.tab.skiresort.config.components.TimePassesComponent;
 import polsl.tab.skiresort.model.PriceList;
+import polsl.tab.skiresort.repository.PriceListRepository;
 
 @Configuration
 public class PriceListOrderedConfig {
@@ -17,6 +18,8 @@ public class PriceListOrderedConfig {
     private final QuantityPassComponent quantityPassComponent;
 
     private final PriceListComponent priceListComponent;
+
+    private final PriceListRepository priceListRepository;
 
     private PriceList priceList;
 
@@ -60,18 +63,19 @@ public class PriceListOrderedConfig {
     public PriceListOrderedConfig(final AgeDiscountsComponent ageDiscountsComponent,
                                   final TimePassesComponent timePassesComponent,
                                   final QuantityPassComponent quantityPassComponent,
-                                  final PriceListComponent priceListComponent
+                                  final PriceListComponent priceListComponent,
+                                  final PriceListRepository priceListRepository
     ) {
         this.ageDiscountsComponent = ageDiscountsComponent;
         this.timePassesComponent = timePassesComponent;
         this.quantityPassComponent = quantityPassComponent;
         this.priceListComponent = priceListComponent;
-        this.createCurrentPriceList();
-        this.createAgeDiscounts();
-        this.createQuantityPasses();
-        this.createTimePasses();
+        this.priceListRepository = priceListRepository;
+        if (priceListRepository.findCurrentPriceList().isEmpty()) {
+            this.createCurrentPriceList();
+            this.createAgeDiscounts();
+            this.createQuantityPasses();
+            this.createTimePasses();
+        }
     }
-
-
-
 }
