@@ -109,7 +109,7 @@ export class PassFormComponent implements OnInit {
       }
       standardPrice = pass.price;
     }
-    this.form.unitPrice = parseInt((standardPrice * (100 - this.activeDiscountPercentage) / 100).toPrecision(3));
+    this.form.unitPrice = parseInt((standardPrice * (100 - this.activeDiscountPercentage) / 100).toPrecision());
   }
 
   convertToDays(hours: number): string {
