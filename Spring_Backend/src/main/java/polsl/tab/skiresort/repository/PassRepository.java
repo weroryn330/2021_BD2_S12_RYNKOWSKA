@@ -1,6 +1,7 @@
 package polsl.tab.skiresort.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,7 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
 
     @Query (
             nativeQuery = true,
-            value = "SELECT * FROM PASSES WHERE end_date > NOW() OR uses_left != 0"
+            value = "SELECT * FROM PASSES WHERE (end_date >= NOW() OR uses_left != 0) AND blocked = FALSE"
     )
     Collection<Pass> getAllActivePasses();
 
@@ -36,8 +37,9 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
                     "INNER JOIN INVOICES i on i.id_invoice = p.invoices_id_invoice " +
                     "INNER JOIN USERS u on u.id_user = i.users_id_user " +
                     "AND u.id_user = :userId " +
-                    "AND (p.end_date > NOW() " +
-                    "OR p.uses_left != 0)"
+                    "AND (p.end_date >= NOW() " +
+                    "OR p.uses_left != 0) " +
+                    "AND p.blocked = FALSE"
     )
     Collection<Pass> getAllActivePassesForUser(@Param("userId") Integer userId);
 
@@ -53,11 +55,13 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
 
     Optional<Pass> deleteByInvoicesIdInvoiceAndIdPass(Invoice invoice, Integer passId);
 
+    @Query(
+            nativeQuery = true,
+            value = "DELETE FROM PASSES p WHERE p.id_pass = :passId"
+    )
     @Transactional
-    Optional<Pass> deleteByIdPass(Integer passId);
-
-    @Transactional
-    Optional<Pass> deleteByIdPass(Pass pass);
+    @Modifying
+    void deletePass(@Param("passId") Integer passId);
 
     @Query(
             nativeQuery = true,
@@ -65,8 +69,9 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
                     "INNER JOIN invoices i on i.id_invoice = p.invoices_id_invoice " +
                     "INNER JOIN users us on us.id_user = :userId " +
                     "INNER JOIN usages u on p.id_pass = u.passes_id_invoice_item " +
-                    "AND :startDate < u.use_timestamp " +
-                    "AND :endDate > u.use_timestamp"
+                    "AND :startDate <= u.use_timestamp " +
+                    "AND :endDate >= u.use_timestamp " +
+                    "AND p.blocked = FALSE"
     )
     Collection<Pass> getPassesUsedBetweenTimestamps(
             @Param("startDate") Timestamp startDate,

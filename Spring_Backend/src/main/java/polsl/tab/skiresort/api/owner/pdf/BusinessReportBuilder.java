@@ -199,7 +199,7 @@ public class BusinessReportBuilder {
             List<Pass> passesFiltered = quantityPasses.stream().filter(pass -> pass.getUsesTotal() == QUANTITY_PASS_TYPES[finalI]).collect(Collectors.toList());
             Row<PDPage> row = table.createRow(20);
 
-            cell = row.createCell(PASS_TABLE_CELL_WIDTHS[0], QUANTITY_PASS_TYPES[i] + " Zjazdow");
+            cell = row.createCell(PASS_TABLE_CELL_WIDTHS[0], QUANTITY_PASS_TYPES[i] + " zjazdow");
             cell.setFontSize(12);cell.setFillColor(color);
             cell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
             cell.setBottomBorderStyle(new LineStyle(Color.DARK_GRAY, 1));
@@ -207,7 +207,7 @@ public class BusinessReportBuilder {
             cell.setFontSize(12);cell.setFillColor(color);
             cell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
             cell.setBottomBorderStyle(new LineStyle(Color.DARK_GRAY, 1));
-            cell = row.createCell(PASS_TABLE_CELL_WIDTHS[2], Double.toString(passesFiltered.stream().mapToDouble(Pass::getUnitPrice).sum()));
+            cell = row.createCell(PASS_TABLE_CELL_WIDTHS[2], String.format("%.02f", passesFiltered.stream().mapToDouble(Pass::getUnitPrice).sum()) + " zl");
             cell.setFontSize(12);cell.setFillColor(color);
             cell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
             cell.setBottomBorderStyle(new LineStyle(Color.DARK_GRAY, 1));
@@ -255,11 +255,16 @@ public class BusinessReportBuilder {
         cell.setAlign(HorizontalAlignment.RIGHT);
 
         for(int i = 0; i < TIME_PASS_TYPES.length; i++){
+            String hours;
+            if(i % 2 == 0 && i != TIME_PASS_TYPES.length - 1)
+                hours = " godziny";
+            else
+                hours = " godzin";
             Color color = i % 2 != 1 ? Color.LIGHT_GRAY : Color.WHITE;
             int finalI = i;
             List<Pass> passesFiltered = timePasses.stream().filter(pass -> TimeUnit.MILLISECONDS.toHours(pass.getEndDate().getTime() - pass.getStartDate().getTime()) == TIME_PASS_TYPES[finalI]).collect(Collectors.toList());
             Row<PDPage> row = table.createRow(20);
-            cell = row.createCell(PASS_TABLE_CELL_WIDTHS[0], TIME_PASS_TYPES[i] + " godzin");
+            cell = row.createCell(PASS_TABLE_CELL_WIDTHS[0], TIME_PASS_TYPES[i] + hours);
             cell.setFontSize(12);cell.setFillColor(color);
             cell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
             cell.setBottomBorderStyle(new LineStyle(Color.DARK_GRAY, 1));
@@ -267,7 +272,7 @@ public class BusinessReportBuilder {
             cell.setFontSize(12);cell.setFillColor(color);
             cell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
             cell.setBottomBorderStyle(new LineStyle(Color.DARK_GRAY, 1));
-            cell = row.createCell(PASS_TABLE_CELL_WIDTHS[2], Double.toString(passesFiltered.stream().mapToDouble(Pass::getUnitPrice).sum()));
+            cell = row.createCell(PASS_TABLE_CELL_WIDTHS[2], String.format("%.02f", passesFiltered.stream().mapToDouble(Pass::getUnitPrice).sum()) + " zl");
             cell.setFontSize(12);cell.setFillColor(color);
             cell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
             cell.setBottomBorderStyle(new LineStyle(Color.DARK_GRAY, 1));
@@ -330,7 +335,7 @@ public class BusinessReportBuilder {
                 int finalI = i;
                 Row<PDPage> row = table.createRow(20);
 
-                cell = row.createCell(50, QUANTITY_PASS_TYPES[i] + " Zjazdow");
+                cell = row.createCell(50, QUANTITY_PASS_TYPES[i] + " zjazdow");
                 cell.setFontSize(12);cell.setFillColor(color);
                 cell.setBorderStyle(new LineStyle(Color.GRAY, 0.5f));
                 cell.setBottomBorderStyle(new LineStyle(Color.DARK_GRAY, 1));

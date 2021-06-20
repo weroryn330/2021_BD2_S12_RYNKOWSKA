@@ -1,5 +1,6 @@
 import psycopg2
-
+import datetime as datetime
+import time
 
 class User:
     def __init__(self, username, password):
@@ -24,7 +25,21 @@ def connection(user, password):
 
 def print_list(objects):
     for one_object in objects:
-        print(one_object)
+        print(one_object[2])
+
+
+def check(passes):
+    for one_pass in passes:
+        if str(one_pass[2]) <= "0":
+            return False
+        if one_pass[0] is not None and one_pass[1] is not None:
+            start_date_unix = datetime.datetime.timestamp(one_pass[0])
+            end_date_unix = datetime.datetime.timestamp(one_pass[1])
+            if int(start_date_unix) > int(time.time()) or int(time.time()) > int(end_date_unix):
+                return False
+        if (one_pass[3]) == "1":
+            return False
+        return True
 
 
 def get_passes(conn):
@@ -70,14 +85,23 @@ def update_passes_uses(conn, usages, id_pass):
     cur.execute("UPDATE passes SET uses_left = " + str(usages) + " WHERE id_pass = " + str(id_pass))
 
 
-def insert_to_usages(conn, index, passes_id, ski_lift_id, time_stamp):
+def check_if_pass_is_ok(conn, pass_id):
+    cur=conn.cursor()
+
+    cur.execute("SELECT start_date, end_date, uses_left, blocked FROM passes where id_pass = " + str(pass_id))
+    passes = cur.fetchall()
+    return check(passes)
+
+
+def insert_to_usages(conn, index, pass_id, ski_lift_id, time_stamp):
     cur = conn.cursor()
     try:
-        cur.execute("INSERT INTO usages(id_usage, passes_id_invoice_item, ski_lift_id_ski_lift, use_timestamp, success_flag) "
-                    "VALUES ("+ str(index) +"," + str(passes_id) + "," + str(ski_lift_id) + ",'" + time_stamp +"', 1)")
-        conn.commit()
+        if check_if_pass_is_ok(conn, pass_id) == True:
+            cur.execute("INSERT INTO usages(id_usage, passes_id_invoice_item, ski_lift_id_ski_lift, use_timestamp, success_flag) "
+                            "VALUES ("+ str(index) +"," + str(pass_id) + "," + str(ski_lift_id) + ",'" + time_stamp +"', 1)")
+            conn.commit()
     except:
-        print("Exception: id_usage " + str(index) + " already exists ")
+       print("Exception: id_usage " + str(index) + " already exists ")
 
 
 def get_skilifts_count(conn):

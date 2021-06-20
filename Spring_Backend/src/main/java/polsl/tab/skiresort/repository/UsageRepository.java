@@ -17,6 +17,6 @@ public interface UsageRepository extends JpaRepository<Usage, Integer> {
     Integer countAllBySkiLiftIdSkiLiftAndUseTimestampBetween(SkiLift skiLift, Timestamp start, Timestamp end);
 
     @Query(nativeQuery = true,
-            value = "SELECT * FROM Usages u WHERE u.use_timestamp BETWEEN :startDate AND :endDate")
+            value = "SELECT * FROM Usages u WHERE u.use_timestamp BETWEEN :startDate AND :endDate AND u.success_flag='1'")
     List<Usage> findAllWithUseTimestampBetween(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 }

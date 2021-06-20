@@ -14,7 +14,9 @@ public class ReturnPassApi {
     public ReturnPassApi(ReturnPassService returnPassService) {this.returnPassService = returnPassService;}
 
     @DeleteMapping("/{passId}")
-    public ResponseEntity<PassResponse> returnUnusedPass(@PathVariable("passId") Integer passId) {
-        return ResponseEntity.ok(returnPassService.returnPass(passId));
+    public ResponseEntity<PassResponse> returnUnusedPass(
+            @RequestHeader("Authorization") String token,
+            @PathVariable("passId") Integer passId) {
+        return ResponseEntity.ok(returnPassService.returnPass(token, passId));
     }
 }
