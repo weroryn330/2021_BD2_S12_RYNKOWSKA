@@ -59,7 +59,9 @@ class OwnerCredentialsConfig {
                             passwordEncoder.encode(password),
                             roleRepository.findAll()
                                     .stream()
-                                    .filter(role -> !role.getRoleName().equals("ROLE_USER"))
+                                    .filter(role -> !role.getRoleName().equals("ROLE_USER")
+                                        && !role.getRoleName().equals("ROLE_TECHNICIAN")
+                                    )
                                     .collect(Collectors.toList()))
                     );
             logger.info("Ski Resort owner added to database with credentials from properties.");

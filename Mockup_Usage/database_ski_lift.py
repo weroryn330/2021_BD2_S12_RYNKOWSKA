@@ -97,6 +97,10 @@ def insert_to_usages(conn, index, pass_id, ski_lift_id, time_stamp):
     cur = conn.cursor()
     try:
         if check_if_pass_is_ok(conn, pass_id) == True:
+            cur.execute("SELECT uses_left FROM passes where id_pass = " + str(pass_id))
+            passes = cur.fetchall()
+            for one_pass in passes:
+                cur.execute("UPDATE passes SET uses_left = " + str(int(one_pass[0])-1) + " WHERE id_pass = " + str(pass_id))
             cur.execute("INSERT INTO usages(id_usage, passes_id_invoice_item, ski_lift_id_ski_lift, use_timestamp, success_flag) "
                             "VALUES ("+ str(index) +"," + str(pass_id) + "," + str(ski_lift_id) + ",'" + time_stamp +"', 1)")
             conn.commit()
