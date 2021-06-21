@@ -65,9 +65,10 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
 
     @Query(
             nativeQuery = true,
-            value = "SELECT * FROM PASSES p " +
+            value = "SELECT DISTINCT * FROM PASSES p " +
                     "INNER JOIN invoices i on i.id_invoice = p.invoices_id_invoice " +
-                    "INNER JOIN users us on us.id_user = :userId " +
+                    "INNER JOIN users us on us.id_user = i.users_id_user " +
+                    "AND us.id_user = :userId " +
                     "INNER JOIN usages u on p.id_pass = u.passes_id_invoice_item " +
                     "AND :startDate <= u.use_timestamp " +
                     "AND :endDate >= u.use_timestamp " +
