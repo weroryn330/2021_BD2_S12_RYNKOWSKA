@@ -14,9 +14,10 @@ import java.util.List;
 @Repository
 public interface SkiReportRepository extends JpaRepository<SkiReport, SkiReportId> {
 
-    @Query("SELECT s.skiReportId.name AS name, s.height AS height, COUNT(s.skiReportId.name) AS count " +
-            "FROM SkiReport AS s WHERE s.skiReportId.idPass=:idPass AND s.useTimestamp BETWEEN :startDate AND :endDate " +
-            "GROUP BY s.skiReportId.name, s.skiReportId.idPass, s.height, s.useTimestamp")
+    @Query(nativeQuery = true,
+            value = "SELECT s.name AS name, s.height AS height, COUNT(name) AS count " +
+            "FROM ski_report_view AS s WHERE s.id_pass=:idPass AND s.use_timestamp BETWEEN :startDate AND :endDate " +
+            "GROUP BY s.name, s.id_pass, s.height")
     List<SkiReportCount> findCountByIdPass(@Param("idPass") Integer idPass,
                                            @Param("startDate")Timestamp startDate,
                                            @Param("endDate")Timestamp endDate);
