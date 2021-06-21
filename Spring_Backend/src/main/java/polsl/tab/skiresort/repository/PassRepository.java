@@ -3,11 +3,13 @@ package polsl.tab.skiresort.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import polsl.tab.skiresort.model.Invoice;
 import polsl.tab.skiresort.model.Pass;
 
+import javax.persistence.QueryHint;
 import javax.transaction.Transactional;
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -65,7 +67,7 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
 
     @Query(
             nativeQuery = true,
-            value = "SELECT DISTINCT * FROM PASSES p " +
+            value = "SELECT DISTINCT p.* FROM PASSES p " +
                     "INNER JOIN invoices i on i.id_invoice = p.invoices_id_invoice " +
                     "INNER JOIN users us on us.id_user = i.users_id_user " +
                     "AND us.id_user = :userId " +
@@ -74,6 +76,7 @@ public interface PassRepository extends JpaRepository<Pass, Integer> {
                     "AND :endDate >= u.use_timestamp " +
                     "AND p.blocked = FALSE"
     )
+    @QueryHints(value = { @QueryHint(name = "HINT_PASS_DISTINCT_THROUGH", value = "false")})
     Collection<Pass> getPassesUsedBetweenTimestamps(
             @Param("startDate") Timestamp startDate,
             @Param("endDate") Timestamp endDate,
